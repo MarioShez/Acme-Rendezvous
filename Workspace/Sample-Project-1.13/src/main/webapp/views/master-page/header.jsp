@@ -12,6 +12,7 @@
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <div>
 	<img src="images/logo.png" alt="Sample Co., Inc." />

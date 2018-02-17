@@ -42,7 +42,7 @@ public class PopulateDatabase {
 		databaseUtil = null;
 
 		try {
-			System.out.println("PopulateDatabase 1.12");
+			System.out.println("PopulateDatabase 1.13");
 			System.out.println("---------------------");
 			System.out.println();
 

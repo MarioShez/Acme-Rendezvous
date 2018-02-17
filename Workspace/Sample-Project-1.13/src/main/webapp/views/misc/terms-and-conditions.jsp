@@ -1,5 +1,5 @@
 <%--
- * action-1.jsp
+ * terms-and-conditions.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -17,4 +17,14 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<p><spring:message code="customer.action.1" /></p>
+<div class="terms-and-conditions">
+	<textarea class="scrolleabletextbox" name="terms-and-conditions">
+		<spring:message code="misc.terms-and-conditions"/>
+	</textarea>
+	<br/>
+	
+	<label><input type="checkbox" id="checkbox"><spring:message code="misc.accept-terms-and-conditions"/></input></label>
+	<br/>
+	
+	<acme:cancel code="misc.cancel" url=""/>
+</div>
