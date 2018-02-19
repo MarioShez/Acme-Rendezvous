@@ -30,15 +30,6 @@
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
-			</li>
-		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
@@ -47,6 +38,7 @@
 					<li><a href="actor/register_User.do"><spring:message code="master.page.register.user" /></a>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="termsAndConditions/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -73,6 +65,8 @@
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="termsAndConditions/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>
+			
 		</security:authorize>
 		
 	</ul>

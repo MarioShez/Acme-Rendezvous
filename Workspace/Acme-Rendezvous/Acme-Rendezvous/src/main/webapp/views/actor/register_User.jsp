@@ -23,14 +23,23 @@
 	<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 	
 	<acme:textbox code="user.name" path="name"/>
+	<br/>
 	<acme:textbox code="user.surname" path="surname"/>
+	<br/>
 	<acme:textbox code="user.email" path="email"/>
+	<br/>
 	<acme:textbox code="user.phone" path="phone"/>
+	<br/>
 	<acme:textbox code="user.address" path="address"/>
+	<br/>
 	<acme:textbox code="user.birth" path="birth"/>
+	<br/>
 	<acme:textbox code="user.username" path="username"/>
+	<br/>
 	<acme:textbox code="user.password" path="password"/>
+	<br/>
 	<acme:textbox code="user.repeatPassword" path="repeatPassword"/>
+	<br/>
 	
 	<form:checkbox path="acceptTerms"/>
 	<form:label path="acceptTerms">
