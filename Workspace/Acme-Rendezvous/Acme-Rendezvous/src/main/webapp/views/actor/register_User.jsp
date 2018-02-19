@@ -29,6 +29,14 @@
 	<%@ taglib prefix="username" tagdir="/WEB-INF/tags" %>
 	<%@ taglib prefix="password" tagdir="/WEB-INF/tags" %>
 	<%@ taglib prefix="repeatPassword" tagdir="/WEB-INF/tags" %>
+	
+	<form:checkbox path="acceptTerms"/>
+	<form:label path="acceptTerms">
+		<spring:message code="actor.acceptTerms" 
+		<a href="javascript: relativeRedir('/');"> </a>  />
+	</form:label>
+	<br />
+	
 	<%@ taglib prefix="save" tagdir="/WEB-INF/tags" %>
 	<%@ taglib prefix="cancel" tagdir="/WEB-INF/tags" %>
 	
