@@ -102,7 +102,7 @@ public class UserService {
 	
 	// Other business methods
 
-	private User findByPrincipal() {
+	public User findByPrincipal() {
 		User res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();

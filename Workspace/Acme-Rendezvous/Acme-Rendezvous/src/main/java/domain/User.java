@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -32,7 +33,7 @@ public class User extends Actor {
 		return answer;
 	}
 	
-	public setAnswer(Collection<Answer> answer) {
+	public void setAnswer(Collection<Answer> answer) {
 		this.answer = answer;
 	}
 	
@@ -44,7 +45,7 @@ public class User extends Actor {
 		return organisedRendezvous;
 	}
 	
-	public setOrganisedRendezvous(Collection<Rendezvous> organisedRendezvous) {
+	public void setOrganisedRendezvous(Collection<Rendezvous> organisedRendezvous) {
 		this.organisedRendezvous = organisedRendezvous;
 	}
 	
@@ -55,7 +56,7 @@ public class User extends Actor {
 		return rsvpdRendezvous;
 	}
 	
-	public setRsvpdRendezvous(Collection<Rendezvous> rsvpdRendezvous) {
+	public void setRsvpdRendezvous(Collection<Rendezvous> rsvpdRendezvous) {
 		this.rsvpdRendezvous = rsvpdRendezvous;
 	}
 	

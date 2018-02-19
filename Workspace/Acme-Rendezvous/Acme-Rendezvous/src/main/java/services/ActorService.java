@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import repositories.ActorRepository;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountService;
 import domain.Actor;
 import domain.User;
 

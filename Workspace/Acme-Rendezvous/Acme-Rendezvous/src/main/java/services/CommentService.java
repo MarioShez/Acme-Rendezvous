@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
 import domain.Comment;
+import domain.Rendezvous;
 import domain.User;
 
 @Service
