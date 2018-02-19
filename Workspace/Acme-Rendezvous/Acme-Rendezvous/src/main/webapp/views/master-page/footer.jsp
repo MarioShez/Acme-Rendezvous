@@ -7,6 +7,8 @@
  * TDG Licence, a copy of which you may download from 
  * http://www.tdg-seville.info/License.html
  --%>
+ 
+ <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 
@@ -17,4 +19,12 @@
 
 <hr />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Sample Co., Inc.</b>
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Sample Co., Inc.</b><br/>
+<spring:message code="master.page.email" var="email"/>
+<spring:message code="master.page.contact-info" /> <a href="mailto:${email}">${email}</a>.
+<div class="data-protection">
+	<spring:message code="master.page.data-protection" />
+</div>
+<div class="copyright-notice">
+	<spring:message code="master.page.cookies" />
+</div>

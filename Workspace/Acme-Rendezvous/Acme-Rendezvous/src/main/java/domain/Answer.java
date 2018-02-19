@@ -1,21 +1,18 @@
 
-package domain.domain;
-
-import java.util.Collection;
+package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import domain.DomainEntity;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Question extends DomainEntity {
+public class Answer extends DomainEntity {
 
 	private String	content;
 
@@ -32,17 +29,17 @@ public class Question extends DomainEntity {
 
 	//Relationships
 
-	private Collection<Answer>	answers;
+	private Question	question;
 
 
 	@Valid
-	@OneToMany
-	public Collection<Answer> getAnswers() {
-		return this.answers;
+	@ManyToOne
+	public Question getQuestion() {
+		return this.question;
 	}
 
-	public void setAnswers(final Collection<Answer> answers) {
-		this.answers = answers;
+	public void setTrips(final Question question) {
+		this.question = question;
 	}
 
 }
