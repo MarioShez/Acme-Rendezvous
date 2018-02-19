@@ -105,3 +105,4 @@ system_catalog.xml
 .metadata/.plugins/org.eclipse.core.resources/.snap
 .metadata/.plugins/org.eclipse.jdt.junit.core/history
 Mockups/LevelA.bmpr
+*.lock
