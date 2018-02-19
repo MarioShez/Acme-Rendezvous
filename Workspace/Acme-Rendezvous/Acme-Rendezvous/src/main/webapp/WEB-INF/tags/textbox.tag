@@ -25,17 +25,6 @@
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
 
-<%@ attribute name="name" required="true" %>
-<%@ attribute name="surname" required="true" %>
-<%@ attribute name="email" required="true" %>
-<%@ attribute name="phone" required="false" %>
-<%@ attribute name="address" required="false" %>
-<%@ attribute name="birth" required="true" type="java.util.Date" %>
-<%@ attribute name="username" required="true" %>
-<%@ attribute name="repeatPassword" required="true" %>
-
-
-
 <%@ attribute name="readonly" required="false" %>
 
 <jstl:if test="${readonly == null}">
@@ -50,68 +39,4 @@
 	</form:label>	
 	<form:input path="${path}" readonly="${readonly}" />	
 	<form:errors path="${path}" cssClass="error" />
-</div>
-
-<div>
-	<form:label path="${name}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${name}" readonly="${readonly}" />	
-	<form:errors path="${name}" cssClass="error" />
-</div>	
-
-<div>
-	<form:label path="${surname}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${surname}" readonly="${readonly}" />	
-	<form:errors path="${surname}" cssClass="error" />
-</div>	
-
-<div>
-	<form:label path="${email}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${email}" readonly="${readonly}" />	
-	<form:errors path="${email}" cssClass="error" />
-</div>	
-
-<div>
-	<form:label path="${phone}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${phone}" readonly="${readonly}" />	
-	<form:errors path="${phone}" cssClass="error" />
-</div>	
-
-<div>
-	<form:label path="${address}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${address}" readonly="${readonly}" />	
-	<form:errors path="${address}" cssClass="error" />
-</div>	
-
-<div>
-	<form:label path="${birth}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${birth}" readonly="${readonly}" />	
-	<form:errors path="${birth}" cssClass="error" />
-</div>	
-
-<div>
-	<form:label path="${username}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${username}" readonly="${readonly}" />	
-	<form:errors path="${username}" cssClass="error" />
-</div>	
-
-<div>
-	<form:label path="${repeatPassword}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${repeatPassword}" readonly="${readonly}" />	
-	<form:errors path="${repeatPassword}" cssClass="error" />
 </div>

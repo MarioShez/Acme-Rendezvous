@@ -23,8 +23,5 @@
 	</textarea>
 	<br/>
 	
-	<label><input type="checkbox" id="checkbox"><spring:message code="misc.accept-terms-and-conditions"/></input></label>
-	<br/>
-	
 	<acme:cancel code="misc.cancel" url=""/>
 </div>
