@@ -52,6 +52,9 @@ public class RegisterUserController extends AbstractController {
 			res = this.createEditModelAndView(userForm, "actor.params.error");
 		else if (!userForm.getRepeatPassword().equals(userForm.getUserAccount().getPassword()))
 			res = this.createEditModelAndView(userForm, "actor.params.errorPassword");
+		else if(userForm.getTermsAndConditions() == false){
+			res = this.createEditModelAndView(userForm, "actor.params.errorTerms");
+		}
 		else
 			try {
 				this.userService.save(user);

@@ -50,7 +50,7 @@ public class User extends Actor {
 	
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy = "attendants")
+	@ManyToMany(mappedBy = "attendants")
 	public Collection<Rendezvous> getRsvpdRendezvous() {
 		return rsvpdRendezvous;
 	}

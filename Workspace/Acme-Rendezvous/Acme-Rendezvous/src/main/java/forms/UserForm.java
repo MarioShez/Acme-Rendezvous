@@ -22,6 +22,7 @@ public class UserForm {
 	private UserAccount UserAccount;
 	
 	private String repeatPassword;
+	private Boolean termsAndConditions;
 	
 	public UserForm(){
 		super();
@@ -93,5 +94,14 @@ public class UserForm {
 	public void setRepeatPassword(String repeatPassword) {
 		this.repeatPassword = repeatPassword;
 	}
+
+	public Boolean getTermsAndConditions() {
+		return termsAndConditions;
+	}
+
+	public void setTermsAndConditions(Boolean termsAndConditions) {
+		this.termsAndConditions = termsAndConditions;
+	}
+
 	
 }
