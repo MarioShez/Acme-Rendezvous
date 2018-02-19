@@ -61,7 +61,7 @@ public class Announcement extends DomainEntity{
 	}
 	
 	
-	// Relationships
+	// Relationships TODO: quitar comentarios de relaciones 
 	
 //	private Rendezvous rendezvous;
 //	
