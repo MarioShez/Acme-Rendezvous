@@ -9,9 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
-import domain.Audit;
 import domain.Comment;
-import domain.Rendezvous;
 import domain.User;
 
 @Service
