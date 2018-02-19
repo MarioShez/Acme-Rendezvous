@@ -20,15 +20,17 @@
 
 <form:form action="user/register_User.do" modelAttribute="userForm">
 	
-	<%@ taglib prefix="name" tagdir="/WEB-INF/tags" %>
-	<%@ taglib prefix="surname" tagdir="/WEB-INF/tags" %>
-	<%@ taglib prefix="email" tagdir="/WEB-INF/tags" %>
-	<%@ taglib prefix="phone" tagdir="/WEB-INF/tags" %>
-	<%@ taglib prefix="address" tagdir="/WEB-INF/tags" %>
-	<%@ taglib prefix="birth" tagdir="/WEB-INF/tags" %>
-	<%@ taglib prefix="username" tagdir="/WEB-INF/tags" %>
-	<%@ taglib prefix="password" tagdir="/WEB-INF/tags" %>
-	<%@ taglib prefix="repeatPassword" tagdir="/WEB-INF/tags" %>
+	<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+	
+	<acme:textbox code="user.name" path="name"/>
+	<acme:textbox code="user.surname" path="surname"/>
+	<acme:textbox code="user.email" path="email"/>
+	<acme:textbox code="user.phone" path="phone"/>
+	<acme:textbox code="user.address" path="address"/>
+	<acme:textbox code="user.birth" path="birth"/>
+	<acme:textbox code="user.username" path="username"/>
+	<acme:textbox code="user.password" path="password"/>
+	<acme:textbox code="user.repeatPassword" path="repeatPassword"/>
 	
 	<form:checkbox path="acceptTerms"/>
 	<form:label path="acceptTerms">
@@ -37,8 +39,8 @@
 	</form:label>
 	<br />
 	
-	<%@ taglib prefix="save" tagdir="/WEB-INF/tags" %>
-	<%@ taglib prefix="cancel" tagdir="/WEB-INF/tags" %>
+	<acme:submit name="user.save" code="save"/>
+	<acme:submit name="user.cancel" code="cancel"/>
 	
 	<%-- 
 	
