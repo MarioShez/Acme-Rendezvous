@@ -26,13 +26,10 @@
 		<value>/views/administrator/tiles.xml</value>
 		<value>/views/customer/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
-<<<<<<< HEAD
-=======
 		
 		
 		<value>/views/actor/tiles.xml</value>
 		<value>/views/user/tiles.xml</value>
->>>>>>> 0d5f83b26e45cff9a9d3b573355520e78843aef1
 	</util:list>
 
 </beans>

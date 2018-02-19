@@ -22,14 +22,11 @@
 			Add your own converters using entries of the following form: 
 			<bean class="converters.Class1ToClass2" /> 
 		-->
-<<<<<<< HEAD
-=======
 		
 		<bean class="converters.ActorToStringConverter" />
 		<bean class="converters.StringToActorConverter" />
 		<bean class="converters.UserToStringConverter" />
 		<bean class="converters.StringToUserConverter" />
->>>>>>> 0d5f83b26e45cff9a9d3b573355520e78843aef1
 	</util:list>
 	
 </beans>

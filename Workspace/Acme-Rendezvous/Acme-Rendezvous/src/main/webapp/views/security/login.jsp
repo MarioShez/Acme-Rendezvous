@@ -19,10 +19,10 @@
 
 <form:form action="j_spring_security_check" modelAttribute="credentials">
 
-	<acme:textbox path="username" code="security.username" readonly="false"/>
+	<acme:textbox path="username" code="security.username"/>
 	<br />
 
-	<acme:textbox path="password" code="security.password" readonly="false"/>
+	<acme:password path="password" code="security.password"/>
 	<br />
 	
 	<jstl:if test="${showError == true}">

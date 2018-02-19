@@ -6,11 +6,11 @@ import javax.persistence.Entity;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Administrator extends Actor {
+public class Admin extends Actor {
 
 	// Constructors
 
-	public Administrator() {
+	public Admin() {
 		super();
 	}
 
