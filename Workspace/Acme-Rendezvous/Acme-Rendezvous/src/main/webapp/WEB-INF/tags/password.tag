@@ -25,6 +25,8 @@
 <%@ attribute name="path" required="true" rtexprvalue="true" %>
 <%@ attribute name="code" required="true" rtexprvalue="true" %>
 
+<%@ attribute name="password" required="true" %>
+
 <%-- Definition --%>
 
 <div>
@@ -33,4 +35,12 @@
 	</form:label>
 	<form:password path="${path}"/>
 	<form:errors path="${path}" cssClass="error" />
+</div>
+
+<div>
+	<form:label path="${password}">
+		<spring:message code="${code}" />
+	</form:label>
+	<form:password path="${password}"/>
+	<form:errors path="${password}" cssClass="error" />
 </div>

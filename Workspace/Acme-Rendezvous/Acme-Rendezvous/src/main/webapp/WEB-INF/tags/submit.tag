@@ -25,8 +25,20 @@
 <%@ attribute name="name" required="true" %> 
 <%@ attribute name="code" required="true" %>
 
+<%@ attribute name="save" required="true" %>
+<%@ attribute name="cancel" required="true" %>
+
 <%-- Definition --%>
 
 <button type="submit" name="${name}" class="btn btn-primary">
 	<spring:message code="${code}" />
+</button>
+
+<button type="submit" name="${save}" class="btn btn-primary">
+	<spring:message code="${code}" />
+</button>
+
+<button type="submit" name="${cancel}" class="btn btn-primary">
+	<spring:message code="${code}" 
+	onclick="javascript: relativeRedir('/');" />
 </button>
