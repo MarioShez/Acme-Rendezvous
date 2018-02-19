@@ -12,7 +12,6 @@
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <div>
 	<img src="images/logo.png" alt="Sample Co., Inc." />
@@ -43,6 +42,11 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href=""><spring:message code="master.page.register" /></a>
+				<ul>
+					<li><a href="actor/register_User.do"><spring:message code="master.page.register.user" /></a>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -59,7 +63,18 @@
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
+			<li>
+				<a class="fNiv"> 
+					<spring:message code="master.page.profile" /> 
+			        (<security:authentication property="principal.username" />)
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
+		
 	</ul>
 </div>
 
