@@ -105,3 +105,5 @@ system_catalog.xml
 .metadata/.plugins/org.eclipse.core.resources/.snap
 .metadata/.plugins/org.eclipse.jdt.junit.core/history
 Mockups/LevelA.bmpr
+*.lock
+Workspace/Acme-Rendezvous/Acme-Rendezvous/target/m2e-wtp/web-resources/META-INF/maven/Design-and-Testing/Sample-Project/pom.properties
