@@ -59,4 +59,108 @@
 	
 	<!-- Other domain beans come here -->	
 	
+	<!-- User -->
+	<bean id="user1" class="domain.User">
+	
+	</bean>
+	
+	
+		
+						<!-- Rendezvous -->
+	<!-- Rendezvous 1 -->
+	<bean id="rendezvous1" class="domain.Rendezvous">
+		<property name="name" value="Rendezvous 01"/>
+		<property name="description" value="A description 1"/>
+		<property name="picture" value="http://www.google.es"/>
+		<property name="moment" value="23/01/2020 19:09"/>
+		<property name="gpsCoordinate" ref="gpsCoordinate1"/>
+		<property name="adult" value="false"/>
+		<property name="finalVersion" value="false"/>
+		<property name="deleted" value="false"/>
+		<property name="announcements">
+			<list>
+				<ref bean="announcement1"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment1"/>
+			</list>
+		</property>
+	</bean>
+	
+							<!-- Comment -->
+	<!-- Comment 1 -->
+	<bean id="comment1" class="domain.Comment">
+	<property name="moment" value="23/01/2011 19:09"/>
+	<property name="remark" value="Comment 01"/>
+	<property name="text" value="A short comment"/>
+	<property name="picture" value="http://www.google.es"/>
+	<property name="comment">
+		<list>
+		</list>
+	</property>
+	<property name="user" ref="user1"/>
+	<property name="rendezvous" ref="rendezvous1"/>
+	</bean>
+	
+	
+						<!-- Announcement -->
+	<!-- Announcement 1 -->
+	<bean id="announcement1" class="domain.Announcement">
+		<property name="moment" value="23/01/2013 19:09"/>
+		<property name="title" value="Announcement 01"/>
+		<property name="description" value="A description 1"/>
+		<property name="rendezvous">
+			<list>
+				<ref bean="rendezvous1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Announcement 2 -->
+	<bean id="announcement2" class="domain.Announcement">
+		<property name="moment" value="15/05/2013 20:09"/>
+		<property name="title" value="Announcement 02"/>
+		<property name="description" value="A description 2"/>
+		<property name="rendezvous">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Announcement 3 -->
+	<bean id="announcement3" class="domain.Announcement">
+		<property name="moment" value="17/06/2013 20:30"/>
+		<property name="title" value="Announcement 03"/>
+		<property name="description" value="A description 3"/>
+		<property name="rendezvous">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	
+						<!-- GpsCoordinate -->
+	<!-- GpsCoordinate 1 -->
+	<bean id="gpsCoordinate1" class="domain.GpsCoordinate">
+		<property name="latitude" value="90.0"/>
+		<property name="longitude" value="180.0"/>
+	</bean>
+	
+	<!-- GpsCoordinate 2 -->
+	<bean id="gpsCoordinate2" class="domain.GpsCoordinate">
+		<property name="latitude" value="60.0"/>
+		<property name="longitude" value="170.0"/>
+	</bean>
+	
+	<!-- GpsCoordinate 3 -->
+	<bean id="gpsCoordinate3" class="domain.GpsCoordinate">
+		<property name="latitude" value="66.0"/>
+		<property name="longitude" value="120.0"/>
+	</bean>
+	
+	
 </beans>

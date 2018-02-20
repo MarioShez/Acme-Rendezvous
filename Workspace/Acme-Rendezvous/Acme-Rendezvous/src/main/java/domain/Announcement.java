@@ -5,8 +5,10 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -61,17 +63,20 @@ public class Announcement extends DomainEntity{
 	}
 	
 	
-	// Relationships TODO: quitar comentarios de relaciones 
+	// Relationships  
 	
-//	private Rendezvous rendezvous;
-//	
-//	public Rendezvous getRendezvous(){
-//		return rendezvous;
-//	}
-//	
-//	public void setRendezvous(Rendezvous rendezvous){
-//		this.rendezvous = rendezvous;
-//	}
+	private Rendezvous rendezvous;
+	
+	@Valid
+	@NotNull
+	@ManyToOne(optional=true)
+	public Rendezvous getRendezvous(){
+		return rendezvous;
+	}
+	
+	public void setRendezvous(Rendezvous rendezvous){
+		this.rendezvous = rendezvous;
+	}
 	 
 	
 	
