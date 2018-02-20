@@ -23,5 +23,5 @@
 	</textarea>
 	<br/>
 	
-	<acme:cancel code="misc.cancel" url=""/>
+	<acme:cancel code="misc.back" url="termsAndConditions/list.do"/>
 </div>

@@ -33,9 +33,9 @@ public class ActorService {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private RendezvousesService rendezvousesService;
-	
+//	@Autowired
+//	private RendezvousesService rendezvousesService;
+//	
 	// Constructors
 	
 	public ActorService() {
