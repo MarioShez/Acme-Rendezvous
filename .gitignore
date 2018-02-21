@@ -108,3 +108,10 @@ Mockups/LevelA.bmpr
 *.lock
 Workspace/Acme-Rendezvous/Acme-Rendezvous/target/m2e-wtp/web-resources/META-INF/maven/Design-and-Testing/Sample-Project/pom.properties
 Workspace/Acme-Rendezvous/Acme-Rendezvous/target/m2e-wtp/web-resources/META-INF/maven/Design-and-Testing/Acme-Rendezvous/pom.properties
+Workspace/Servers/Tomcat v7.0 Server at localhost-config/catalina.policy
+Workspace/Servers/Tomcat v7.0 Server at localhost-config/catalina.policy
+Workspace/Servers/Tomcat v7.0 Server at localhost-config/catalina.properties
+Workspace/Servers/Tomcat v7.0 Server at localhost-config/context.xml
+Workspace/Servers/Tomcat v7.0 Server at localhost-config/server.xml
+Workspace/Servers/Tomcat v7.0 Server at localhost-config/tomcat-users.xml
+Workspace/Servers/Tomcat v7.0 Server at localhost-config/web.xml
