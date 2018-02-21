@@ -40,10 +40,10 @@ public class RendezvousService {
 	
 	@Autowired
 	private CommentService commentService;
-//	
-//	@Autowired
-//	private QuestionService questionService;
-//	
+	
+	@Autowired
+	private QuestionService questionService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public RendezvousService() {
@@ -64,6 +64,7 @@ public class RendezvousService {
 		result.setComments(new ArrayList<Comment>());
 		result.setQuestions(new ArrayList<Question>());
 		result.setAttendants(new ArrayList<User>());
+		result.getAttendants().add(this.userService.findByPrincipal());
 		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
 
 		return result;
@@ -92,8 +93,6 @@ public class RendezvousService {
 		Assert.notNull(rendezvous.getMoment());
 		final Date actualDate = new Date();
 		Assert.isTrue(rendezvous.getMoment().after(actualDate));
-		Assert.isTrue(rendezvous.getFinalVersion() == false);
-		Assert.isTrue(rendezvous.getDeleted() == false);
 		this.checkPrincipal(rendezvous);
 
 		final Rendezvous result;
@@ -107,28 +106,28 @@ public class RendezvousService {
 		return result;
 	}
 	
-//	public void delete(final Rendezvous rendezvous) {
-//
-//		Assert.notNull(rendezvous);
-//		Assert.isTrue(rendezvous.getId() != 0);
-//		Assert.isTrue(adminService.findByPrincipal() != null);
-//
-//		rendezvous.getOrganiser().getOrganisedRendezvous().remove(rendezvous);
-//		for(User attendant:rendezvous.getAttendants()){
-//			attendant.getRsvpdRendezvous().remove(rendezvous);
-//		}
-//		for(Announcement announcement:rendezvous.getAnnouncements()){
-//			announcementService.delete(announcement);
-//		}
-//		for(Comment comment:rendezvous.getComments()){
-//			commentService.delete(comment);
-//		}
-//		for(Question question:rendezvous.getQuestions()){
-//			questionService.delete(question);
-//		}
-//		
-//		this.rendezvousRepository.delete(rendezvous);
-//	}
+	public void delete(final Rendezvous rendezvous) {
+
+		Assert.notNull(rendezvous);
+		Assert.isTrue(rendezvous.getId() != 0);
+		Assert.isTrue(adminService.findByPrincipal() != null);
+
+		rendezvous.getOrganiser().getOrganisedRendezvous().remove(rendezvous);
+		for(User attendant:rendezvous.getAttendants()){
+			attendant.getRsvpdRendezvous().remove(rendezvous);
+		}
+		for(Announcement announcement:rendezvous.getAnnouncements()){
+			announcementService.delete(announcement);
+		}
+		for(Comment comment:rendezvous.getComments()){
+			commentService.delete(comment);
+		}
+		for(Question question:rendezvous.getQuestions()){
+			questionService.delete(question);
+		}
+		
+		this.rendezvousRepository.delete(rendezvous);
+	}
 
 	// Other business methods -------------------------------------------------
 
@@ -138,6 +137,17 @@ public class RendezvousService {
 
 		final User principal = this.userService.findByPrincipal();
 		Assert.isTrue(rendezvous.getOrganiser().equals(principal));
+	}
+	
+	public void changeToDeleted(int rendezvousId){
+		
+		Rendezvous rendezvous = findOneToEdit(rendezvousId);
+		
+		Assert.isTrue(rendezvous.getDeleted() == false);
+		Assert.isTrue(rendezvous.getFinalVersion() == false);
+		
+		rendezvous.setDeleted(true);
+		save(rendezvous);
 	}
 	
 	public Collection<Rendezvous> findFutureMomentAndNotAdult(){
