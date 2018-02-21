@@ -78,12 +78,12 @@ public class AnswerService {
 		return res;
 	}
 
-	//	public void delete(Actor actor) {
-	//		Assert.notNull(actor);
-	//		Assert.isTrue(actor.getId() != 0);
-	//		Assert.isTrue(this.actorRepository.exists(actor.getId()));
-	//		this.actorRepository.delete(actor);
-	//	}
+	public void delete(final Answer answer) {
+		Assert.notNull(answer);
+		Assert.isTrue(answer.getId() != 0);
+		Assert.isTrue(this.answerRepository.exists(answer.getId()));
+		this.answerRepository.delete(answer);
+	}
 
 	// Other business methods
 
