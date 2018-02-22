@@ -45,18 +45,17 @@
 	<display:column property="commentReply" title="${commentHeader}" sortable="false" />
 	
 	<spring:message code="comment.rendezvous" var="rendezvousHeader" />
-	<display:column property="rendezvous.title" title="${rendezvousHeader}"	sortable="true" />
+	<display:column property="rendezvous" title="${rendezvousHeader}"	sortable="true" />
 	
-	<spring:message code="comment.comment" var="commentHeader" />
-	<display:column property="comment.title" title="${commentHeader}"	sortable="true" />
+	<spring:message code="comment.user" var="userHeader" />
+	<display:column property="user" title="${userHeader}"	sortable="true" />
 	
-	<spring:message code="comment.replies" var="repliesHeader"/>
+	<spring:message code="comment.replies" var="replies"/>
 	<display:column title="${categoryChildren}">
 		<a href="comment/list.do?commentId=${row.id}">
 			<spring:message code="comment.replies.link"/>
 		</a>
 	</display:column>
-
 	
 </display:table>
 

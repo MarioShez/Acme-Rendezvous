@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdminService;
 import services.CommentService;
 import services.RendezvousService;
+import services.UserService;
 import domain.Comment;
-import domain.Rendezvous;
+import domain.User;
 
 @Controller
 @RequestMapping("/comment")
@@ -30,6 +30,9 @@ public class CommentController extends AbstractController {
 		
 		@Autowired
 		private RendezvousService rendezvousService;
+		
+		@Autowired
+		private UserService userService;
 
 		// Constructors ---------------------------------------------------------
 
@@ -40,7 +43,7 @@ public class CommentController extends AbstractController {
 		//Listing --------------------------------------------------------------
 		
 		@RequestMapping(value = "/list", method = RequestMethod.GET)
-		public ModelAndView display(@RequestParam int rendezvousId){
+		public ModelAndView display(){
 			ModelAndView result;
 			
 			Collection<Comment> comment;
