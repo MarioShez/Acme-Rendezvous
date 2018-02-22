@@ -45,17 +45,11 @@ public class RendezvousService {
 	private CommentService			commentService;
 
 	@Autowired
-<<<<<<< HEAD
 	private QuestionService questionService;
 	
 	@Autowired
 	private Validator validator;
-	
-=======
-	private QuestionService			questionService;
 
-
->>>>>>> 5b3bd589c5a239eb55a1f47a039ded56c8ab38ab
 	// Constructors -----------------------------------------------------------
 
 	public RendezvousService() {
@@ -112,11 +106,8 @@ public class RendezvousService {
 
 		if (rendezvous.getId() == 0)
 			result.getOrganiser().getOrganisedRendezvous().add(result);
-<<<<<<< HEAD
 			// Añadir attendant
 		}
-=======
->>>>>>> 5b3bd589c5a239eb55a1f47a039ded56c8ab38ab
 
 		return result;
 	}
