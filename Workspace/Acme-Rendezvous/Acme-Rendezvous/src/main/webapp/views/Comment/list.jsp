@@ -50,6 +50,14 @@
 	<spring:message code="comment.comment" var="commentHeader" />
 	<display:column property="comment.title" title="${commentHeader}"	sortable="true" />
 	
+	<spring:message code="comment.replies" var="repliesHeader"/>
+	<display:column title="${categoryChildren}">
+		<a href="comment/list.do?commentId=${row.id}">
+			<spring:message code="comment.replies.link"/>
+		</a>
+	</display:column>
+
+	
 </display:table>
 
 	<security:authorize access="hasRole('USER')">

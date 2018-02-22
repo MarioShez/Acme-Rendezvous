@@ -80,5 +80,15 @@ public class CommentService {
 		Assert.isTrue(this.commentRepository.exists(comment.getId()));
 		this.commentRepository.delete(comment);
 	}
+	
+	// pasar a servicio de Rendezvous
+//	public Collection<Rendezvous> findRsvpdRendezvousByUserId(int attendantsId){
+//		Assert.notNull(attendantsId);
+//		Collection<Rendezvous> rendezvous;
+//		rendezvous = this.commentRepository.findRsvpdRendezvousByUserId(attendantsId);
+//		Assert.notNull(rendezvous);
+//		return rendezvous;
+//			
+//	}
 
 }
