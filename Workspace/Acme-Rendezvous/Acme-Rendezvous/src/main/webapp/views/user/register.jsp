@@ -1,5 +1,5 @@
 <%--
- * register_Explorer.jsp
+ * register.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -18,7 +18,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="user/register_User.do" modelAttribute="userForm">
+<form:form action="user/register.do" modelAttribute="userForm">
 	
 	<acme:textbox code="user.name" path="name"/>
 	<br/>
@@ -38,6 +38,10 @@
 	<br/>
 	<acme:textbox code="user.repeatPassword" path="repeatPassword"/>
 	<br/>
+	
+	<%--
+	<acme:checkbox code="actor.acceptTerms" path="acceptTerms"/>
+	--%>
 	
 	<form:checkbox path="acceptTerms"/>
 	<form:label path="acceptTerms">
