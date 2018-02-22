@@ -1,12 +1,64 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<%--
+ * list.jsp
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ --%>
 
-</body>
-</html>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+
+<security:authorize access="hasRole('USER') or hasRole('ADMIN')">
+
+<display:table pagesize="6" class="displaycomment" keepStatus="true"
+	name="comment" requestURI="${requestURI }" id="row">
+	
+<security:authorize access="hasRole('USER')">
+	<spring:message code="comment.edit"/>
+	<display:column>
+		<a href= "comment/user/edit.do?commentId=${row.id}">
+		<spring:message code="comment.edit"/></a>
+	</display:column>
+</security:authorize>
+	
+	<spring:message code="comment.moment" var="momentHeader" />
+	<display:column property="moment" title="${momentHeader}" sortable="true" />
+
+	<spring:message code="comment.remark" var="remarkHeader" />
+	<display:column property="remark" title="${remarkHeader}" sortable="true" />
+
+	<spring:message code="comment.text" var="textHeader" />
+	<display:column property="text" title="${textHeader}" sortable="false" />
+
+	<spring:message code="comment.picture" var="commentHeader" />
+	<display:column property="commentReply" title="${commentHeader}" sortable="false" />
+	
+	<spring:message code="comment.rendezvous" var="rendezvousHeader" />
+	<display:column property="rendezvous.title" title="${rendezvousHeader}"	sortable="true" />
+	
+	<spring:message code="comment.comment" var="commentHeader" />
+	<display:column property="comment.title" title="${commentHeader}"	sortable="true" />
+	
+</display:table>
+
+	<security:authorize access="hasRole('USER')">
+		<div>
+			<a href="comment/user/create.do">
+				<button>
+					<spring:message code="comment.create" />
+				</button>
+			</a>
+		</div>
+	</security:authorize>
+</security:authorize>
