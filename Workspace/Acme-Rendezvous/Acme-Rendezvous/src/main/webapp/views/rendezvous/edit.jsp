@@ -11,18 +11,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="rendezvous/user/edit.do" modelAttribute="rendezvous">
+<form:form action="rendezvous/user/edit.do" modelAttribute="rendezvousForm">
 	
-	<form:hidden path="id"/>
-	<form:hidden path="version"/>
-	<form:hidden path="organiser"/>
-	<form:hidden path="attendants"/>
-	<form:hidden path="linkedRendezvouses"/>
-	<form:hidden path="announcements"/>
-	<form:hidden path="comments"/>
-	<form:hidden path="questions"/>
 	<form:hidden path="deleted"/>
-	<jstl:if test="${rendezvous.finalVersion == true}">
+	<jstl:if test="${rendezvous.finalVersion == false}">
 		<form:hidden path="finalVersion"/>
 	</jstl:if>
 	

@@ -57,10 +57,29 @@
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<!-- Other domain beans come here -->
 	
-	<!-- User -->
+						<!-- Actor -->
+	<!-- Actor 1 -->
+	<bean id="actor1" class="domain.Actor">
+	<property name="name" value="Pedro"/>
+	<property name="surname" value="Perez"/>
+	<property name="email" value="ppez@gmail.com"/>
+	<property name="phone" value="987654321"/>
+	<property name="address" value="C/Margarita nº7"/>
+	<property name="birth" value="01/01/92"/>
+	<property name="userAccount" ref="user1"/>
+	</bean>
+		
+	
+						<!-- User -->
+	<!-- User 1 -->
 	<bean id="user1" class="domain.User">
+	
+	</bean>
+	
+	<!-- User 2 -->
+	<bean id="user2" class="domain.User">
 	
 	</bean>
 	
@@ -80,11 +99,31 @@
 		<property name="announcements">
 			<list>
 				<ref bean="announcement1"/>
+				<ref bean="announcement2"/>
 			</list>
 		</property>
 		<property name="comments">
 			<list>
 				<ref bean="comment1"/>
+				<ref bean="comment2"/>
+				<ref bean="comment3"/>
+			</list>
+		</property>
+		<property name="questions">
+			<list>
+				<ref bean="question1"/>
+				<ref bean="question2"/>
+			</list>
+		</property>
+		<property name="organiser" ref="user1"/>
+		<property name="attendants"> 
+			<list>
+				
+			</list>
+		</property>
+		<property name="linkedRendezvouses"> 
+			<list>
+				
 			</list>
 		</property>
 	</bean>
@@ -103,6 +142,105 @@
 	<property name="user" ref="user1"/>
 	<property name="rendezvous" ref="rendezvous1"/>
 	</bean>
+	
+	<!-- Comment 2 -->
+	<bean id="comment2" class="domain.Comment">
+	<property name="moment" value="23/02/2011 19:09"/>
+	<property name="remark" value="Comment 02"/>
+	<property name="text" value="A comment"/>
+	<property name="picture" value=""/>
+	<property name="comment">
+		<list>
+			<ref bean="comment3"/>
+		</list>
+	</property>
+	<property name="user" ref="user2"/>
+	<property name="rendezvous" ref="rendezvous1"/>
+	</bean>
+	
+	<!-- Comment 3 -->
+	<bean id="comment3" class="domain.Comment">
+	<property name="moment" value="22/03/2011 19:09"/>
+	<property name="remark" value="Comment 03"/>
+	<property name="text" value="A comment ..."/>
+	<property name="picture" value=""/>
+	<property name="comment">
+		<list>
+		</list>
+	</property>
+	<property name="user" ref="user2"/>
+	<property name="rendezvous" ref="rendezvous1"/>
+	</bean>
+	
+						<!-- Question -->
+	<!-- Question 1 -->
+	<bean id="question1" class="domain.Question">
+		<property name="content" value="Question 01?"/>
+		<property name="answers">
+			<list>
+				<ref bean="answer1"/>
+				<ref bean="answer2"/>
+				<ref bean="answer3"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Question 2 -->
+	<bean id="question2" class="domain.Question">
+		<property name="content" value="Question 02?"/>
+		<property name="answers">
+			<list>
+				<ref bean="answer4"/>
+				<ref bean="answer5"/>
+				<ref bean="answer6"/>
+			</list>
+		</property>
+	</bean>
+
+	
+						<!-- Answer -->
+	<!-- Answer 01 -->
+	<bean id="answer1" class="domain.Answer">
+	<property name="content" value="Answer 1"/>
+	<property name="question" ref="question1"/>
+	<property name="user" ref=""/>
+	</bean>
+	
+	<!-- Answer 02 -->
+	<bean id="answer2" class="domain.Answer">
+	<property name="content" value="Answer 2"/>
+	<property name="question" ref="question1"/>
+	<property name="user" ref=""/>
+	</bean>
+	
+	<!-- Answer 03 -->
+	<bean id="answer3" class="domain.Answer">
+	<property name="content" value="Answer 3"/>
+	<property name="question" ref="question1"/>
+	<property name="user" ref=""/>
+	</bean>
+	
+	<!-- Answer 04 -->
+	<bean id="answer4" class="domain.Answer">
+	<property name="content" value="Answer 4"/>
+	<property name="question" ref="question2"/>
+	<property name="user" ref=""/>
+	</bean>
+	
+	<!-- Answer 05 -->
+	<bean id="answer5" class="domain.Answer">
+	<property name="content" value="Answer 5"/>
+	<property name="question" ref="question2"/>
+	<property name="user" ref=""/>
+	</bean>
+	
+	<!-- Answer 06 -->
+	<bean id="answer6" class="domain.Answer">
+	<property name="content" value="Answer 6"/>
+	<property name="question" ref="question2"/>
+	<property name="user" ref=""/>
+	</bean>
+	
 	
 	
 						<!-- Announcement -->
@@ -125,7 +263,7 @@
 		<property name="description" value="A description 2"/>
 		<property name="rendezvous">
 			<list>
-
+				<ref bean="rendezvous2"/>
 			</list>
 		</property>
 	</bean>

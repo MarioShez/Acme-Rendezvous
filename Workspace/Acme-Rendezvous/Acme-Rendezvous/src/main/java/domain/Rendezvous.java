@@ -1,7 +1,8 @@
+
 package domain;
 
-import java.sql.Date;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -15,6 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,105 +30,114 @@ public class Rendezvous extends DomainEntity {
 		super();
 	}
 
+
 	// Attributes -------------------------------------------------------------
 
-	private String name;
-	private String description;
-	private String picture;
-	private Date moment;
-	private GpsCoordinate gpsCoordinate;
-	private boolean adult;
-	private boolean finalVersion;
-	private boolean deleted;
+	private String			name;
+	private String			description;
+	private String			picture;
+	private Date			moment;
+	private GpsCoordinate	gpsCoordinate;
+	private boolean			adult;
+	private boolean			finalVersion;
+	private boolean			deleted;
+
 
 	@NotBlank
+	@SafeHtml
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
 	@URL
+	@SafeHtml
 	public String getPicture() {
-		return picture;
+		return this.picture;
 	}
 
-	public void setPicture(String picture) {
+	public void setPicture(final String picture) {
 		this.picture = picture;
 	}
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@SafeHtml
 	public Date getMoment() {
-		return moment;
+		return this.moment;
 	}
 
-	public void setMoment(Date moment) {
+	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
 
 	@Valid
+	@SafeHtml
 	public GpsCoordinate getGpsCoordinate() {
-		return gpsCoordinate;
+		return this.gpsCoordinate;
 	}
 
-	public void setGpsCoordinate(GpsCoordinate gpsCoordinate) {
+	public void setGpsCoordinate(final GpsCoordinate gpsCoordinate) {
 		this.gpsCoordinate = gpsCoordinate;
 	}
 
 	public boolean getFinalVersion() {
-		return finalVersion;
+		return this.finalVersion;
 	}
 
-	public void setFinalVersion(boolean finalVersion) {
+	public void setFinalVersion(final boolean finalVersion) {
 		this.finalVersion = finalVersion;
 	}
 
 	public boolean getAdult() {
-		return adult;
+		return this.adult;
 	}
 
-	public void setAdult(boolean adult) {
+	public void setAdult(final boolean adult) {
 		this.adult = adult;
 	}
 
 	public boolean getDeleted() {
-		return deleted;
+		return this.deleted;
 	}
 
-	public void setDeleted(boolean deleted) {
+	public void setDeleted(final boolean deleted) {
 		this.deleted = deleted;
 	}
 
+
 	// Relationships ----------------------------------------------------------
 
-	private Collection<Announcement> announcements;
-	private Collection<Comment> comments;
-	private Collection<Question> questions;
-	private User organiser;
-	private Collection<User> attendants;
-	private Collection<Rendezvous> linkedRendezvouses;
+	private Collection<Announcement>	announcements;
+	private Collection<Comment>			comments;
+	private Collection<Question>		questions;
+	private User						organiser;
+	private Collection<User>			attendants;
+	private Collection<Rendezvous>		linkedRendezvouses;
+
 
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "rendezvous")
 	public Collection<Announcement> getAnnouncements() {
-		return announcements;
+		return this.announcements;
 	}
 
-	public void setAnnouncements(Collection<Announcement> announcements) {
+	public void setAnnouncements(final Collection<Announcement> announcements) {
 		this.announcements = announcements;
 	}
 
@@ -134,10 +145,10 @@ public class Rendezvous extends DomainEntity {
 	@NotNull
 	@OneToMany(mappedBy = "rendezvous")
 	public Collection<Comment> getComments() {
-		return comments;
+		return this.comments;
 	}
 
-	public void setComments(Collection<Comment> comments) {
+	public void setComments(final Collection<Comment> comments) {
 		this.comments = comments;
 	}
 
@@ -145,10 +156,10 @@ public class Rendezvous extends DomainEntity {
 	@NotNull
 	@OneToMany(mappedBy = "rendezvous")
 	public Collection<Question> getQuestions() {
-		return questions;
+		return this.questions;
 	}
 
-	public void setQuestions(Collection<Question> questions) {
+	public void setQuestions(final Collection<Question> questions) {
 		this.questions = questions;
 	}
 
@@ -156,10 +167,10 @@ public class Rendezvous extends DomainEntity {
 	@NotNull
 	@ManyToOne(optional = false)
 	public User getOrganiser() {
-		return organiser;
+		return this.organiser;
 	}
 
-	public void setOrganiser(User organiser) {
+	public void setOrganiser(final User organiser) {
 		this.organiser = organiser;
 	}
 
@@ -167,10 +178,10 @@ public class Rendezvous extends DomainEntity {
 	@NotNull
 	@ManyToMany
 	public Collection<User> getAttendants() {
-		return attendants;
+		return this.attendants;
 	}
 
-	public void setAttendants(Collection<User> attendants) {
+	public void setAttendants(final Collection<User> attendants) {
 		this.attendants = attendants;
 	}
 
@@ -178,10 +189,10 @@ public class Rendezvous extends DomainEntity {
 	@NotNull
 	@OneToMany(mappedBy = "rendezvous0")
 	public Collection<Rendezvous> getLinkedRendezvouses() {
-		return linkedRendezvouses;
+		return this.linkedRendezvouses;
 	}
 
-	public void setLinkedRendezvouses(Collection<Rendezvous> linkedRendezvouses) {
+	public void setLinkedRendezvouses(final Collection<Rendezvous> linkedRendezvouses) {
 		this.linkedRendezvouses = linkedRendezvouses;
 	}
 

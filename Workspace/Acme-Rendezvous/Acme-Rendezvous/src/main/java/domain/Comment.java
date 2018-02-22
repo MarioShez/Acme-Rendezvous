@@ -76,9 +76,10 @@ public class Comment extends DomainEntity {
 
 	// Relationships
 
-	private Collection<Comment> comment;
+	private Collection<Comment> replies;
 	private User user;
 	private Rendezvous rendezvous;
+	private Comment commentParent;
 
 	@Valid
 	@NotNull
@@ -103,13 +104,24 @@ public class Comment extends DomainEntity {
 	}
 
 	@Valid
-	@OneToMany(mappedBy = "comment")
-	public Collection<Comment> getComment() {
-		return comment;
+	@OneToMany(mappedBy = "commentParent")
+	public Collection<Comment> getReplies() {
+		return replies;
 	}
 
-	public void setComment(Collection<Comment> comment) {
-		this.comment = comment;
+	public void setReplies(Collection<Comment> replies) {
+		this.replies = replies;
+	}
+	
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Comment getCommentParent() {
+		return commentParent;
+	}
+
+	public void setCommentParent(Comment commentParent) {
+		this.commentParent = commentParent;
 	}
 
 }

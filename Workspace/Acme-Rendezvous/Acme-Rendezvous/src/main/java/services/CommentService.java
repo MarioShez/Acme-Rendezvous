@@ -1,7 +1,10 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+
+import javassist.expr.NewArray;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,10 +45,14 @@ public class CommentService {
 		Rendezvous rendezvous = new Rendezvous();
 
 		Date d = new Date();
+		Comment parent= new Comment();
+		Collection<Comment> replies = new ArrayList<Comment>();
 
 		res.setMoment(d);
 		res.setUser(u);
 		res.setRendezvous(rendezvous);
+		res.setCommentParent(parent);
+		res.setReplies(replies);
 		return res;
 	}
 
@@ -80,5 +87,15 @@ public class CommentService {
 		Assert.isTrue(this.commentRepository.exists(comment.getId()));
 		this.commentRepository.delete(comment);
 	}
+	
+	// pasar a servicio de Rendezvous
+//	public Collection<Rendezvous> findRsvpdRendezvousByUserId(int attendantsId){
+//		Assert.notNull(attendantsId);
+//		Collection<Rendezvous> rendezvous;
+//		rendezvous = this.commentRepository.findRsvpdRendezvousByUserId(attendantsId);
+//		Assert.notNull(rendezvous);
+//		return rendezvous;
+//			
+//	}
 
 }

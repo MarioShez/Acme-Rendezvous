@@ -1,5 +1,5 @@
 <%--
- * register_Explorer.jsp
+ * register.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -14,13 +14,11 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="user/register_User.do" modelAttribute="userForm">
-	
-	<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<form:form action="user/register.do" modelAttribute="userForm">
 	
 	<acme:textbox code="user.name" path="name"/>
 	<br/>
@@ -40,6 +38,10 @@
 	<br/>
 	<acme:textbox code="user.repeatPassword" path="repeatPassword"/>
 	<br/>
+	
+	<%--
+	<acme:checkbox code="actor.acceptTerms" path="acceptTerms"/>
+	--%>
 	
 	<form:checkbox path="acceptTerms"/>
 	<form:label path="acceptTerms">

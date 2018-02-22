@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-
 @Entity
 @Access(AccessType.PROPERTY)
 public class Answer extends DomainEntity {
@@ -30,6 +29,7 @@ public class Answer extends DomainEntity {
 	//Relationships
 
 	private Question	question;
+	private User		user;
 
 
 	@Valid
@@ -40,6 +40,15 @@ public class Answer extends DomainEntity {
 
 	public void setTrips(final Question question) {
 		this.question = question;
+	}
+
+	@ManyToOne
+	public Actor getUser() {
+		return this.user;
+	}
+
+	public void setUser(final User user) {
+		this.user = user;
 	}
 
 }
