@@ -22,27 +22,26 @@ public class ActorService {
 	// Managed repository
 
 	@Autowired
-	private ActorRepository	actorRepository;
-
+	private ActorRepository		actorRepository;
 
 	// Supporting services
 
 	@Autowired
-	private UserAccountService userAccountService;
-	
+	private UserAccountService	userAccountService;
+
 	@Autowired
-	private UserService userService;
-	
-//	@Autowired
-//	private RendezvousesService rendezvousesService;
-//	
+	private UserService			userService;
+
+
+	//	@Autowired
+	//	private RendezvousesService rendezvousesService;
+	//	
 	// Constructors
-	
+
 	public ActorService() {
 		super();
 	}
-	
-	
+
 	// Simple CRUD methods
 
 	public Collection<Actor> findAll() {
@@ -52,39 +51,38 @@ public class ActorService {
 		return res;
 	}
 
-	public Actor findOne(int actorId) {
+	public Actor findOne(final int actorId) {
 		Assert.isTrue(actorId != 0);
 		Actor res;
 		res = this.actorRepository.findOne(actorId);
 		Assert.notNull(res);
 		return res;
 	}
-	
-	public Actor save(Actor actor) {
+
+	public Actor save(final Actor actor) {
 		Assert.notNull(actor);
 		Actor res;
 		res = this.actorRepository.save(actor);
 		return res;
 	}
-	
-//	public void delete(Actor actor) {
-//		Assert.notNull(actor);
-//		Assert.isTrue(actor.getId() != 0);
-//		Assert.isTrue(this.actorRepository.exists(actor.getId()));
-//		this.actorRepository.delete(actor);
-//	}
-	
-	
+
+	//	public void delete(Actor actor) {
+	//		Assert.notNull(actor);
+	//		Assert.isTrue(actor.getId() != 0);
+	//		Assert.isTrue(this.actorRepository.exists(actor.getId()));
+	//		this.actorRepository.delete(actor);
+	//	}
+
 	// Other business methods
-	
+
 	public void checkUserLogin() {
-		UserAccount userAccount = LoginService.getPrincipal();
+		final UserAccount userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		Actor actor = this.findByPrincipal();
+		final Actor actor = this.findByPrincipal();
 		Assert.notNull(actor);
 	}
 
-	private Actor findByPrincipal() {
+	public Actor findByPrincipal() {
 		Actor res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -92,53 +90,40 @@ public class ActorService {
 		Assert.notNull(res);
 		return res;
 	}
-	
+
 	public boolean checkAuthority() {
 		boolean res = false;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		if(userAccount != null){
+		if (userAccount != null)
 			res = true;
-		}
 		return res;
 	}
-	
-	public UserAccount findByUserAccount(Actor actor){
+
+	public UserAccount findByUserAccount(final Actor actor) {
 		Assert.notNull(actor);
 		UserAccount res;
-		res = userAccountService.findByActor(actor);
+		res = this.userAccountService.findByActor(actor);
 		Assert.notNull(res);
 		return res;
 	}
-	
+
 	// 4.2
-	
+
 	public Collection<User> findAllUser() {
 		Collection<User> res;
 		res = this.userService.findAll();
 		return res;
 	}
-	
-	
+
 	// 20.1
-	
-	public Collection<User> findUserRsvpdRendezvous(){
+
+	public Collection<User> findUserRsvpdRendezvous() {
 		Collection<User> res;
-		res = actorRepository.findUserRsvpdRendezvous();
+		res = this.actorRepository.findUserRsvpdRendezvous();
 		Assert.notNull(res);
-		
+
 		return res;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
