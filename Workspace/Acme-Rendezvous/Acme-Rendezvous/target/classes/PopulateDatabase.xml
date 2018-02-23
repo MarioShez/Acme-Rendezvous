@@ -71,6 +71,8 @@
 	<property name="userAccount" ref="userAccount2"/>
 	<property name="answer">
 		<list>
+			<ref bean="answer1"/>
+			<ref bean="answer1"/>
 		</list>
 	</property>
 	<property name="organisedRendezvous">
@@ -103,12 +105,12 @@
 	</property>
 	<property name="organisedRendezvous">
 		<list>
-			
+			<ref bean="rendezvous2"/>
 		</list>
 	</property>
 	<property name="rsvpdRendezvous">
 		<list>
-			<ref bean="rendezvous1"/>
+			<ref bean="rendezvous2"/>
 		</list>
 	</property>
 	</bean>
@@ -134,7 +136,7 @@
 		</property>
 		<property name="comments">
 			<list>
-			
+				<ref bean="comment1"/>
 			</list>
 		</property>
 		<property name="questions">
@@ -147,6 +149,35 @@
 		<property name="attendants"> 
 			<list>
 				<ref bean="user1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Rendezvous 2 -->
+	<bean id="rendezvous2" class="domain.Rendezvous">
+		<property name="name" value="Rendezvous 02"/>
+		<property name="description" value="A description 2"/>
+		<property name="picture" value="http://www.google.es"/>
+		<property name="moment" value="23/01/2020 19:09"/>
+		<property name="adult" value="true"/>
+		<property name="finalVersion" value="true"/>
+		<property name="deleted" value="false"/>
+		<property name="announcements">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="questions">
+			<list>
+			</list>
+		</property>
+		<property name="organiser" ref="user2"/>
+		<property name="attendants"> 
+			<list>
+				<ref bean="user2"/>
 			</list>
 		</property>
 	</bean>

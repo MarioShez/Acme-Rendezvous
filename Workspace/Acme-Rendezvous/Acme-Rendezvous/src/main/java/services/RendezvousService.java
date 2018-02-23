@@ -70,7 +70,7 @@ public class RendezvousService {
 		result.setQuestions(new ArrayList<Question>());
 		result.setAttendants(new ArrayList<User>());
 		result.getAttendants().add(this.userService.findByPrincipal());
-		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
+//		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
 
 		return result;
 
@@ -147,7 +147,7 @@ public class RendezvousService {
 
 		result.setAnnouncements(new ArrayList<Announcement>());
 		result.setAttendants(new ArrayList<User>());
-		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
+//		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
 		result.setComments(new ArrayList<Comment>());
 		result.setQuestions(new ArrayList<Question>());
 
