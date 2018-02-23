@@ -44,7 +44,6 @@ public class Rendezvous extends DomainEntity {
 
 
 	@NotBlank
-	@SafeHtml
 	public String getName() {
 		return this.name;
 	}
@@ -54,7 +53,6 @@ public class Rendezvous extends DomainEntity {
 	}
 
 	@NotBlank
-	@SafeHtml
 	public String getDescription() {
 		return this.description;
 	}
@@ -64,7 +62,6 @@ public class Rendezvous extends DomainEntity {
 	}
 
 	@URL
-	@SafeHtml
 	public String getPicture() {
 		return this.picture;
 	}
@@ -76,7 +73,6 @@ public class Rendezvous extends DomainEntity {
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	@SafeHtml
 	public Date getMoment() {
 		return this.moment;
 	}
@@ -86,7 +82,6 @@ public class Rendezvous extends DomainEntity {
 	}
 
 	@Valid
-	@SafeHtml
 	public GpsCoordinate getGpsCoordinate() {
 		return this.gpsCoordinate;
 	}
