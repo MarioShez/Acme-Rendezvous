@@ -17,7 +17,7 @@ public interface RendezvousRepository extends JpaRepository<Rendezvous, Integer>
 	@Query("select r from Rendezvous r where r.adult = false and r.moment > current_timestamp")
 	Collection<Rendezvous> findFutureMomentAndNotAdult();
 
-	@Query("select r from Rendezvous r where r.ornaniser = ?1")
+	@Query("select r from Rendezvous r where r.organiser = ?1")
 	Collection<Rendezvous> findByOrganiserId(int organiserId);
 	
 
