@@ -144,6 +144,7 @@
 			<list>
 				<ref bean="announcement1"/>
 				<ref bean="announcement2"/>
+				<ref bean="announcement3"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -228,6 +229,11 @@
 				<ref bean="answer3"/>
 			</list>
 		</property>
+		<property name="rendezvous">
+			<list>
+				<ref bean="rendezvous1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Question 2 -->
@@ -240,6 +246,7 @@
 				<ref bean="answer6"/>
 			</list>
 		</property>
+		
 	</bean>
 
 	
@@ -308,7 +315,7 @@
 		<property name="description" value="A description 2"/>
 		<property name="rendezvous">
 			<list>
-				<ref bean="rendezvous2"/>
+				<ref bean="rendezvous1"/>
 			</list>
 		</property>
 	</bean>
@@ -320,7 +327,7 @@
 		<property name="description" value="A description 3"/>
 		<property name="rendezvous">
 			<list>
-
+				<ref bean="rendezvous1"/>
 			</list>
 		</property>
 	</bean>
