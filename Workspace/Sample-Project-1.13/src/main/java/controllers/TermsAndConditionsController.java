@@ -3,7 +3,6 @@ package controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -19,9 +18,9 @@ public class TermsAndConditionsController extends AbstractController {
 	}
 
 	// Listing --------------------------------------------------------------
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping("/list")
 	public ModelAndView list() {
-		ModelAndView result = new ModelAndView();
+		ModelAndView result;
 
 		result = new ModelAndView("terms/list");
 		
