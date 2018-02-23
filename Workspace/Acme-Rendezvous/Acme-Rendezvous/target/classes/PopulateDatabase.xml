@@ -57,17 +57,6 @@
 	
 	<!-- Other domain beans come here -->
 	
-						<!-- Actor -->
-	<!-- Actor 1 -->
-	<bean id="actor1" class="domain.Actor">
-	<property name="name" value="Pedro"/>
-	<property name="surname" value="Perez"/>
-	<property name="email" value="ppez@gmail.com"/>
-	<property name="phone" value="987654321"/>
-	<property name="address" value="C/Margarita nº7"/>
-	<property name="birth" value="01/01/1992"/>
-	<property name="userAccount" ref="user1"/>
-	</bean>
 		
 	
 						<!-- User -->
@@ -79,12 +68,9 @@
 	<property name="phone" value="601234578"/>
 	<property name="address" value="C/Margarita nº7"/>
 	<property name="birth" value="12/09/1993"/>
-	<property name="userAccount" ref="user1"/>
+	<property name="userAccount" ref="userAccount2"/>
 	<property name="answer">
 		<list>
-			<ref bean="answer1"/>
-			<ref bean="answer2"/>
-			<ref bean="answer3"/>
 		</list>
 	</property>
 	<property name="organisedRendezvous">
@@ -107,7 +93,7 @@
 	<property name="phone" value="698253684"/>
 	<property name="address" value="C/La Vega nº7"/>
 	<property name="birth" value="06/05/1992"/>
-	<property name="userAccount" ref="user2"/>
+	<property name="userAccount" ref="userAccount3"/>
 	<property name="answer">
 		<list>
 			<ref bean="answer4"/>
@@ -136,7 +122,6 @@
 		<property name="description" value="A description 1"/>
 		<property name="picture" value="http://www.google.es"/>
 		<property name="moment" value="23/01/2020 19:09"/>
-		<property name="gpsCoordinate" ref="gpsCoordinate1"/>
 		<property name="adult" value="false"/>
 		<property name="finalVersion" value="false"/>
 		<property name="deleted" value="false"/>
@@ -149,9 +134,7 @@
 		</property>
 		<property name="comments">
 			<list>
-				<ref bean="comment1"/>
-				<ref bean="comment2"/>
-				<ref bean="comment3"/>
+			
 			</list>
 		</property>
 		<property name="questions">
@@ -164,12 +147,6 @@
 		<property name="attendants"> 
 			<list>
 				<ref bean="user1"/>
-				<ref bean="user2"/>
-			</list>
-		</property>
-		<property name="linkedRendezvouses"> 
-			<list>
-				
 			</list>
 		</property>
 	</bean>
@@ -178,10 +155,9 @@
 	<!-- Comment 1 -->
 	<bean id="comment1" class="domain.Comment">
 	<property name="moment" value="23/01/2011 19:09"/>
-	<property name="remark" value="Comment 01"/>
 	<property name="text" value="A short comment"/>
 	<property name="picture" value="http://www.google.es"/>
-	<property name="comment">
+	<property name="replies">
 		<list>
 		</list>
 	</property>
@@ -192,10 +168,9 @@
 	<!-- Comment 2 -->
 	<bean id="comment2" class="domain.Comment">
 	<property name="moment" value="23/02/2011 19:09"/>
-	<property name="remark" value="Comment 02"/>
 	<property name="text" value="A comment"/>
 	<property name="picture" value=""/>
-	<property name="comment">
+	<property name="replies">
 		<list>
 			<ref bean="comment3"/>
 		</list>
@@ -207,10 +182,9 @@
 	<!-- Comment 3 -->
 	<bean id="comment3" class="domain.Comment">
 	<property name="moment" value="22/03/2011 19:09"/>
-	<property name="remark" value="Comment 03"/>
 	<property name="text" value="A comment ..."/>
 	<property name="picture" value=""/>
-	<property name="comment">
+	<property name="replies">
 		<list>
 		</list>
 	</property>
@@ -224,16 +198,10 @@
 		<property name="content" value="Question 01?"/>
 		<property name="answers">
 			<list>
-				<ref bean="answer1"/>
-				<ref bean="answer2"/>
-				<ref bean="answer3"/>
+				
 			</list>
 		</property>
-		<property name="rendezvous">
-			<list>
-				<ref bean="rendezvous1"/>
-			</list>
-		</property>
+		<property name="rendezvous" ref="rendezvous1"/>
 	</bean>
 	
 	<!-- Question 2 -->
@@ -241,12 +209,10 @@
 		<property name="content" value="Question 02?"/>
 		<property name="answers">
 			<list>
-				<ref bean="answer4"/>
-				<ref bean="answer5"/>
-				<ref bean="answer6"/>
+				
 			</list>
 		</property>
-		
+		<property name="rendezvous" ref="rendezvous1"/>
 	</bean>
 
 	
@@ -301,11 +267,7 @@
 		<property name="moment" value="23/01/2013 19:09"/>
 		<property name="title" value="Announcement 01"/>
 		<property name="description" value="A description 1"/>
-		<property name="rendezvous">
-			<list>
-				<ref bean="rendezvous1"/>
-			</list>
-		</property>
+		<property name="rendezvous" ref="rendezvous1"/>
 	</bean>
 	
 	<!-- Announcement 2 -->
@@ -313,11 +275,7 @@
 		<property name="moment" value="15/05/2013 20:09"/>
 		<property name="title" value="Announcement 02"/>
 		<property name="description" value="A description 2"/>
-		<property name="rendezvous">
-			<list>
-				<ref bean="rendezvous1"/>
-			</list>
-		</property>
+		<property name="rendezvous" ref="rendezvous1"/>
 	</bean>
 	
 	<!-- Announcement 3 -->
@@ -325,32 +283,17 @@
 		<property name="moment" value="17/06/2013 20:30"/>
 		<property name="title" value="Announcement 03"/>
 		<property name="description" value="A description 3"/>
-		<property name="rendezvous">
-			<list>
-				<ref bean="rendezvous1"/>
-			</list>
-		</property>
+		<property name="rendezvous" ref="rendezvous1"/>
 	</bean>
 	
 	
 						<!-- GpsCoordinate -->
 	<!-- GpsCoordinate 1 -->
 	<bean id="gpsCoordinate1" class="domain.GpsCoordinate">
-		<property name="latitude" value="90.0"/>
-		<property name="longitude" value="180.0"/>
+		<property name="latitude" value="89.0"/>
+		<property name="longitude" value="179.0"/>
 	</bean>
 	
-	<!-- GpsCoordinate 2 -->
-	<bean id="gpsCoordinate2" class="domain.GpsCoordinate">
-		<property name="latitude" value="60.0"/>
-		<property name="longitude" value="170.0"/>
-	</bean>
-	
-	<!-- GpsCoordinate 3 -->
-	<bean id="gpsCoordinate3" class="domain.GpsCoordinate">
-		<property name="latitude" value="66.0"/>
-		<property name="longitude" value="120.0"/>
-	</bean>
 	
 	
 </beans>
