@@ -20,10 +20,5 @@
 		<put-attribute name="title" value="Panic" />
 		<put-attribute name="body" value="/views/misc/panic.jsp" />
 	</definition>
-	
-	<definition name="terms-and-conditions" extends="master.page">
-		<put-attribute name="title" value="Terms and conditions" />
-		<put-attribute name="body" value="/views/misc/terms-and-conditions.jsp" />
-	</definition>
 
 </tiles-definitions>
