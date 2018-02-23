@@ -15,6 +15,7 @@ import services.UserService;
 import controllers.AbstractController;
 import domain.Comment;
 import domain.Rendezvous;
+import domain.User;
 
 @Controller
 @RequestMapping("/comment/user")
@@ -57,6 +58,47 @@ public class CommentUserController extends AbstractController {
 		
 		return result;
 	}
+	
+	// Creation ---------------------------------------------------------------
+
+		@RequestMapping(value = "/create", method = RequestMethod.GET)
+		public ModelAndView create() {
+			ModelAndView result;
+			Comment c;
+
+			c = this.commentService.create();
+			result = this.createModelAndView(c);
+			return result;
+		}
+
+		// Ancillary methods --------------------------------------------------
+
+		protected ModelAndView createModelAndView(final Comment comment) {
+			ModelAndView result;
+
+			result = this.createModelAndView(comment, null);
+
+			return result;
+		}
+		
+		protected ModelAndView createModelAndView(
+				final Comment comment, final String message) {
+			ModelAndView result;
+			result = new ModelAndView("application/explorer/edit");
+			
+			Rendezvous r = new Rendezvous();
+			
+			User user = userService.findOrganiserByRendezvousId(r.getId());
+			
+			result.addObject("user", user);
+			result.addObject("comment", comment);
+			result.addObject("message", message);
+			return result;
+		}
+		
+		
+		
+		
 
 	
 

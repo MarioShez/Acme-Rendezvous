@@ -35,9 +35,6 @@
 	<spring:message code="comment.moment" var="momentHeader" />
 	<display:column property="moment" title="${momentHeader}" sortable="true" />
 
-	<spring:message code="comment.remark" var="remarkHeader" />
-	<display:column property="remark" title="${remarkHeader}" sortable="true" />
-
 	<spring:message code="comment.text" var="textHeader" />
 	<display:column property="text" title="${textHeader}" sortable="false" />
 
