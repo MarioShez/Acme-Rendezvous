@@ -180,15 +180,15 @@ public class Rendezvous extends DomainEntity {
 		this.attendants = attendants;
 	}
 
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "linkedRendezvouses")
-	public Collection<Rendezvous> getLinkedRendezvouses() {
-		return this.linkedRendezvouses;
-	}
-
-	public void setLinkedRendezvouses(final Collection<Rendezvous> linkedRendezvouses) {
-		this.linkedRendezvouses = linkedRendezvouses;
-	}
+//	@Valid
+//	@NotNull
+//	@OneToMany(mappedBy = "linkedRendezvouses")
+//	public Collection<Rendezvous> getLinkedRendezvouses() {
+//		return this.linkedRendezvouses;
+//	}
+//
+//	public void setLinkedRendezvouses(final Collection<Rendezvous> linkedRendezvouses) {
+//		this.linkedRendezvouses = linkedRendezvouses;
+//	}
 
 }
