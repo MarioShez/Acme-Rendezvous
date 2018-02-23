@@ -26,7 +26,7 @@
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.listUsers" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="actor/register_User.do"><spring:message code="master.page.register" /></a>
-			<li><a class="fNiv" href="termsAndConditions/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>
+			<li><a class="fNiv" href="terms/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

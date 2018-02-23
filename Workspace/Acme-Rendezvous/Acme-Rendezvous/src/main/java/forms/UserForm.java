@@ -22,7 +22,7 @@ public class UserForm {
 	private UserAccount UserAccount;
 	
 	private String repeatPassword;
-	private Boolean termsAndConditions;
+	private boolean termsAndConditions;
 	
 	public UserForm(){
 		super();

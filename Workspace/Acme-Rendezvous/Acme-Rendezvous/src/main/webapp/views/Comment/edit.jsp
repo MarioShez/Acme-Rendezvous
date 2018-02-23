@@ -23,13 +23,11 @@
 	
 	<acme:textbox code="comment.moment" path="moment"/>
 	<br/>
-	<acme:textbox code="comment.remark" path="remark"/>
-	<br/>
 	<acme:textarea code="comment.text" path="text"/>
 	<br/>
 	<acme:textbox code="comment.picture" path="picture"/>
 	<br/>
-	<acme:select items="${commentParent}" itemLabel="remark" code="comment.commentParent"  path="commentParent"/>
+	<acme:select items="${commentParent}" itemLabel="picture" code="comment.commentParent"  path="commentParent"/>
 	<br/>
 	
 	

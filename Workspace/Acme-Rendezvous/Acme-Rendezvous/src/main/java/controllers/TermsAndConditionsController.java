@@ -3,12 +3,11 @@ package controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/termsAndConditions")
+@RequestMapping("/terms")
 public class TermsAndConditionsController extends AbstractController {
 
 	// Services -------------------------------------------------------------
@@ -21,12 +20,11 @@ public class TermsAndConditionsController extends AbstractController {
 		
 		
 	// Listing --------------------------------------------------------------
-		@RequestMapping(value = "/list", method = RequestMethod.GET)
+		@RequestMapping("/list")
 		public ModelAndView list() {
 			ModelAndView result;
 			
-			result = new ModelAndView("termsAndConditions/list");
-			result.addObject("requestURI", "termsAndConditions/list.do");
+			result = new ModelAndView("terms/list");
 			
 			return result;
 		}

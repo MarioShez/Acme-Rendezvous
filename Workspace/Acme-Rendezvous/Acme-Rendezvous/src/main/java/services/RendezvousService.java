@@ -10,6 +10,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.RendezvousRepository;
 import domain.Announcement;
@@ -17,6 +19,7 @@ import domain.Comment;
 import domain.Question;
 import domain.Rendezvous;
 import domain.User;
+import forms.RendezvousForm;
 
 @Service
 @Transactional
@@ -42,8 +45,10 @@ public class RendezvousService {
 	private CommentService			commentService;
 
 	@Autowired
-	private QuestionService			questionService;
-
+	private QuestionService questionService;
+	
+	@Autowired
+	private Validator validator;
 
 	// Constructors -----------------------------------------------------------
 
@@ -101,6 +106,8 @@ public class RendezvousService {
 
 		if (rendezvous.getId() == 0)
 			result.getOrganiser().getOrganisedRendezvous().add(result);
+			// Añadir attendant
+		}
 
 		return result;
 	}
@@ -125,6 +132,29 @@ public class RendezvousService {
 	}
 
 	// Other business methods -------------------------------------------------
+	
+	public Rendezvous reconstruct(RendezvousForm rendezvousForm, BindingResult binding) {
+		
+		Rendezvous result = new Rendezvous();
+		
+		result.setName(rendezvousForm.getName());
+		result.setDescription(rendezvousForm.getDescription());
+		result.setPicture(rendezvousForm.getPicture());
+		result.setMoment(rendezvousForm.getMoment());
+		result.setAdult(rendezvousForm.getAdult());
+		result.setFinalVersion(rendezvousForm.getFinalVersion());
+		result.setDeleted(rendezvousForm.getDeleted());
+		
+		result.setAnnouncements(new ArrayList<Announcement>());
+		result.setAttendants(new ArrayList<User>());
+		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
+		result.setComments(new ArrayList<Comment>());
+		result.setQuestions(new ArrayList<Question>());
+		
+		validator.validate(result, binding);
+		
+		return result;
+	}
 
 	public void checkPrincipal(final Rendezvous rendezvous) {
 

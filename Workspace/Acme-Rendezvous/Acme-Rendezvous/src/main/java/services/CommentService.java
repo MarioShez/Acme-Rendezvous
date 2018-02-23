@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javassist.expr.NewArray;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CommentRepository;
 import domain.Comment;
 import domain.Rendezvous;
 import domain.User;
+import forms.CommentForm;
 
 @Service
 @Transactional
@@ -25,7 +26,14 @@ public class CommentService {
 	@Autowired
 	private CommentRepository commentRepository;
 	
+	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CommentForm commentForm;
+	
+	private Validator validator;
+	
 
 	// Constructors
 
@@ -44,11 +52,11 @@ public class CommentService {
 
 		Rendezvous rendezvous = new Rendezvous();
 
-		Date d = new Date();
+		Date moment = new Date(System.currentTimeMillis()-1);
 		Comment parent= new Comment();
 		Collection<Comment> replies = new ArrayList<Comment>();
 
-		res.setMoment(d);
+		res.setMoment(moment);
 		res.setUser(u);
 		res.setRendezvous(rendezvous);
 		res.setCommentParent(parent);
@@ -98,4 +106,21 @@ public class CommentService {
 //			
 //	}
 
+	//Other bussines methods
+	
+	public Comment reconstruct(CommentForm commentForm, BindingResult binding) {
+		Comment res= new Comment();
+		
+		Date moment = new Date(System.currentTimeMillis()-1);
+		
+		res.setMoment(moment);
+		res.setPicture(commentForm.getPicture());
+		res.setText(commentForm.getText());
+		
+		validator.validate(res, binding);
+		
+		
+		return res;
+
+	}
 }

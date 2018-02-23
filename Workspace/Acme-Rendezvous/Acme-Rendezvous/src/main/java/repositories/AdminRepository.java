@@ -33,4 +33,6 @@ public interface AdminRepository extends JpaRepository<Admin, Integer>{
 	//B-1
 		@Query("select avg(r.announcements.size), sqrt(sum(r.announcements.size*r.announcements.size)/count(r.announcements.size)-(avg(r.announcements.size)*avg(r.announcements.size))) from Rendezvous r")
 		Object[] avgSqtrAnnouncementPerRendezvous();
+		
+		
 }
