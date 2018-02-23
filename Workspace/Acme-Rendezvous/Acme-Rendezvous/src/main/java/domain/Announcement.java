@@ -47,7 +47,6 @@ public class Announcement extends DomainEntity{
 	}
 	
 	@NotBlank
-	@SafeHtml
 	public String getTitle() {
 		return title;
 	}
@@ -57,7 +56,6 @@ public class Announcement extends DomainEntity{
 	}
 	
 	@NotBlank
-	@SafeHtml
 	public String getDescription() {
 		return description;
 	}

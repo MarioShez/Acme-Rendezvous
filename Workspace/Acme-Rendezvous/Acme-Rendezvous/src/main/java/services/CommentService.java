@@ -59,7 +59,7 @@ public class CommentService {
 		res.setMoment(moment);
 		res.setUser(u);
 		res.setRendezvous(rendezvous);
-		res.setCommentParent(parent);
+//		res.setCommentParent(parent);
 		res.setReplies(replies);
 		return res;
 	}

@@ -48,7 +48,6 @@ public class Comment extends DomainEntity {
 	}
 
 	@NotBlank
-	@SafeHtml
 	public String getText() {
 		return text;
 	}
@@ -58,7 +57,6 @@ public class Comment extends DomainEntity {
 	}
 
 	@URL
-	@SafeHtml
 	public String getPicture() {
 		return picture;
 	}
@@ -72,7 +70,7 @@ public class Comment extends DomainEntity {
 	private Collection<Comment> replies;
 	private User user;
 	private Rendezvous rendezvous;
-	private Comment commentParent;
+//	private Comment commentParent;
 
 	@Valid
 	@NotNull
@@ -97,7 +95,7 @@ public class Comment extends DomainEntity {
 	}
 
 	@Valid
-	@OneToMany(mappedBy = "commentParent")
+	@OneToMany()
 	public Collection<Comment> getReplies() {
 		return replies;
 	}
@@ -106,15 +104,14 @@ public class Comment extends DomainEntity {
 		this.replies = replies;
 	}
 	
-	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
-	public Comment getCommentParent() {
-		return commentParent;
-	}
-
-	public void setCommentParent(Comment commentParent) {
-		this.commentParent = commentParent;
-	}
+//	@Valid
+//	@ManyToOne(optional = false)
+//	public Comment getCommentParent() {
+//		return commentParent;
+//	}
+//
+//	public void setCommentParent(Comment commentParent) {
+//		this.commentParent = commentParent;
+//	}
 
 }

@@ -1,5 +1,22 @@
 #./src/main/resources/Entities.map
-#Sat Sep 23 12:30:14 CEST 2017
-userAccount3=6
-userAccount2=5
-userAccount1=4
+#Fri Feb 23 15:16:16 CET 2018
+question2=31
+question1=30
+answer6=37
+answer5=36
+answer4=35
+answer3=34
+answer2=33
+userAccount3=23
+answer1=32
+userAccount2=22
+userAccount1=21
+rendezvous1=26
+comment3=29
+comment2=28
+comment1=27
+announcement3=40
+announcement2=39
+announcement1=38
+user2=25
+user1=24
