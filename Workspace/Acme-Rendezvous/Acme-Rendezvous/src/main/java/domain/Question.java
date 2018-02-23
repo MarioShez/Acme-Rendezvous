@@ -36,7 +36,7 @@ public class Question extends DomainEntity {
 
 
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy="question")
 	public Collection<Answer> getAnswers() {
 		return this.answers;
 	}
@@ -45,7 +45,8 @@ public class Question extends DomainEntity {
 		this.answers = answers;
 	}
 
-	@ManyToOne
+	@Valid
+	@ManyToOne(optional= true)
 	public Rendezvous getRendezvous() {
 		return this.rendezvous;
 	}

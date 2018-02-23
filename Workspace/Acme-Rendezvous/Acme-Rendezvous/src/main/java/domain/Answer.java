@@ -33,17 +33,17 @@ public class Answer extends DomainEntity {
 
 
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional=true)
 	public Question getQuestion() {
 		return this.question;
 	}
 
-	public void setTrips(final Question question) {
+	public void setQuestion(final Question question) {
 		this.question = question;
 	}
-
-	@ManyToOne
-	public Actor getUser() {
+	@Valid
+	@ManyToOne(optional= true)
+	public User getUser() {
 		return this.user;
 	}
 

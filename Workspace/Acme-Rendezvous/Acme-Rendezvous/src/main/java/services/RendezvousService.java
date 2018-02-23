@@ -1,4 +1,3 @@
-
 package services;
 
 import java.util.ArrayList;
@@ -28,25 +27,25 @@ public class RendezvousService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private RendezvousRepository	rendezvousRepository;
+	private RendezvousRepository rendezvousRepository;
 
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	private UserService				userService;
+	private UserService userService;
 
 	@Autowired
-	private AdminService			adminService;
+	private AdminService adminService;
 
 	@Autowired
-	private AnnouncementService		announcementService;
+	private AnnouncementService announcementService;
 
 	@Autowired
-	private CommentService			commentService;
+	private CommentService commentService;
 
 	@Autowired
 	private QuestionService questionService;
-	
+
 	@Autowired
 	private Validator validator;
 
@@ -79,7 +78,8 @@ public class RendezvousService {
 
 	public Rendezvous findOne(final int rendezvousId) {
 
-		final Rendezvous result = this.rendezvousRepository.findOne(rendezvousId);
+		final Rendezvous result = this.rendezvousRepository
+				.findOne(rendezvousId);
 		return result;
 	}
 
@@ -106,8 +106,7 @@ public class RendezvousService {
 
 		if (rendezvous.getId() == 0)
 			result.getOrganiser().getOrganisedRendezvous().add(result);
-			// Añadir attendant
-		}
+		// Añadir attendant
 
 		return result;
 	}
@@ -132,11 +131,12 @@ public class RendezvousService {
 	}
 
 	// Other business methods -------------------------------------------------
-	
-	public Rendezvous reconstruct(RendezvousForm rendezvousForm, BindingResult binding) {
-		
+
+	public Rendezvous reconstruct(RendezvousForm rendezvousForm,
+			BindingResult binding) {
+
 		Rendezvous result = new Rendezvous();
-		
+
 		result.setName(rendezvousForm.getName());
 		result.setDescription(rendezvousForm.getDescription());
 		result.setPicture(rendezvousForm.getPicture());
@@ -144,15 +144,15 @@ public class RendezvousService {
 		result.setAdult(rendezvousForm.getAdult());
 		result.setFinalVersion(rendezvousForm.getFinalVersion());
 		result.setDeleted(rendezvousForm.getDeleted());
-		
+
 		result.setAnnouncements(new ArrayList<Announcement>());
 		result.setAttendants(new ArrayList<User>());
 		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
 		result.setComments(new ArrayList<Comment>());
 		result.setQuestions(new ArrayList<Question>());
-		
+
 		validator.validate(result, binding);
-		
+
 		return result;
 	}
 
@@ -177,20 +177,23 @@ public class RendezvousService {
 
 	public Collection<Rendezvous> findFutureMomentAndNotAdult() {
 
-		final Collection<Rendezvous> result = this.rendezvousRepository.findFutureMomentAndNotAdult();
+		final Collection<Rendezvous> result = this.rendezvousRepository
+				.findFutureMomentAndNotAdult();
 		return result;
 	}
 
 	public Collection<Rendezvous> findFutureMoment() {
 
-		final Collection<Rendezvous> result = this.rendezvousRepository.findFutureMoment();
+		final Collection<Rendezvous> result = this.rendezvousRepository
+				.findFutureMoment();
 		return result;
 	}
 
 	public Collection<Rendezvous> findByPrincipal() {
 
 		final User organiser = this.userService.findByPrincipal();
-		final Collection<Rendezvous> result = this.rendezvousRepository.findByOrganiserId(organiser.getId());
+		final Collection<Rendezvous> result = this.rendezvousRepository
+				.findByOrganiserId(organiser.getId());
 		return result;
 	}
 
