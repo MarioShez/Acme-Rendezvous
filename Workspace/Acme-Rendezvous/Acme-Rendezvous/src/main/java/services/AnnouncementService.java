@@ -6,10 +6,13 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AnnouncementRepository;
 import domain.Announcement;
 import domain.Rendezvous;
+import forms.AnnouncementForm;
 
 public class AnnouncementService {
 
@@ -19,8 +22,11 @@ public class AnnouncementService {
 	private AnnouncementRepository announcementRepository;
 	
 	// Supporting services
+//	@Autowired
+//	private RendezvousService rendezvousService;
+
 	@Autowired
-	private RendezvousService rendezvousService;
+	private Validator validator;
 	
 	// Constructors
 	
@@ -80,6 +86,31 @@ public class AnnouncementService {
 		Assert.isTrue(this.announcementRepository.exists(announcement.getId()));
 		
 		this.announcementRepository.delete(announcement);
+	}
+	
+	// Other busines methods
+	
+	public Collection<Announcement> findAnnouncementByRendezvous(int idRendezvous){
+		Collection<Announcement> res = new ArrayList<Announcement>();
+		
+		res = announcementRepository.findAnnouncementByRendezvous(idRendezvous);
+		Assert.notNull(res);
+		
+		return res;
+	}
+	
+	public Announcement reconstruct(AnnouncementForm announcementForm, BindingResult binding){
+		Announcement res = new Announcement();
+		
+		Date moment = new Date(System.currentTimeMillis()-1);
+		
+		res.setMoment(moment);
+		res.setTitle(announcementForm.getTitle());
+		res.setDescription(announcementForm.getDescription());
+		
+		validator.validate(res, binding);
+		
+		return res;
 	}
 
 

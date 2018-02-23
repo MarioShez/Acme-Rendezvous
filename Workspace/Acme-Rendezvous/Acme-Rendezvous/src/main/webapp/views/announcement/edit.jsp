@@ -9,25 +9,14 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action ="${requestURI }" modelAttribute="announcement">
+<form:form action ="${requestURI }" modelAttribute="announcementForm">
 
-	<form:hidden path="id"/>
-	<form:form path="version"/>
-	
-<security:authorize access="hasRole('USER')">
 
-	<form:hidden path="moment"/>
 
 	<acme:textbox code="announcement.title" path="title"/>
 	
 	<acme:textbox code="announcement.description" path="description"/>
 	
-	<acme:select items="${rendezvous}" itemLabel="rendezvous" 
-			code="annoncement.rendezvous" path="rendezvous"/>
-	
-
-</security:authorize>
-
 <input type="submit" name="save"
 		value="<spring:message code="announcement.save" />" />&nbsp; 
 

@@ -14,20 +14,20 @@
 	name="announcement" requestURI="${requestURI }" id="row">	
 	
 	<spring:message code="announcement.moment" var="momentHeader"/>
-	<display:colum property="moment" title="${momentHeader}" soportable="true"/>
-	
+	<display:column property="moment" title="${momentHeader}" sortable="true"/>
 	<spring:message code="announcement.title" var="titleHeader"/>
-	<display:colum property="title" title="${titleHeader}" soportable="true"/>
+	<display:column property="title" title="${titleHeader}" sortable="true"/>
 	
 	<spring:message code="announcement.description" var="descriptionHeader"/>
-	<display:colum property="description" title="${descriptionHeader}" soportable="true"/>
+	<display:column property="description" title="${descriptionHeader}" sortable="true"/>
 	
 	<spring:message code="announcement.rendezvous" var="rendezvousHeader"/>
-	<display:colum title="${rendezvous}">
-		<a hred="rendezvous/display.do?rendezvousId=${row.id}">
+	<display:column title="${rendezvous}">
+		<a href="rendezvous/display.do?rendezvousId=${row.id}">
 		<spring:message code="rendezvous.display"/></a>
-	</display:colum>
-	
+	</display:column>
+
+<!-- 
 <security:authorize access="hasRole('USER')">>
 	
 	<div>
@@ -39,6 +39,7 @@
 	</div>
 	
 </security:authorize>
+ -->
 	
 	
 
