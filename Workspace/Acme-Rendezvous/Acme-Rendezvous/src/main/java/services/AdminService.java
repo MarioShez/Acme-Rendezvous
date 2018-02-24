@@ -103,4 +103,81 @@ public class AdminService {
 		Assert.isTrue(authority.contains(res));
 	}
 
+	// C-1
+	public Object[] avgSqtrUser() {
+		Object[] res;
+		res = this.adminRepository.avgSqtrUser();
+		return res;
+	}
+
+	// C-2
+	public Double ratioUserRendezvous() {
+		Double res;
+		res = this.adminRepository.ratioUserRendezvous();
+		return res;
+	}
+
+	// C-3
+	public Object[] avgSqtrUserPerRendezvous() {
+		Object[] res;
+		res = this.adminRepository.avgSqtrUserPerRendezvous();
+		return res;
+	}
+
+	// C-4
+	public Object[] avgSqtrUser2() {
+		Object[] res;
+		res = this.adminRepository.avgSqtrUser2();
+		return res;
+	}
+
+	// C-5
+	public Object[] topRendezvous() {
+		Object[] res;
+		res = this.adminRepository.topRendezvous();
+		return res;
+	}
+
+	// B-1
+	public Object[] avgSqtrAnnouncementPerRendezvous() {
+		Object[] res;
+		res = this.adminRepository.avgSqtrAnnouncementPerRendezvous();
+		return res;
+	}
+
+	// B-2
+	public Object[] rendezvousNumberAnnouncements() {
+		Object[] res;
+		res = this.adminRepository.rendezvousNumberAnnouncements();
+		return res;
+	}
+
+	// B-3
+	public Object[] rendezvousLinked() {
+		Object[] res;
+		res = this.adminRepository.rendezvousLinked();
+		return res;
+	}
+
+	// A-1
+	public Object[] avgSqtrQuestionsPerRendezvous() {
+		Object[] res;
+		res = this.adminRepository.avgSqtrQuestionsPerRendezvous();
+		return res;
+	}
+
+	// A-2
+	public Object[] avgSqtrAnswersPerRendezvous() {
+		Object[] res;
+		res = this.adminRepository.avgSqtrAnswersPerRendezvous();
+		return res;
+	}
+
+	// A-3
+	public Object[] avgSqtRrepliesPerComment() {
+		Object[] res;
+		res = this.adminRepository.avgSqtRrepliesPerComment();
+		return res;
+	}
+
 }

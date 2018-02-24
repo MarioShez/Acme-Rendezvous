@@ -27,6 +27,8 @@
 		<bean class="converters.StringToActorConverter" />
 		<bean class="converters.UserToStringConverter" />
 		<bean class="converters.StringToUserConverter" />
+		<bean class="converters.UserAccountToStringConverter" />
+		<bean class="converters.StringToUserAccountConverter" />
 	</util:list>
 	
 </beans>
