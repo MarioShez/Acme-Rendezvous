@@ -25,7 +25,7 @@
 			<li><a class="fNiv" href="rendezvous/list.do"><spring:message code="master.page.avalibleRendezvouses" /></a></li>
 			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.listUsers" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
-			<li><a class="fNiv" href="actor/register.do"><spring:message code="master.page.register" /></a>
+			<li><a class="fNiv" href="user/register.do"><spring:message code="master.page.register" /></a>
 			<li><a class="fNiv" href="terms/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>
 		</security:authorize>
 		

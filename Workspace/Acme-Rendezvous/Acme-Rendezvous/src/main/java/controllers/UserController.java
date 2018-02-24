@@ -71,7 +71,7 @@ public class UserController extends AbstractController {
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(userForm, "user.params.error");
 		else if (!userForm.getRepeatPassword().equals(userForm.getUserAccount().getPassword()))
-			res = this.createEditModelAndView(userForm, "user.params.errorPassword");
+			res = this.createEditModelAndView(userForm, "user.commit.errorPassword");
 		else if (userForm.getTermsAndConditions() == false) {
 			res = this.createEditModelAndView(userForm, "user.params.errorTerms");
 		} else
@@ -124,7 +124,7 @@ public class UserController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final UserForm userForm, final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("user/register_User");
+		result = new ModelAndView("user/register");
 		result.addObject("userForm", userForm);
 		result.addObject("message", message);
 

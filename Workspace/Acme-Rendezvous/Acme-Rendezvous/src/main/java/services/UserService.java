@@ -148,6 +148,10 @@ public class UserService {
 	public User reconstruct(UserForm userForm, BindingResult binding) {
 		User res = new User();
 		
+		Collection<Answer> answers = new ArrayList<Answer>();
+		Collection<Rendezvous> organisedRendezvous = new ArrayList<Rendezvous>();
+		Collection<Rendezvous> rsvpdRendezvous = new ArrayList<Rendezvous>();
+		
 		UserAccount userAccount = userForm.getUserAccount();
 		
 		Authority authority = new Authority();
@@ -161,6 +165,10 @@ public class UserService {
 		res.setPhone(userForm.getPhone());
 		res.setAddress(userForm.getAddress());
 		res.setBirth(userForm.getBirth());
+		
+		res.setAnswer(answers);
+		res.setRsvpdRendezvous(rsvpdRendezvous);
+		res.setOrganisedRendezvous(organisedRendezvous);
 		
 		validator.validate(res, binding);
 		
