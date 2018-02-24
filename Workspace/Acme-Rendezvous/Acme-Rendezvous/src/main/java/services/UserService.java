@@ -1,8 +1,11 @@
 package services;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.joda.time.DateTime;
+import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,46 +27,44 @@ import forms.UserForm;
 @Service
 @Transactional
 public class UserService {
-	
+
 	// Managed repository
-	
+
 	@Autowired
-	private UserRepository	userRepository;
-	
+	private UserRepository userRepository;
+
 	// Supporting services
-	
+
 	@Autowired
 	private Validator validator;
-	
+
 	// Constructors
-	
+
 	public UserService() {
 		super();
 	}
-	
-	
+
 	// Simple CRUD methods
-	
+
 	public User create() {
 		User res = new User();
-		
+
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		Collection<Answer> answer = new ArrayList<Answer>();
 		Collection<Rendezvous> organisedrendezvous = new ArrayList<Rendezvous>();
 		Collection<Rendezvous> rsvpdRendezvous = new ArrayList<Rendezvous>();
-		
+
 		authority.setAuthority(Authority.USER);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
 		res.setAnswer(answer);
 		res.setOrganisedRendezvous(organisedrendezvous);
 		res.setRsvpdRendezvous(rsvpdRendezvous);
-		
+
 		return res;
 	}
-	
-	
+
 	public Collection<User> findAll() {
 		Collection<User> res;
 		res = this.userRepository.findAll();
@@ -78,30 +79,30 @@ public class UserService {
 		Assert.notNull(res);
 		return res;
 	}
-	
+
 	public Actor save(User user) {
 		User res;
-		
+
 		if (user.getId() == 0) {
 			String pass = user.getUserAccount().getPassword();
-			
+
 			final Md5PasswordEncoder code = new Md5PasswordEncoder();
-			
+
 			pass = code.encodePassword(pass, null);
-			
+
 			user.getUserAccount().setPassword(pass);
 		}
 		res = this.userRepository.save(user);
 		return res;
 	}
-	
-//	public void delete(User user) {
-//		Assert.notNull(user);
-//		Assert.isTrue(user.getId() != 0);
-//		Assert.isTrue(this.userRepository.exists(user.getId()));
-//		this.actorRepository.delete(user);
-//	}
-	
+
+	// public void delete(User user) {
+	// Assert.notNull(user);
+	// Assert.isTrue(user.getId() != 0);
+	// Assert.isTrue(this.userRepository.exists(user.getId()));
+	// this.actorRepository.delete(user);
+	// }
+
 	// Other business methods
 
 	public User findByPrincipal() {
@@ -112,7 +113,7 @@ public class UserService {
 		Assert.notNull(res);
 		return res;
 	}
-	
+
 	public void checkAuthority() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -123,37 +124,43 @@ public class UserService {
 		res.setAuthority("USER");
 		Assert.isTrue(authority.contains(res));
 	}
-	
+
+	public boolean isAdult(Date birth) {
+		DateTime birthDateTime = new DateTime(birth);
+		DateTime now = new DateTime();
+		Years age = Years.yearsBetween(birthDateTime, now);
+		return age.getYears() >= 18;
+	}
+
 	// 4.3
-	
-	public Collection<User> findAttendsByRendezvousId(int rendezvousId){
+
+	public Collection<User> findAttendsByRendezvousId(int rendezvousId) {
 		Collection<User> res;
 		res = userRepository.findAttendsByRendezvousId(rendezvousId);
 		Assert.notNull(res);
-		
+
 		return res;
 	}
-	
+
 	// 4.3
-	
-	public User findOrganiserByRendezvousId(int rendezvousId){
+
+	public User findOrganiserByRendezvousId(int rendezvousId) {
 		User res;
 		res = userRepository.findOrganiserByRendezvousId(rendezvousId);
 		Assert.notNull(res);
-		
+
 		return res;
 	}
 
-
 	public User reconstruct(UserForm userForm, BindingResult binding) {
 		User res = new User();
-		
+
 		Collection<Answer> answers = new ArrayList<Answer>();
 		Collection<Rendezvous> organisedRendezvous = new ArrayList<Rendezvous>();
 		Collection<Rendezvous> rsvpdRendezvous = new ArrayList<Rendezvous>();
-		
+
 		UserAccount userAccount = userForm.getUserAccount();
-		
+
 		Authority authority = new Authority();
 		authority.setAuthority(Authority.USER);
 		userAccount.addAuthority(authority);
@@ -165,28 +172,14 @@ public class UserService {
 		res.setPhone(userForm.getPhone());
 		res.setAddress(userForm.getAddress());
 		res.setBirth(userForm.getBirth());
-		
+
 		res.setAnswer(answers);
 		res.setRsvpdRendezvous(rsvpdRendezvous);
 		res.setOrganisedRendezvous(organisedRendezvous);
-		
+
 		validator.validate(res, binding);
-		
+
 		return res;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

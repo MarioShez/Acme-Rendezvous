@@ -147,7 +147,7 @@ public class RendezvousService {
 
 		result.setAnnouncements(new ArrayList<Announcement>());
 		result.setAttendants(new ArrayList<User>());
-//		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
+		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
 		result.setComments(new ArrayList<Comment>());
 		result.setQuestions(new ArrayList<Question>());
 
@@ -188,12 +188,58 @@ public class RendezvousService {
 				.findFutureMoment();
 		return result;
 	}
+	
+	public Collection<Rendezvous> linkedRendezvousesFutureMomentByRendezvousId(int rendezvousId){
+		
+		Collection<Rendezvous> result = rendezvousRepository.linkedRendezvousesFutureMomentByRendezvousId(rendezvousId);
+		return result;
+	}
+	
+	public Collection<Rendezvous> linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(int rendezvousId){
+		
+		Collection<Rendezvous> result = rendezvousRepository.linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(rendezvousId);
+		return result;
+	}
+	
+	public Collection<Rendezvous> findByOrganiserId(int organiserId) {
 
-	public Collection<Rendezvous> findByPrincipal() {
+		final Collection<Rendezvous> result = this.rendezvousRepository
+				.findByOrganiserId(organiserId);
+		return result;
+	}
+	
+	public Collection<Rendezvous> findByOrganiserIdNotAdult(int organiserId) {
+
+		final Collection<Rendezvous> result = this.rendezvousRepository
+				.findByOrganiserIdNotAdult(organiserId);
+		return result;
+	}
+
+	public Collection<Rendezvous> findByAttendantId(int attendantId) {
+
+		final Collection<Rendezvous> result = this.rendezvousRepository
+				.findByAttendantId(attendantId);
+		return result;
+	}
+	
+	public Collection<Rendezvous> findByAttendantIdNotAdult(int attendantId) {
+
+		final Collection<Rendezvous> result = this.rendezvousRepository
+				.findByAttendantIdNotAdult(attendantId);
+		return result;
+	}
+	
+	public Collection<Rendezvous> findOrganisedRendezvousesByPrincipal() {
 
 		final User organiser = this.userService.findByPrincipal();
-		final Collection<Rendezvous> result = this.rendezvousRepository
-				.findByOrganiserId(organiser.getId());
+		Collection<Rendezvous> result = findByOrganiserId(organiser.getId());
+		return result;
+	}
+	
+	public Collection<Rendezvous> findRspvdRendezvousesByPrincipal() {
+
+		final User attendant = this.userService.findByPrincipal();
+		Collection<Rendezvous> result = findByAttendantId(attendant.getId());
 		return result;
 	}
 

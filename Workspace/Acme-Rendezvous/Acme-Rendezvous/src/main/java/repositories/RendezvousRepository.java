@@ -16,9 +16,24 @@ public interface RendezvousRepository extends JpaRepository<Rendezvous, Integer>
 	
 	@Query("select r from Rendezvous r where r.adult = false and r.moment > current_timestamp")
 	Collection<Rendezvous> findFutureMomentAndNotAdult();
+	
+	@Query("select l from Rendezvous r join r.linkedRendezvouses l where r.id = ?1 and l.moment > current_timestamp")
+	Collection<Rendezvous> linkedRendezvousesFutureMomentByRendezvousId(int rendezvousId);
+	
+	@Query("select l from Rendezvous r join r.linkedRendezvouses l where r.id = ?1 and l.adult = false and l.moment > current_timestamp")
+	Collection<Rendezvous> linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(int rendezvousId);
 
-	@Query("select r from Rendezvous r where r.organiser = ?1")
+	@Query("select u.organisedRendezvouses from User u where u.id = ?1")
 	Collection<Rendezvous> findByOrganiserId(int organiserId);
+	
+	@Query("select r from User u join u.organisedRendezvouses r where u.id = ?1 and r.adult == false")
+	Collection<Rendezvous> findByOrganiserIdNotAdult(int organiserId);
+	
+	@Query("select u.rspvdRendezvouses from User u where u.id = ?1")
+	Collection<Rendezvous> findByAttendantId(int attendantId);
+	
+	@Query("select r from User u join u.respvdRendezvouses r where u.id = ?1 and r.adult == false")
+	Collection<Rendezvous> findByAttendantIdNotAdult(int attendantId);
 	
 
 }
