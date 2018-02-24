@@ -110,7 +110,6 @@ public class UserService {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		res = this.userRepository.findUserByUserAccountId(userAccount.getId());
-		Assert.notNull(res);
 		return res;
 	}
 
