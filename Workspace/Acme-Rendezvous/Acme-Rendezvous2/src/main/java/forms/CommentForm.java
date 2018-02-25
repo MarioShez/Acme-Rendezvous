@@ -21,21 +21,8 @@ public class CommentForm {
 
 	// Attributes
 
-	private Date moment;
 	private String text;
 	private String picture;
-
-	@NotNull
-	@Past
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getMoment() {
-		return moment;
-	}
-
-	public void setMoment(Date moment) {
-		this.moment = moment;
-	}
 
 
 	@NotBlank

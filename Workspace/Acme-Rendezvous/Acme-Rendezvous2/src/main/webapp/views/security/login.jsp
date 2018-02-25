@@ -22,7 +22,7 @@
 	<acme:textbox path="username" code="security.username" readonly="false"/>
 	<br />
 
-	<acme:textbox path="password" code="security.password" readonly="false"/>
+	<acme:password code="security.password" path="password"/>
 	<br />
 	
 	<jstl:if test="${showError == true}">
