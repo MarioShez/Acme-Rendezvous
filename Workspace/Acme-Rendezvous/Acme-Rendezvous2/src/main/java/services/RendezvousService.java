@@ -1,62 +1,62 @@
-//package services;
-//
-//import java.util.ArrayList;
-//import java.util.Collection;
-//import java.util.Date;
-//
-//import javax.transaction.Transactional;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//import org.springframework.util.Assert;
-//import org.springframework.validation.BindingResult;
-//import org.springframework.validation.Validator;
-//
-//import repositories.RendezvousRepository;
-//import domain.Announcement;
-//import domain.Comment;
-//import domain.Question;
-//import domain.Rendezvous;
-//import domain.User;
-//import forms.RendezvousForm;
-//
-//@Service
-//@Transactional
-//public class RendezvousService {
-//
-//	// Managed repository -----------------------------------------------------
-//
+package services;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+
+import repositories.RendezvousRepository;
+import domain.Announcement;
+import domain.Comment;
+import domain.Question;
+import domain.Rendezvous;
+import domain.User;
+import forms.RendezvousForm;
+
+@Service
+@Transactional
+public class RendezvousService {
+
+	// Managed repository -----------------------------------------------------
+
 //	@Autowired
 //	private RendezvousRepository rendezvousRepository;
-//
-//	// Supporting services ----------------------------------------------------
-//
-//	@Autowired
-//	private UserService userService;
-//
-//	@Autowired
-//	private AdminService adminService;
-//
-//	@Autowired
-//	private AnnouncementService announcementService;
-//
-//	@Autowired
-//	private CommentService commentService;
-//
-//	@Autowired
-//	private QuestionService questionService;
-//
-//	@Autowired
-//	private Validator validator;
-//
-//	// Constructors -----------------------------------------------------------
-//
-//	public RendezvousService() {
-//		super();
-//	}
-//
-//	// Simple CRUD methods ----------------------------------------------------
-//
+
+	// Supporting services ----------------------------------------------------
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private AdminService adminService;
+
+	@Autowired
+	private AnnouncementService announcementService;
+
+	@Autowired
+	private CommentService commentService;
+
+	@Autowired
+	private QuestionService questionService;
+
+	@Autowired
+	private Validator validator;
+
+	// Constructors -----------------------------------------------------------
+
+	public RendezvousService() {
+		super();
+	}
+
+	// Simple CRUD methods ----------------------------------------------------
+
 //	public Rendezvous create() {
 //
 //		final Rendezvous result = new Rendezvous();
@@ -70,26 +70,26 @@
 //		result.setQuestions(new ArrayList<Question>());
 //		result.setAttendants(new ArrayList<User>());
 //		result.getAttendants().add(this.userService.findByPrincipal());
-////		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
+//		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
 //
 //		return result;
 //
 //	}
-//
+
 //	public Rendezvous findOne(final int rendezvousId) {
 //
 //		final Rendezvous result = this.rendezvousRepository
 //				.findOne(rendezvousId);
 //		return result;
 //	}
-//
+
 //	public Rendezvous findOneToEdit(final int rendezvousId) {
 //
 //		final Rendezvous result = this.findOne(rendezvousId);
 //		this.checkPrincipal(result);
 //		return result;
 //	}
-//
+
 //	public Rendezvous save(final Rendezvous rendezvous) {
 //
 //		Assert.notNull(rendezvous);
@@ -110,7 +110,7 @@
 //
 //		return result;
 //	}
-//
+
 //	public void delete(final Rendezvous rendezvous) {
 //
 //		Assert.notNull(rendezvous);
@@ -129,9 +129,9 @@
 //
 //		this.rendezvousRepository.delete(rendezvous);
 //	}
-//
-//	// Other business methods -------------------------------------------------
-//
+
+	// Other business methods -------------------------------------------------
+
 //	public Rendezvous reconstruct(RendezvousForm rendezvousForm,
 //			BindingResult binding) {
 //
@@ -155,15 +155,15 @@
 //
 //		return result;
 //	}
-//
-//	public void checkPrincipal(final Rendezvous rendezvous) {
-//
-//		Assert.notNull(rendezvous);
-//
-//		final User principal = this.userService.findByPrincipal();
-//		Assert.isTrue(rendezvous.getOrganiser().equals(principal));
-//	}
-//
+
+	public void checkPrincipal(final Rendezvous rendezvous) {
+
+		Assert.notNull(rendezvous);
+
+		final User principal = this.userService.findByPrincipal();
+		Assert.isTrue(rendezvous.getOrganiser().equals(principal));
+	}
+
 //	public void changeToDeleted(final int rendezvousId) {
 //
 //		final Rendezvous rendezvous = this.findOneToEdit(rendezvousId);
@@ -174,7 +174,7 @@
 //		rendezvous.setDeleted(true);
 //		this.save(rendezvous);
 //	}
-//
+
 //	public Collection<Rendezvous> findFutureMomentAndNotAdult() {
 //
 //		final Collection<Rendezvous> result = this.rendezvousRepository
@@ -228,7 +228,7 @@
 //				.findByAttendantIdNotAdult(attendantId);
 //		return result;
 //	}
-//	
+	
 //	public Collection<Rendezvous> findOrganisedRendezvousesByPrincipal() {
 //
 //		final User organiser = this.userService.findByPrincipal();
@@ -242,5 +242,5 @@
 //		Collection<Rendezvous> result = findByAttendantId(attendant.getId());
 //		return result;
 //	}
-//
-//}
+
+}
