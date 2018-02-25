@@ -88,4 +88,8 @@ public class AnswerService {
 
 	// Other business methods
 
+	public Collection<Answer> findByQuestionId(final Integer id) {
+		return this.answerRepository.findByQuestionId(id);
+	}
+
 }
