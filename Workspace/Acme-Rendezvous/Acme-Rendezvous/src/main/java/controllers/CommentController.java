@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AdminService;
 import services.CommentService;
-import services.RendezvousService;
 import services.UserService;
 import domain.Comment;
 import domain.User;
@@ -25,11 +23,6 @@ public class CommentController extends AbstractController {
 		@Autowired
 		private CommentService commentService;
 
-		@Autowired
-		private AdminService adminService;
-		
-		@Autowired
-		private RendezvousService rendezvousService;
 		
 		@Autowired
 		private UserService userService;

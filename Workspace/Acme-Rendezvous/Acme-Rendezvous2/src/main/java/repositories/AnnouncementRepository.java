@@ -1,0 +1,15 @@
+package repositories;
+
+import java.util.Collection;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import domain.Announcement;
+
+public interface AnnouncementRepository extends JpaRepository<Announcement, Integer> {
+	
+	@Query("select a from Announcement a where a.rendezvous.id =?1")
+	Collection<Announcement> findAnnouncementByRendezvous(int idRendezvous);
+
+}
