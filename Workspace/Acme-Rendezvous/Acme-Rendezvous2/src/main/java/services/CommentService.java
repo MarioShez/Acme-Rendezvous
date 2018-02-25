@@ -32,6 +32,9 @@ public class CommentService {
 	@Autowired
 	private Validator validator;
 	
+	@Autowired
+	private AdminService adminService;
+	
 
 	// Constructors
 
@@ -91,6 +94,9 @@ public class CommentService {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
 		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		
+//		this.adminService.checkAuthority();
+		
 		this.commentRepository.delete(comment);
 	}
 	
@@ -127,6 +133,16 @@ public class CommentService {
 		
 		
 		return res;
-
 	}
+	
+	public CommentForm reconstruct(Comment comment) {
+		CommentForm res= new CommentForm();
+		
+		res.setPicture(comment.getPicture());
+		res.setText(comment.getText());
+		res.setId(comment.getId());
+		
+		return res;
+	}
+	
 }

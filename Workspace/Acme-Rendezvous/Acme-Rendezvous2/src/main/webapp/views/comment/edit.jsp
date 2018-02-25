@@ -18,28 +18,30 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<security:authorize access="hasRole('USER') or hasRole('ADMIN') ">
 <form:form action="comment/edit.do" modelAttribute="comment">
 	
-	<acme:textbox code="comment.moment" path="moment"/>
-	<br/>
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="user" />
+	
+
 	<acme:textarea code="comment.text" path="text"/>
 	<br/>
 	<acme:textbox code="comment.picture" path="picture"/>
 	<br/>
+	<%-- 
 	<acme:select items="${commentParent}" itemLabel="picture" code="comment.commentParent"  path="commentParent"/>
+	--%>
 	<br/>
 	
-	
 	<input type="button" name="cancel"
-			value="<spring:message code="category.cancel" />"
-			onclick="javascript: relativeRedir('category/list.do');" />
+			value="<spring:message code="comment.cancel" />"
+			onclick="javascript: relativeRedir('comment/list.do');" />
 	
-	</security:authorize>
 	
 	<security:authorize access="hasRole('USER')">
 		<input type="submit" name="save"
-			value="<spring:message code="category.save" />" />&nbsp; 
+			value="<spring:message code="comment.save" />" />&nbsp; 
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
