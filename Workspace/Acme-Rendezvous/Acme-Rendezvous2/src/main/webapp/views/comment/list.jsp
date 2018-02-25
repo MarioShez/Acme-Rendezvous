@@ -27,10 +27,11 @@
 <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
 	<spring:message code="comment.edit"/>
 	<display:column>
-		<a href= "comment/user/edit.do?commentId=${row.id}">
+		<a href= "comment/edit.do?commentId=${row.id}">
 		<spring:message code="comment.edit"/></a>
 	</display:column>
 </security:authorize>
+
 	
 	<spring:message code="comment.moment" var="momentHeader" />
 	<display:column property="moment" title="${momentHeader}" sortable="true" />
