@@ -70,7 +70,7 @@ public class Comment extends DomainEntity {
 	private Collection<Comment> replies;
 	private User user;
 	private Rendezvous rendezvous;
-//	private Comment commentParent;
+	private Comment commentParent;
 
 	@Valid
 	@NotNull
@@ -104,14 +104,14 @@ public class Comment extends DomainEntity {
 		this.replies = replies;
 	}
 	
-//	@Valid
-//	@ManyToOne(optional = false)
-//	public Comment getCommentParent() {
-//		return commentParent;
-//	}
-//
-//	public void setCommentParent(Comment commentParent) {
-//		this.commentParent = commentParent;
-//	}
+	@Valid
+	@ManyToOne(optional = true)
+	public Comment getCommentParent() {
+		return commentParent;
+	}
+
+	public void setCommentParent(Comment commentParent) {
+		this.commentParent = commentParent;
+	}
 
 }
