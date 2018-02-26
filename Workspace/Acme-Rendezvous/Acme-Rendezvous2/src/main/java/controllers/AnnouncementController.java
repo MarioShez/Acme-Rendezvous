@@ -53,6 +53,20 @@ public class AnnouncementController extends AbstractController {
 		
 		return res;
 	}
+	
+	@RequestMapping(value = "/user/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam int announcementId) {
+		ModelAndView result;
+		Announcement announcement;
+
+		announcement = this.announcementService.findOne(announcementId);
+
+		result = new ModelAndView("announcement/display");
+		result.addObject("announcement", announcement);
+		result.addObject("requestURI", "announcements/user/display.do");
+
+		return result;
+	}
 
 	@RequestMapping(value="user/create", method=RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int rendezvousId){

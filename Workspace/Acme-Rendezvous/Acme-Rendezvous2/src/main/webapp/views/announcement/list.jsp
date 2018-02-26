@@ -13,6 +13,10 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="announcement" requestURI="${requestURI }" id="row">	
 	
+	<display:column>
+		<a href="announcement/user/display.do?announcementId=${row.id}"><spring:message code="announcement.display"/></a>
+	</display:column>
+	
 	<spring:message code="announcement.moment" var="momentHeader"/>
 	<display:column property="moment" title="${momentHeader}" sortable="true"/>
 	<spring:message code="announcement.title" var="titleHeader"/>
