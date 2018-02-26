@@ -28,14 +28,16 @@
 		<b><spring:message code="rendezvous.organiser"/>:&nbsp;</b><a href="user/display.do?userId=${rendezvous.organiser.id}"><jstl:out value="${rendezvous.organiser.name} ${rendezvous.organiser.surname}"/></a>
 		<br/>
 		
-		<fieldset>
-			<legend><spring:message code="rendezvous.gpsCoordinate"/></legend>
-			
-			<b><spring:message code="rendezvous.gpsCoordinate.latitude"/>:&nbsp;</b><jstl:out value="${rendezvous.gpsCoordinate.latitude}º"/>
-			<br/>
-			<b><spring:message code="rendezvous.gpsCoordinate.longitude"/>:&nbsp;</b><jstl:out value="${rendezvous.gpsCoordinate.longitude}º"/>
-			<br/>
-		</fieldset>
+		<jstl:if test="${rendezvous.gpsCoordinate != null}">
+			<fieldset>
+				<legend><spring:message code="rendezvous.gpsCoordinate"/></legend>
+				
+				<b><spring:message code="rendezvous.gpsCoordinate.latitude"/>:&nbsp;</b><jstl:out value="${rendezvous.gpsCoordinate.latitude}º"/>
+				<br/>
+				<b><spring:message code="rendezvous.gpsCoordinate.longitude"/>:&nbsp;</b><jstl:out value="${rendezvous.gpsCoordinate.longitude}º"/>
+				<br/>
+			</fieldset>
+		</jstl:if>
 		
 		<jstl:if test="${rendezvous.adult == true}">
 			<h3 style="text-transform: uppercase; color: red;"><b><spring:message code="rendezvous.onlyAdults"/></b></h3>
