@@ -19,5 +19,7 @@
 <br/>
 
 <b><spring:message code="announcement.description"/>:&nbsp;</b><jstl:out value="${announcement.description}"/>
+
+
 <br/>
 

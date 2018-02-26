@@ -49,9 +49,9 @@ public class AnnouncementService {
 		Announcement res = new Announcement();
 		
 		Date moment = new Date(System.currentTimeMillis()-1);
-		Rendezvous rendezvous = new Rendezvous();
-		
-		res.setRendezvous(rendezvous);
+//		Rendezvous rendezvous = new Rendezvous();
+//		
+//		res.setRendezvous(rendezvous);
 		res.setMoment(moment);
 		
 		return res;

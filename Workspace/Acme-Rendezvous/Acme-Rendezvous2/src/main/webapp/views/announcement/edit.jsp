@@ -25,9 +25,10 @@
 		value="<spring:message code="announcement.cancel" />"
 		onclick="javascript: relativeRedir('/');" />
 	
-	<security:authorize access="hasRole('USER')">
+	<security:authorize access="hasRole('USER') or hasRole('ADMIN')">
 		<input type="submit" name="save"
 			value="<spring:message code="announcement.save" />" />&nbsp; 
+
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
