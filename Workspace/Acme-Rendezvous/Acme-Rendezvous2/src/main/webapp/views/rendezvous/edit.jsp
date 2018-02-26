@@ -48,6 +48,7 @@
 	</jstl:if>
 	
 	<jstl:if test="${rendezvous.id != 0}">
+<!-- 	Arreglar -->
 		<a href="rendezvous/user/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listLinkedRendezvouses"/></a>
 		<br/>
 		

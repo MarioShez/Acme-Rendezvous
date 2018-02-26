@@ -28,7 +28,7 @@
 		<b><spring:message code="rendezvous.organiser"/>:&nbsp;</b><a href="user/display.do?userId=${rendezvous.organiser.id}"><jstl:out value="${rendezvous.organiser.name} ${rendezvous.organiser.surname}"/></a>
 		<br/>
 		
-		<jstl:if test="${rendezvous.gpsCoordinate}">
+		<jstl:if test="${rendezvous.gpsCoordinate != null}">
 			<fieldset>
 				<legend><spring:message code="rendezvous.gpsCoordinate"/></legend>
 				
