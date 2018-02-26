@@ -30,6 +30,13 @@
 		<a href="rendezvous/display.do?rendezvousId=${row.rendezvous.id}">
 		<spring:message code="rendezvous.display"/></a>
 	</display:column>
+	
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<a href="announcement/admin/edit.do?announcementId=${row.id}">
+			<spring:message code="announcement.delete"/></a>
+		</display:column>
+	</security:authorize>
 
 <!-- 
 <security:authorize access="hasRole('USER')">>

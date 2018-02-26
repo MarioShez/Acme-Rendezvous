@@ -21,9 +21,17 @@
 		<put-attribute name="body" value="/views/announcement/list.jsp" />
 	</definition>
 	
+<<<<<<< HEAD
 	<definition name="announcement/display" extends="master.page">	
 		<put-attribute name="title" value="Mostrar anuncio" />
 		<put-attribute name="body" value="/views/announcement/display.jsp" />
 	</definition>
+=======
+	<definition name="announcement/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar anuncios" />
+		<put-attribute name="body" value="/views/announcement/edit.jsp" />
+	</definition>
+	
+>>>>>>> 1966de6989c9bb09541a67cf25cfb667ade8b654
 	
 </tiles-definitions>
