@@ -19,6 +19,7 @@ import controllers.AbstractController;
 
 import domain.Announcement;
 import domain.Comment;
+import domain.Rendezvous;
 
 @Controller
 @RequestMapping("/announcement")
@@ -63,7 +64,6 @@ public class AnnouncementAdminController extends AbstractController {
 	}
 	
 	
-	///admin/delete.do?announcementId=${row.id}
 	@RequestMapping(value="/admin/edit", method=RequestMethod.POST, params ="delete")
 	public ModelAndView create(@Valid final Announcement announcement, 
 			final BindingResult binding){
@@ -94,9 +94,12 @@ public class AnnouncementAdminController extends AbstractController {
 	private ModelAndView createEditModelAndView(final Announcement announcement,
 			final String message) {
 		ModelAndView res;
+		Rendezvous rendezvous;
+		rendezvous = announcement.getRendezvous();
 		
 		res = new ModelAndView("announcement/edit");
 		res.addObject("announcement", announcement);
+		res.addObject("rendezvous", rendezvous);
 		res.addObject("message",message);
 		
 		return res;

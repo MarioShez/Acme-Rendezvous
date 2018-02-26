@@ -13,17 +13,13 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="announcement" requestURI="${requestURI }" id="row">	
 	
+	
 	<display:column>
-		<a href="announcement/user/display.do?announcementId=${row.id}"><spring:message code="announcement.display"/></a>
+		<a href="announcement/display.do?announcementId=${row.id}"><spring:message code="announcement.display"/></a>
 	</display:column>
 	
-	<spring:message code="announcement.moment" var="momentHeader"/>
-	<display:column property="moment" title="${momentHeader}" sortable="true"/>
 	<spring:message code="announcement.title" var="titleHeader"/>
 	<display:column property="title" title="${titleHeader}" sortable="true"/>
-	
-	<spring:message code="announcement.description" var="descriptionHeader"/>
-	<display:column property="description" title="${descriptionHeader}" sortable="true"/>
 	
 	<spring:message code="announcement.rendezvous" var="rendezvousHeader"/>
 	<display:column title="${rendezvousHeader}">
@@ -31,27 +27,10 @@
 		<spring:message code="rendezvous.display"/></a>
 	</display:column>
 	
-	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
-			<a href="announcement/admin/edit.do?announcementId=${row.id}">
-			<spring:message code="announcement.delete"/></a>
-		</display:column>
-	</security:authorize>
+	
 
-<!-- 
-<security:authorize access="hasRole('USER')">>
-	
-	<div>
-		<a href="annoncement/create.do">
-			<button>
-				<spring:message code="annoncement.create" />
-			</button>
-		</a>
-	</div>
-	
-</security:authorize>
- -->
-	
 	
 
 </display:table>
+
+	

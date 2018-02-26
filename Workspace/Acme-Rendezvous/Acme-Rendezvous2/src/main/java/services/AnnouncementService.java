@@ -33,6 +33,9 @@ public class AnnouncementService {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AdminService adminService;
 
 	@Autowired
 	private Validator validator;
@@ -49,9 +52,9 @@ public class AnnouncementService {
 		Announcement res = new Announcement();
 		
 		Date moment = new Date(System.currentTimeMillis()-1);
-		Rendezvous rendezvous = new Rendezvous();
-		
-		res.setRendezvous(rendezvous);
+//		Rendezvous rendezvous = new Rendezvous();
+//		
+//		res.setRendezvous(rendezvous);
 		res.setMoment(moment);
 		
 		return res;
@@ -82,6 +85,23 @@ public class AnnouncementService {
 	public Announcement save(Announcement announcement){
 		Assert.notNull(announcement);
 		Announcement res;
+		User user = new User();
+		Collection<Rendezvous> rendezvousByPrincipal = new ArrayList<Rendezvous>();
+		Date moment;
+		
+		//editar sus propios announcements
+		if(announcement.getId() != 0){
+			Collection<Announcement> announcementUser;
+			announcementUser = this.announcementRepository.announcementsByUser(user.getId());
+			Assert.isTrue(announcementUser.contains(announcement));
+		}
+		
+		//crear announcements para los rendezvous que ha organizado
+		rendezvousByPrincipal = user.getOrganisedRendezvouses();
+		Assert.isTrue(rendezvousByPrincipal.contains(announcement.getRendezvous()));
+		
+		moment = new Date(System.currentTimeMillis()-1);
+		announcement.setMoment(moment);
 		
 		res = this.announcementRepository.save(announcement);
 		
@@ -90,9 +110,15 @@ public class AnnouncementService {
 	}
 	
 	public void delete(Announcement announcement){
+		this.adminService.checkAuthority();
+		
 		Assert.notNull(announcement);
 		Assert.isTrue(announcement.getId()!=0);
 		Assert.isTrue(this.announcementRepository.exists(announcement.getId()));
+//		
+//		Rendezvous rendezvous = new Rendezvous();
+//		rendezvous = announcement.getRendezvous();
+//		rendezvous.getAnnouncements().remove(announcement);
 		
 		this.announcementRepository.delete(announcement);
 	}
