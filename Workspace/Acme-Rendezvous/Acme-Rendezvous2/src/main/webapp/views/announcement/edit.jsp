@@ -9,20 +9,32 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action ="${requestURI }" modelAttribute="announcementForm">
+<form:form action ="${requestURI }" modelAttribute="announcement">
 
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="rendezvous"/>
 
 
 	<acme:textbox code="announcement.title" path="title"/>
 	
 	<acme:textbox code="announcement.description" path="description"/>
 	
-<input type="submit" name="save"
-		value="<spring:message code="announcement.save" />" />&nbsp; 
-
 	<input type="button" name="cancel"
 		value="<spring:message code="announcement.cancel" />"
 		onclick="javascript: relativeRedir('/');" />
-	<br />
+	
+	<security:authorize access="hasRole('USER')">
+		<input type="submit" name="save"
+			value="<spring:message code="announcement.save" />" />&nbsp; 
+	</security:authorize>
+	
+	<security:authorize access="hasRole('ADMIN')">
+	<jstl:if test="${comment.id != 0}">
+			<input type="submit" name="delete"
+				value="<spring:message code="announcement.delete" />"
+				onclick="return confirm('<spring:message code="announcement.confirm.delete" />')" />&nbsp;
+	</jstl:if>
+	</security:authorize>
 
 </form:form>	

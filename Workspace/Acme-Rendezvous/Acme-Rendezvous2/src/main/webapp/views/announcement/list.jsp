@@ -22,8 +22,8 @@
 	<display:column property="description" title="${descriptionHeader}" sortable="true"/>
 	
 	<spring:message code="announcement.rendezvous" var="rendezvousHeader"/>
-	<display:column title="${rendezvous}">
-		<a href="rendezvous/display.do?rendezvousId=${row.id}">
+	<display:column title="${rendezvousHeader}">
+		<a href="rendezvous/display.do?rendezvousId=${row.rendezvous.id}">
 		<spring:message code="rendezvous.display"/></a>
 	</display:column>
 

@@ -18,7 +18,7 @@
 
 	<definition name="announcement/list" extends="master.page">	
 		<put-attribute name="title" value="Mostrar anuncios" />
-		<put-attribute name="body" value="announcement/list.jsp" />
+		<put-attribute name="body" value="/views/announcement/list.jsp" />
 	</definition>
 	
 	
