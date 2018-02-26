@@ -9,10 +9,11 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action ="${requestURI }" modelAttribute="announcement">
+<form:form action ="announcement/edit.do" modelAttribute="announcement">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="moment"/>
 	<form:hidden path="rendezvous"/>
 
 
@@ -30,7 +31,7 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
-	<jstl:if test="${comment.id != 0}">
+	<jstl:if test="${announcement.id != 0}">
 			<input type="submit" name="delete"
 				value="<spring:message code="announcement.delete" />"
 				onclick="return confirm('<spring:message code="announcement.confirm.delete" />')" />&nbsp;

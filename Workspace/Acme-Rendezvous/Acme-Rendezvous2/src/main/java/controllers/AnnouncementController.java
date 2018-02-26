@@ -40,21 +40,10 @@ public class AnnouncementController extends AbstractController {
 		return res;
 	}
 	
-	@RequestMapping(value="/admin/list", method=RequestMethod.GET)
-	public ModelAndView list(){
-		ModelAndView res;
-		Collection<Announcement> announcements;
 	
-		announcements = this.announcementService.findAll();
-		
-		res = new ModelAndView("announcement/list");
-		res.addObject("announcement",announcements);
-		res.addObject("requestURI","announcement/list.do");
-		
-		return res;
-	}
-
-	@RequestMapping(value="user/create", method=RequestMethod.GET)
+	
+	// Create --------------
+	@RequestMapping(value="/user/create", method=RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int rendezvousId){
 		ModelAndView res;
 		Announcement announcement;
@@ -65,6 +54,9 @@ public class AnnouncementController extends AbstractController {
 		return res;
 	}
 
+	
+	
+	
 	private ModelAndView createEditModelAndView(final Announcement announcement) {
 		ModelAndView res;
 		
