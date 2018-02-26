@@ -26,7 +26,7 @@
 <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
 	<spring:message code="comment.edit"/>
 	<display:column>
-		<a href= "comment/edit.do?commentId=${row.id}">
+		<a href= "comment/rendezvous/create.do">
 		<spring:message code="comment.edit"/></a>
 	</display:column>
 </security:authorize>
@@ -58,7 +58,7 @@
 
 	<security:authorize access="hasRole('USER')">
 		<div>
-			<a href="comment/user/create.do">
+			<a href="comment/rendezvous/create.do">
 				<button>
 					<spring:message code="comment.create" />
 				</button>

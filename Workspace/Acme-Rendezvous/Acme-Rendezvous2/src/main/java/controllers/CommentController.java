@@ -16,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AdminService;
 import services.CommentService;
 import services.RendezvousService;
+import services.UserService;
 import domain.Comment;
 import domain.Rendezvous;
+import domain.User;
 
 @Controller
 @RequestMapping("/comment")
@@ -34,6 +36,9 @@ public class CommentController extends AbstractController {
 	 @Autowired
 	 private RendezvousService rendezvousService;
 
+	 @Autowired
+	 private UserService userService;
+	 
 	// Constructors ---------------------------------------------------------
 
 	public CommentController() {
@@ -105,6 +110,40 @@ public class CommentController extends AbstractController {
 		return result;
 	}
 	
+	// Creation ---------------------------------------------------------------
+
+			@RequestMapping(value = "/rendezvous/create", method = RequestMethod.GET)
+			public ModelAndView create() {
+				ModelAndView result;
+				Comment c;
+
+				c = this.commentService.create();
+				result = this.createEditModelAndView(c);
+				return result;
+			}
+			
+
+			// Edition ----------------------------------------------------------------
+
+			//Save
+			@RequestMapping(value = "rendezvous/edit", method = RequestMethod.POST, params = "save")
+			public ModelAndView save(Comment comment, final BindingResult binding) {
+				ModelAndView result;
+
+				comment = this.commentService.save(comment);
+				System.out.println(binding);
+				if (binding.hasErrors())
+					result = this.createEditModelAndView(comment);
+				else
+					try {
+						this.commentService.save(comment);
+						result = new ModelAndView("redirect:list.do" );
+					} catch (final Throwable oops) {
+						result = this.createEditModelAndView(comment, "comment.commit.error");
+					}
+				return result;
+			}
+	
 	
 	// Ancillary methods --------------------------------------------------
 
@@ -119,9 +158,19 @@ public class CommentController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Comment comment,
 			final String message) {
 		ModelAndView result;
-
+		User u= new User();
+		Rendezvous r= new Rendezvous();
+		u= comment.getUser();
+		r= comment.getRendezvous();
+		Comment commentParent= new Comment();
+		
+		
 		result = new ModelAndView("comment/edit");
+		//result.addObject("user", u);
+		//result.addObject("rendezvous", r);
 		result.addObject("comment", comment);
+		result.addObject("comment", commentParent);
+		
 		result.addObject("message", message);
 
 		return result;

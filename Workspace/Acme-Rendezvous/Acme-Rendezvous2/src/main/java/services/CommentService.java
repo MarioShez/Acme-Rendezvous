@@ -129,6 +129,16 @@ public class CommentService {
 
 	//Other bussines methods
 	
+	
+	public Collection<Comment> commentsOfThisRendezvouseWithCommentNull(final int rendezvouseId) {
+		Collection<Comment> commentsOfThisRendezvouse;
+
+		commentsOfThisRendezvouse = this.commentRepository.commentsOfThisRendezvouseWithCommentNull(rendezvouseId);
+
+		return commentsOfThisRendezvouse;
+	}
+	
+	
 	public Comment reconstruct(CommentForm commentForm, BindingResult binding) {
 		Comment res= new Comment();
 		
