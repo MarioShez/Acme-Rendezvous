@@ -14,7 +14,7 @@
 	name="announcement" requestURI="${requestURI }" id="row">	
 	
 	<display:column>
-		<a href="announcement/user/display.do?announcementId=${row.id}"><spring:message code="announcement.display"/></a>
+		<a href="announcement/display.do?announcementId=${row.id}"><spring:message code="announcement.display"/></a>
 	</display:column>
 	
 	<spring:message code="announcement.moment" var="momentHeader"/>

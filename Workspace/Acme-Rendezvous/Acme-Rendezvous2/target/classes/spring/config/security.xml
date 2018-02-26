@@ -42,7 +42,9 @@
 		<security:intercept-url pattern="/user/register.do" access="permitAll" />
 		<security:intercept-url pattern="/user/display.do" access="permitAll" />
 		
-		<security:intercept-url pattern="/announcement/user/**" access="hasRole('USER')" /> 
+		<security:intercept-url pattern="/announcement/display.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/announcement/admin/**" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/announcement/**" access="hasRole('USER')" /> 
 		
 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 

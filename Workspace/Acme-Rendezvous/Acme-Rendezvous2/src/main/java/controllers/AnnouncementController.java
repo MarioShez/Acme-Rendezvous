@@ -2,8 +2,12 @@ package controllers;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +46,7 @@ public class AnnouncementController extends AbstractController {
 	
 	
 	
-	@RequestMapping(value = "/user/display", method = RequestMethod.GET)
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam int announcementId) {
 		ModelAndView result;
 		Announcement announcement;
@@ -51,9 +55,25 @@ public class AnnouncementController extends AbstractController {
 
 		result = new ModelAndView("announcement/display");
 		result.addObject("announcement", announcement);
-		result.addObject("requestURI", "announcements/user/display.do");
+		result.addObject("requestURI", "announcements/display.do");
 
 		return result;
+	}
+	
+	@RequestMapping(value="/display", method=RequestMethod.POST, params ="delete")
+	public ModelAndView create(@Valid final Announcement announcement, 
+			final BindingResult binding){
+		ModelAndView res;
+		
+		Assert.notNull(announcement);
+		try{
+			this.announcementService.delete(announcement);
+			res = new ModelAndView("redirect:admin/list.do");
+		}catch (final Throwable oops) {
+			res = this.createEditModelAndView(announcement, "announcement.commit.error");
+		}
+		
+		return res;
 	}
 
 	
