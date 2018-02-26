@@ -15,7 +15,7 @@
 	<jstl:when test="${rendezvous.deleted == false}">
 		<h3><b><spring:message code="rendezvous.name"/>:&nbsp;</b><jstl:out value="${rendezvous.name}"/></h3>
 		
-		<img src="<jstl:out value="${rendezvous.picture}"/>" width="500" height="100">
+		<img src="<jstl:out value="${rendezvous.picture}"/>" width="450" height="174">
 		<br/>
 		
 		<b><spring:message code="rendezvous.description"/>:&nbsp;</b><jstl:out value="${rendezvous.description}"/>
@@ -25,19 +25,21 @@
 		<b><spring:message code="rendezvous.moment"/>:&nbsp;</b><fmt:formatDate value="${rendezvous.moment}" pattern="${patternDate}"/>
 		<br/>
 		
-		<b><spring:message code="rendezvous.organiser"/>:&nbsp;</b><a href="user/display.do?userId=${rendezvous.organiser.id}"><jstl:out value="${rendezvous.organiser.name + ' ' + rendezvous.organiser.surname}"/></a>
+		<b><spring:message code="rendezvous.organiser"/>:&nbsp;</b><a href="user/display.do?userId=${rendezvous.organiser.id}"><jstl:out value="${rendezvous.organiser.name} ${rendezvous.organiser.surname}"/></a>
 		<br/>
 		
-		<fieldset>
-			<legend><spring:message code="rendezvous.gpsCoordinate"/></legend>
-			
-			<b><spring:message code="rendezvous.gpsCoordinate.latitude"/>:&nbsp;</b><jstl:out value="${rendezvous.gpsCoordinate.latitude}"/>
-			<br/>
-			<b><spring:message code="rendezvous.gpsCoordinate.longitude"/>:&nbsp;</b><jstl:out value="${rendezvous.gpsCoordinate.longitude}"/>
-			<br/>
-		</fieldset>
+		<jstl:if test="${rendezvous.gpsCoordinate != null}">
+			<fieldset>
+				<legend><spring:message code="rendezvous.gpsCoordinate"/></legend>
+				
+				<b><spring:message code="rendezvous.gpsCoordinate.latitude"/>:&nbsp;</b><jstl:out value="${rendezvous.gpsCoordinate.latitude}º"/>
+				<br/>
+				<b><spring:message code="rendezvous.gpsCoordinate.longitude"/>:&nbsp;</b><jstl:out value="${rendezvous.gpsCoordinate.longitude}º"/>
+				<br/>
+			</fieldset>
+		</jstl:if>
 		
-		<jstl:if test=${rendezvous.adult == true}>
+		<jstl:if test="${rendezvous.adult == true}">
 			<h3 style="text-transform: uppercase; color: red;"><b><spring:message code="rendezvous.onlyAdults"/></b></h3>
 		</jstl:if>
 		
@@ -55,22 +57,25 @@
 		</jstl:if>
 		
 		<jstl:if test="${not empty rendezvous.comments}">
-			<a href="comment/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listComments"/></a>
+			<a href="comment/rendezvous/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listComments"/></a>
 			<br/>
 		</jstl:if>
 		
 		<jstl:choose>
-			<jstl:when test="${!areRSPVd and empty rendezvous.questions}">
+			<jstl:when test="${areRSPVd == false and empty rendezvous.questions}">
 				<button type="button" onclick="javascript: relativeRedir('rendezvous/user/list-rsvp.do')" ><spring:message code="rendezvous.makeRSPV" /></button>
 				<br/>
 			</jstl:when>
-			<jstl:when test="${!areRSPVd and not empty rendezvous.questions}">
+			<jstl:when test="${areRSPVd == false and not empty rendezvous.questions}">
 				<button type="button" onclick="javascript: relativeRedir('answer/user/create.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.makeRSPV" /></button>
 				<br/>
 			</jstl:when>
 			<jstl:when test="${areRSPVd}">
 				<button type="button" onclick="javascript: relativeRedir('answer/user/delete.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.cancelRSPV" /></button>
 				<br/>
+			</jstl:when>
+			<jstl:when test="${areRSPVd == null}">
+				
 			</jstl:when>
 		</jstl:choose>
 		

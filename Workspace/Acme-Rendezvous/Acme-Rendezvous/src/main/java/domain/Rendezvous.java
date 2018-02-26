@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -43,6 +44,7 @@ public class Rendezvous extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return this.name;
 	}
@@ -52,6 +54,7 @@ public class Rendezvous extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return this.description;
 	}
@@ -61,6 +64,7 @@ public class Rendezvous extends DomainEntity {
 	}
 
 	@URL
+	@SafeHtml
 	public String getPicture() {
 		return this.picture;
 	}
@@ -121,7 +125,7 @@ public class Rendezvous extends DomainEntity {
 	private Collection<Question>		questions;
 	private User						organiser;
 	private Collection<User>			attendants;
-//	private Collection<Rendezvous>		linkedRendezvouses;
+	private Collection<Rendezvous>		linkedRendezvouses;
 
 
 	@Valid
@@ -179,15 +183,14 @@ public class Rendezvous extends DomainEntity {
 		this.attendants = attendants;
 	}
 
-//	@Valid
-//	@NotNull
-//	@OneToMany(mappedBy = "rendezvous")
-//	public Collection<Rendezvous> getLinkedRendezvouses() {
-//		return this.linkedRendezvouses;
-//	}
-//
-//	public void setLinkedRendezvouses(final Collection<Rendezvous> linkedRendezvouses) {
-//		this.linkedRendezvouses = linkedRendezvouses;
-//	}
+	@Valid
+	@ManyToOne(optional = true)
+	public Collection<Rendezvous> getLinkedRendezvouses() {
+		return this.linkedRendezvouses;
+	}
+
+	public void setLinkedRendezvouses(final Collection<Rendezvous> linkedRendezvouses) {
+		this.linkedRendezvouses = linkedRendezvouses;
+	}
 
 }

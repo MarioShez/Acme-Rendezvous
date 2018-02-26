@@ -85,4 +85,8 @@ public class QuestionService {
 
 	// Other business methods
 
+	public Collection<Question> findByRendezvousId(final Integer rendezvousId) {
+		return this.questionRepository.findByRendezvousId(rendezvousId);
+	}
+
 }

@@ -32,6 +32,9 @@ public class CommentService {
 	@Autowired
 	private Validator validator;
 	
+	@Autowired
+	private AdminService adminService;
+	
 
 	// Constructors
 
@@ -48,16 +51,14 @@ public class CommentService {
 		u = userService.findByPrincipal();
 		Assert.notNull(u);
 
-		Rendezvous rendezvous = new Rendezvous();
 
 		Date moment = new Date(System.currentTimeMillis()-1);
-//		Comment parent= new Comment();
+		Comment parent= new Comment();
 		Collection<Comment> replies = new ArrayList<Comment>();
 
-		res.setMoment(moment);
+		//res.setMoment(moment);
 		res.setUser(u);
-		res.setRendezvous(rendezvous);
-//		res.setCommentParent(parent);
+		res.setCommentParent(parent);
 		res.setReplies(replies);
 		return res;
 	}
@@ -78,19 +79,41 @@ public class CommentService {
 	}
 
 	public Comment save(Comment coment) {
+		
+		Date moment;
+		User userConnected;
+
+		moment = new Date();
+		userConnected = this.userService.findByPrincipal();
+		
 		Assert.notNull(coment);
+		Assert.isTrue(coment.getRendezvous().getAttendants().contains(userConnected));
 
 		Comment res;
+		
+		moment = new Date(System.currentTimeMillis() - 1000);
+		
+		this.userService.checkAuthority();
+		Assert.isTrue(coment.getUser().equals(userConnected));
+		Assert.isTrue(coment.getId() == 0);
+		
+		coment.setMoment(moment);
 		res = this.commentRepository.save(coment);
-		Date fechaActual = new Date();
-		res.setMoment(fechaActual);
 		return res;
 	}
 
 	public void delete(Comment comment) {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
-		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		
+		Assert.isTrue(this.commentRepository.findOne(comment.getId()) != null);
+		
+		this.adminService.checkAuthority();
+		
+		if (comment.getReplies().size() != 0)
+			for (final Comment c : comment.getReplies())
+				this.delete(c);
+		
 		this.commentRepository.delete(comment);
 	}
 	
@@ -105,6 +128,16 @@ public class CommentService {
 //	}
 
 	//Other bussines methods
+	
+	
+	public Collection<Comment> commentsOfThisRendezvouseWithCommentNull(final int rendezvouseId) {
+		Collection<Comment> commentsOfThisRendezvouse;
+
+		commentsOfThisRendezvouse = this.commentRepository.commentsOfThisRendezvouseWithCommentNull(rendezvouseId);
+
+		return commentsOfThisRendezvouse;
+	}
+	
 	
 	public Comment reconstruct(CommentForm commentForm, BindingResult binding) {
 		Comment res= new Comment();
@@ -127,6 +160,16 @@ public class CommentService {
 		
 		
 		return res;
-
 	}
+	
+	public CommentForm reconstruct(Comment comment) {
+		CommentForm res= new CommentForm();
+		
+		res.setPicture(comment.getPicture());
+		res.setText(comment.getText());
+		res.setId(comment.getId());
+		
+		return res;
+	}
+	
 }

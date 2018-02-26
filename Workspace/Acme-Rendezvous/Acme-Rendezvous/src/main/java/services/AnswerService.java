@@ -73,6 +73,7 @@ public class AnswerService {
 
 	public Answer save(final Answer answer) {
 		Assert.notNull(answer);
+		Assert.isTrue(this.answerRepository.findByQuestionId(answer.getQuestion().getId()) != null);
 		Answer res;
 		res = this.answerRepository.save(answer);
 		return res;
@@ -86,5 +87,9 @@ public class AnswerService {
 	}
 
 	// Other business methods
+
+	public Collection<Answer> findByQuestionId(final Integer id) {
+		return this.answerRepository.findByQuestionId(id);
+	}
 
 }

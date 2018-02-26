@@ -19,18 +19,18 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasRole('USER') or hasRole('ADMIN')">
 
 <display:table pagesize="6" class="displaycomment" keepStatus="true"
 	name="comment" requestURI="${requestURI }" id="row">
 	
-<security:authorize access="hasRole('USER')">
+<security:authorize access="hasRole('USER') or hasRole('ADMIN')">
 	<spring:message code="comment.edit"/>
 	<display:column>
-		<a href= "comment/user/edit.do?commentId=${row.id}">
+		<a href= "comment/rendezvous/create.do">
 		<spring:message code="comment.edit"/></a>
 	</display:column>
 </security:authorize>
+
 	
 	<spring:message code="comment.moment" var="momentHeader" />
 	<display:column property="moment" title="${momentHeader}" sortable="true" />
@@ -38,31 +38,30 @@
 	<spring:message code="comment.text" var="textHeader" />
 	<display:column property="text" title="${textHeader}" sortable="false" />
 
-	<spring:message code="comment.picture" var="commentHeader" />
-	<display:column property="commentReply" title="${commentHeader}" sortable="false" />
+	<spring:message code="comment.picture" var="pictureHeader" />
+	<display:column property="picture" title="${pictureHeader}" sortable="false" />
 	
 	<spring:message code="comment.rendezvous" var="rendezvousHeader" />
-	<display:column property="rendezvous" title="${rendezvousHeader}"	sortable="true" />
+	<display:column property="rendezvous.name" title="${rendezvousHeader}"	sortable="true" />
 	
 	<spring:message code="comment.user" var="userHeader" />
-	<display:column property="user" title="${userHeader}"	sortable="true" />
-	
+	<display:column property="user.name" title="${userHeader}"	sortable="true" />
+	<%--
 	<spring:message code="comment.replies" var="replies"/>
 	<display:column title="${categoryChildren}">
 		<a href="comment/list.do?commentId=${row.id}">
 			<spring:message code="comment.replies.link"/>
 		</a>
 	</display:column>
-	
+	--%>
 </display:table>
 
 	<security:authorize access="hasRole('USER')">
 		<div>
-			<a href="comment/user/create.do">
+			<a href="comment/rendezvous/create.do">
 				<button>
 					<spring:message code="comment.create" />
 				</button>
 			</a>
 		</div>
 	</security:authorize>
-</security:authorize>

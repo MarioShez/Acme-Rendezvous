@@ -48,6 +48,35 @@ public class UserController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "creator/list", method = RequestMethod.GET)
+	public ModelAndView listCreator(@RequestParam int organiserId) {
+		ModelAndView result;
+		User organizer;
+
+		organizer = userService.findOne(organiserId);
+
+		result = new ModelAndView("user/list");
+		result.addObject("user", organizer);
+		result.addObject("requestURI", "user/creator/list.do");
+
+		return result;
+	}
+	
+	@RequestMapping(value = "display", method = RequestMethod.GET)
+	public ModelAndView listUser(@RequestParam int userId) {
+		ModelAndView result;
+		User user;
+
+		user = userService.findOne(userId);
+
+		result = new ModelAndView("user/list");
+		result.addObject("user", user);
+		result.addObject("requestURI", "user/list.do");
+
+		return result;
+	}
+	
 
 	// Registering ----------------------------------------------------------
 

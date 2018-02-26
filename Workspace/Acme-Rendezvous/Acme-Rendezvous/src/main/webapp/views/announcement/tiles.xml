@@ -18,7 +18,17 @@
 
 	<definition name="announcement/list" extends="master.page">	
 		<put-attribute name="title" value="List announcement" />
-		<put-attribute name="body" value="anouncement/list.jsp" />
+		<put-attribute name="body" value="/views/announcement/list.jsp" />
+	</definition>
+
+	<definition name="announcement/display" extends="master.page">	
+		<put-attribute name="title" value="Display announcement" />
+		<put-attribute name="body" value="/views/announcement/display.jsp" />
+	</definition>
+
+	<definition name="announcement/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit announcement" />
+		<put-attribute name="body" value="/views/announcement/edit.jsp" />
 	</definition>
 	
 </tiles-definitions>

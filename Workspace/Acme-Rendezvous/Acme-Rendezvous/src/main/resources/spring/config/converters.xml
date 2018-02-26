@@ -42,6 +42,14 @@
 		
 		<bean class="converters.CommentToStringConverter" />
 		<bean class="converters.StringToCommentConverter" />
+		
+		<bean class="converters.AdminToStringConverter" />
+		<bean class="converters.StringToAdminConverter" />
+		
+		<bean class="converters.GpsCoordinateToStringConverter" />
+		<bean class="converters.StringToGpsCoordinateConverter" />
+		
+		
 	</util:list>
 	
 </beans>
