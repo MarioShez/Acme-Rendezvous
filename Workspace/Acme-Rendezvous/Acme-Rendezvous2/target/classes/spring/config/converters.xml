@@ -43,6 +43,9 @@
 		<bean class="converters.CommentToStringConverter" />
 		<bean class="converters.StringToCommentConverter" />
 		
+		<bean class="converters.AdminToStringConverter" />
+		<bean class="converters.StringToAdminConverter" />
+		
 		
 	</util:list>
 	

@@ -41,7 +41,7 @@
 		</jstl:forEach>
 	</tr>
 </table>
-
+<%--
 <spring:message code="administrator.ratioUserRendezvousLabel" />
 <jstl:out value="${ratioUserRendezvousLabel}"></jstl:out>
 <table class="displaytag"  name="ratioUserRendezvous">
@@ -57,6 +57,7 @@
 		</td>
 	</tr>
 </table>
+--%>
 
 <spring:message code="administrator.userPerRendezvousLabel"/>
 <jstl:out value="${userPerRendezvousLabel}"></jstl:out>
@@ -101,7 +102,7 @@
 		</jstl:forEach>
 	</tr>
 </table>
-
+ 
 <spring:message code="administrator.topRendezvousLabel"/>
 <jstl:out value="${topRendezvousLabel}"></jstl:out>
 <table class="displaytag"  name="topRendezvous">
@@ -111,12 +112,12 @@
 			<jstl:out value="${topHeader}"></jstl:out>
 		</th>
 	</tr>
+	<jstl:forEach var="datos" items="${topRendezvous}">
 	<tr>
-		<jstl:forEach var="datos" items="${topRendezvous}">
-			<td>
-				<jstl:out value="${datos}"></jstl:out>
-			</td>
-		</jstl:forEach>
+		<th>
+			<jstl:out value="${datos.name}"></jstl:out>
+		</th>
+	</jstl:forEach>
 	</tr>
 </table>
 
@@ -142,6 +143,7 @@
 	</tr>
 </table>
 
+<%--
 <spring:message code="administrator.rendezvousNumberAnnouncementsLabel"/>
 <jstl:out value="${rendezvousNumberAnnouncementsLabel}"></jstl:out>
 <table class="displaytag"  name="rendezvousNumberAnnouncements">
@@ -177,7 +179,7 @@
 		</jstl:forEach>
 	</tr>
 </table>
-
+--%>
 
 <spring:message code="administrator.questionsPerRendezvousLabel"/>
 <jstl:out value="${questionsPerRendezvousLabel}"></jstl:out>
@@ -200,7 +202,7 @@
 		</jstl:forEach>
 	</tr>
 </table>
-
+<%--
 <spring:message code="administrator.answersPerRendezvousLabel"/>
 <jstl:out value="${answersPerRendezvousLabel}"></jstl:out>
 <table class="displaytag"  name="answersPerRendezvous">
@@ -215,11 +217,9 @@
 		</th>
 	</tr>
 	<tr>
-		<jstl:forEach var="datos" items="${answersPerRendezvous}">
-			<td>
-				<jstl:out value="${datos}"></jstl:out>
-			</td>
-		</jstl:forEach>
+		<td>
+			<jstl:out value="${datos}"></jstl:out>
+		</td>
 	</tr>
 </table>
 
@@ -237,14 +237,12 @@
 		</th>
 	</tr>
 	<tr>
-		<jstl:forEach var="datos" items="${repliesPerComment}">
-			<td>
-				<jstl:out value="${datos}"></jstl:out>
-			</td>
-		</jstl:forEach>
+		<td>
+			<jstl:out value="${datos}"></jstl:out>
+		</td>
 	</tr>
 </table>
-
+--%>
 </security:authorize>
 
 
