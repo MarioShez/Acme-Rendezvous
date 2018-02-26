@@ -25,7 +25,7 @@
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 			<li><a href="comment/list.do"><spring:message code="master.page.administrator.comment" /></a></li>
-			<li><a href="administrator/information.do"><spring:message code="master.page.administrator.information" /></a></li>
+			<li><a href="administrator/display.do"><spring:message code="master.page.administrator.information" /></a></li>
 			
 				<!--
 				<ul>

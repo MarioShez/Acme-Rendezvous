@@ -55,13 +55,13 @@ public class AdministratorController extends AbstractController {
 		return result;
 	}
 
-	// information
+	// display
 	// --------------------------------------------------------------
 
-	@RequestMapping(value = "/information", method = RequestMethod.GET)
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		result = new ModelAndView("administrator/information");
+		result = new ModelAndView("administrator/display");
 
 		Object avgSqtrUser[];
 //		Double ratioUserRendezvous;
@@ -69,11 +69,11 @@ public class AdministratorController extends AbstractController {
 		Object avgSqtrUser2[];
 		Collection<Object> topRendezvous;
 		Object avgSqtrAnnouncementPerRendezvous[];
-//		Object rendezvousNumberAnnouncements[];
-//		Object rendezvousLinked[];
-		Collection<Object> avgSqtrQuestionsPerRendezvous;
+		Collection<Object> rendezvousNumberAnnouncements;
+		Collection<Object> rendezvousLinked;
+		Object avgSqtrQuestionsPerRendezvous[];
 //		Object avgSqtrAnswersPerRendezvous[];
-//		Object avgSqtRrepliesPerComment[];
+		Object avgSqtRrepliesPerComment[];
 
 		avgSqtrUser = this.administratorService.avgSqtrUser();
 //		ratioUserRendezvous = this.administratorService.ratioUserRendezvous();
@@ -81,11 +81,11 @@ public class AdministratorController extends AbstractController {
 		avgSqtrUser2 = this.administratorService.avgSqtrUser2();
 		topRendezvous = this.administratorService.topRendezvous();
 		avgSqtrAnnouncementPerRendezvous = this.administratorService.avgSqtrAnnouncementPerRendezvous();
-////		rendezvousNumberAnnouncements = this.administratorService.rendezvousNumberAnnouncements();
-////		rendezvousLinked = this.administratorService.rendezvousLinked();
+		rendezvousNumberAnnouncements = this.administratorService.rendezvousNumberAnnouncements();
+		rendezvousLinked = this.administratorService.rendezvousLinked();
 		avgSqtrQuestionsPerRendezvous = this.administratorService.avgSqtrQuestionsPerRendezvous();
 //		avgSqtrAnswersPerRendezvous = this.administratorService.avgSqtrAnswersPerRendezvous();
-//		avgSqtRrepliesPerComment = this.administratorService.avgSqtRrepliesPerComment();
+		avgSqtRrepliesPerComment = this.administratorService.avgSqtRrepliesPerComment();
 
 		result.addObject("rendezvousPerUser", avgSqtrUser);
 //		result.addObject("ratioUserRendezvous", ratioUserRendezvous);
@@ -93,12 +93,12 @@ public class AdministratorController extends AbstractController {
 		result.addObject("rsvpdPerUser", avgSqtrUser2);
 		result.addObject("topRendezvous", topRendezvous);
 		result.addObject("announcementsPerRendezvous", avgSqtrAnnouncementPerRendezvous);
-//		result.addObject("rendezvousNumberAnnouncements", rendezvousNumberAnnouncements);
-//		result.addObject("rendezvousLinked", rendezvousLinked);
+		result.addObject("rendezvousNumberAnnouncements", rendezvousNumberAnnouncements);
+		result.addObject("rendezvousLinked", rendezvousLinked);
 		
-//		result.addObject("questionsPerRendezvous", avgSqtrQuestionsPerRendezvous);
+		result.addObject("questionsPerRendezvous", avgSqtrQuestionsPerRendezvous);
 //		result.addObject("answersPerRendezvous", avgSqtrAnswersPerRendezvous);
-//		result.addObject("repliesPerComment", avgSqtRrepliesPerComment);
+		result.addObject("repliesPerComment", avgSqtRrepliesPerComment);
 
 		return result;
 	}

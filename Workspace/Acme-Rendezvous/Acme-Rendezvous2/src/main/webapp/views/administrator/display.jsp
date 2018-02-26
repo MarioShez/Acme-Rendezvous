@@ -114,9 +114,9 @@
 	</tr>
 	<jstl:forEach var="datos" items="${topRendezvous}">
 	<tr>
-		<th>
+		<td>
 			<jstl:out value="${datos.name}"></jstl:out>
-		</th>
+		</td>
 	</jstl:forEach>
 	</tr>
 </table>
@@ -143,7 +143,7 @@
 	</tr>
 </table>
 
-<%--
+
 <spring:message code="administrator.rendezvousNumberAnnouncementsLabel"/>
 <jstl:out value="${rendezvousNumberAnnouncementsLabel}"></jstl:out>
 <table class="displaytag"  name="rendezvousNumberAnnouncements">
@@ -153,13 +153,13 @@
 			<jstl:out value="${rendezvousHeader}"></jstl:out>
 		</th>
 	</tr>
+	<jstl:forEach var="datos" items="${rendezvousNumberAnnouncements}">
 	<tr>
-		<jstl:forEach var="datos" items="${rendezvousNumberAnnouncements}">
-			<td>
-				<jstl:out value="${datos}"></jstl:out>
-			</td>
-		</jstl:forEach>
+		<td>
+			<jstl:out value="${datos.name}"></jstl:out>
+		</td>
 	</tr>
+	</jstl:forEach>
 </table>
 
 <spring:message code="administrator.rendezvousLinkedLabel"/>
@@ -171,15 +171,15 @@
 			<jstl:out value="${rendezvousHeader}"></jstl:out>
 		</th>
 	</tr>
+	<jstl:forEach var="datos" items="${rendezvousLinked}">
 	<tr>
-		<jstl:forEach var="datos" items="${rendezvousLinked}">
-			<td>
-				<jstl:out value="${datos}"></jstl:out>
-			</td>
-		</jstl:forEach>
+		<td>
+			<jstl:out value="${datos.name}"></jstl:out>
+		</td>
 	</tr>
+	</jstl:forEach>
 </table>
---%>
+
 
 <spring:message code="administrator.questionsPerRendezvousLabel"/>
 <jstl:out value="${questionsPerRendezvousLabel}"></jstl:out>
@@ -222,7 +222,7 @@
 		</td>
 	</tr>
 </table>
-
+--%>
 <spring:message code="administrator.repliesPerCommentLabel"/>
 <jstl:out value="${repliesPerCommentLabel}"></jstl:out>
 <table class="displaytag"  name="repliesPerComment">
@@ -237,12 +237,14 @@
 		</th>
 	</tr>
 	<tr>
-		<td>
-			<jstl:out value="${datos}"></jstl:out>
-		</td>
+		<jstl:forEach var="datos" items="${repliesPerComment}">
+			<td>
+				<jstl:out value="${datos}"></jstl:out>
+			</td>
+		</jstl:forEach>
 	</tr>
 </table>
---%>
+
 </security:authorize>
 
 

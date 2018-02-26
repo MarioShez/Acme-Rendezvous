@@ -216,23 +216,23 @@ public class AdminService {
 		return res;
 	}
 
-//	// B-2
-//	public Object[] rendezvousNumberAnnouncements() {
-//		Object[] res;
-//		res = this.adminRepository.rendezvousNumberAnnouncements();
-//		return res;
-//	}
-//
-//	// B-3
-//	public Object[] rendezvousLinked() {
-//		Object[] res;
-//		res = this.adminRepository.rendezvousLinked();
-//		return res;
-//	}
+	// B-2
+	public Collection<Object> rendezvousNumberAnnouncements() {
+		Collection<Object> res;
+		res = this.adminRepository.rendezvousNumberAnnouncements();
+		return res;
+	}
+
+	// B-3
+	public Collection<Object> rendezvousLinked() {
+		Collection<Object> res;
+		res = this.adminRepository.rendezvousLinked();
+		return res;
+	}
 
 	// A-1
-	public Collection<Object> avgSqtrQuestionsPerRendezvous() {
-		Collection<Object> res;
+	public Object[] avgSqtrQuestionsPerRendezvous() {
+		Object[] res;
 		res = this.adminRepository.avgSqtrQuestionsPerRendezvous();
 		return res;
 	}
