@@ -55,7 +55,7 @@
 		</jstl:if>
 		
 		<jstl:if test="${not empty rendezvous.comments}">
-			<a href="comment/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listComments"/></a>
+			<a href="comment/rendezvous/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listComments"/></a>
 			<br/>
 		</jstl:if>
 		

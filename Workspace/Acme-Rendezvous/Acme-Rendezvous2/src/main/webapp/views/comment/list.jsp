@@ -19,7 +19,6 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<security:authorize access="hasRole('USER') or hasRole('ADMIN')">
 
 <display:table pagesize="6" class="displaycomment" keepStatus="true"
 	name="comment" requestURI="${requestURI }" id="row">
@@ -66,4 +65,3 @@
 			</a>
 		</div>
 	</security:authorize>
-</security:authorize>

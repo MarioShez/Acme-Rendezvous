@@ -15,8 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AdminService;
 import services.CommentService;
+import services.RendezvousService;
 import domain.Comment;
-import forms.CommentForm;
+import domain.Rendezvous;
 
 @Controller
 @RequestMapping("/comment")
@@ -30,8 +31,8 @@ public class CommentController extends AbstractController {
 	@Autowired
 	private AdminService adminService;
 
-	// @Autowired
-	// private RendezvousService rendezvousService;
+	 @Autowired
+	 private RendezvousService rendezvousService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -52,6 +53,23 @@ public class CommentController extends AbstractController {
 
 		result.addObject("comment", comment);
 		result.addObject("requestURI", "comment/list.do");
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/rendezvous/list", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam int rendezvousId) {
+		ModelAndView result;
+		Rendezvous rendezvous;
+		
+		Collection<Comment> comment;
+		rendezvous = this.rendezvousService.findOne(rendezvousId);
+		comment = rendezvous.getComments();
+
+		result = new ModelAndView("comment/list");
+
+		result.addObject("comment", comment);
+		result.addObject("requestURI", "comment/rendezvous/list.do");
 
 		return result;
 	}
