@@ -52,15 +52,15 @@ public class UserService {
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		Collection<Answer> answer = new ArrayList<Answer>();
-		Collection<Rendezvous> organisedrendezvous = new ArrayList<Rendezvous>();
-		Collection<Rendezvous> rsvpdRendezvous = new ArrayList<Rendezvous>();
+		Collection<Rendezvous> organisedrendezvouses = new ArrayList<Rendezvous>();
+		Collection<Rendezvous> rsvpdRendezvouses = new ArrayList<Rendezvous>();
 
 		authority.setAuthority(Authority.USER);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
 		res.setAnswer(answer);
-		res.setOrganisedRendezvous(organisedrendezvous);
-		res.setRsvpdRendezvous(rsvpdRendezvous);
+		res.setOrganisedRendezvouses(organisedrendezvouses);
+		res.setRsvpdRendezvouses(rsvpdRendezvouses);
 
 		return res;
 	}
@@ -109,7 +109,11 @@ public class UserService {
 		User res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		res = this.userRepository.findUserByUserAccountId(userAccount.getId());
+		if(userAccount == null){
+			res = null;
+		}else{
+			res = this.userRepository.findUserByUserAccountId(userAccount.getId());	
+		}
 		return res;
 	}
 
@@ -155,7 +159,7 @@ public class UserService {
 		User res = new User();
 
 		Collection<Answer> answers = new ArrayList<Answer>();
-		Collection<Rendezvous> organisedRendezvous = new ArrayList<Rendezvous>();
+		Collection<Rendezvous> organisedRendezvouses = new ArrayList<Rendezvous>();
 		Collection<Rendezvous> rsvpdRendezvous = new ArrayList<Rendezvous>();
 
 		UserAccount userAccount = userForm.getUserAccount();
@@ -173,8 +177,8 @@ public class UserService {
 		res.setBirth(userForm.getBirth());
 
 		res.setAnswer(answers);
-		res.setRsvpdRendezvous(rsvpdRendezvous);
-		res.setOrganisedRendezvous(organisedRendezvous);
+		res.setRsvpdRendezvouses(rsvpdRendezvous);
+		res.setOrganisedRendezvouses(organisedRendezvouses);
 
 		validator.validate(res, binding);
 

@@ -23,8 +23,8 @@ public class User extends Actor {
 	// Relationships
 	
 	private Collection<Answer> answer;
-	private Collection<Rendezvous> organisedRendezvous;
-	private Collection<Rendezvous> rsvpdRendezvous;
+	private Collection<Rendezvous> organisedRendezvouses;
+	private Collection<Rendezvous> rsvpdRendezvouses;
 	
 	@Valid
 	@NotNull
@@ -41,23 +41,23 @@ public class User extends Actor {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "organiser")
-	public Collection<Rendezvous> getOrganisedRendezvous() {
-		return organisedRendezvous;
+	public Collection<Rendezvous> getOrganisedRendezvouses() {
+		return organisedRendezvouses;
 	}
 	
-	public void setOrganisedRendezvous(Collection<Rendezvous> organisedRendezvous) {
-		this.organisedRendezvous = organisedRendezvous;
+	public void setOrganisedRendezvouses(Collection<Rendezvous> organisedRendezvouses) {
+		this.organisedRendezvouses = organisedRendezvouses;
 	}
 	
 	@Valid
 	@NotNull
 	@ManyToMany(mappedBy = "attendants")
-	public Collection<Rendezvous> getRsvpdRendezvous() {
-		return rsvpdRendezvous;
+	public Collection<Rendezvous> getRsvpdRendezvouses() {
+		return rsvpdRendezvouses;
 	}
 	
-	public void setRsvpdRendezvous(Collection<Rendezvous> rsvpdRendezvous) {
-		this.rsvpdRendezvous = rsvpdRendezvous;
+	public void setRsvpdRendezvouses(Collection<Rendezvous> rsvpdRendezvouses) {
+		this.rsvpdRendezvouses = rsvpdRendezvouses;
 	}
 	
 	

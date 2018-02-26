@@ -39,9 +39,7 @@
 <%-- Definition --%>
 
 <div>
-	<form:label path="${path}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${path}" readonly="${readonly}" placeholder="${placeholder}" />	
+	<b><form:label path="${path}"><spring:message code="${code}" />:&nbsp;</form:label></b>
+	<form:input path="${path}" readonly="${readonly}" placeholder="${placeholder}"/>	
 	<form:errors path="${path}" cssClass="error" />
-</div>	
+</div>

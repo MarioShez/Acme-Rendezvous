@@ -30,3 +30,4 @@
 <button type="submit" name="${name}" class="btn btn-primary">
 	<spring:message code="${code}" />
 </button>
+

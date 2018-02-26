@@ -1,18 +1,14 @@
 package services;
 
-//import java.util.Collection;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-//import org.springframework.util.Assert;
-//
-//import repositories.AdminRepository;
-//import security.Authority;
-//import security.LoginService;
-//import security.UserAccount;
-//import domain.Admin;
+import org.springframework.util.Assert;
+
+import repositories.AdminRepository;
+import security.LoginService;
+import security.UserAccount;
+import domain.Admin;
 
 @Service
 @Transactional
@@ -20,20 +16,20 @@ public class AdminService {
 
 	// Managed repository
 
-//	@Autowired
-//	private AdminRepository adminRepository;
+	@Autowired
+	private AdminRepository adminRepository;
 
 	// Supporting services
 
 
 	// Constructors
 
-//	public AdminService() {
-//		super();
-//	}
-//
-//	// Simple CRUD methods
-//
+	public AdminService() {
+		super();
+	}
+
+	// Simple CRUD methods
+
 //	public Admin create() {
 //		Admin res = new Admin();
 //
@@ -80,15 +76,15 @@ public class AdminService {
 //	}
 //
 //	// Ancillary methods
-//	public Admin findByPrincipal() {
-//		Admin res;
-//		UserAccount userAccount;
-//		userAccount = LoginService.getPrincipal();
-//		res = this.adminRepository.findAdministratorByUserAccountId(userAccount
-//				.getId());
-//		Assert.notNull(res);
-//		return res;
-//	}
+	public Admin findByPrincipal() {
+		Admin res;
+		UserAccount userAccount;
+		userAccount = LoginService.getPrincipal();
+		res = this.adminRepository.findAdministratorByUserAccountId(userAccount
+				.getId());
+		Assert.notNull(res);
+		return res;
+	}
 //
 //	public void checkAuthority() {
 //		UserAccount userAccount;
