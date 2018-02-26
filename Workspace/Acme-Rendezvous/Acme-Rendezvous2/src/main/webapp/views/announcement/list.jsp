@@ -27,26 +27,10 @@
 		<spring:message code="rendezvous.display"/></a>
 	</display:column>
 	
-	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
-			<a href="announcement/admin/edit.do?announcementId=${row.id}">
-			<spring:message code="announcement.delete"/></a>
-			
-		</display:column>
-
-	</security:authorize>
-	
 	
 
 	
 
 </display:table>
 
-<security:authorize access="hasRole('ADMIN')">
-	<div>
-		<a href="announcement/user/create.do?rendezvousId=${row.rendezvous.id}">
-		<spring:message code="announcement.create"/></a>
-		<br/>
-	</div>
-	</security:authorize>
 	
