@@ -24,6 +24,8 @@
 <br/>
 
 <b><spring:message code="announcement.description"/>:&nbsp;</b><jstl:out value="${announcement.description}"/>
+
+
 <br/>
 
 <b><spring:message code="announcement.rendezvous"/>:&nbsp;</b><jstl:out value="${announcement.rendezvous.name}"/>

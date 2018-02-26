@@ -42,10 +42,13 @@
 		<security:intercept-url pattern="/user/register.do" access="permitAll" />
 		<security:intercept-url pattern="/user/display.do" access="permitAll" />
 		
+<<<<<<< HEAD
 		<security:intercept-url pattern="/announcement/display.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/announcement/admin/**" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/announcement/**" access="hasRole('USER')" /> 
 		
+=======
+>>>>>>> bd906bd9d0c324f0283b43a2c18d8477b540ed1e
 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
@@ -53,8 +56,9 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/terms/**" access="permitAll" />
-
+	
 		<security:intercept-url pattern="/announcement/list.do" access="permitAll"/>
+		<security:intercept-url pattern="/announcement/user/**" access="permitAll" /> 
 		<security:intercept-url pattern="/announcement/admin/list.do" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/announcement/admin/edit.do" access="hasRole('ADMIN')"/>
 
