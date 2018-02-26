@@ -31,7 +31,7 @@
 //		ModelAndView res;
 //		Collection<Announcement> announcements;
 //	
-//		announcements = this.announcementService.findAnnouncementByRendezvous(idRendezvous);
+//		announcements = this.announcementService.findAnnouncementsByRendezvous(idRendezvous);
 //		
 //		res = new ModelAndView("announcement/list");
 //		res.addObject("announcement",announcements);

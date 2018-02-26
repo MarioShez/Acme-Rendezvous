@@ -41,7 +41,7 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	Object[] rendezvousNumberAnnouncements();
 
 	// B-3
-	@Query("select r from Rendezvous r where r.linkedRendezvouses.size > (select avg(r.linkedRendezvouses.size)* 1.1 from Rendezvouses r)")
+	@Query("select r from Rendezvous r where r.linkedRendezvouses.size > (select avg(l.linkedRendezvouses.size)* 1.1 from Rendezvous l)")
 	Object[] rendezvousLinked();
 
 	// A-1

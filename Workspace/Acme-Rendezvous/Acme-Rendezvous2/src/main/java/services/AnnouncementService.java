@@ -95,10 +95,10 @@ public class AnnouncementService {
 	
 	// Other busines methods
 	
-	public Collection<Announcement> findAnnouncementByRendezvous(int idRendezvous){
+	public Collection<Announcement> findAnnouncementsByRendezvous(int idRendezvous){
 		Collection<Announcement> res = new ArrayList<Announcement>();
 		
-		res = announcementRepository.findAnnouncementByRendezvous(idRendezvous);
+		res = announcementRepository.findAnnouncementsByRendezvous(idRendezvous);
 		Assert.notNull(res);
 		
 		return res;

@@ -26,13 +26,13 @@ public interface RendezvousRepository extends JpaRepository<Rendezvous, Integer>
 	@Query("select u.organisedRendezvouses from User u where u.id = ?1")
 	Collection<Rendezvous> findByOrganiserId(int organiserId);
 	
-	@Query("select r from User u join u.organisedRendezvouses r where u.id = ?1 and r.adult == false")
+	@Query("select r from User u join u.organisedRendezvouses r where u.id = ?1 and r.adult = false")
 	Collection<Rendezvous> findByOrganiserIdNotAdult(int organiserId);
 	
-	@Query("select u.rspvdRendezvouses from User u where u.id = ?1")
+	@Query("select u.rsvpdRendezvouses from User u where u.id = ?1")
 	Collection<Rendezvous> findByAttendantId(int attendantId);
 	
-	@Query("select r from User u join u.respvdRendezvouses r where u.id = ?1 and r.adult == false")
+	@Query("select r from User u join u.rsvpdRendezvouses r where u.id = ?1 and r.adult = false")
 	Collection<Rendezvous> findByAttendantIdNotAdult(int attendantId);
 	
 

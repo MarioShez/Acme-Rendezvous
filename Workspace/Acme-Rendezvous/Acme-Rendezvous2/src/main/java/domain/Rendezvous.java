@@ -121,7 +121,7 @@ public class Rendezvous extends DomainEntity {
 	private Collection<Question>		questions;
 	private User						organiser;
 	private Collection<User>			attendants;
-//	private Collection<Rendezvous>		linkedRendezvouses;
+	private Collection<Rendezvous>		linkedRendezvouses;
 
 
 	@Valid
@@ -179,15 +179,15 @@ public class Rendezvous extends DomainEntity {
 		this.attendants = attendants;
 	}
 
-//	@Valid
-//	@NotNull
-//	@OneToMany(mappedBy = "rendezvous")
-//	public Collection<Rendezvous> getLinkedRendezvouses() {
-//		return this.linkedRendezvouses;
-//	}
-//
-//	public void setLinkedRendezvouses(final Collection<Rendezvous> linkedRendezvouses) {
-//		this.linkedRendezvouses = linkedRendezvouses;
-//	}
+	@Valid
+	@NotNull
+	@OneToMany
+	public Collection<Rendezvous> getLinkedRendezvouses() {
+		return this.linkedRendezvouses;
+	}
+
+	public void setLinkedRendezvouses(final Collection<Rendezvous> linkedRendezvouses) {
+		this.linkedRendezvouses = linkedRendezvouses;
+	}
 
 }

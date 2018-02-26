@@ -15,19 +15,25 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	Admin findAdministratorByUserAccountId(int uA);
 
 	// C-1
-	@Query("select avg(u.organisedRendezvous.size), sqrt(sum(u.organisedRendezvous.size*u.organisedRendezvous.size)/count(u.organisedRendezvous.size)-(avg(u.organisedRendezvous.size)*avg(u.organisedRendezvous.size))) from User u")
+	@Query("select avg(u.organisedRendezvouses.size), sqrt(sum(u.organisedRendezvouses.size*u.organisedRendezvouses.size)/count(u.organisedRendezvouses.size)-(avg(u.organisedRendezvouses.size)*avg(u.organisedRendezvouses.size))) from User u")
 	Object[] avgSqtrUser();
 
+<<<<<<< HEAD
 //	// C-2
 //	@Query("select (select count(u) from User u where u.organisedRendezvous.size!=0)* 1.0/count(u) from User u where u.organisedRendezvous.size= 0) ")
 //	Double ratioUserRendezvous();
+=======
+	// C-2
+	@Query("select (select count(u) from User u where u.organisedRendezvouses.size!=0)* 1.0/count(u) from User u where u.organisedRendezvouses.size= 0) ")
+	Double ratioUserRendezvous();
+>>>>>>> a0a91cf2ced56cc7a8b0e232781a748438960939
 
 	// C-3
 	@Query("select avg(r.attendants.size), sqrt(sum(r.attendants.size*r.attendants.size)/count(r.attendants.size)-(avg(r.attendants.size)*avg(r.attendants.size))) from Rendezvous r")
 	Object[] avgSqtrUserPerRendezvous();
 
 	// C-4
-	@Query("select avg(u.rsvpdRendezvous.size), sqrt(sum(u.rsvpdRendezvous.size*u.rsvpdRendezvous.size)/count(u.rsvpdRendezvous.size)-(avg(u.rsvpdRendezvous.size)*avg(u.rsvpdRendezvous.size))) from User u")
+	@Query("select avg(u.rsvpdRendezvouses.size), sqrt(sum(u.rsvpdRendezvouses.size*u.rsvpdRendezvouses.size)/count(u.rsvpdRendezvouses.size)-(avg(u.rsvpdRendezvouses.size)*avg(u.rsvpdRendezvouses.size))) from User u")
 	Object[] avgSqtrUser2();
 
 	// C-5
@@ -39,12 +45,21 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	Object[] avgSqtrAnnouncementPerRendezvous();
 
 	// B-2
+<<<<<<< HEAD
 //	@Query("select r from Rendezvous r where r.announcements.size> (select 0.75* avg(r.announcements.size) from Rendezvous r")
 //	Object[] rendezvousNumberAnnouncements();
 
 //	// B-3
 //	@Query("select r from Rendezvous r where r.linkedRendezvouses.size > (select avg(r.linkedRendezvouses.size)* 1.1 from Rendezvouses r)")
 //	Object[] rendezvousLinked();
+=======
+	@Query("select r from Rendezvous r where r.announcements.size> (select 0.75* avg(r.announcements.size) from Rendezvous r)")
+	Object[] rendezvousNumberAnnouncements();
+
+	// B-3
+	@Query("select r from Rendezvous r where r.linkedRendezvouses.size > (select avg(r.linkedRendezvouses.size)* 1.1 from Rendezvous r)")
+	Object[] rendezvousLinked();
+>>>>>>> a0a91cf2ced56cc7a8b0e232781a748438960939
 
 	// A-1
 	@Query("select (select count(q) from Question q where q.rendezvous.id= r.id) from Rendezvous r")
