@@ -41,15 +41,6 @@ public class AnnouncementController extends AbstractController {
 	}
 	
 	
-<<<<<<< HEAD
-		announcements = this.announcementService.findAll();
-		
-		res = new ModelAndView("announcement/list");
-		res.addObject("announcement",announcements);
-		res.addObject("requestURI","announcement/list.do");
-		
-		return res;
-	}
 	
 	@RequestMapping(value = "/user/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam int announcementId) {
@@ -65,12 +56,9 @@ public class AnnouncementController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value="user/create", method=RequestMethod.GET)
-=======
 	
 	// Create --------------
 	@RequestMapping(value="/user/create", method=RequestMethod.GET)
->>>>>>> 1966de6989c9bb09541a67cf25cfb667ade8b654
 	public ModelAndView create(@RequestParam final int rendezvousId){
 		ModelAndView res;
 		Announcement announcement;
