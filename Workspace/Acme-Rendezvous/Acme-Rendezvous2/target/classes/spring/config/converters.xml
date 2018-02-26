@@ -46,6 +46,9 @@
 		<bean class="converters.AdminToStringConverter" />
 		<bean class="converters.StringToAdminConverter" />
 		
+		<bean class="converters.GpsCoordinateToStringConverter" />
+		<bean class="converters.StringToGpsCoordinateConverter" /
+		
 		
 	</util:list>
 	
