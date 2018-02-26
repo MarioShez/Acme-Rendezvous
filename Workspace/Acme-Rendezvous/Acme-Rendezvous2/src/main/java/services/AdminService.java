@@ -1,30 +1,23 @@
 package services;
 
-<<<<<<< HEAD
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-=======
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> a0a91cf2ced56cc7a8b0e232781a748438960939
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AdminRepository;
-<<<<<<< HEAD
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Admin;
 
-
-=======
 import security.LoginService;
 import security.UserAccount;
 import domain.Admin;
->>>>>>> a0a91cf2ced56cc7a8b0e232781a748438960939
 
 @Service
 @Transactional
@@ -46,7 +39,6 @@ public class AdminService {
 
 	// Simple CRUD methods
 
-<<<<<<< HEAD
 	public Admin create() {
 		Admin res = new Admin();
 
@@ -93,8 +85,8 @@ public class AdminService {
 	}
 
 	// Ancillary methods
-=======
-//	public Admin create() {
+
+	//	public Admin create() {
 //		Admin res = new Admin();
 //
 //		UserAccount userAccount = new UserAccount();
@@ -140,7 +132,7 @@ public class AdminService {
 //	}
 //
 //	// Ancillary methods
->>>>>>> a0a91cf2ced56cc7a8b0e232781a748438960939
+
 	public Admin findByPrincipal() {
 		Admin res;
 		UserAccount userAccount;
@@ -150,8 +142,8 @@ public class AdminService {
 		Assert.notNull(res);
 		return res;
 	}
-<<<<<<< HEAD
 
+	
 	public void checkAuthority() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -170,7 +162,6 @@ public class AdminService {
 		return res;
 	}
 
-=======
 //
 //	public void checkAuthority() {
 //		UserAccount userAccount;
@@ -190,7 +181,6 @@ public class AdminService {
 //		return res;
 //	}
 //
->>>>>>> a0a91cf2ced56cc7a8b0e232781a748438960939
 //	// C-2
 //	public Double ratioUserRendezvous() {
 //		Double res;

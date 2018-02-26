@@ -47,7 +47,6 @@
 		 
 		<security:intercept-url pattern="/terms/**" access="permitAll" />
 
-<<<<<<< HEAD
 		<security:intercept-url pattern="/administrator/action-1.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/action-2.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/comment/list.do" access="hasRole('ADMIN')" /> 
@@ -61,10 +60,9 @@
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
-=======
+
 	<!-- Rendezvous -->
 		<security:intercept-url pattern="/rendezvous/**" access="permitAll" />
->>>>>>> a0a91cf2ced56cc7a8b0e232781a748438960939
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
