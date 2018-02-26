@@ -47,7 +47,7 @@
 	
 	<spring:message code="user.rendezvouses" var="rsvpdRendezvous"/>
 	<display:column title="${rsvpdRendezvous}">
-		<a href="rendezvouses/user/list.do?rendezvousesId=${row.id }">
+		<a href="rendezvous/list-rspv.do?userId=${row.id }">
 			<spring:message code="user.rendezvouses.link"/>
 		</a>
 	</display:column>
