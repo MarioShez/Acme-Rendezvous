@@ -11,8 +11,16 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="rendezvous/user/edit.do" modelAttribute="rendezvousForm">
-	
+<form:form action="rendezvous/user/edit.do" modelAttribute="rendezvous">
+
+	<form:hidden path="id"/>
+	<form:hidden path="version"/>
+	<form:hidden path="announcements"/>
+	<form:hidden path="comments"/>
+	<form:hidden path="questions"/>
+	<form:hidden path="organiser"/>
+	<form:hidden path="attendants"/>
+	<form:hidden path="linkedRendezvouses"/>
 	<form:hidden path="deleted"/>
 	<jstl:if test="${rendezvous.finalVersion == false}">
 		<form:hidden path="finalVersion"/>
@@ -48,8 +56,7 @@
 	</jstl:if>
 	
 	<jstl:if test="${rendezvous.id != 0}">
-<!-- 	Arreglar -->
-		<a href="rendezvous/user/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listLinkedRendezvouses"/></a>
+		<a href="rendezvous/user/list-link.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.assignRendezvouses"/></a>
 		<br/>
 		
 		<a href="announcement/user/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listAnnouncements"/></a>
@@ -62,8 +69,10 @@
 	<jstl:if test="${rendezvous.finalVersion == false and rendezvous.deleted == false}">
 		<acme:submit name="save" code="rendezvous.save"/>
 		&nbsp;
-		<acme:submit name="delete" code="rendezvous.delete"/>
-		&nbsp;
+		<jstl:if test="${rendezvous.id != 0}">
+			<acme:submit name="delete" code="rendezvous.delete"/>
+			&nbsp;
+		</jstl:if>
 	</jstl:if>
 	
 	<acme:cancel url="rendezvous/user/list.do" code="rendezvous.cancel"/>

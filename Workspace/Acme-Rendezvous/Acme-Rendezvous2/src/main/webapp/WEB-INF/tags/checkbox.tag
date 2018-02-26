@@ -27,7 +27,7 @@
 
 <%@ attribute name="disabled" required="false" %>
 
-<jstl:if test=${disabled == null}>
+<jstl:if test="${disabled == null}">
 	<jstl:set var="disabled" value="false"/>
 </jstl:if>
 

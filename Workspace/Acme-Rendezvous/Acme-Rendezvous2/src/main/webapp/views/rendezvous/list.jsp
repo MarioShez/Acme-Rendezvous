@@ -27,6 +27,14 @@
 			<jstl:when test="${requestURI == 'rendezvous/user/list-rsvp.do'}">
 				<a href="comment/user/create.do?rendezvousId=${row.id}"><spring:message code="rendezvous.comment"/></a>
 			</jstl:when>
+			<jstl:when test="${requestURI == 'rendezvous/user/list-link.do'}">
+				<jstl:if test="${!rendezvousSource.linkedRendezvouses.contains(row)}">
+					<a href="rendezvous/user/assign.do?rendezvousSourceId=${rendezvousSource.id}&rendezvousTargetId=${row.id}"><spring:message code="rendezvous.assign"/></a>
+				</jstl:if>
+				<jstl:if test="${rendezvousSource.linkedRendezvouses.contains(row)}">
+					<a href="rendezvous/user/unassign.do?rendezvousSourceId=${rendezvousSource.id}&rendezvousTargetId=${row.id}"><spring:message code="rendezvous.unassign"/></a>
+				</jstl:if>
+			</jstl:when>
 		</jstl:choose>
 	</display:column>
 	

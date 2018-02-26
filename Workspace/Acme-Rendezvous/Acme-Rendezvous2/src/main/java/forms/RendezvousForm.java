@@ -12,8 +12,6 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import domain.GpsCoordinate;
-
 public class RendezvousForm {
 
 	// Constructors -----------------------------------------------------------
@@ -28,7 +26,8 @@ public class RendezvousForm {
 	private String description;
 	private String picture;
 	private Date moment;
-	private GpsCoordinate gpsCoordinate;
+	private Double latitude;
+	private Double longitude;
 	private boolean adult;
 	private boolean finalVersion;
 	private boolean deleted;
@@ -77,12 +76,22 @@ public class RendezvousForm {
 
 	@Valid
 	@SafeHtml
-	public GpsCoordinate getGpsCoordinate() {
-		return gpsCoordinate;
+	public Double getLatitude() {
+		return latitude;
 	}
 
-	public void setGpsCoordinate(GpsCoordinate gpsCoordinate) {
-		this.gpsCoordinate = gpsCoordinate;
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	
+	@Valid
+	@SafeHtml
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
 	}
 
 	public boolean getFinalVersion() {

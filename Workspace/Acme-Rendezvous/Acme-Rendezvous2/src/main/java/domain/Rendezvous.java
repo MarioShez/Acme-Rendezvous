@@ -54,7 +54,7 @@ public class Rendezvous extends DomainEntity {
 	}
 
 	@NotBlank
-//	@SafeHtml
+	@SafeHtml
 	public String getDescription() {
 		return this.description;
 	}
@@ -64,7 +64,7 @@ public class Rendezvous extends DomainEntity {
 	}
 
 	@URL
-//	@SafeHtml
+	@SafeHtml
 	public String getPicture() {
 		return this.picture;
 	}
@@ -184,8 +184,7 @@ public class Rendezvous extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
-	@OneToMany
+	@ManyToOne(optional = true)
 	public Collection<Rendezvous> getLinkedRendezvouses() {
 		return this.linkedRendezvouses;
 	}

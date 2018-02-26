@@ -15,6 +15,7 @@ import org.springframework.validation.Validator;
 import repositories.RendezvousRepository;
 import domain.Announcement;
 import domain.Comment;
+import domain.GpsCoordinate;
 import domain.Question;
 import domain.Rendezvous;
 import domain.User;
@@ -136,6 +137,10 @@ public class RendezvousService {
 
 	public Rendezvous reconstruct(RendezvousForm rendezvousForm,
 			BindingResult binding) {
+		
+		GpsCoordinate gpsCoordinate = new GpsCoordinate();
+		gpsCoordinate.setLatitude(rendezvousForm.getLatitude());
+		gpsCoordinate.setLongitude(rendezvousForm.getLongitude());
 
 		Rendezvous result = new Rendezvous();
 
@@ -143,6 +148,7 @@ public class RendezvousService {
 		result.setDescription(rendezvousForm.getDescription());
 		result.setPicture(rendezvousForm.getPicture());
 		result.setMoment(rendezvousForm.getMoment());
+		result.setGpsCoordinate(gpsCoordinate);
 		result.setAdult(rendezvousForm.getAdult());
 		result.setFinalVersion(rendezvousForm.getFinalVersion());
 		result.setDeleted(rendezvousForm.getDeleted());

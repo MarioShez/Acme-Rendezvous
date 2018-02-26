@@ -1,6 +1,5 @@
-<<<<<<< .mine
 #./src/main/resources/Entities.map
-#Mon Feb 26 11:18:28 CET 2018
+#Mon Feb 26 20:25:37 CET 2018
 question2=35
 question1=34
 answer6=41
@@ -23,54 +22,3 @@ announcement2=43
 announcement1=42
 user2=28
 user1=27
-||||||| .r100
-#./src/main/resources/Entities.map
-#Mon Feb 26 08:34:05 CET 2018
-question2=35
-question1=34
-answer6=41
-answer5=40
-answer4=39
-answer3=38
-answer2=37
-userAccount3=25
-answer1=36
-userAccount2=24
-administrator1=26
-userAccount1=23
-rendezvous2=30
-rendezvous1=29
-comment3=33
-comment2=32
-comment1=31
-announcement3=44
-announcement2=43
-announcement1=42
-user2=28
-user1=27
-=======
-#./src/main/resources/Entities.map
-#Mon Feb 26 18:04:36 CET 2018
-question2=35
-question1=34
-answer6=41
-answer5=40
-answer4=39
-answer3=38
-answer2=37
-userAccount3=25
-answer1=36
-userAccount2=24
-administrator1=26
-userAccount1=23
-rendezvous2=30
-rendezvous1=29
-comment3=33
-comment2=32
-comment1=31
-announcement3=44
-announcement2=43
-announcement1=42
-user2=28
-user1=27
->>>>>>> .r114

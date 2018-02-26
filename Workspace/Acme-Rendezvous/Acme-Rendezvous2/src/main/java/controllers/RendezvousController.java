@@ -55,6 +55,7 @@ public class RendezvousController extends AbstractController {
 		
 		ModelAndView result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvouses", rendezvouses);
+		result.addObject("rendezvousSource", null);
 		result.addObject("requestURI", "rendezvous/list.do");
 		
 		return result;
@@ -75,6 +76,7 @@ public class RendezvousController extends AbstractController {
 		
 		ModelAndView result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvouses", rendezvouses);
+		result.addObject("rendezvousSource", null);
 		result.addObject("requestURI", "rendezvous/list-organised.do");
 		
 		return result;
@@ -95,6 +97,7 @@ public class RendezvousController extends AbstractController {
 		
 		ModelAndView result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvouses", rendezvouses);
+		result.addObject("rendezvousSource", null);
 		result.addObject("requestURI", "rendezvous/list-rspv.do");
 		
 		return result;
@@ -112,7 +115,14 @@ public class RendezvousController extends AbstractController {
 		
 		ModelAndView result = new ModelAndView("rendezvous/display");
 		result.addObject("rendezvous", rendezvous);
-		result.addObject("areRSPVd", null);
+		if(principal == null){
+			result.addObject("areRSPVd", null);
+		}else if(principal != null && !principal.getRsvpdRendezvouses().contains(rendezvous)){
+			result.addObject("areRSPVd", false);
+		}else if(principal != null && principal.getRsvpdRendezvouses().contains(rendezvous)){
+			result.addObject("areRSPVd", true);
+		}
+		
 		
 		return result;
 	}
