@@ -25,7 +25,7 @@
 	
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
-			<a href="comment/user/edit.do?commentId=${row.id}"><spring:message code="comment.replyComment"/></a>
+			<a href="comment/edit.do?commentId=${row.id}"><spring:message code="comment.edit"/></a>
 		</display:column>
 	</security:authorize>
 	

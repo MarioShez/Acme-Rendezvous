@@ -19,6 +19,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <form:form action="comment/user/edit.do" modelAttribute="comment">
+	<security:authorize access="hasRole('USER')">
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -37,7 +38,7 @@
 	<acme:select items="${commentParent}" itemLabel="picture" code="comment.commentParent"  path="commentParent"/>
 	--%>
 	<br/>
-
+</security:authorize>
 	<%-- <jstl:choose>
 		
 
