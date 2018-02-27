@@ -60,4 +60,13 @@
 </security:authorize>
 
 <spring:message var="cancelValue" code="rendezvous.cancel" />
-<input type="button" name="cancel" value="${cancelValue}" onclick="javascript: relativeRedir('welcome/index.do');" />
+<jstl:choose>
+	<jstl:when test="${requestURI == 'rendezvous/user/list-link.do'}">
+		<input type="button" name="cancel" value="${cancelValue}" onclick="javascript: relativeRedir('rendezvous/user/edit.do?rendezvousId=${rendezvousSource.id}');" />
+	</jstl:when>
+	<jstl:otherwise>
+		<input type="button" name="cancel" value="${cancelValue}" onclick="javascript: relativeRedir('welcome/index.do');" />
+	</jstl:otherwise>
+</jstl:choose>
+
+

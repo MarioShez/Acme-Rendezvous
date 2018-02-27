@@ -18,26 +18,35 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="comment/rendezvous/edit.do" modelAttribute="comment">
+<form:form action="comment/user/edit.do" modelAttribute="comment">
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="user" />
-	<form:hidden path="rendezvous" />
 	<form:hidden path="replies" />
 	<form:hidden path="commentParent" />
+	<form:hidden path="moment" />
 	
 
 	<acme:textarea code="comment.text" path="text"/>
 	<br/>
 	<acme:textbox code="comment.picture" path="picture"/>
+	<%--
 	<br/>
-	<acme:textbox code="comment.rendezvous" path="rendezvous"/>
-	<br/>
-	<%-- 
+	<acme:select items="${rendezvous }" itemLabel="name" code="comment.rendezvous" path="rendezvous"/>
+	 
 	<acme:select items="${commentParent}" itemLabel="picture" code="comment.commentParent"  path="commentParent"/>
 	--%>
 	<br/>
+	
+	<form:label path="rendezvous">
+		<spring:message code="comment.rendezvous" />:
+	</form:label>
+	<form:select path="rendezvous">
+		<form:option item="null" value="0" label="----"/>
+        <form:options items="${rendezvous}" itemLabel="name"/>
+	</form:select>
+	<form:errors cssClass="error" path="rendezvous" />
+	<br />
 	
 	<input type="button" name="cancel"
 			value="<spring:message code="comment.cancel" />"

@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.QuestionRepository;
 import security.UserAccountService;
+import domain.Answer;
 import domain.Question;
 import domain.Rendezvous;
 
@@ -23,6 +24,9 @@ public class QuestionService {
 	private QuestionRepository	questionRepository;
 
 	// Supporting services
+
+	@Autowired
+	private AnswerService		answerService;
 
 	@Autowired
 	private UserAccountService	userAccountService;
@@ -80,6 +84,8 @@ public class QuestionService {
 		Assert.notNull(question);
 		Assert.isTrue(question.getId() != 0);
 		Assert.isTrue(this.questionRepository.exists(question.getId()));
+		for (final Answer a : this.answerService.findByQuestionId(question.getId()))
+			this.answerService.delete(a);
 		this.questionRepository.delete(question);
 	}
 

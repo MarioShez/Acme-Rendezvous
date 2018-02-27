@@ -85,7 +85,7 @@ public class RendezvousUserController extends AbstractController {
 	public ModelAndView create() {
 
 		Rendezvous rendezvous = rendezvousService.create();
-
+		
 		ModelAndView result = createEditModelAndView(rendezvous);
 
 		return result;

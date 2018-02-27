@@ -23,15 +23,6 @@
 <display:table pagesize="6" class="displaycomment" keepStatus="true"
 	name="comment" requestURI="${requestURI }" id="row">
 	
-<security:authorize access="hasRole('USER') or hasRole('ADMIN')">
-	<spring:message code="comment.edit"/>
-	<display:column>
-		<a href= "comment/rendezvous/create.do">
-		<spring:message code="comment.edit"/></a>
-	</display:column>
-</security:authorize>
-
-	
 	<spring:message code="comment.moment" var="momentHeader" />
 	<display:column property="moment" title="${momentHeader}" sortable="true" />
 
@@ -58,7 +49,7 @@
 
 	<security:authorize access="hasRole('USER')">
 		<div>
-			<a href="comment/rendezvous/create.do">
+			<a href="comment/user/edit.do">
 				<button>
 					<spring:message code="comment.create" />
 				</button>
