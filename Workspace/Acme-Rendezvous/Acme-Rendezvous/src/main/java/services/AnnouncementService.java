@@ -100,10 +100,7 @@ public class AnnouncementService {
 		Assert.notNull(announcement);
 		Assert.isTrue(announcement.getId()!=0);
 		Assert.isTrue(this.announcementRepository.exists(announcement.getId()));
-//		
-//		Rendezvous rendezvous = new Rendezvous();
-//		rendezvous = announcement.getRendezvous();
-//		rendezvous.getAnnouncements().remove(announcement);
+
 		
 		this.announcementRepository.delete(announcement);
 	}
