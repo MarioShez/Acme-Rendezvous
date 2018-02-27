@@ -30,16 +30,16 @@
 	<acme:textarea code="comment.text" path="text"/>
 	<br/>
 	<acme:textbox code="comment.picture" path="picture"/>
-	<%--
+	
 	<br/>
 	<acme:select items="${rendezvous }" itemLabel="name" code="comment.rendezvous" path="rendezvous"/>
-	 
+	 <%--
 	<acme:select items="${commentParent}" itemLabel="picture" code="comment.commentParent"  path="commentParent"/>
 	--%>
 	<br/>
 
-	<jstl:choose>
-		<jstl:when test="${requestURI == 'comment/user/edit.do'}">
+	<%-- <jstl:choose>
+		
 
 			<form:label path="rendezvous">
 				<spring:message code="comment.rendezvous" />:
@@ -51,8 +51,8 @@
 			<form:errors cssClass="error" path="rendezvous" />
 			<br />
 
-		</jstl:when>
-	</jstl:choose>
+		
+	</jstl:choose> --%>
 
 	<input type="button" name="cancel"
 			value="<spring:message code="comment.cancel" />"
@@ -65,11 +65,11 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
-	<jstl:if test="${comment.id != 0}">
+	
 			<input type="submit" name="delete"
 				value="<spring:message code="comment.delete" />"
 				onclick="return confirm('<spring:message code="comment.confirm.delete" />')" />&nbsp;
-	</jstl:if>
+	
 	</security:authorize>
 		
 </form:form>
