@@ -22,9 +22,10 @@
 	<form:hidden path="attendants"/>
 	<form:hidden path="linkedRendezvouses"/>
 	<form:hidden path="deleted"/>
-	<jstl:if test="${rendezvous.finalVersion == false}">
+	<jstl:if test="${rendezvous.finalVersion == true}">
 		<form:hidden path="finalVersion"/>
 	</jstl:if>
+	
 	
 	<acme:textbox code="rendezvous.name" path="name" readonly="${rendezvous.finalVersion}"/>
 	<br/>
@@ -51,7 +52,7 @@
 	<br/>
 	
 	<jstl:if test="${rendezvous.finalVersion == false}">
-		<acme:checkbox code="rendezvous.finalVersion" path="finalVersion" disabled="${rendezvous.finalVersion}"/>
+		<acme:checkbox code="rendezvous.finalVersion" path="finalVersion"/>
 		<br/>
 	</jstl:if>
 	
@@ -75,6 +76,6 @@
 		</jstl:if>
 	</jstl:if>
 	
-	<acme:cancel url="rendezvous/user/list.do" code="rendezvous.cancel"/>
+	<acme:cancel url="rendezvous/user/list-organised.do" code="rendezvous.cancel"/>
 	
 </form:form>
