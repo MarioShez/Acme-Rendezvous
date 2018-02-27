@@ -51,6 +51,7 @@
 		</th>
 	</tr>
 	<tr>
+	
 		<td>
 			<jstl:out value="${ratioUserRendezvous}"></jstl:out>
 		</td>
