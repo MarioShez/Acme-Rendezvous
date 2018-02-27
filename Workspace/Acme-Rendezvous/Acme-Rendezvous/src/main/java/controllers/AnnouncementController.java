@@ -89,9 +89,11 @@ public class AnnouncementController extends AbstractController {
 		Announcement announcement;
 		Rendezvous rendezvous;
 		
-		announcement = this.announcementService.create();
 		
 		rendezvous = this.rendezvousService.findOne(rendezvousId);
+		
+		announcement = this.announcementService.create(rendezvous);
+				
 		announcement.setRendezvous(rendezvous);
 		
 		res = this.createEditModelAndView(announcement);
@@ -117,7 +119,6 @@ public class AnnouncementController extends AbstractController {
 		return res;
 	}
 
-	
 	
 	
 	private ModelAndView createEditModelAndView(final Announcement announcement) {
