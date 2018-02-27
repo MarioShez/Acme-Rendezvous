@@ -22,7 +22,7 @@ import domain.Comment;
 import domain.Rendezvous;
 
 @Controller
-@RequestMapping("/announcement")
+@RequestMapping("/announcement/admin")
 public class AnnouncementAdminController extends AbstractController {
 
 	// Services ---------------
@@ -35,7 +35,7 @@ public class AnnouncementAdminController extends AbstractController {
 	}
 	
 	// List -----------
-	@RequestMapping(value="/admin/list", method=RequestMethod.GET)
+	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView list(){
 		ModelAndView res;
 		Collection<Announcement> announcements;
@@ -51,7 +51,7 @@ public class AnnouncementAdminController extends AbstractController {
 	
 	// Delete ------------
 	
-	@RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int announcementId) {
 		ModelAndView result;
 		Announcement announcement = new Announcement();
@@ -64,8 +64,8 @@ public class AnnouncementAdminController extends AbstractController {
 	}
 	
 	
-	@RequestMapping(value="/admin/edit", method=RequestMethod.POST, params ="delete")
-	public ModelAndView create(@Valid final Announcement announcement, 
+	@RequestMapping(value="/edit", method=RequestMethod.POST, params ="delete")
+	public ModelAndView create(final Announcement announcement, 
 			final BindingResult binding){
 		ModelAndView res;
 		

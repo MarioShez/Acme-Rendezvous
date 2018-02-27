@@ -20,7 +20,7 @@ import domain.Announcement;
 import domain.Rendezvous;
 
 @Controller
-@RequestMapping("/announcements/user")
+@RequestMapping("/announcement/user")
 public class AnnouncementsUserController extends AbstractController {
 
 	@Autowired
@@ -57,7 +57,6 @@ public class AnnouncementsUserController extends AbstractController {
 			ModelAndView res;
 			Announcement announcement;
 			Rendezvous rendezvous;
-			Date moment;
 			
 			
 			rendezvous = this.rendezvousService.findOne(rendezvousId);
@@ -75,17 +74,18 @@ public class AnnouncementsUserController extends AbstractController {
 			return res;
 		}
 		
-		@RequestMapping(value="/create",method=RequestMethod.POST, params = "save")
+		@RequestMapping(value="/edit",method=RequestMethod.POST, params = "save")
 		public ModelAndView save(@Valid final Announcement announcement,
 				final BindingResult binding){
 			ModelAndView res;
+			Integer id = announcement.getRendezvous().getId();
 			
 			if(binding.hasErrors()){
 				res = this.createEditModelAndView(announcement, "announcement.params.error");
 			}else
 				try{
 					this.announcementService.save(announcement);
-					res = new ModelAndView("redirect:../announcement/list.do");
+					res = new ModelAndView("redirect:/announcement/list.do?rendezvousId="+id);
 				}catch (final Throwable oops) {
 					res = this.createEditModelAndView(announcement, "announcement.commit.error");
 				}
@@ -96,7 +96,7 @@ public class AnnouncementsUserController extends AbstractController {
 		
 		
 		
-		private ModelAndView createEditModelAndView(final Announcement announcement) {
+		protected ModelAndView createEditModelAndView(final Announcement announcement) {
 			ModelAndView res;
 			
 			res = this.createEditModelAndView(announcement,null);
@@ -104,7 +104,7 @@ public class AnnouncementsUserController extends AbstractController {
 			return res;
 		}
 
-		private ModelAndView createEditModelAndView(final Announcement announcement,
+		protected ModelAndView createEditModelAndView(final Announcement announcement,
 				final String message) {
 			ModelAndView res;
 			res = new ModelAndView("announcement/edit");

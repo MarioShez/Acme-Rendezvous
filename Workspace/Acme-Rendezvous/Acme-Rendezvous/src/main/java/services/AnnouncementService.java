@@ -83,22 +83,15 @@ public class AnnouncementService {
 	
 	public Announcement save(Announcement announcement){
 		Assert.notNull(announcement);
+		this.checkPrincipal(announcement);
+		
 		Announcement res;
-		User user = new User();
-		Collection<Rendezvous> rendezvousByPrincipal = new ArrayList<Rendezvous>();
-		Date moment;
-		
-		//crear announcements para los rendezvous que ha organizado
-		rendezvousByPrincipal = user.getOrganisedRendezvouses();
-		Assert.isTrue(rendezvousByPrincipal.contains(announcement.getRendezvous()));
-		
-		moment = new Date(System.currentTimeMillis()-1);
-		announcement.setMoment(moment);
 		
 		res = this.announcementRepository.save(announcement);
 		
 		Assert.notNull(res);
 		return res;
+		
 	}
 	
 	public void delete(Announcement announcement){
@@ -116,6 +109,11 @@ public class AnnouncementService {
 	}
 	
 	// Other busines methods
+	
+	public void checkPrincipal(Announcement announcement){
+		User principal = userService.findByPrincipal();
+		Assert.isTrue(principal.equals(announcement.getRendezvous().getOrganiser()));
+	}
 	
 	public Collection<Announcement> findAnnouncementsByRendezvous(int rendezvousId){
 		Collection<Announcement> res = new ArrayList<Announcement>();

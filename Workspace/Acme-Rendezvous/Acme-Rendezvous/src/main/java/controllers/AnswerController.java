@@ -15,18 +15,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AnswerService;
 import services.QuestionService;
 import services.RendezvousService;
 import services.UserService;
+import domain.Answer;
 import domain.Question;
 import domain.Rendezvous;
-import domain.User;
 
 @Controller
-@RequestMapping("/question")
-public class QuestionController extends AbstractController {
+@RequestMapping("/answer")
+public class AnswerController extends AbstractController {
 
 	// Services ------------------------------------------------------
+
+	@Autowired
+	private AnswerService		answerService;
 
 	@Autowired
 	private QuestionService		questionService;
@@ -40,27 +44,24 @@ public class QuestionController extends AbstractController {
 
 	// Constructors --------------------------------------------------
 
-	public QuestionController() {
+	public AnswerController() {
 		super();
 	}
 
 	// Listing -------------------------------------------------------
 
 	@RequestMapping(value = "/user/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(required = true) final Integer rendezvousId) {
+	public ModelAndView list(@RequestParam(required = true) final Integer questionId) {
 
-		final Collection<Question> questions = new ArrayList<Question>();
+		final Collection<Answer> answers = new ArrayList<Answer>();
 
-		final User principal = this.userService.findByPrincipal();
-		final Rendezvous r = this.rendezvousService.findOne(rendezvousId);
-		Assert.notNull(r);
-		questions.addAll(this.questionService.findByRendezvousId(rendezvousId));
+		final Question question = this.questionService.findOne(questionId);
+		Assert.notNull(question);
+		answers.addAll(this.answerService.findByQuestionId(questionId));
 
-		final Boolean isPrincipal = principal == r.getOrganiser();
-
-		final ModelAndView result = new ModelAndView("question/list");
-		result.addObject("questions", questions);
-		result.addObject("isPrincipal", isPrincipal);
+		final ModelAndView result = new ModelAndView("answer/list");
+		result.addObject("answers", answers);
+		result.addObject("question", question);
 		result.addObject("requestURI", "question/user/list.do");
 
 		return result;
