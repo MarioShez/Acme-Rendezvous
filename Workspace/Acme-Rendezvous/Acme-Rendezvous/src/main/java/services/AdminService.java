@@ -238,8 +238,8 @@ public class AdminService {
 	}
 
 	// A-2
-	public Object[] avgSqtrAnswersPerRendezvous() {
-		Object[] res;
+	public Collection<Object> avgSqtrAnswersPerRendezvous() {
+		Collection<Object> res;
 		res = this.adminRepository.avgSqtrAnswersPerRendezvous();
 		return res;
 	}

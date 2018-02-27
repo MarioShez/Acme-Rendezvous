@@ -202,7 +202,7 @@
 		</jstl:forEach>
 	</tr>
 </table>
-<%--
+
 <spring:message code="administrator.answersPerRendezvousLabel"/>
 <jstl:out value="${answersPerRendezvousLabel}"></jstl:out>
 <table class="displaytag"  name="answersPerRendezvous">
@@ -216,13 +216,16 @@
 			<jstl:out value="${standardDeviationHeader}"></jstl:out>
 		</th>
 	</tr>
-	<tr>
-		<td>
-			<jstl:out value="${datos}"></jstl:out>
-		</td>
-	</tr>
+		<tr>
+		<jstl:forEach var="datos" items="${answersPerRendezvous}">
+			<td>
+				<jstl:out value="${datos}"></jstl:out>
+			</td>
+		</jstl:forEach>
+		</tr>
+	
 </table>
---%>
+
 <spring:message code="administrator.repliesPerCommentLabel"/>
 <jstl:out value="${repliesPerCommentLabel}"></jstl:out>
 <table class="displaytag"  name="repliesPerComment">

@@ -45,21 +45,25 @@ public class CommentService {
 	// Simple CRUD methods
 
 	public Comment create() {
+		userService.checkAuthority();
 		Comment res = new Comment();
-
-		User u = new User();
-		u = userService.findByPrincipal();
-		Assert.notNull(u);
-
-
-		Date moment = new Date(System.currentTimeMillis()-1);
-		Comment parent= new Comment();
 		Collection<Comment> replies = new ArrayList<Comment>();
-
-		//res.setMoment(moment);
-		res.setUser(u);
-		res.setCommentParent(parent);
+		
 		res.setReplies(replies);
+		
+//		User u = new User();
+//		u = userService.findByPrincipal();
+//		Assert.notNull(u);
+//
+//
+//		Date moment = new Date(System.currentTimeMillis()-1);
+//		Comment parent= new Comment();
+//		Collection<Comment> replies = new ArrayList<Comment>();
+//
+//		//res.setMoment(moment);
+//		res.setUser(u);
+//		res.setCommentParent(parent);
+//		res.setReplies(replies);
 		return res;
 	}
 
@@ -78,27 +82,38 @@ public class CommentService {
 		return res;
 	}
 
-	public Comment save(Comment coment) {
+	public Comment save(Comment comment) {
 		
-		Date moment;
-		User userConnected;
-
-		moment = new Date();
-		userConnected = this.userService.findByPrincipal();
-		
-		Assert.notNull(coment);
-		Assert.isTrue(coment.getRendezvous().getAttendants().contains(userConnected));
+		userService.checkAuthority();
 
 		Comment res;
+		Assert.notNull(comment);
+		if(comment.getId() == 0){
+			Date moment;
+			moment = new Date(System.currentTimeMillis()-1000);
+			comment.setMoment(moment);
+		}
+		res = this.commentRepository.saveAndFlush(comment);
+		if(comment.getCommentParent() != null){
+			this.actualizarParent(comment.getCommentParent(), res);
+		}
+		this.actualizarParent(comment.getCommentParent(), res);
 		
-		moment = new Date(System.currentTimeMillis() - 1000);
-		
-		this.userService.checkAuthority();
-		Assert.isTrue(coment.getUser().equals(userConnected));
-		Assert.isTrue(coment.getId() == 0);
-		
-		coment.setMoment(moment);
-		res = this.commentRepository.save(coment);
+//		moment = new Date();
+//		userConnected = this.userService.findByPrincipal();
+//		
+//		Assert.notNull(coment);
+//		Assert.isTrue(coment.getRendezvous().getAttendants().contains(userConnected));
+//
+//		Comment res;
+//		
+//		moment = new Date(System.currentTimeMillis() - 1000);
+//		
+//		this.userService.checkAuthority();
+//		Assert.isTrue(coment.getUser().equals(userConnected));
+//		Assert.isTrue(coment.getId() == 0);
+//		
+//		coment.setMoment(moment);
 		return res;
 	}
 
@@ -129,6 +144,16 @@ public class CommentService {
 
 	//Other bussines methods
 	
+	
+	private void actualizarParent(Comment commentParent, Comment commentSon){
+		Collection<Comment> replies = new ArrayList<Comment>();
+		if(commentParent.getReplies() != null){
+			replies.addAll(commentParent.getReplies());
+		}
+		replies.add(commentSon);
+		commentParent.setReplies(replies);
+		this.commentRepository.saveAndFlush(commentParent);
+	}
 	
 	public Collection<Comment> commentsOfThisRendezvouseWithCommentNull(final int rendezvouseId) {
 		Collection<Comment> commentsOfThisRendezvouse;
