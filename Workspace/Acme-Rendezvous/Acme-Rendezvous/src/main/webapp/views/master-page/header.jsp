@@ -31,7 +31,6 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('USER')">
-			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 			<li><a href="announcements/user/list.do"><spring:message code="master.page.administrator.announcement" /></a></li>
 			
 		</security:authorize>
