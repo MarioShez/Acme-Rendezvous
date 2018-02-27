@@ -1,7 +1,6 @@
 package controllers.user;
 
 import java.util.Collection;
-import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -21,7 +20,7 @@ import domain.Rendezvous;
 
 @Controller
 @RequestMapping("/announcement/user")
-public class AnnouncementsUserController extends AbstractController {
+public class AnnouncementUserController extends AbstractController {
 
 	@Autowired
 	private AnnouncementService announcementService;
@@ -31,7 +30,7 @@ public class AnnouncementsUserController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public AnnouncementsUserController() {
+	public AnnouncementUserController() {
 		super();
 	}
 
@@ -46,7 +45,7 @@ public class AnnouncementsUserController extends AbstractController {
 
 		result = new ModelAndView("announcement/list");
 		result.addObject("announcement", announcements);
-		result.addObject("requestURI", "announcement/list.do");
+		result.addObject("requestURI", "announcement/announcement/list.do");
 
 		return result;
 	}

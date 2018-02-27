@@ -21,33 +21,32 @@
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		<li><a class="fNiv" href="rendezvous/list.do"><spring:message code="master.page.avalibleRendezvouses" /></a></li>
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
-			<li><a href="comment/list.do"><spring:message code="master.page.administrator.comment" /></a></li>
-			<li><a href="announcement/admin/list.do"><spring:message code="master.page.administrator.announcement" /></a></li>
-			<li><a href="administrator/display.do"><spring:message code="master.page.administrator.information" /></a></li>
-			
+			<ul>
+				<li><a href="comment/list.do"><spring:message code="master.page.administrator.comment" /></a></li>
+				<li><a href="announcement/admin/list.do"><spring:message code="master.page.administrator.announcement" /></a></li>
+				<li><a href="administrator/display.do"><spring:message code="master.page.administrator.information" /></a></li>
+			</ul>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('USER')">
-			<li><a href="announcement/user/list.do"><spring:message code="master.page.administrator.announcement" /></a></li>
+		<li><a class="fNiv"><spring:message	code="master.page.user" /></a>
+			<ul>
+				<li><a href="rendezvous/user/list-organised.do"><spring:message code="master.page.user.organisedRendezvouses" /></a></li>
+				<li><a href="rendezvous/user/list-rspv.do"><spring:message code="master.page.user.rspvRendezvouses" /></a></li>
+				<li><a href="announcement/user/list.do"><spring:message code="master.page.user.streamingAnnouncements" /></a></li>
+			</ul>
 			
 		</security:authorize>
 		
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
-			<li><a class="fNiv" href="terms/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>
 			<li><a class="fNiv" href="user/register.do"><spring:message code="master.page.register" /></a>
-			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.listUsers" /></a></li>
-			
-			
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
-			<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.listUsers" /></a></li>
-		
 			<li>
 				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 
@@ -59,11 +58,11 @@
 					
 				</ul>
 			</li>
-			<li><a class="fNiv" href="terms/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>
-			
-			
-			
+	
 		</security:authorize>
+		<li><a class="fNiv" href="rendezvous/list.do"><spring:message code="master.page.avalibleRendezvouses" /></a></li>
+		<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.listUsers" /></a></li>
+		<li><a class="fNiv" href="terms/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>
 	</ul>
 </div>
 
