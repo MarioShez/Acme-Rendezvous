@@ -112,15 +112,15 @@ public class CommentController extends AbstractController {
 	
 	// Creation ---------------------------------------------------------------
 
-			@RequestMapping(value = "/rendezvous/create", method = RequestMethod.GET)
-			public ModelAndView create() {
-				ModelAndView result;
-				Comment c;
+	@RequestMapping(value = "/rendezvous/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Comment c;
 
-				c = this.commentService.create();
-				result = this.createEditModelAndView(c);
-				return result;
-			}
+		c = this.commentService.create();
+		result = this.createEditModelAndView(c);
+		return result;
+	}
 			
 
 			// Edition ----------------------------------------------------------------
@@ -131,7 +131,6 @@ public class CommentController extends AbstractController {
 				ModelAndView result;
 
 				comment = this.commentService.save(comment);
-				System.out.println(binding);
 				if (binding.hasErrors())
 					result = this.createEditModelAndView(comment);
 				else

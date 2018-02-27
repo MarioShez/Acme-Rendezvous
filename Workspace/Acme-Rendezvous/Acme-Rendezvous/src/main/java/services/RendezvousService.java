@@ -76,6 +76,13 @@ public class RendezvousService {
 		return result;
 
 	}
+	
+	public Collection<Rendezvous> findAll() {
+		Collection<Rendezvous> res;
+		res = this.rendezvousRepository.findAll();
+		Assert.notNull(res);
+		return res;
+	}
 
 	public Rendezvous findOne(final int rendezvousId) {
 

@@ -230,7 +230,6 @@
 		</property>
 		<property name="linkedRendezvouses">
 			<list>
-				<null />
 			</list>
 		</property>
 	</bean>
@@ -266,7 +265,6 @@
 		</property>
 		<property name="linkedRendezvouses">
 			<list>
-				<null />
 			</list>
 		</property>
 	</bean>
