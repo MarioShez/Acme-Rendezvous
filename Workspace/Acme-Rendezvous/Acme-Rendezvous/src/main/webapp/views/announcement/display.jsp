@@ -31,9 +31,12 @@
 <b><spring:message code="announcement.rendezvous"/>:&nbsp;</b><jstl:out value="${announcement.rendezvous.name}"/>
 <br/>
 
+<security:authorize access="hasRole('ADMIN')">
 <jstl:if test="${comment.id != 0}">
 	<input type="submit" name="delete"
 		value="<spring:message code="comment.delete" />"
 		onclick="return confirm('<spring:message code="comment.confirm.delete" />')" />&nbsp;
 </jstl:if>
+</security:authorize>
 </form:form>
+

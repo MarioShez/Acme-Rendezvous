@@ -41,63 +41,12 @@ public class CommentUserController extends AbstractController {
 	
 	//Listing --------------------------------------------------------------
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView display(@RequestParam int rendezvousId){
-		ModelAndView result;
-		Rendezvous rendezvous;
-		Collection<Comment> comment;
-		
-		rendezvous = this.rendezvousService.findOne(rendezvousId);
-		
-		comment= rendezvous.getComments();
-		
-		result = new ModelAndView("comment/list");
-		
-		result.addObject("comment", comment);
-		result.addObject("requestURI", "comment/user/list." +
-				"" +
-				"" +
-				"do");
-		
-		return result;
-	}
 	
 	// Creation ---------------------------------------------------------------
 
-		@RequestMapping(value = "/create", method = RequestMethod.GET)
-		public ModelAndView create() {
-			ModelAndView result;
-			Comment c;
 
-			c = this.commentService.create();
-			result = this.createModelAndView(c);
-			return result;
-		}
+	// Ancillary methods --------------------------------------------------
 
-		// Ancillary methods --------------------------------------------------
-
-		protected ModelAndView createModelAndView(final Comment comment) {
-			ModelAndView result;
-
-			result = this.createModelAndView(comment, null);
-
-			return result;
-		}
-		
-		protected ModelAndView createModelAndView(
-				final Comment comment, final String message) {
-			ModelAndView result;
-			result = new ModelAndView("application/explorer/edit");
-			
-			Rendezvous r = new Rendezvous();
-			
-			User user = userService.findOrganiserByRendezvousId(r.getId());
-			
-			result.addObject("user", user);
-			result.addObject("comment", comment);
-			result.addObject("message", message);
-			return result;
-		}
 		
 		
 		

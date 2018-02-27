@@ -72,7 +72,7 @@ public class AdministratorController extends AbstractController {
 		Collection<Object> rendezvousNumberAnnouncements;
 		Collection<Object> rendezvousLinked;
 		Object avgSqtrQuestionsPerRendezvous[];
-//		Object avgSqtrAnswersPerRendezvous[];
+		Collection<Object> avgSqtrAnswersPerRendezvous;
 		Object avgSqtRrepliesPerComment[];
 
 		avgSqtrUser = this.administratorService.avgSqtrUser();
@@ -84,7 +84,7 @@ public class AdministratorController extends AbstractController {
 		rendezvousNumberAnnouncements = this.administratorService.rendezvousNumberAnnouncements();
 		rendezvousLinked = this.administratorService.rendezvousLinked();
 		avgSqtrQuestionsPerRendezvous = this.administratorService.avgSqtrQuestionsPerRendezvous();
-//		avgSqtrAnswersPerRendezvous = this.administratorService.avgSqtrAnswersPerRendezvous();
+		avgSqtrAnswersPerRendezvous = this.administratorService.avgSqtrAnswersPerRendezvous();
 		avgSqtRrepliesPerComment = this.administratorService.avgSqtRrepliesPerComment();
 
 		result.addObject("rendezvousPerUser", avgSqtrUser);
@@ -97,7 +97,7 @@ public class AdministratorController extends AbstractController {
 		result.addObject("rendezvousLinked", rendezvousLinked);
 		
 		result.addObject("questionsPerRendezvous", avgSqtrQuestionsPerRendezvous);
-//		result.addObject("answersPerRendezvous", avgSqtrAnswersPerRendezvous);
+		result.addObject("answersPerRendezvous", avgSqtrAnswersPerRendezvous);
 		result.addObject("repliesPerComment", avgSqtRrepliesPerComment);
 
 		return result;

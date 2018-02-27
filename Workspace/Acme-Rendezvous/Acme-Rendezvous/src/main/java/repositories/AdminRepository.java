@@ -19,7 +19,7 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	Object[] avgSqtrUser();
 
 //	// C-2
-//	@Query("select (select count(u) from User u where u.organisedRendezvous.size!=0)* 1.0/count(u) from User u where u.organisedRendezvous.size= 0) ")
+//	@Query("select (select count(u) from User u where u.organisedRendezvouses.size!=0)* 1.0/count(u) from User u where u.organisedRendezvouses.size= 0) ")
 //	Double ratioUserRendezvous();
 
 	// C-3
@@ -39,14 +39,6 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	Object[] avgSqtrAnnouncementPerRendezvous();
 
 	// B-2
-//	@Query("select r from Rendezvous r where r.announcements.size> (select 0.75* avg(r.announcements.size) from Rendezvous r")
-//	Object[] rendezvousNumberAnnouncements();
-
-//	// B-3
-//	@Query("select r from Rendezvous r where r.linkedRendezvouses.size > (select avg(r.linkedRendezvouses.size)* 1.1 from Rendezvouses r)")
-//	Object[] rendezvousLinked();
-
-	// B-2
 	@Query("select r from Rendezvous r where r.announcements.size> (select 0.75* avg(r.announcements.size) from Rendezvous r)")
 	Collection<Object> rendezvousNumberAnnouncements();
 
@@ -60,7 +52,7 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
 	// A-2
 	@Query("select (select count(a) from Answer a where a.question.rendezvous.id= r.id) from Rendezvous r")
-	Object[] avgSqtrAnswersPerRendezvous();
+	Collection<Object> avgSqtrAnswersPerRendezvous();
 
 	// A-3
 	@Query("select avg(c.replies.size), sqrt(sum(c.replies.size*c.replies.size)/count(c.replies.size)-(avg(c.replies.size)*avg(c.replies.size))) from Comment c")
