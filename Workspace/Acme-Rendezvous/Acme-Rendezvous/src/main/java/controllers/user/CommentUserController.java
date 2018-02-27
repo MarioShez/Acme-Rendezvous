@@ -55,15 +55,16 @@ public class CommentUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Comment comment, final BindingResult binding) {
 		ModelAndView result;
+		int rendezvousId = 0;
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(comment, "comment.params.error");
 		else
 			try {
 				this.commentService.save(comment);
-				result = new ModelAndView("redirect:list.do");
+				rendezvousId = comment.getRendezvous().getId();
+				result = new ModelAndView("redirect:/comment/rendezvous/list.do?rendezvousId=" + rendezvousId);
 			} catch (final Throwable oops) {
-				System.out.println(oops);
 				result = this.createEditModelAndView(comment,
 						"comment.commit.error");
 			}

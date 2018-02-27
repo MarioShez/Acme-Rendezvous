@@ -49,15 +49,11 @@ public class CommentService {
 		Comment res = new Comment();
 		Collection<Comment> replies = new ArrayList<Comment>();
 		Rendezvous rendezvous = new Rendezvous();
-		
-		res.setReplies(replies);
-		
 		User u = new User();
-		u = userService.findByPrincipal();
+		Comment parent= new Comment();
 		Assert.notNull(u);
 
-		Date moment = new Date(System.currentTimeMillis()-1);
-		Comment parent= new Comment();
+		Date moment = new Date(System.currentTimeMillis()-1000);
 
 		res.setMoment(moment);
 		res.setUser(u);
@@ -86,10 +82,15 @@ public class CommentService {
 		
 		userService.checkAuthority();
 
+		User user = new User();
+		user = this.userService.findByPrincipal();
 		Comment res;
 		Assert.notNull(comment);
 		
+		comment.setUser(user);
+		
 		res = this.commentRepository.save(comment);
+		
 		
 //		if(comment.getId() == 0){
 //			Date moment;
