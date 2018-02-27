@@ -29,19 +29,19 @@ public class AnnouncementsUserController extends AbstractController {
 
 	// Listing --------------------------------------------------------------
 
-//	@RequestMapping(value = "/list", method = RequestMethod.GET)
-//	public ModelAndView list() {
-//		ModelAndView result;
-//		Collection<Announcement> announcements;
-//
-//		announcements = this.announcementService.findAnnouncementsByAttendants();
-//
-//		result = new ModelAndView("user/list");
-//		result.addObject("announcement", announcements);
-//		result.addObject("requestURI", "announcement/list.do");
-//
-//		return result;
-//	}
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Announcement> announcements;
+
+		announcements = this.announcementService.findAnnouncementsByAttendants();
+
+		result = new ModelAndView("announcement/list");
+		result.addObject("announcement", announcements);
+		result.addObject("requestURI", "announcement/list.do");
+
+		return result;
+	}
 	
 	
 

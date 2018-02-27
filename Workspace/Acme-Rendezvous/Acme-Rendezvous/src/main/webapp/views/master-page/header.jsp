@@ -28,16 +28,14 @@
 			<li><a href="announcement/admin/list.do"><spring:message code="master.page.administrator.announcement" /></a></li>
 			<li><a href="administrator/display.do"><spring:message code="master.page.administrator.information" /></a></li>
 			
-				<!--
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
-				</ul>
-				
-			</li>
-			-->
 		</security:authorize>
+		
+		<security:authorize access="hasRole('USER')">
+			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
+			<li><a href="announcements/user/list.do"><spring:message code="master.page.administrator.announcement" /></a></li>
+			
+		</security:authorize>
+		
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
@@ -60,12 +58,6 @@
 					<li class="arrow"></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 					
-					<!-- 
-					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
-					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
-					-->	
 				</ul>
 			</li>
 			<li><a class="fNiv" href="terms/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>

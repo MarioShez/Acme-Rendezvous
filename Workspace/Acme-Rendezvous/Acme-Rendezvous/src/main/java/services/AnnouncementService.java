@@ -148,14 +148,14 @@ public class AnnouncementService {
 		return res;
 	}
 	
-//	public Collection<Announcement> findAnnouncementsByAttendants(){
-//		Collection<Announcement> res;
-//		User user = new User();
-//		user = this.userService.findByPrincipal();
-//		res = this.announcementRepository.findAnnouncementsByAttendants(user.getId());
-//		Assert.notNull(res);
-//		return res;
-//	}
+	public Collection<Announcement> findAnnouncementsByAttendants(){
+		Collection<Announcement> res;
+		User user = new User();
+		user = this.userService.findByPrincipal();
+		res = this.announcementRepository.findAnnouncementsByAttendants(user.getId());
+		Assert.notNull(res);
+		return res;
+	}
 
 
 }
