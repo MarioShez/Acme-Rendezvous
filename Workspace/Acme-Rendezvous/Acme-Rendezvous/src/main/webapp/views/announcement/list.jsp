@@ -27,9 +27,6 @@
 		<spring:message code="rendezvous.display"/></a>
 	</display:column>
 	
-	
-
-	
 
 </display:table>
 

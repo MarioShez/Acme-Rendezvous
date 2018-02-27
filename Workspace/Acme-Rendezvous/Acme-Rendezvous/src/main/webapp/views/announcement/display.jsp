@@ -40,3 +40,5 @@
 </security:authorize>
 </form:form>
 
+<a href="javascript:window.history.back();">&laquo; <spring:message code="terms.back"/></a>
+

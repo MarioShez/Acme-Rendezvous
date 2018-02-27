@@ -58,9 +58,10 @@
 			<spring:message code="user.answer.link"/>
 		</a>
 	</display:column>
-
+	
 </display:table>
 
+<a href="javascript:window.history.back();">&laquo; <spring:message code="terms.back"/></a>
 
 
 
