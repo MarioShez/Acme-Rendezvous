@@ -63,7 +63,7 @@
 		
 		<jstl:choose>
 			<jstl:when test="${areRSPVd == false and empty rendezvous.questions}">
-				<button type="button" onclick="javascript: relativeRedir('rendezvous/user/list-rsvp.do')" ><spring:message code="rendezvous.makeRSPV" /></button>
+				<button type="button" onclick="javascript: relativeRedir('rendezvous/user/rspv.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.makeRSPV" /></button>
 				<br/>
 			</jstl:when>
 			<jstl:when test="${areRSPVd == false and not empty rendezvous.questions}">
@@ -71,7 +71,7 @@
 				<br/>
 			</jstl:when>
 			<jstl:when test="${areRSPVd}">
-				<button type="button" onclick="javascript: relativeRedir('answer/user/delete.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.cancelRSPV" /></button>
+				<button type="button" onclick="javascript: relativeRedir('rendezvous/user/unrspv.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.cancelRSPV" /></button>
 				<br/>
 			</jstl:when>
 			<jstl:when test="${areRSPVd == null}">

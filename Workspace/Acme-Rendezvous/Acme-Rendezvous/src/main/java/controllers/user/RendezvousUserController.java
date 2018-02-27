@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.RendezvousService;
+import services.UserService;
 import controllers.AbstractController;
 import domain.Rendezvous;
+import domain.User;
 
 @Controller
 @RequestMapping("/rendezvous/user")
@@ -24,6 +27,9 @@ public class RendezvousUserController extends AbstractController {
 
 	@Autowired
 	private RendezvousService rendezvousService;
+	
+	@Autowired
+	private UserService userService;
 
 
 	// Constructors --------------------------------------------------
@@ -168,6 +174,40 @@ public class RendezvousUserController extends AbstractController {
 		}
 
 		return result;
+	}
+	
+	@RequestMapping(value = "/rspv", method = RequestMethod.GET)
+	public ModelAndView rspv(@RequestParam int rendezvousId){
+		
+		Rendezvous rendezvous = rendezvousService.findOne(rendezvousId);
+		User principal = userService.findByPrincipal();
+		
+		Assert.notNull(principal);
+		Assert.isTrue(!principal.getRsvpdRendezvouses().contains(rendezvous));
+		
+		principal.getRsvpdRendezvouses().add(rendezvous);
+		rendezvous.getAttendants().add(principal);
+		
+		userService.save(principal);
+		
+		return new ModelAndView("redirect:list-rspv.do");
+	}
+	
+	@RequestMapping(value = "/unrspv", method = RequestMethod.GET)
+	public ModelAndView unrspv(@RequestParam int rendezvousId){
+		
+		Rendezvous rendezvous = rendezvousService.findOne(rendezvousId);
+		User principal = userService.findByPrincipal();
+		
+		Assert.notNull(principal);
+		Assert.isTrue(principal.getRsvpdRendezvouses().contains(rendezvous));
+		
+		principal.getRsvpdRendezvouses().remove(rendezvous);
+		rendezvous.getAttendants().remove(principal);
+		
+		userService.save(principal);
+		
+		return new ModelAndView("redirect:list-rspv.do");
 	}
 
 	// Ancillary methods ------------------------------------------------------
