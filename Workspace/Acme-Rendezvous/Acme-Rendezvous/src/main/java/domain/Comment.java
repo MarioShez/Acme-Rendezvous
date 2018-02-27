@@ -51,6 +51,7 @@ public class Comment extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getText() {
 		return text;
 	}
@@ -60,6 +61,7 @@ public class Comment extends DomainEntity {
 	}
 
 	@URL
+	@SafeHtml
 	public String getPicture() {
 		return picture;
 	}

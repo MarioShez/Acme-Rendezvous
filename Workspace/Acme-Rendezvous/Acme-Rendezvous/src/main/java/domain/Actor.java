@@ -49,6 +49,7 @@ public abstract class Actor extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return this.name;
 	}
@@ -57,6 +58,7 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getSurname() {
 		return this.surname;
 	}
@@ -67,6 +69,7 @@ public abstract class Actor extends DomainEntity {
 
 	@Email
 	@NotBlank
+	@SafeHtml
 	public String getEmail() {
 		return this.email;
 	}
@@ -75,6 +78,7 @@ public abstract class Actor extends DomainEntity {
 		this.email = email;
 	}
 	
+	@SafeHtml
 	public String getPhone() {
 		return this.phone;
 	}
@@ -83,6 +87,7 @@ public abstract class Actor extends DomainEntity {
 		this.phone = phone;
 	}
 
+	@SafeHtml
 	public String getAddress() {
 		return this.address;
 	}
