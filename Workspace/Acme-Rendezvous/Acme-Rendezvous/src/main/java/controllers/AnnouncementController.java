@@ -65,63 +65,45 @@ public class AnnouncementController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping(value="/display", method=RequestMethod.POST, params ="delete")
-	public ModelAndView create(@Valid final Announcement announcement, 
-			final BindingResult binding){
-		ModelAndView res;
-		
-		Assert.notNull(announcement);
-		try{
-			this.announcementService.delete(announcement);
-			res = new ModelAndView("redirect:admin/list.do");
-		}catch (final Throwable oops) {
-			res = this.createEditModelAndView(announcement, "announcement.commit.error");
-		}
-		
-		return res;
-	}
+//	@RequestMapping(value="/display", method=RequestMethod.POST, params ="delete")
+//	public ModelAndView create(@Valid final Announcement announcement, 
+//			final BindingResult binding){
+//		ModelAndView res;
+//		
+//		Assert.notNull(announcement);
+//		try{
+//			this.announcementService.delete(announcement);
+//			res = new ModelAndView("redirect:admin/list.do");
+//		}catch (final Throwable oops) {
+//			res = this.createEditModelAndView(announcement, "announcement.commit.error");
+//		}
+//		
+//		return res;
+//	}
 
 	
-	// Create --------------
-	@RequestMapping(value="/user/create", method=RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int rendezvousId){
-		ModelAndView res;
-		Announcement announcement;
-		Rendezvous rendezvous;
-		
-		
-		rendezvous = this.rendezvousService.findOne(rendezvousId);
-		
-		announcement = this.announcementService.create(rendezvous);
-				
-		announcement.setRendezvous(rendezvous);
-		
-		res = this.createEditModelAndView(announcement);
-		
-		return res;
-	}
-	
-	@RequestMapping(value="/user/create",method=RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Announcement announcement,
-			final BindingResult binding){
-		ModelAndView res;
-		
-		if(binding.hasErrors()){
-			res = this.createEditModelAndView(announcement, "announcement.params.error");
-		}else
-			try{
-				this.announcementService.save(announcement);
-				res = new ModelAndView("redirect:../announcement/list.do");
-			}catch (final Throwable oops) {
-				res = this.createEditModelAndView(announcement, "announcement.commit.error");
-			}
-		
-		return res;
-	}
+//	// Create --------------
+//	@RequestMapping(value="/user/create", method=RequestMethod.GET)
+//	public ModelAndView create(@RequestParam final int rendezvousId){
+//		ModelAndView res;
+//		Announcement announcement;
+//		Rendezvous rendezvous;
+//		
+//		
+//		rendezvous = this.rendezvousService.findOne(rendezvousId);
+//		
+//		announcement = this.announcementService.create(rendezvous);
+//				
+//		announcement.setRendezvous(rendezvous);
+//		
+//		res = this.createEditModelAndView(announcement);
+//		
+//		return res;
+//	}
 
 	
 	
-	private ModelAndView createEditModelAndView(final Announcement announcement) {
+	protected ModelAndView createEditModelAndView(final Announcement announcement) {
 		ModelAndView res;
 		
 		res = this.createEditModelAndView(announcement,null);
@@ -129,7 +111,7 @@ public class AnnouncementController extends AbstractController {
 		return res;
 	}
 
-	private ModelAndView createEditModelAndView(final Announcement announcement,
+	protected ModelAndView createEditModelAndView(final Announcement announcement,
 			final String message) {
 		ModelAndView res;
 		res = new ModelAndView("announcement/edit");
