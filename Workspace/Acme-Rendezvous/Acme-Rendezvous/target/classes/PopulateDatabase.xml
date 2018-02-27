@@ -257,7 +257,7 @@
 			<ref bean="question3" />
 			</list>
 		</property>
-		<property name="organiser" ref="user3" />
+		<property name="organiser" ref="user2" />
 		<property name="attendants">
 			<list>
 				<ref bean="user2" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles.xml
+ * tiles_es.xml
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -13,26 +13,26 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+      
 <tiles-definitions>
 
-	<definition name="question/list" extends="master.page">	
-		<put-attribute name="title" value="List questions" />
-		<put-attribute name="body" value="/views/question/list.jsp" />
+	<definition name="rendezvous/list" extends="master.page">	
+		<put-attribute name="title" value="Listar encuentros" />
+		<put-attribute name="body" value="/views/rendezvous/list.jsp" />
 	</definition>
 	
-<!-- 	<definition name="question/edit" extends="master.page">	
-		<put-attribute name="title" value="Edit a question" />
+	<definition name="rendezvous/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar un encuentro" />
 		<put-attribute name="body" value="/views/rendezvous/edit.jsp" />
 	</definition>
 	
-	<definition name="question/create" extends="master.page">	
-		<put-attribute name="title" value="Create a question" />
+	<definition name="rendezvous/create" extends="master.page">	
+		<put-attribute name="title" value="Crear un encuentro" />
 		<put-attribute name="body" value="/views/rendezvous/edit.jsp" />
 	</definition>
 	
-	<definition name="question/display" extends="master.page">	
-		<put-attribute name="title" value="Display rendezvous" />
+	<definition name="rendezvous/display" extends="master.page">	
+		<put-attribute name="title" value="Mostrar encuentro" />
 		<put-attribute name="body" value="/views/rendezvous/display.jsp" />
-	</definition> -->
+	</definition>
 </tiles-definitions>

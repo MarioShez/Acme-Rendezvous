@@ -9,7 +9,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action ="announcement/edit.do" modelAttribute="announcement">
+<form:form action ="${requestURI }" modelAttribute="announcement">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -25,7 +25,7 @@
 		value="<spring:message code="announcement.cancel" />"
 		onclick="javascript: relativeRedir('/');" />
 	
-	<security:authorize access="hasRole('USER') or hasRole('ADMIN')">
+	<security:authorize access="hasRole('USER')">
 		<input type="submit" name="save"
 			value="<spring:message code="announcement.save" />" />&nbsp; 
 

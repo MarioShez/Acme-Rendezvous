@@ -43,20 +43,24 @@ public class QuestionController extends AbstractController {
 
 	// Listing -------------------------------------------------------
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(required = true) final Integer questionId) {
+	@RequestMapping(value = "/user/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(required = true) final Integer rendezvousId) {
 
 		final Collection<Question> questions = new ArrayList<Question>();
 
 		final User principal = this.userService.findByPrincipal();
-		final Rendezvous r = this.rendezvousService.findOne(questionId);
+		final Rendezvous r = this.rendezvousService.findOne(rendezvousId);
+		System.out.println(rendezvousId);
+		System.out.println(r);
 		Assert.notNull(r);
+		questions.addAll(this.questionService.findByRendezvousId(rendezvousId));
+
 		final Boolean isPrincipal = principal == r.getOrganiser();
 
-		final ModelAndView result = new ModelAndView("rendezvous/list");
+		final ModelAndView result = new ModelAndView("question/list");
 		result.addObject("questions", questions);
 		result.addObject("isPrincipal", isPrincipal);
-		result.addObject("requestURI", "question/list.do");
+		result.addObject("requestURI", "question/user/list.do");
 
 		return result;
 	}
