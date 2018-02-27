@@ -49,6 +49,9 @@
 		<bean class="converters.GpsCoordinateToStringConverter" />
 		<bean class="converters.StringToGpsCoordinateConverter" />
 		
+		<bean class="converters.RendezvousToStringConverter" />
+		<bean class="converters.StringToRendezvousConverter" />
+		
 		
 	</util:list>
 	
