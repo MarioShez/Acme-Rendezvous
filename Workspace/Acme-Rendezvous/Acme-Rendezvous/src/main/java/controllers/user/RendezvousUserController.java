@@ -104,7 +104,7 @@ public class RendezvousUserController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView edit(@Valid Rendezvous rendezvous, BindingResult binding) {
+	public ModelAndView save(@Valid Rendezvous rendezvous, BindingResult binding) {
 
 		ModelAndView result;
 		if (binding.hasErrors())

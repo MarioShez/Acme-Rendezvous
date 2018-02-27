@@ -184,7 +184,8 @@ public class Rendezvous extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToOne(optional = true)
+	@NotNull
+	@ManyToMany
 	public Collection<Rendezvous> getLinkedRendezvouses() {
 		return this.linkedRendezvouses;
 	}
