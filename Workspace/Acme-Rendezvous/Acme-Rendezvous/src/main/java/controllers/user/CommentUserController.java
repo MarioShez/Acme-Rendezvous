@@ -71,20 +71,20 @@ public class CommentUserController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/editReplies", method = RequestMethod.GET)
-	public ModelAndView createReplies(@RequestParam int commentId) {
-		ModelAndView result;
-		Comment c;
-		Comment commentParent;
-		
-		commentParent = this.commentService.findOne(commentId);
-		
-		c = this.commentService.create();
-		c.setCommentParent(commentParent);
-		
-		result = this.createEditModelAndView(c);
-		return result;
-	}
+//	@RequestMapping(value = "/editReplies", method = RequestMethod.GET)
+//	public ModelAndView createReplies(@RequestParam int commentId) {
+//		ModelAndView result;
+//		Comment c;
+//		Comment commentParent;
+//		
+//		commentParent = this.commentService.findOne(commentId);
+//		
+//		c = this.commentService.create();
+//		c.setCommentParent(commentParent);
+//		
+//		result = this.createEditModelAndView(c);
+//		return result;
+//	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Comment comment, final BindingResult binding) {
