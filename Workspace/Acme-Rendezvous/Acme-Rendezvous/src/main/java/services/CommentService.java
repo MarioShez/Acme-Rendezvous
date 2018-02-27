@@ -48,22 +48,22 @@ public class CommentService {
 		userService.checkAuthority();
 		Comment res = new Comment();
 		Collection<Comment> replies = new ArrayList<Comment>();
+		Rendezvous rendezvous = new Rendezvous();
 		
 		res.setReplies(replies);
 		
-//		User u = new User();
-//		u = userService.findByPrincipal();
-//		Assert.notNull(u);
-//
-//
-//		Date moment = new Date(System.currentTimeMillis()-1);
-//		Comment parent= new Comment();
-//		Collection<Comment> replies = new ArrayList<Comment>();
-//
-//		//res.setMoment(moment);
-//		res.setUser(u);
-//		res.setCommentParent(parent);
-//		res.setReplies(replies);
+		User u = new User();
+		u = userService.findByPrincipal();
+		Assert.notNull(u);
+
+		Date moment = new Date(System.currentTimeMillis()-1);
+		Comment parent= new Comment();
+
+		res.setMoment(moment);
+		res.setUser(u);
+		res.setCommentParent(parent);
+		res.setReplies(replies);
+		res.setRendezvous(rendezvous);
 		return res;
 	}
 
@@ -88,16 +88,19 @@ public class CommentService {
 
 		Comment res;
 		Assert.notNull(comment);
-		if(comment.getId() == 0){
-			Date moment;
-			moment = new Date(System.currentTimeMillis()-1000);
-			comment.setMoment(moment);
-		}
-		res = this.commentRepository.saveAndFlush(comment);
-		if(comment.getCommentParent() != null){
-			this.actualizarParent(comment.getCommentParent(), res);
-		}
-		this.actualizarParent(comment.getCommentParent(), res);
+		
+		res = this.commentRepository.save(comment);
+		
+//		if(comment.getId() == 0){
+//			Date moment;
+//			moment = new Date(System.currentTimeMillis()-1000);
+//			comment.setMoment(moment);
+//		}
+		
+//		if(comment.getCommentParent() != null){
+//			this.actualizarParent(comment.getCommentParent(), res);
+//		}
+//		this.actualizarParent(comment.getCommentParent(), res);
 		
 //		moment = new Date();
 //		userConnected = this.userService.findByPrincipal();

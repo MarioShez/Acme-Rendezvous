@@ -64,7 +64,7 @@ public class AdministratorController extends AbstractController {
 		result = new ModelAndView("administrator/display");
 
 		Object avgSqtrUser[];
-//		Double ratioUserRendezvous;
+		Double ratioUserRendezvous;
 		Object avgSqtrUserPerRendezvous[];
 		Object avgSqtrUser2[];
 		Collection<Object> topRendezvous;
@@ -76,7 +76,7 @@ public class AdministratorController extends AbstractController {
 		Object avgSqtRrepliesPerComment[];
 
 		avgSqtrUser = this.administratorService.avgSqtrUser();
-//		ratioUserRendezvous = this.administratorService.ratioUserRendezvous();
+		ratioUserRendezvous = this.administratorService.ratioUserRendezvous();
 		avgSqtrUserPerRendezvous = this.administratorService.avgSqtrUserPerRendezvous();
 		avgSqtrUser2 = this.administratorService.avgSqtrUser2();
 		topRendezvous = this.administratorService.topRendezvous();
@@ -88,7 +88,7 @@ public class AdministratorController extends AbstractController {
 		avgSqtRrepliesPerComment = this.administratorService.avgSqtRrepliesPerComment();
 
 		result.addObject("rendezvousPerUser", avgSqtrUser);
-//		result.addObject("ratioUserRendezvous", ratioUserRendezvous);
+		result.addObject("ratioUserRendezvous", ratioUserRendezvous);
 		result.addObject("userPerRendezvous", avgSqtrUserPerRendezvous);
 		result.addObject("rsvpdPerUser", avgSqtrUser2);
 		result.addObject("topRendezvous", topRendezvous);

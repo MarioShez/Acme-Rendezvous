@@ -1,6 +1,7 @@
 
 package converters;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -23,12 +24,15 @@ public class StringToAnswerConverter implements Converter<String, Answer> {
 		int id;
 
 		try {
-			id = Integer.valueOf(text);
-			result = this.answerRepository.findOne(id);
+			if (StringUtils.isEmpty(text))
+				result = null;
+			else {
+				id = Integer.valueOf(text);
+				result = this.answerRepository.findOne(id);
+			}
 		} catch (final Throwable oops) {
 			throw new IllegalArgumentException(oops);
 		}
-
 		return result;
 	}
 

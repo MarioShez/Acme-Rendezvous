@@ -48,13 +48,12 @@ public class AnnouncementService {
 	
 	// Simple CRUD methods 
 	
-	public Announcement create(){
+	public Announcement create(final Rendezvous rendezvous){
 		Announcement res = new Announcement();
 		
 		Date moment = new Date(System.currentTimeMillis()-1);
-//		Rendezvous rendezvous = new Rendezvous();
-//		
-//		res.setRendezvous(rendezvous);
+		
+		res.setRendezvous(rendezvous);
 		res.setMoment(moment);
 		
 		return res;
@@ -88,13 +87,6 @@ public class AnnouncementService {
 		User user = new User();
 		Collection<Rendezvous> rendezvousByPrincipal = new ArrayList<Rendezvous>();
 		Date moment;
-		
-		//editar sus propios announcements
-		if(announcement.getId() != 0){
-			Collection<Announcement> announcementUser;
-			announcementUser = this.announcementRepository.announcementsByUser(user.getId());
-			Assert.isTrue(announcementUser.contains(announcement));
-		}
 		
 		//crear announcements para los rendezvous que ha organizado
 		rendezvousByPrincipal = user.getOrganisedRendezvouses();
