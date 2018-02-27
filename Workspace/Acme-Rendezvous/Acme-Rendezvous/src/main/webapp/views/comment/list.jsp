@@ -23,8 +23,15 @@
 <display:table pagesize="6" class="displaycomment" keepStatus="true"
 	name="comment" requestURI="${requestURI }" id="row">
 	
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<a href="comment/user/edit.do?commentId=${row.id}"><spring:message code="comment.replyComment"/></a>
+		</display:column>
+	</security:authorize>
+	
 	<spring:message code="comment.moment" var="momentHeader" />
-	<display:column property="moment" title="${momentHeader}" sortable="true" />
+	<spring:message var="formatDate" code="comment.format.date"/>
+	<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
 
 	<spring:message code="comment.text" var="textHeader" />
 	<display:column property="text" title="${textHeader}" sortable="false" />
@@ -37,14 +44,23 @@
 	
 	<spring:message code="comment.user" var="userHeader" />
 	<display:column property="user.name" title="${userHeader}"	sortable="true" />
-	<%--
-	<spring:message code="comment.replies" var="replies"/>
-	<display:column title="${categoryChildren}">
-		<a href="comment/list.do?commentId=${row.id}">
-			<spring:message code="comment.replies.link"/>
+
+	<spring:message code="comment.replies" var="repliesHeader"/>
+	<display:column title="${repliesHeader}">
+		<a href="comment/user/listReplies.do?commentId=${row.id}">
+			<spring:message code="comment.replyComment"/>
+		</a>
+	</display:column>
+	
+	<%-- 
+	<spring:message code="comment.createReply" var="createReplyHeader"/>
+	<display:column title="${createReplyHeader}">
+		<a href="comment/user/editReplies.do?commentId=${row.id}">
+			<spring:message code="comment.replyComment"/>
 		</a>
 	</display:column>
 	--%>
+	
 </display:table>
 
 	<security:authorize access="hasRole('USER')">
