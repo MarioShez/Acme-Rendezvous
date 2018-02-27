@@ -60,7 +60,7 @@
 		<a href="rendezvous/user/list-link.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.assignRendezvouses"/></a>
 		<br/>
 		
-		<a href="announcement/user/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listAnnouncements"/></a>
+		<a href="announcement/user/create.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.addAnnouncement"/></a>
 		<br/>
 		
 		<a href="question/user/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listQuestions"/></a>
