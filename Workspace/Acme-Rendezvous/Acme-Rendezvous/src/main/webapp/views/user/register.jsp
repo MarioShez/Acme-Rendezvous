@@ -45,7 +45,7 @@
 	
 	<form:checkbox path="termsAndConditions"/>
 	<form:label path="termsAndConditions">
-		<spring:message code="user.acceptTerms" />
+		<a href="terms/list.do"><spring:message code="user.acceptTerms"/></a>
 	</form:label>
 	<br />
 	
