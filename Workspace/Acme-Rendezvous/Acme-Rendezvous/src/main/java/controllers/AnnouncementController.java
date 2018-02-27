@@ -65,21 +65,21 @@ public class AnnouncementController extends AbstractController {
 		return result;
 	}
 	
-//	@RequestMapping(value="/display", method=RequestMethod.POST, params ="delete")
-//	public ModelAndView create(@Valid final Announcement announcement, 
-//			final BindingResult binding){
-//		ModelAndView res;
-//		
-//		Assert.notNull(announcement);
-//		try{
-//			this.announcementService.delete(announcement);
-//			res = new ModelAndView("redirect:admin/list.do");
-//		}catch (final Throwable oops) {
-//			res = this.createEditModelAndView(announcement, "announcement.commit.error");
-//		}
-//		
-//		return res;
-//	}
+	@RequestMapping(value="/display", method=RequestMethod.POST, params ="delete")
+	public ModelAndView create(@Valid final Announcement announcement, 
+			final BindingResult binding){
+		ModelAndView res;
+		
+		Assert.notNull(announcement);
+		try{
+			this.announcementService.delete(announcement);
+			res = new ModelAndView("redirect:admin/list.do");
+		}catch (final Throwable oops) {
+			res = this.createEditModelAndView(announcement, "announcement.commit.error");
+		}
+		
+		return res;
+	}
 
 	
 //	// Create --------------
