@@ -1,15 +1,20 @@
 package converters;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import repositories.RendezvousRepository;
 import domain.Rendezvous;
 
-public class StringToRendezvousConverter implements Converter<String, Rendezvous>{
-	
+@Component
+@Transactional
+public class StringToRendezvousConverter implements Converter<String, Rendezvous> {
+
 	@Autowired
-	RendezvousRepository rendezvousRepository;
+	RendezvousRepository	rendezvousRepository;
 
 	@Override
 	public Rendezvous convert(final String text) {
@@ -17,12 +22,16 @@ public class StringToRendezvousConverter implements Converter<String, Rendezvous
 		int id;
 
 		try {
-			id = Integer.valueOf(text);
-			result = this.rendezvousRepository.findOne(id);
+			if (StringUtils.isEmpty(text))
+				result = null;
+			else {
+				id = Integer.valueOf(text);
+				result = this.rendezvousRepository.findOne(id);
+			}
 		} catch (final Throwable oops) {
 			throw new IllegalArgumentException(oops);
 		}
-
 		return result;
 	}
+
 }

@@ -39,7 +39,7 @@
 <h1><spring:message code="terms.legislacion"></spring:message></h1>
 <p><spring:message code="terms.legislacion.contenido"></spring:message></p>
 
-
+<a href="javascript:window.history.back();">&laquo; <spring:message code="terms.back"/></a>
 
 
 
