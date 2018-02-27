@@ -41,6 +41,25 @@ public class CommentUserController extends AbstractController {
 
 	// Listing --------------------------------------------------------------
 
+	@RequestMapping(value = "/listReplies", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int commentId) {
+		ModelAndView result;
+		
+		Comment comment = new Comment();
+		comment = this.commentService.findOne(commentId);
+		
+		Collection<Comment> comments;
+		comments = comment.getReplies();
+
+		result = new ModelAndView("comment/list");
+
+		result.addObject("comment", comments);
+		result.addObject("requestURI", "comment/list.do");
+
+		return result;
+	}
+	
+	
 	// Creation ---------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView create() {
@@ -48,6 +67,21 @@ public class CommentUserController extends AbstractController {
 		Comment c;
 
 		c = this.commentService.create();
+		result = this.createEditModelAndView(c);
+		return result;
+	}
+	
+	@RequestMapping(value = "/editReplies", method = RequestMethod.GET)
+	public ModelAndView createReplies(@RequestParam int commentId) {
+		ModelAndView result;
+		Comment c;
+		Comment commentParent;
+		
+		commentParent = this.commentService.findOne(commentId);
+		
+		c = this.commentService.create();
+		c.setCommentParent(commentParent);
+		
 		result = this.createEditModelAndView(c);
 		return result;
 	}
@@ -70,6 +104,8 @@ public class CommentUserController extends AbstractController {
 			}
 		return result;
 	}
+	
+	
 
 	// Ancillary methods --------------------------------------------------
 

@@ -43,7 +43,8 @@
 	<display:column property="address" title="${addressHeader}" sortable="true" />
 	
 	<spring:message code="user.birth" var="birthHeader" />
-	<display:column property="birth" title="${birthHeader}" sortable="true" />
+	<spring:message var="formatDate" code="user.format.date"/>
+	<display:column property="birth" title="${birthHeader}" format="${formatDate}" sortable="true" />
 	
 	<spring:message code="user.rendezvouses" var="rsvpdRendezvous"/>
 	<display:column title="${rsvpdRendezvous}">

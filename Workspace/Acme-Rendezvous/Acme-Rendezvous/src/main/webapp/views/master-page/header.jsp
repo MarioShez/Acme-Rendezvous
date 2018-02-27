@@ -31,7 +31,7 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('USER')">
-			<li><a href="announcements/user/list.do"><spring:message code="master.page.administrator.announcement" /></a></li>
+			<li><a href="announcement/user/list.do"><spring:message code="master.page.administrator.announcement" /></a></li>
 			
 		</security:authorize>
 		

@@ -18,8 +18,9 @@
 
 
 	<acme:textbox code="announcement.title" path="title"/>
-	
-	<acme:textbox code="announcement.description" path="description"/>
+	<br/>
+	<acme:textarea code="announcement.description" path="description"/>
+	<br/>
 	
 	<input type="button" name="cancel"
 		value="<spring:message code="announcement.cancel" />"

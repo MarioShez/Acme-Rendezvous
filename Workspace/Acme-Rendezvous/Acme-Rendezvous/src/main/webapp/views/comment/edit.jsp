@@ -37,17 +37,23 @@
 	<acme:select items="${commentParent}" itemLabel="picture" code="comment.commentParent"  path="commentParent"/>
 	--%>
 	<br/>
-	
-	<form:label path="rendezvous">
-		<spring:message code="comment.rendezvous" />:
-	</form:label>
-	<form:select path="rendezvous">
-		<form:option item="null" value="0" label="----"/>
-        <form:options items="${rendezvous}" itemLabel="name"/>
-	</form:select>
-	<form:errors cssClass="error" path="rendezvous" />
-	<br />
-	
+
+	<jstl:choose>
+		<jstl:when test="${requestURI == 'comment/user/edit.do'}">
+
+			<form:label path="rendezvous">
+				<spring:message code="comment.rendezvous" />:
+			</form:label>
+			<form:select path="rendezvous">
+				<form:option item="null" value="0" label="----" />
+				<form:options items="${rendezvous}" itemLabel="name" />
+			</form:select>
+			<form:errors cssClass="error" path="rendezvous" />
+			<br />
+
+		</jstl:when>
+	</jstl:choose>
+
 	<input type="button" name="cancel"
 			value="<spring:message code="comment.cancel" />"
 			onclick="javascript: relativeRedir('/');" />

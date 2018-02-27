@@ -46,14 +46,12 @@ public class QuestionService {
 
 	// Simple CRUD methods
 
-	public Question create() {
+	public Question create(final Rendezvous r) {
 		final Question res = new Question();
-
-		final Rendezvous rendezvous = new Rendezvous();
 
 		final Question a = new Question();
 
-		a.setRendezvous(rendezvous);
+		a.setRendezvous(r);
 
 		return res;
 	}

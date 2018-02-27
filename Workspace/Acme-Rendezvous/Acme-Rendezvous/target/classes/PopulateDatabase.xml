@@ -286,7 +286,7 @@
 		</property>
 		<property name="user" ref="user1" />
 		<property name="rendezvous" ref="rendezvous1" />
-		<property name="commentParent" ref="comment1" />
+<!-- 		<property name="commentParent" ref="comment1" /> -->
 	</bean>
 
 	<!-- Comment 2 -->
@@ -301,7 +301,7 @@
 		</property>
 		<property name="user" ref="user2" />
 		<property name="rendezvous" ref="rendezvous1" />
-		<property name="commentParent" ref="comment1" />
+<!-- 		<property name="commentParent" ref="comment1" /> -->
 	</bean>
 
 	<!-- Comment 3 -->
@@ -315,7 +315,7 @@
 		</property>
 		<property name="user" ref="user2" />
 		<property name="rendezvous" ref="rendezvous2" />
-		<property name="commentParent" ref="comment1" />
+<!-- 		<property name="commentParent" ref="comment1" /> -->
 	</bean>
 
 	<!-- Question -->

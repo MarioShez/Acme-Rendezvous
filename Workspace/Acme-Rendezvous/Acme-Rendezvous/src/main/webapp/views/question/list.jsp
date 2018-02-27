@@ -1,4 +1,4 @@
-<%-- list.jsp de Application --%>
+<%-- list.jsp de Question --%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
@@ -10,6 +10,7 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+
 
 <display:table name="questions" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 		
