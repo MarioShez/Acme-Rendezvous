@@ -33,7 +33,7 @@
 	<spring:message code="user.surname" var="surnameHeader" />
 	<display:column property="surname" title="${surnameHeader}" sortable="true" />
 
-	<spring:message code="user.email" var="emaileader" />
+	<spring:message code="user.email" var="emailHeader" />
 	<display:column property="email" title="${emailHeader}" sortable="true" />
 	
 	<spring:message code="user.phone" var="phoneHeader" />
@@ -53,7 +53,7 @@
 	</display:column>
 	
 	<spring:message code="user.answer" var="answerHeader"/>
-	<display:column title="${answer}">
+	<display:column title="${answerHeader}">
 		<a href="answer/user/list.do?answerId=${row.id }">
 			<spring:message code="user.answer.link"/>
 		</a>
