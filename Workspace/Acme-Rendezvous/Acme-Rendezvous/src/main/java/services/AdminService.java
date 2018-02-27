@@ -86,52 +86,6 @@ public class AdminService {
 
 	// Ancillary methods
 
-	//	public Admin create() {
-//		Admin res = new Admin();
-//
-//		UserAccount userAccount = new UserAccount();
-//		Authority authority = new Authority();
-//
-//		authority.setAuthority(Authority.ADMIN);
-//		userAccount.addAuthority(authority);
-//		res.setUserAccount(userAccount);
-//
-//		return res;
-//	}
-//
-//	public Collection<Admin> findAll() {
-//		Collection<Admin> res;
-//		res = this.adminRepository.findAll();
-//		Assert.notNull(res);
-//		return res;
-//	}
-//
-//	public Admin findOne(int administratorId) {
-//		Assert.isTrue(administratorId != 0);
-//		Admin res;
-//		res = this.adminRepository.findOne(administratorId);
-//		Assert.notNull(res);
-//		return res;
-//	}
-//
-//	public Admin save(Admin administrator) {
-//		Admin res;
-//
-//		if (administrator.getId() == 0) {
-//			String pass = administrator.getUserAccount().getPassword();
-//
-//			final Md5PasswordEncoder code = new Md5PasswordEncoder();
-//
-//			pass = code.encodePassword(pass, null);
-//
-//			administrator.getUserAccount().setPassword(pass);
-//		}
-//
-//		res = this.adminRepository.save(administrator);
-//		return res;
-//	}
-//
-//	// Ancillary methods
 
 	public Admin findByPrincipal() {
 		Admin res;
@@ -181,13 +135,13 @@ public class AdminService {
 //		return res;
 //	}
 //
-//	// C-2
-//	public Double ratioUserRendezvous() {
-//		Double res;
-//		res = this.adminRepository.ratioUserRendezvous();
-//		return res;
-//	}
-//
+	// C-2
+	public Double ratioUserRendezvous() {
+		Double res;
+		res = this.adminRepository.ratioUserRendezvous();
+		return res;
+	}
+
 	// C-3
 	public Object[] avgSqtrUserPerRendezvous() {
 		Object[] res;

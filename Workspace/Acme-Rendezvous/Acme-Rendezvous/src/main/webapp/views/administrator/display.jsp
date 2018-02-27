@@ -41,7 +41,6 @@
 		</jstl:forEach>
 	</tr>
 </table>
-<%--
 <spring:message code="administrator.ratioUserRendezvousLabel" />
 <jstl:out value="${ratioUserRendezvousLabel}"></jstl:out>
 <table class="displaytag"  name="ratioUserRendezvous">
@@ -57,7 +56,6 @@
 		</td>
 	</tr>
 </table>
---%>
 
 <spring:message code="administrator.userPerRendezvousLabel"/>
 <jstl:out value="${userPerRendezvousLabel}"></jstl:out>

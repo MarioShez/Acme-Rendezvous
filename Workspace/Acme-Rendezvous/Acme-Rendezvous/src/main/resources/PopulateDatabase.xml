@@ -47,6 +47,18 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="user3" />
+		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 
 	<!-- Other domain beans come here -->
@@ -76,7 +88,8 @@
 		<property name="answer">
 			<list>
 				<ref bean="answer1" />
-				<ref bean="answer1" />
+				<ref bean="answer2" />
+				<ref bean="answer3" />
 			</list>
 		</property>
 		<property name="organisedRendezvouses">
@@ -104,12 +117,12 @@
 			<list>
 				<ref bean="answer4" />
 				<ref bean="answer5" />
-				<ref bean="answer6" />
 			</list>
 		</property>
 		<property name="organisedRendezvouses">
 			<list>
 				<ref bean="rendezvous2" />
+				<ref bean="rendezvous3" />
 			</list>
 		</property>
 		<property name="rsvpdRendezvouses">
@@ -119,6 +132,30 @@
 		</property>
 	</bean>
 
+	<!-- User 3 -->
+	<bean id="user3" class="domain.User">
+		<property name="name" value="Juan Carlos" />
+		<property name="surname" value="Cansino" />
+		<property name="email" value="jc@gmail.com" />
+		<property name="phone" value="698253674" />
+		<property name="address" value="C/LAraña nº12" />
+		<property name="birth" value="06/05/1998" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="answer">
+			<list>
+				<ref bean="answer6" />
+				
+			</list>
+		</property>
+		<property name="organisedRendezvouses">
+			<list>
+			</list>
+		</property>
+		<property name="rsvpdRendezvouses">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 
 	<!-- Rendezvous -->
@@ -135,8 +172,6 @@
 		<property name="announcements">
 			<list>
 				<ref bean="announcement1" />
-				<ref bean="announcement2" />
-				<ref bean="announcement3" />
 			</list>
 		</property>
 		<property name="comments">
@@ -175,6 +210,7 @@
 		<property name="deleted" value="false" />
 		<property name="announcements">
 			<list>
+			<ref bean="announcement2" />
 			</list>
 		</property>
 		<property name="comments">
@@ -187,6 +223,42 @@
 			</list>
 		</property>
 		<property name="organiser" ref="user2" />
+		<property name="attendants">
+			<list>
+				<ref bean="user2" />
+			</list>
+		</property>
+		<property name="linkedRendezvouses">
+			<list>
+				<null />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Rendezvous 3 -->
+	<bean id="rendezvous3" class="domain.Rendezvous">
+		<property name="name" value="Rendezvous 03" />
+		<property name="description" value="A description 3" />
+		<property name="picture" value="http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png" />
+		<property name="moment" value="21/03/2025 19:09" />
+		<property name="adult" value="false" />
+		<property name="finalVersion" value="true" />
+		<property name="deleted" value="false" />
+		<property name="announcements">
+			<list>
+			<ref bean="announcement3" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="questions">
+			<list>
+			<ref bean="question3" />
+			</list>
+		</property>
+		<property name="organiser" ref="user3" />
 		<property name="attendants">
 			<list>
 				<ref bean="user2" />
@@ -249,7 +321,9 @@
 		<property name="content" value="Question 01?" />
 		<property name="answers">
 			<list>
-
+			<ref bean="answer1" />
+			<ref bean="answer2" />
+			<ref bean="answer3" />
 			</list>
 		</property>
 		<property name="rendezvous" ref="rendezvous1" />
@@ -260,10 +334,22 @@
 		<property name="content" value="Question 02?" />
 		<property name="answers">
 			<list>
-
+			<ref bean="answer4" />
+			<ref bean="answer5" />
 			</list>
 		</property>
 		<property name="rendezvous" ref="rendezvous1" />
+	</bean>
+	
+	<!-- Question 3 -->
+	<bean id="question3" class="domain.Question">
+		<property name="content" value="Question 03?" />
+		<property name="answers">
+			<list>
+			<ref bean="answer6" />
+			</list>
+		</property>
+		<property name="rendezvous" ref="rendezvous3" />
 	</bean>
 
 
@@ -306,8 +392,8 @@
 	<!-- Answer 06 -->
 	<bean id="answer6" class="domain.Answer">
 		<property name="content" value="Answer 6" />
-		<property name="question" ref="question2" />
-		<property name="user" ref="user2" />
+		<property name="question" ref="question3" />
+		<property name="user" ref="user3" />
 	</bean>
 
 
@@ -326,7 +412,7 @@
 		<property name="moment" value="15/05/2013 20:09" />
 		<property name="title" value="Announcement 02" />
 		<property name="description" value="A description 2" />
-		<property name="rendezvous" ref="rendezvous1" />
+		<property name="rendezvous" ref="rendezvous2" />
 	</bean>
 
 	<!-- Announcement 3 -->
@@ -334,7 +420,7 @@
 		<property name="moment" value="17/06/2013 20:30" />
 		<property name="title" value="Announcement 03" />
 		<property name="description" value="A description 3" />
-		<property name="rendezvous" ref="rendezvous1" />
+		<property name="rendezvous" ref="rendezvous3" />
 	</bean>
 
 
