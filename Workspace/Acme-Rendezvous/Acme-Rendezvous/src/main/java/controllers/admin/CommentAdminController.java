@@ -1,5 +1,7 @@
 package controllers.admin;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,23 @@ public class CommentAdminController extends AbstractController{
 
 		public CommentAdminController() {
 			super();
+		}
+		
+		// Listing --------------------------------------------------------------
+
+		@RequestMapping(value = "/list", method = RequestMethod.GET)
+		public ModelAndView display() {
+			ModelAndView result;
+
+			Collection<Comment> comment;
+			comment = this.commentService.findAll();
+
+			result = new ModelAndView("comment/list");
+
+			result.addObject("comment", comment);
+			result.addObject("requestURI", "comment/list.do");
+
+			return result;
 		}
 		
 		// Deleting --------------------------------------------------------------
@@ -89,19 +108,12 @@ public class CommentAdminController extends AbstractController{
 		protected ModelAndView createEditModelAndView(final Comment comment,
 				final String message) {
 			ModelAndView result;
-			User u= new User();
-			Rendezvous r= new Rendezvous();
-			u= comment.getUser();
-			r= comment.getRendezvous();
-			Comment commentParent= new Comment();
-			
+			Comment commentParent;
+			commentParent = comment.getCommentParent();
 			
 			result = new ModelAndView("comment/edit");
-			//result.addObject("user", u);
-			//result.addObject("rendezvous", r);
 			result.addObject("comment", comment);
-			result.addObject("comment", commentParent);
-			
+			result.addObject("commentParent", commentParent);
 			result.addObject("message", message);
 
 			return result;

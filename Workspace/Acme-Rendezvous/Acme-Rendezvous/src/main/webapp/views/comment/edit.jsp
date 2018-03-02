@@ -18,13 +18,12 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="comment/user/edit.do" modelAttribute="comment">
-	<security:authorize access="hasRole('USER')">
+<form:form action="${requestURI }" modelAttribute="comment">
+	<security:authorize access="hasRole('USER') or hasRole('ADMIN')">
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="replies" />
-	<form:hidden path="commentParent" />
 	<form:hidden path="moment" />
 	
 
@@ -66,11 +65,11 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">
-	
-			<input type="submit" name="delete"
-				value="<spring:message code="comment.delete" />"
-				onclick="return confirm('<spring:message code="comment.confirm.delete" />')" />&nbsp;
-	
+	<jstl:if test="${comment.id != 0}">
+		<input type="submit" name="delete"
+			value="<spring:message code="comment.delete" />"
+			onclick="return confirm('<spring:message code="comment.confirm.delete" />')" />&nbsp;
+	</jstl:if>
 	</security:authorize>
 		
 </form:form>

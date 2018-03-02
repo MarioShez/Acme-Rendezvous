@@ -129,9 +129,9 @@ public class CommentService {
 		
 		this.adminService.checkAuthority();
 		
-		if (comment.getReplies().size() != 0)
-			for (final Comment c : comment.getReplies())
-				this.delete(c);
+//		if (comment.getReplies().size() != 0)
+//			for (final Comment c : comment.getReplies())
+//				this.delete(c);
 		
 		this.commentRepository.delete(comment);
 	}
