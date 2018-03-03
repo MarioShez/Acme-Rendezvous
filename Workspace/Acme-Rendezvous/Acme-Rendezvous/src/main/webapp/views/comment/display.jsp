@@ -19,7 +19,8 @@
 <img src="<jstl:out value="${comment.picture}"/>" width="450" height="174">
 <br/>
 
-<b><spring:message code="comment.moment"/>:&nbsp;</b><jstl:out value="${comment.moment}"/>
+<spring:message var="patternDate" code="comment.pattern.date"/>
+<b><spring:message code="comment.moment"/>:&nbsp;</b><fmt:formatDate value="${comment.moment}" pattern="${patternDate}"/>
 <br/>
 
 <b><spring:message code="comment.text"/>:&nbsp;</b><jstl:out value="${comment.text}"/>
