@@ -115,10 +115,10 @@ public class CommentService {
 		Assert.isTrue(this.commentRepository.findOne(comment.getId()) != null);
 		this.adminService.checkAuthority();
 		
-//		if (comment.getReplies().size() != 0){
-//			for (Comment c : comment.getReplies())
-//				this.delete(c);
-//		}
+		if (comment.getReplies().size() != 0){
+			for (Comment c : comment.getReplies())
+				this.delete(c);
+		}
 		this.commentRepository.delete(comment);
 	}
 	
