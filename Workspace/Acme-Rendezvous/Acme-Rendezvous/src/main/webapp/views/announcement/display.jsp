@@ -16,8 +16,8 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
-
-<b><spring:message code="announcement.moment"/>:&nbsp;</b><jstl:out value="${announcement.moment}"/>
+<spring:message var="patternDate" code="announcement.pattern.date"/>
+<b><spring:message code="announcement.moment"/>:&nbsp;</b><fmt:formatDate value="${announcement.moment}" pattern="${patternDate}"/>
 <br/>
 
 <b><spring:message code="announcement.title"/>:&nbsp;</b><jstl:out value="${announcement.title}"/>
