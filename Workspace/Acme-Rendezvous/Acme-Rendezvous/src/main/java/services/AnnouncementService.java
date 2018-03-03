@@ -84,11 +84,6 @@ public class AnnouncementService {
 	public Announcement save(Announcement announcement){
 		Assert.notNull(announcement);
 		this.checkPrincipal(announcement);
-		User user = new User();
-		user = this.userService.findByPrincipal();
-		Rendezvous rendezvous;
-		rendezvous = announcement.getRendezvous();
-		Assert.isTrue(user.getOrganisedRendezvouses().contains(rendezvous));
 		
 		Announcement res;
 		
