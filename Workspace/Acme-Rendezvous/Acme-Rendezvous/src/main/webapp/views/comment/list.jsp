@@ -29,16 +29,14 @@
 		</display:column>
 	</security:authorize>
 	
+	<display:column>
+			<a href="comment/display.do?commentId=${row.id}"><spring:message code="comment.display"/></a>
+	</display:column>
+	
 	<spring:message code="comment.moment" var="momentHeader" />
 	<spring:message var="formatDate" code="comment.format.date"/>
 	<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
 
-	<spring:message code="comment.text" var="textHeader" />
-	<display:column property="text" title="${textHeader}" sortable="false" />
-
-	<spring:message code="comment.picture" var="pictureHeader" />
-	<display:column property="picture" title="${pictureHeader}" sortable="false" />
-	
 	<spring:message code="comment.rendezvous" var="rendezvousHeader" />
 	<display:column property="rendezvous.name" title="${rendezvousHeader}"	sortable="true" />
 	
@@ -47,19 +45,20 @@
 
 	<spring:message code="comment.replies" var="repliesHeader"/>
 	<display:column title="${repliesHeader}">
-		<a href="comment/user/listReplies.do?commentId=${row.id}">
-			<spring:message code="comment.replyComment"/>
+		<a href="comment/listReplies.do?commentId=${row.id}">
+			<spring:message code="comment.listReplies"/>
 		</a>
 	</display:column>
 	
-	<%-- 
+	 <security:authorize access="hasRole('USER')">
 	<spring:message code="comment.createReply" var="createReplyHeader"/>
 	<display:column title="${createReplyHeader}">
 		<a href="comment/user/editReplies.do?commentId=${row.id}">
-			<spring:message code="comment.replyComment"/>
+			<spring:message code="comment.create"/>
 		</a>
 	</display:column>
-	--%>
+	</security:authorize>
+	
 	
 </display:table>
 

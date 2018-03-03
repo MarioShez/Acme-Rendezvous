@@ -1,5 +1,6 @@
 package controllers.admin;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -17,11 +18,9 @@ import services.AdminService;
 import services.CommentService;
 import services.RendezvousService;
 import services.UserService;
-
 import controllers.AbstractController;
 import domain.Comment;
 import domain.Rendezvous;
-import domain.User;
 
 @Controller
 @RequestMapping("/comment/admin")
@@ -108,12 +107,13 @@ public class CommentAdminController extends AbstractController{
 		protected ModelAndView createEditModelAndView(final Comment comment,
 				final String message) {
 			ModelAndView result;
-			Comment commentParent;
-			commentParent = comment.getCommentParent();
+			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
+			Rendezvous rendezvous = comment.getRendezvous(); 
+			rendezvouses.add(rendezvous);
 			
 			result = new ModelAndView("comment/edit");
 			result.addObject("comment", comment);
-			result.addObject("commentParent", commentParent);
+			result.addObject("rendezvous", rendezvouses);
 			result.addObject("message", message);
 
 			return result;

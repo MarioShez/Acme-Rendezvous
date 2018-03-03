@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AdminService;
 import services.CommentService;
 import services.RendezvousService;
-import services.UserService;
 import domain.Comment;
 import domain.Rendezvous;
 import domain.User;
@@ -30,14 +28,9 @@ public class CommentController extends AbstractController {
 	@Autowired
 	private CommentService commentService;
 
-	@Autowired
-	private AdminService adminService;
-
 	 @Autowired
 	 private RendezvousService rendezvousService;
 
-	 @Autowired
-	 private UserService userService;
 	 
 	// Constructors ---------------------------------------------------------
 
@@ -58,6 +51,39 @@ public class CommentController extends AbstractController {
 
 		result.addObject("comment", comment);
 		result.addObject("requestURI", "comment/list.do");
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/listReplies", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int commentId) {
+		ModelAndView result;
+		
+		Comment comment = new Comment();
+		comment = this.commentService.findOne(commentId);
+		
+		Collection<Comment> comments;
+		comments = comment.getReplies();
+
+		result = new ModelAndView("comment/list");
+
+		result.addObject("comment", comments);
+		result.addObject("requestURI", "comment/listReplies.do");
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView displayComment(@RequestParam int commentId) {
+		ModelAndView result;
+		
+		Comment comment;
+		comment = this.commentService.findOne(commentId);
+		
+		result = new ModelAndView("comment/display");
+
+		result.addObject("comment", comment);
+		result.addObject("requestURI", "comment/display.do");
 
 		return result;
 	}
@@ -157,16 +183,9 @@ public class CommentController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Comment comment,
 			final String message) {
 		ModelAndView result;
-		User u= new User();
-		Rendezvous r= new Rendezvous();
-		u= comment.getUser();
-		r= comment.getRendezvous();
 		Comment commentParent= new Comment();
 		
-		
 		result = new ModelAndView("comment/edit");
-		//result.addObject("user", u);
-		//result.addObject("rendezvous", r);
 		result.addObject("comment", comment);
 		result.addObject("comment", commentParent);
 		

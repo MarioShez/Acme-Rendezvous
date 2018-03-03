@@ -23,36 +23,35 @@
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="replies" />
 	<form:hidden path="moment" />
 	
 
 	<acme:textarea code="comment.text" path="text"/>
 	<br/>
-	<acme:textbox code="comment.picture" path="picture"/>
 	
+	<acme:textbox code="comment.picture" path="picture"/>
+	<br/>
+	
+	<acme:select items="${rendezvous }" itemLabel="name" code="comment.rendezvous" path="rendezvous"/>
+	<br/>
+	
+	<jstl:choose>
+		<jstl:when test="${requestURI == 'comment/user/editReplies.do'}">
+			<acme:select items="${commentParent }" itemLabel="text" code="comment.commentParent" path="commentParent"/>
+		</jstl:when>
+	</jstl:choose>
+	
+	<%-- 
 	<br/>
 	<acme:select items="${rendezvous }" itemLabel="name" code="comment.rendezvous" path="rendezvous"/>
-	 <%--
-	<acme:select items="${commentParent}" itemLabel="picture" code="comment.commentParent"  path="commentParent"/>
+	
+	
+	
+	<br/>
+	<acme:textbox code="comment.rendezvous" path="rendezvous.name"/>
 	--%>
 	<br/>
 </security:authorize>
-	<%-- <jstl:choose>
-		
-
-			<form:label path="rendezvous">
-				<spring:message code="comment.rendezvous" />:
-			</form:label>
-			<form:select path="rendezvous">
-				<form:option item="null" value="0" label="----" />
-				<form:options items="${rendezvous}" itemLabel="name" />
-			</form:select>
-			<form:errors cssClass="error" path="rendezvous" />
-			<br />
-
-		
-	</jstl:choose> --%>
 
 	<input type="button" name="cancel"
 			value="<spring:message code="comment.cancel" />"
@@ -60,8 +59,16 @@
 	
 	
 	<security:authorize access="hasRole('USER')">
-		<input type="submit" name="save"
-			value="<spring:message code="comment.save" />" />&nbsp; 
+	<jstl:choose>
+		<jstl:when test="${requestURI == 'comment/user/editReplies.do'}">
+			<input type="submit" name="saveReply"
+				value="<spring:message code="comment.save" />" />&nbsp; 
+		</jstl:when>
+		<jstl:when test="${requestURI == 'comment/user/edit.do'}">
+			<input type="submit" name="save"
+				value="<spring:message code="comment.save" />" />&nbsp; 
+		</jstl:when>
+	</jstl:choose>
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">

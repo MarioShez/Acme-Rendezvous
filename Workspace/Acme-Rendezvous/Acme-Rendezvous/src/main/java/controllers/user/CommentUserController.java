@@ -1,5 +1,6 @@
 package controllers.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class CommentUserController extends AbstractController {
 		result = new ModelAndView("comment/list");
 
 		result.addObject("comment", comments);
-		result.addObject("requestURI", "comment/list.do");
+		result.addObject("requestURI", "comment/user/list.do");
 
 		return result;
 	}
@@ -71,20 +72,21 @@ public class CommentUserController extends AbstractController {
 		return result;
 	}
 	
-//	@RequestMapping(value = "/editReplies", method = RequestMethod.GET)
-//	public ModelAndView createReplies(@RequestParam int commentId) {
-//		ModelAndView result;
-//		Comment c;
-//		Comment commentParent;
-//		
-//		commentParent = this.commentService.findOne(commentId);
-//		
-//		c = this.commentService.create();
-//		c.setCommentParent(commentParent);
-//		
-//		result = this.createEditModelAndView(c);
-//		return result;
-//	}
+	@RequestMapping(value = "/editReplies", method = RequestMethod.GET)
+	public ModelAndView createReplies(@RequestParam int commentId) {
+		ModelAndView result;
+		Comment c;
+		Comment commentParent;
+		
+		commentParent = this.commentService.findOne(commentId);
+		
+		c = this.commentService.create();
+		c.setCommentParent(commentParent);
+		c.setRendezvous(commentParent.getRendezvous());
+		
+		result = this.createEditModelAndViewReply(c);
+		return result;
+	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Comment comment, final BindingResult binding) {
@@ -100,6 +102,32 @@ public class CommentUserController extends AbstractController {
 				result = new ModelAndView("redirect:/comment/rendezvous/list.do?rendezvousId=" + rendezvousId);
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(comment,
+						"comment.commit.error");
+			}
+		return result;
+	}
+	
+	@RequestMapping(value = "/editReplies", method = RequestMethod.POST, params = "saveReply")
+	public ModelAndView saveReply(Comment comment, final BindingResult binding) {
+		ModelAndView result;
+		int rendezvousId = 0;
+		
+//		Collection<Comment> replies = new ArrayList<Comment>();
+//		Comment commentParent;
+//		
+//		commentParent = comment.getCommentParent();
+//		replies = commentParent.getReplies();
+//		replies.add(comment);
+//		
+		if (binding.hasErrors())
+			result = this.createEditModelAndViewReply(comment, "comment.params.error");
+		else
+			try {
+				this.commentService.save(comment);
+				rendezvousId = comment.getRendezvous().getId();
+				result = new ModelAndView("redirect:/comment/rendezvous/list.do?rendezvousId=" + rendezvousId);
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndViewReply(comment,
 						"comment.commit.error");
 			}
 		return result;
@@ -130,6 +158,40 @@ public class CommentUserController extends AbstractController {
 		result.addObject("rendezvous", rendezvous);
 		result.addObject("comment", comment);
 		result.addObject("message", message);
+		result.addObject("requestURI", "comment/user/edit.do");
+
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndViewReply(final Comment comment) {
+		ModelAndView result;
+
+		result = this.createEditModelAndViewReply(comment, null);
+
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndViewReply(final Comment comment,
+			final String message) {
+		ModelAndView result;
+//		Rendezvous rendezvous;
+//		Comment commentParent;
+//
+//		rendezvous = comment.getRendezvous();
+//		commentParent = comment.getCommentParent();
+		
+		
+		Collection<Rendezvous> rendezvous = new ArrayList<Rendezvous>();
+		rendezvous.add(comment.getRendezvous());
+		Collection<Comment> comments = new ArrayList<Comment>();
+		comments.add(comment.getCommentParent());
+		
+		result = new ModelAndView("comment/edit");
+		result.addObject("comment", comment);
+		result.addObject("rendezvous", rendezvous);
+		result.addObject("commentParent", comments);
+		result.addObject("message", message);
+		result.addObject("requestURI", "comment/user/editReplies.do");
 
 		return result;
 	}

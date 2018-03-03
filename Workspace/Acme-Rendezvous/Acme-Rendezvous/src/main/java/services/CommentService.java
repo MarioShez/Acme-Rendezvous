@@ -81,9 +81,13 @@ public class CommentService {
 	public Comment save(Comment comment) {
 		
 		userService.checkAuthority();
-
+		
 		User user = new User();
 		user = this.userService.findByPrincipal();
+		Rendezvous rendezvous;
+		rendezvous = comment.getRendezvous();
+		Assert.isTrue(user.getRsvpdRendezvouses().contains(rendezvous));
+		
 		Comment res;
 		Assert.notNull(comment);
 		
@@ -98,56 +102,28 @@ public class CommentService {
 //			comment.setMoment(moment);
 //		}
 		
-//		if(comment.getCommentParent() != null){
-//			this.actualizarParent(comment.getCommentParent(), res);
-//		}
-//		this.actualizarParent(comment.getCommentParent(), res);
+		if(comment.getCommentParent() != null){
+			this.actualizarParent(comment.getCommentParent(), res);
+		}
 		
-//		moment = new Date();
-//		userConnected = this.userService.findByPrincipal();
-//		
-//		Assert.notNull(coment);
-//		Assert.isTrue(coment.getRendezvous().getAttendants().contains(userConnected));
-//
-//		Comment res;
-//		
-//		moment = new Date(System.currentTimeMillis() - 1000);
-//		
-//		this.userService.checkAuthority();
-//		Assert.isTrue(coment.getUser().equals(userConnected));
-//		Assert.isTrue(coment.getId() == 0);
-//		
-//		coment.setMoment(moment);
 		return res;
 	}
 
 	public void delete(Comment comment) {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
-		
 		Assert.isTrue(this.commentRepository.findOne(comment.getId()) != null);
-		
 		this.adminService.checkAuthority();
 		
-//		if (comment.getReplies().size() != 0)
-//			for (final Comment c : comment.getReplies())
+//		if (comment.getReplies().size() != 0){
+//			for (Comment c : comment.getReplies())
 //				this.delete(c);
-		
+//		}
 		this.commentRepository.delete(comment);
 	}
 	
-	// pasar a servicio de Rendezvous
-//	public Collection<Rendezvous> findRsvpdRendezvousByUserId(int attendantsId){
-//		Assert.notNull(attendantsId);
-//		Collection<Rendezvous> rendezvous;
-//		rendezvous = this.commentRepository.findRsvpdRendezvousByUserId(attendantsId);
-//		Assert.notNull(rendezvous);
-//		return rendezvous;
-//			
-//	}
-
-	//Other bussines methods
 	
+	//Other bussines methods
 	
 	private void actualizarParent(Comment commentParent, Comment commentSon){
 		Collection<Comment> replies = new ArrayList<Comment>();
@@ -156,7 +132,7 @@ public class CommentService {
 		}
 		replies.add(commentSon);
 		commentParent.setReplies(replies);
-		this.commentRepository.saveAndFlush(commentParent);
+		this.commentRepository.save(commentParent);
 	}
 	
 	public Collection<Comment> commentsOfThisRendezvouseWithCommentNull(final int rendezvouseId) {
