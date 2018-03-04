@@ -17,7 +17,7 @@
 	<form:hidden path="rendezvous"/>
 
 
-	<acme:textbox code="question.content" path="content"/>
+	<acme:textbox code="question.text" path="content"/>
 	<br/>
 	
 	<input type="button" name="cancel"
