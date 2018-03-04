@@ -43,20 +43,32 @@
 			<h3 style="text-transform: uppercase; color: red;"><b><spring:message code="rendezvous.onlyAdults"/></b></h3>
 		</jstl:if>
 		
-		<a href="user/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listAttendants"/></a>
-		<br/>
+		<jstl:if test="${not empty rendezvous.attendants}">
+			<a href="user/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listAttendants"/></a>
+			<br/>
+		</jstl:if>
 		
+		<jstl:if test="${not empty rendezvous.linkedRendezvouses}">
 			<a href="rendezvous/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listLinkedRendezvouses"/></a>
 			<br/>
+		</jstl:if>
 		
+		<jstl:if test="${not empty rendezvous.announcements}">
 			<a href="announcement/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listAnnouncements"/></a>
 			<br/>
+		</jstl:if>
 		
+		<jstl:if test="${not empty rendezvous.comments}">
 			<a href="comment/rendezvous/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listComments"/></a>
 			<br/>
+		</jstl:if>
 		
 		<jstl:choose>
 			<jstl:when test="${areRSPVd == false and empty rendezvous.questions}">
+				<button type="button" onclick="javascript: relativeRedir('rendezvous/user/rspv.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.makeRSPV" /></button>
+				<br/>
+			</jstl:when>
+			<jstl:when test="${areRSPVd == false and not empty rendezvous.questions}">
 				<button type="button" onclick="javascript: relativeRedir('rendezvous/user/rspv.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.makeRSPV" /></button>
 				<br/>
 			</jstl:when>
