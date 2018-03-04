@@ -19,6 +19,7 @@ import services.QuestionService;
 import services.RendezvousService;
 import services.UserService;
 import controllers.AbstractController;
+import domain.Answer;
 import domain.Question;
 import domain.Rendezvous;
 import domain.User;
@@ -82,13 +83,31 @@ public class QuestionUserController extends AbstractController {
 		return res;
 	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int questionId) {
+		ModelAndView result;
+		Question question;
+		Rendezvous rendezvous;
+		Collection<Answer> answers;
+
+		question = this.questionService.findOne(questionId);
+		Assert.notNull(question);
+		rendezvous = this.rendezvousService.findOne(question.getRendezvous().getId());
+		answers = question.getAnswers();
+		result = this.createEditModelAndView(question);
+		result.addObject("rendezvous", rendezvous);
+		result.addObject("answers", answers);
+
+		return result;
+	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Question question, final BindingResult binding) {
 		ModelAndView res;
 		final int id = question.getRendezvous().getId();
 
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(question, "question.params.error");
+			res = this.createEditModelAndView(question);
 		else
 			try {
 				this.questionService.save(question);
@@ -100,13 +119,13 @@ public class QuestionUserController extends AbstractController {
 		return res;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView create(@Valid final Question question, final BindingResult binding) {
+	public ModelAndView delete(@Valid final Question question, final BindingResult binding) {
 		ModelAndView result;
 
 		Assert.notNull(question);
 		try {
 			this.questionService.delete(question);
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:/question/user/list.do?rendezvousId=" + question.getRendezvous().getId());
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(question, "comment.commit.error");
 		}

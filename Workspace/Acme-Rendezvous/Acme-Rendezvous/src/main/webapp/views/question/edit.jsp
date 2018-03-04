@@ -9,15 +9,15 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action ="${requestURI }" modelAttribute="question">
+<form:form action ="question/user/edit.do" modelAttribute="question">
 
-	<form:hidden path="id" />
+	<form:hidden path="id"/>
+	<form:hidden path="version"/>
+	<form:hidden path="answers"/>
 	<form:hidden path="rendezvous"/>
 
 
 	<acme:textbox code="question.content" path="content"/>
-	<br/>
-	<acme:textarea code="question.content" path="content"/>
 	<br/>
 	
 	<input type="button" name="cancel"
