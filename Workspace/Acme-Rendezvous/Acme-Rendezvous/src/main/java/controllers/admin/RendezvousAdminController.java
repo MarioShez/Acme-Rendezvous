@@ -34,7 +34,7 @@ public class RendezvousAdminController extends AbstractController {
 		
 		rendezvousService.delete(rendezvous);
 		
-		return new ModelAndView("redirect:welcome/index.do");
+		return new ModelAndView("redirect:/welcome/index.do");
 	}
 
 }
