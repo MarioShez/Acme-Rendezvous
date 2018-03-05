@@ -14,7 +14,4 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
 	@Query("select q from Question q where q.rendezvous.id = ?1")
 	Collection<Question> findByRendezvousId(int rendezvousId);
-
-	@Query("select q from Question q where q.rendezvous.organiser.id = ?1")
-	Collection<Question> findByUserId(int userId);
 }
