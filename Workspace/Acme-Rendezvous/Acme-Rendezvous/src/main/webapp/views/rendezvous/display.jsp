@@ -58,10 +58,10 @@
 			<br/>
 		</jstl:if>
 		
-		<jstl:if test="${not empty rendezvous.comments}">
+		<%-- <jstl:if test="${not empty rendezvous.comments}">--%>
 			<a href="comment/rendezvous/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listComments"/></a>
 			<br/>
-		</jstl:if>
+		<%-- </jstl:if>--%>
 		
 		<jstl:choose>
 			<jstl:when test="${areRSPVd == false and empty rendezvous.questions}">

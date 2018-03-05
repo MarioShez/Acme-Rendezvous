@@ -125,6 +125,13 @@ public class CommentService {
 	
 	//Other bussines methods
 	
+	public void deleteAll(Collection<Comment> comments){
+		//Assert.notNull(comments);
+		this.adminService.checkAuthority();
+		for(Comment c : comments)
+			this.commentRepository.delete(c);
+	}
+	
 	private void actualizarParent(Comment commentParent, Comment commentSon){
 		Collection<Comment> replies = new ArrayList<Comment>();
 		if(commentParent.getReplies() != null){
