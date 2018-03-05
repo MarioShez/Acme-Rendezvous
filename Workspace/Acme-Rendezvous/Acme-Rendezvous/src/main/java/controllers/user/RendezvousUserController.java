@@ -150,6 +150,7 @@ public class RendezvousUserController extends AbstractController {
 
 		try {
 			source.getLinkedRendezvouses().add(target);
+			rendezvousService.save(source);
 			result = new ModelAndView("redirect:list-link.do?rendezvousId=" + rendezvousSourceId);
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(source, "rendezvous.commit.error");
@@ -168,6 +169,7 @@ public class RendezvousUserController extends AbstractController {
 
 		try {
 			source.getLinkedRendezvouses().remove(target);
+			rendezvousService.save(source);
 			result = new ModelAndView("redirect:list-link.do?rendezvousId=" + rendezvousSourceId);
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(source, "rendezvous.commit.error");

@@ -73,11 +73,11 @@ public class QuestionService {
 
 	public Question save(final Question question) {
 		Assert.notNull(question);
+		Assert.isTrue(this.questionRepository.findByUserId(question.getRendezvous().getOrganiser().getId()) != null);
 		Question res;
 		res = this.questionRepository.save(question);
 		return res;
 	}
-
 	public void delete(final Question question) {
 		Assert.notNull(question);
 		Assert.isTrue(question.getId() != 0);
