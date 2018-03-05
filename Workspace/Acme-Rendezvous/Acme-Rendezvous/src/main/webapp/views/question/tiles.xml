@@ -23,12 +23,12 @@
 	
  	<definition name="question/edit" extends="master.page">	
 		<put-attribute name="title" value="Edit a question" />
-		<put-attribute name="body" value="/views/rendezvous/edit.jsp" />
+		<put-attribute name="body" value="/views/question/edit.jsp" />
 	</definition>
 	
 	<definition name="question/create" extends="master.page">	
 		<put-attribute name="title" value="Create a question" />
-		<put-attribute name="body" value="/views/rendezvous/edit.jsp" />
+		<put-attribute name="body" value="/views/question/edit.jsp" />
 	</definition>
 	
 <!--	<definition name="question/display" extends="master.page">	
