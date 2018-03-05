@@ -134,10 +134,15 @@ public class RendezvousService {
 			this.announcementService.delete(announcement);
 		if(rendezvous.getComments().size()>0)
 			this.commentService.deleteAll(rendezvous.getComments());
-//		for (final Comment comment : rendezvous.getComments())
-//			this.commentService.delete(comment);
+		for (final Comment comment : rendezvous.getComments())
+			this.commentService.delete(comment);
 		for (final Question question : rendezvous.getQuestions())
 			this.questionService.delete(question);
+		for (final Rendezvous linkedRendezvous : rendezvous.getLinkedRendezvouses())
+			rendezvous.getLinkedRendezvouses().remove(linkedRendezvous);
+		for (Rendezvous parentRendezvous : this.findParentRendezvouses(rendezvous.getId())){
+			parentRendezvous.getLinkedRendezvouses().remove(rendezvous);
+		}
 
 		this.rendezvousRepository.delete(rendezvous);
 }
@@ -257,6 +262,12 @@ public class RendezvousService {
 
 		final User attendant = this.userService.findByPrincipal();
 		Collection<Rendezvous> result = findByAttendantId(attendant.getId());
+		return result;
+	}
+	
+	public Collection<Rendezvous> findParentRendezvouses(int rendezvousId){
+		
+		Collection<Rendezvous> result = rendezvousRepository.findParentRendezvouses(rendezvousId);
 		return result;
 	}
 

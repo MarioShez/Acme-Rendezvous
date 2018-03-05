@@ -35,5 +35,8 @@ public interface RendezvousRepository extends JpaRepository<Rendezvous, Integer>
 	@Query("select r from User u join u.rsvpdRendezvouses r where u.id = ?1 and r.adult = false")
 	Collection<Rendezvous> findByAttendantIdNotAdult(int attendantId);
 	
+	@Query("select r from Rendezvous r join r.linkedRendezvouses l where l.id=?1")
+	Collection<Rendezvous> findParentRendezvouses(int rendezvousId);
+	
 
 }

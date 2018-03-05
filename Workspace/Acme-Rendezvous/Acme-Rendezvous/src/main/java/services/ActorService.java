@@ -2,7 +2,10 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
+import org.joda.time.DateTime;
+import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -124,6 +127,13 @@ public class ActorService {
 		Assert.notNull(res);
 
 		return res;
+	}
+	
+	public boolean isAdult(Date birth) {
+		DateTime birthDateTime = new DateTime(birth);
+		DateTime now = new DateTime();
+		Years age = Years.yearsBetween(birthDateTime, now);
+		return age.getYears() >= 18;
 	}
 
 }

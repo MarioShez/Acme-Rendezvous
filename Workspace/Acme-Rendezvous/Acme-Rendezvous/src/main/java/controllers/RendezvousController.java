@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.RendezvousService;
 import services.UserService;
+import domain.Actor;
+import domain.Admin;
 import domain.Rendezvous;
 import domain.User;
 
@@ -24,6 +27,9 @@ public class RendezvousController extends AbstractController {
 
 	@Autowired
 	private RendezvousService rendezvousService;
+	
+	@Autowired
+	private ActorService	actorService;
 	
 	@Autowired
 	private UserService	userService;
@@ -41,15 +47,15 @@ public class RendezvousController extends AbstractController {
 
 		Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
 		
-		User principal = userService.findByPrincipal();
+		Actor principal = actorService.findByPrincipal();
 		
-		if(rendezvousId == null && (principal == null || !userService.isAdult(principal.getBirth()))){
+		if(rendezvousId == null && (principal == null || !actorService.isAdult(principal.getBirth()))){
 			rendezvouses = rendezvousService.findFutureMomentAndNotAdult();
-		}else if(rendezvousId == null && userService.isAdult(principal.getBirth())){
+		}else if(rendezvousId == null && actorService.isAdult(principal.getBirth())){
 			rendezvouses = rendezvousService.findFutureMoment();
-		}else if(rendezvousId != null && (principal == null || !userService.isAdult(principal.getBirth()))){
+		}else if(rendezvousId != null && (principal == null || !actorService.isAdult(principal.getBirth()))){
 			rendezvouses = rendezvousService.linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(rendezvousId);
-		}else if(rendezvousId != null && userService.isAdult(principal.getBirth())){
+		}else if(rendezvousId != null && actorService.isAdult(principal.getBirth())){
 			rendezvouses = rendezvousService.linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(rendezvousId);
 		}
 		
@@ -68,7 +74,7 @@ public class RendezvousController extends AbstractController {
 		
 		User principal = userService.findByPrincipal();
 		
-		if(principal == null || !userService.isAdult(principal.getBirth())){
+		if(principal == null || !actorService.isAdult(principal.getBirth())){
 			rendezvouses = rendezvousService.findByOrganiserIdNotAdult(userId);
 		}else{
 			rendezvouses = rendezvousService.findByOrganiserId(userId);
@@ -89,7 +95,7 @@ public class RendezvousController extends AbstractController {
 		
 		User principal = userService.findByPrincipal();
 		
-		if(principal == null || !userService.isAdult(principal.getBirth())){
+		if(principal == null || !actorService.isAdult(principal.getBirth())){
 			rendezvouses = rendezvousService.findByAttendantIdNotAdult(userId);
 		}else{
 			rendezvouses = rendezvousService.findByAttendantId(userId);
@@ -109,20 +115,21 @@ public class RendezvousController extends AbstractController {
 	public ModelAndView display(@RequestParam int rendezvousId){
 		
 		Rendezvous rendezvous = rendezvousService.findOne(rendezvousId);
-		User principal = userService.findByPrincipal();
+		Actor principal = actorService.findByPrincipal();
 		
-		Assert.isTrue((principal == null && rendezvous.getAdult() == false) || (!userService.isAdult(principal.getBirth()) && rendezvous.getAdult() == false) || (userService.isAdult(principal.getBirth())));
+		Assert.isTrue((principal == null && rendezvous.getAdult() == false) || (!actorService.isAdult(principal.getBirth()) && rendezvous.getAdult() == false) || (actorService.isAdult(principal.getBirth())));
 		
 		ModelAndView result = new ModelAndView("rendezvous/display");
 		result.addObject("rendezvous", rendezvous);
-		if(principal == null){
+		if((principal == null) || (principal instanceof Admin)){
 			result.addObject("areRSPVd", null);
-		}else if(principal != null && !principal.getRsvpdRendezvouses().contains(rendezvous)){
-			result.addObject("areRSPVd", false);
-		}else if(principal != null && principal.getRsvpdRendezvouses().contains(rendezvous)){
-			result.addObject("areRSPVd", true);
+		}else if(principal instanceof User){
+			if(!((User) principal).getRsvpdRendezvouses().contains(rendezvous)){
+				result.addObject("areRSPVd", false);
+			}else{
+				result.addObject("areRSPVd", true);
+			}
 		}
-		
 		
 		return result;
 	}

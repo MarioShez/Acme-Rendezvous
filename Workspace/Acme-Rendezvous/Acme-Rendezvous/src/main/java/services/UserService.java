@@ -1,11 +1,8 @@
 package services;
 
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.joda.time.DateTime;
-import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -126,13 +123,6 @@ public class UserService {
 		Authority res = new Authority();
 		res.setAuthority("USER");
 		Assert.isTrue(authority.contains(res));
-	}
-
-	public boolean isAdult(Date birth) {
-		DateTime birthDateTime = new DateTime(birth);
-		DateTime now = new DateTime();
-		Years age = Years.yearsBetween(birthDateTime, now);
-		return age.getYears() >= 18;
 	}
 
 	// 4.3
