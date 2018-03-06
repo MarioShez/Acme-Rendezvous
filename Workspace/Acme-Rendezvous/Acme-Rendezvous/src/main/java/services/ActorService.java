@@ -89,8 +89,11 @@ public class ActorService {
 		Actor res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		res = this.actorRepository.findActorByUserAccountId(userAccount.getId());
-		Assert.notNull(res);
+		if(userAccount == null){
+			res = null;
+		}else{
+			res = this.actorRepository.findActorByUserAccountId(userAccount.getId());
+		}
 		return res;
 	}
 

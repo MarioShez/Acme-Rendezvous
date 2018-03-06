@@ -49,13 +49,17 @@ public class RendezvousController extends AbstractController {
 		
 		Actor principal = actorService.findByPrincipal();
 		
-		if(rendezvousId == null && (principal == null || !actorService.isAdult(principal.getBirth()))){
+		if(rendezvousId == null && principal == null){
 			rendezvouses = rendezvousService.findFutureMomentAndNotAdult();
 		}else if(rendezvousId == null && actorService.isAdult(principal.getBirth())){
 			rendezvouses = rendezvousService.findFutureMoment();
-		}else if(rendezvousId != null && (principal == null || !actorService.isAdult(principal.getBirth()))){
+		}else if(rendezvousId == null && !actorService.isAdult(principal.getBirth())){
+			rendezvouses = rendezvousService.findFutureMomentAndNotAdult();
+		}else if(rendezvousId != null && principal == null){
 			rendezvouses = rendezvousService.linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(rendezvousId);
-		}else if(rendezvousId != null && actorService.isAdult(principal.getBirth())){
+		}else if(rendezvousId!= null && actorService.isAdult(principal.getBirth())){
+			rendezvouses = rendezvousService.linkedRendezvousesFutureMomentByRendezvousId(rendezvousId);
+		}else if(rendezvousId!= null && !actorService.isAdult(principal.getBirth())){
 			rendezvouses = rendezvousService.linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(rendezvousId);
 		}
 		

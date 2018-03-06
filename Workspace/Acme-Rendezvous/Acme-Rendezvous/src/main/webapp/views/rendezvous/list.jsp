@@ -19,24 +19,31 @@
 		</display:column>
 	</security:authorize>
 	
-	<display:column>
+	
 		<jstl:choose>
 			<jstl:when test="${requestURI == 'rendezvous/user/list-organised.do' and row.finalVersion == false and row.deleted == false}">
-				<a href="rendezvous/user/edit.do?rendezvousId=${row.id}"><spring:message code="rendezvous.edit"/></a>
+				<display:column>
+					<a href="rendezvous/user/edit.do?rendezvousId=${row.id}"><spring:message code="rendezvous.edit"/></a>
+				</display:column>
 			</jstl:when>
 			<jstl:when test="${requestURI == 'rendezvous/user/list-rsvp.do'}">
-				<a href="comment/user/create.do?rendezvousId=${row.id}"><spring:message code="rendezvous.comment"/></a>
+				<display:column>
+					<a href="comment/user/create.do?rendezvousId=${row.id}"><spring:message code="rendezvous.comment"/></a>
+				</display:column>
 			</jstl:when>
 			<jstl:when test="${requestURI == 'rendezvous/user/list-link.do'}">
 				<jstl:if test="${!rendezvousSource.linkedRendezvouses.contains(row)}">
-					<a href="rendezvous/user/assign.do?rendezvousSourceId=${rendezvousSource.id}&rendezvousTargetId=${row.id}"><spring:message code="rendezvous.assign"/></a>
+					<display:column>
+						<a href="rendezvous/user/assign.do?rendezvousSourceId=${rendezvousSource.id}&rendezvousTargetId=${row.id}"><spring:message code="rendezvous.assign"/></a>
+					</display:column>
 				</jstl:if>
 				<jstl:if test="${rendezvousSource.linkedRendezvouses.contains(row)}">
-					<a href="rendezvous/user/unassign.do?rendezvousSourceId=${rendezvousSource.id}&rendezvousTargetId=${row.id}"><spring:message code="rendezvous.unassign"/></a>
+					<display:column>
+						<a href="rendezvous/user/unassign.do?rendezvousSourceId=${rendezvousSource.id}&rendezvousTargetId=${row.id}"><spring:message code="rendezvous.unassign"/></a>
+					</display:column>
 				</jstl:if>
 			</jstl:when>
 		</jstl:choose>
-	</display:column>
 	
 	<display:column>
 		<a href="rendezvous/display.do?rendezvousId=${row.id}"><spring:message code="rendezvous.display"/></a>
