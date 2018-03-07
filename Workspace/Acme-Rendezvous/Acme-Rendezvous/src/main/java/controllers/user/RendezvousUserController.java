@@ -1,8 +1,7 @@
+
 package controllers.user;
 
 import java.util.Collection;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,10 +26,10 @@ public class RendezvousUserController extends AbstractController {
 	// Services ------------------------------------------------------
 
 	@Autowired
-	private RendezvousService rendezvousService;
-	
+	private RendezvousService	rendezvousService;
+
 	@Autowired
-	private UserService userService;
+	private UserService			userService;
 
 
 	// Constructors --------------------------------------------------
@@ -44,10 +43,9 @@ public class RendezvousUserController extends AbstractController {
 	@RequestMapping(value = "/list-organised", method = RequestMethod.GET)
 	public ModelAndView organised() {
 
-		Collection<Rendezvous> rendezvouses = rendezvousService
-				.findOrganisedRendezvousesByPrincipal();
+		final Collection<Rendezvous> rendezvouses = this.rendezvousService.findOrganisedRendezvousesByPrincipal();
 
-		ModelAndView result = new ModelAndView("rendezvous/list");
+		final ModelAndView result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvouses", rendezvouses);
 		result.addObject("rendezvousSource", null);
 		result.addObject("requestURI", "rendezvous/user/list-organised.do");
@@ -58,43 +56,41 @@ public class RendezvousUserController extends AbstractController {
 	@RequestMapping(value = "/list-rspv", method = RequestMethod.GET)
 	public ModelAndView rspv() {
 
-		Collection<Rendezvous> rendezvouses = rendezvousService
-				.findRspvdRendezvousesByPrincipal();
+		final Collection<Rendezvous> rendezvouses = this.rendezvousService.findRspvdRendezvousesByPrincipal();
 
-		ModelAndView result = new ModelAndView("rendezvous/list");
+		final ModelAndView result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvouses", rendezvouses);
 		result.addObject("rendezvousSource", null);
 		result.addObject("requestURI", "rendezvous/user/list-rspv.do");
 
 		return result;
 	}
-	
-	@RequestMapping(value = "/list-link", method = RequestMethod.GET)
-	public ModelAndView link(@RequestParam int rendezvousId) {
 
-		Collection<Rendezvous> rendezvouses = rendezvousService
-				.findOrganisedRendezvousesByPrincipal();
-		Rendezvous rendezvousSource = rendezvousService.findOneToEdit(rendezvousId);
-		
+	@RequestMapping(value = "/list-link", method = RequestMethod.GET)
+	public ModelAndView link(@RequestParam final int rendezvousId) {
+
+		final Collection<Rendezvous> rendezvouses = this.rendezvousService.findOrganisedRendezvousesByPrincipal();
+		final Rendezvous rendezvousSource = this.rendezvousService.findOneToEdit(rendezvousId);
+
 		rendezvouses.remove(rendezvousSource);
 
-		ModelAndView result = new ModelAndView("rendezvous/list");
+		final ModelAndView result = new ModelAndView("rendezvous/list");
 		result.addObject("rendezvouses", rendezvouses);
 		result.addObject("rendezvousSource", rendezvousSource);
 		result.addObject("requestURI", "rendezvous/user/list-link.do");
 
 		return result;
 	}
-	
+
 	// Create ---------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 
-		Rendezvous rendezvous = rendezvousService.create();
-		RendezvousForm rendezvousForm = rendezvousService.construct(rendezvous);
-		
-		ModelAndView result = createEditModelAndView(rendezvousForm);
+		final Rendezvous rendezvous = this.rendezvousService.create();
+		final RendezvousForm rendezvousForm = this.rendezvousService.construct(rendezvous);
+
+		final ModelAndView result = this.createEditModelAndView(rendezvousForm);
 
 		return result;
 	}
@@ -102,25 +98,25 @@ public class RendezvousUserController extends AbstractController {
 	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int rendezvousId) {
+	public ModelAndView edit(@RequestParam final int rendezvousId) {
 
-		Rendezvous rendezvous = rendezvousService.findOneToEdit(rendezvousId);
-		RendezvousForm rendezvousForm = rendezvousService.construct(rendezvous);
+		final Rendezvous rendezvous = this.rendezvousService.findOneToEdit(rendezvousId);
+		final RendezvousForm rendezvousForm = this.rendezvousService.construct(rendezvous);
 
-		ModelAndView result = createEditModelAndView(rendezvousForm);
+		final ModelAndView result = this.createEditModelAndView(rendezvousForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid RendezvousForm rendezvousForm, BindingResult binding) {
+	public ModelAndView save(final RendezvousForm rendezvousForm, final BindingResult binding) {
 
 		ModelAndView result;
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(rendezvousForm);
 		else
 			try {
-				Rendezvous rendezvous = rendezvousService.reconstruct(rendezvousForm, binding);
+				final Rendezvous rendezvous = this.rendezvousService.reconstruct(rendezvousForm, binding);
 				this.rendezvousService.save(rendezvous);
 				result = new ModelAndView("redirect:list-organised.do");
 			} catch (final Throwable oops) {
@@ -128,9 +124,9 @@ public class RendezvousUserController extends AbstractController {
 			}
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(RendezvousForm rendezvousForm, BindingResult binding) {
+	public ModelAndView delete(final RendezvousForm rendezvousForm, final BindingResult binding) {
 
 		ModelAndView result;
 
@@ -143,78 +139,78 @@ public class RendezvousUserController extends AbstractController {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
-	public ModelAndView assign(int rendezvousSourceId, int rendezvousTargetId) {
-		
-		Rendezvous source = rendezvousService.findOneToEdit(rendezvousSourceId);
-		Rendezvous target = rendezvousService.findOneToEdit(rendezvousTargetId);
-		
+	public ModelAndView assign(final int rendezvousSourceId, final int rendezvousTargetId) {
+
+		final Rendezvous source = this.rendezvousService.findOneToEdit(rendezvousSourceId);
+		final Rendezvous target = this.rendezvousService.findOneToEdit(rendezvousTargetId);
+
 		ModelAndView result;
 
 		try {
 			source.getLinkedRendezvouses().add(target);
-			rendezvousService.save(source);
+			this.rendezvousService.save(source);
 			result = new ModelAndView("redirect:list-link.do?rendezvousId=" + rendezvousSourceId);
 		} catch (final Throwable oops) {
-			RendezvousForm sourceForm = rendezvousService.construct(source);
+			final RendezvousForm sourceForm = this.rendezvousService.construct(source);
 			result = this.createEditModelAndView(sourceForm, "rendezvous.commit.error");
 		}
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/unassign", method = RequestMethod.GET)
-	public ModelAndView unassign(int rendezvousSourceId, int rendezvousTargetId) {
-		
-		Rendezvous source = rendezvousService.findOneToEdit(rendezvousSourceId);
-		Rendezvous target = rendezvousService.findOneToEdit(rendezvousTargetId);
-		
+	public ModelAndView unassign(final int rendezvousSourceId, final int rendezvousTargetId) {
+
+		final Rendezvous source = this.rendezvousService.findOneToEdit(rendezvousSourceId);
+		final Rendezvous target = this.rendezvousService.findOneToEdit(rendezvousTargetId);
+
 		ModelAndView result;
 
 		try {
 			source.getLinkedRendezvouses().remove(target);
-			rendezvousService.save(source);
+			this.rendezvousService.save(source);
 			result = new ModelAndView("redirect:list-link.do?rendezvousId=" + rendezvousSourceId);
 		} catch (final Throwable oops) {
-			RendezvousForm sourceForm = rendezvousService.construct(source);
+			final RendezvousForm sourceForm = this.rendezvousService.construct(source);
 			result = this.createEditModelAndView(sourceForm, "rendezvous.commit.error");
 		}
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/rspv", method = RequestMethod.GET)
-	public ModelAndView rspv(@RequestParam int rendezvousId){
-		
-		Rendezvous rendezvous = rendezvousService.findOne(rendezvousId);
-		User principal = userService.findByPrincipal();
-		
+	public ModelAndView rspv(@RequestParam final int rendezvousId) {
+
+		final Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
+		final User principal = this.userService.findByPrincipal();
+
 		Assert.notNull(principal);
 		Assert.isTrue(!principal.getRsvpdRendezvouses().contains(rendezvous));
-		
+
 		principal.getRsvpdRendezvouses().add(rendezvous);
 		rendezvous.getAttendants().add(principal);
-		
-		userService.save(principal);
-		
+
+		this.userService.save(principal);
+
 		return new ModelAndView("redirect:list-rspv.do");
 	}
-	
+
 	@RequestMapping(value = "/unrspv", method = RequestMethod.GET)
-	public ModelAndView unrspv(@RequestParam int rendezvousId){
-		
-		Rendezvous rendezvous = rendezvousService.findOne(rendezvousId);
-		User principal = userService.findByPrincipal();
-		
+	public ModelAndView unrspv(@RequestParam final int rendezvousId) {
+
+		final Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
+		final User principal = this.userService.findByPrincipal();
+
 		Assert.notNull(principal);
 		Assert.isTrue(principal.getRsvpdRendezvouses().contains(rendezvous));
-		
+
 		principal.getRsvpdRendezvouses().remove(rendezvous);
 		rendezvous.getAttendants().remove(principal);
-		
-		userService.save(principal);
-		
+
+		this.userService.save(principal);
+
 		return new ModelAndView("redirect:list-rspv.do");
 	}
 
@@ -227,10 +223,9 @@ public class RendezvousUserController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final RendezvousForm rendezvousForm,
-			final String messageCode) {
+	protected ModelAndView createEditModelAndView(final RendezvousForm rendezvousForm, final String messageCode) {
 
-		rendezvousService.checkPrincipalForm(rendezvousForm);
+		this.rendezvousService.checkPrincipalForm(rendezvousForm);
 
 		ModelAndView result;
 
