@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -148,34 +149,65 @@ public class RendezvousService {
 }
 
 	// Other business methods -------------------------------------------------
+	
+	public RendezvousForm construct(Rendezvous rendezvous) {
+		
+		Assert.notNull(rendezvous);
+		
+		RendezvousForm rendezvousForm;
+
+		rendezvousForm = new RendezvousForm();
+
+		rendezvousForm.setId(rendezvous.getId());
+		rendezvousForm.setName(rendezvous.getName());
+		rendezvousForm.setDescription(rendezvous.getDescription());
+		rendezvousForm.setPicture(rendezvous.getPicture());
+		rendezvousForm.setMoment(rendezvous.getMoment());
+		if(rendezvous.getGpsCoordinate() == null){
+			rendezvousForm.setLatitude(null);
+			rendezvousForm.setLongitude(null);
+		}else{
+			rendezvousForm.setLatitude(rendezvous.getGpsCoordinate().getLatitude());
+			rendezvousForm.setLongitude(rendezvous.getGpsCoordinate().getLongitude());
+		}
+		rendezvousForm.setAdult(rendezvous.getAdult());
+		rendezvousForm.setFinalVersion(rendezvous.getFinalVersion());
+		rendezvousForm.setDeleted(rendezvous.getDeleted());
+		
+		return rendezvousForm;
+	}
 
 	public Rendezvous reconstruct(RendezvousForm rendezvousForm,
 			BindingResult binding) {
+		
+		Assert.notNull(rendezvousForm);
+	
+		Rendezvous rendezvous;
+		
+		if(rendezvousForm.getId() != 0){
+			rendezvous = findOne(rendezvousForm.getId()); 
+		}else{
+			rendezvous = create();
+		}
 		
 		GpsCoordinate gpsCoordinate = new GpsCoordinate();
 		gpsCoordinate.setLatitude(rendezvousForm.getLatitude());
 		gpsCoordinate.setLongitude(rendezvousForm.getLongitude());
 
-		Rendezvous result = new Rendezvous();
-
-		result.setName(rendezvousForm.getName());
-		result.setDescription(rendezvousForm.getDescription());
-		result.setPicture(rendezvousForm.getPicture());
-		result.setMoment(rendezvousForm.getMoment());
-		result.setGpsCoordinate(gpsCoordinate);
-		result.setAdult(rendezvousForm.getAdult());
-		result.setFinalVersion(rendezvousForm.getFinalVersion());
-		result.setDeleted(rendezvousForm.getDeleted());
-
-		result.setAnnouncements(new ArrayList<Announcement>());
-		result.setAttendants(new ArrayList<User>());
-		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
-		result.setComments(new ArrayList<Comment>());
-		result.setQuestions(new ArrayList<Question>());
-
-		validator.validate(result, binding);
-
-		return result;
+		rendezvous.setName(rendezvousForm.getName());
+		rendezvous.setDescription(rendezvousForm.getDescription());
+		rendezvous.setPicture(rendezvousForm.getPicture());
+		rendezvous.setMoment(rendezvousForm.getMoment());
+		rendezvous.setGpsCoordinate(gpsCoordinate);
+		rendezvous.setAdult(rendezvousForm.getAdult());
+		rendezvous.setFinalVersion(rendezvousForm.getFinalVersion());
+		rendezvous.setDeleted(rendezvousForm.getDeleted());
+		
+		if(binding != null){
+			validator.validate(rendezvous, binding);
+		}
+	
+		return rendezvous;
 	}
 
 	public void checkPrincipal(final Rendezvous rendezvous) {
@@ -183,6 +215,16 @@ public class RendezvousService {
 		Assert.notNull(rendezvous);
 
 		final User principal = this.userService.findByPrincipal();
+		Assert.isTrue(rendezvous.getOrganiser().equals(principal));
+	}
+	
+	public void checkPrincipalForm(final RendezvousForm rendezvousForm) {
+
+		Assert.notNull(rendezvousForm);
+		
+		Rendezvous rendezvous = reconstruct(rendezvousForm, null);
+		final User principal = this.userService.findByPrincipal();
+		
 		Assert.isTrue(rendezvous.getOrganiser().equals(principal));
 	}
 

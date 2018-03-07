@@ -1,6 +1,6 @@
 package forms;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class RendezvousForm {
@@ -22,6 +23,7 @@ public class RendezvousForm {
 
 	// Attributes -------------------------------------------------------------
 
+	private int id;
 	private String name;
 	private String description;
 	private String picture;
@@ -32,8 +34,16 @@ public class RendezvousForm {
 	private boolean finalVersion;
 	private boolean deleted;
 
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
 	@NotBlank
-	@SafeHtml
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return name;
 	}
@@ -43,7 +53,7 @@ public class RendezvousForm {
 	}
 
 	@NotBlank
-	@SafeHtml
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDescription() {
 		return description;
 	}
@@ -53,7 +63,7 @@ public class RendezvousForm {
 	}
 
 	@URL
-	@SafeHtml
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPicture() {
 		return picture;
 	}
@@ -65,7 +75,7 @@ public class RendezvousForm {
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	@SafeHtml
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public Date getMoment() {
 		return moment;
 	}
@@ -75,7 +85,7 @@ public class RendezvousForm {
 	}
 
 	@Valid
-	@SafeHtml
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public Double getLatitude() {
 		return latitude;
 	}
@@ -85,7 +95,7 @@ public class RendezvousForm {
 	}
 	
 	@Valid
-	@SafeHtml
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public Double getLongitude() {
 		return longitude;
 	}

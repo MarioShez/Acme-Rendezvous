@@ -18,6 +18,7 @@ import services.UserService;
 import controllers.AbstractController;
 import domain.Rendezvous;
 import domain.User;
+import forms.RendezvousForm;
 
 @Controller
 @RequestMapping("/rendezvous/user")
@@ -91,8 +92,9 @@ public class RendezvousUserController extends AbstractController {
 	public ModelAndView create() {
 
 		Rendezvous rendezvous = rendezvousService.create();
+		RendezvousForm rendezvousForm = rendezvousService.construct(rendezvous);
 		
-		ModelAndView result = createEditModelAndView(rendezvous);
+		ModelAndView result = createEditModelAndView(rendezvousForm);
 
 		return result;
 	}
@@ -103,45 +105,47 @@ public class RendezvousUserController extends AbstractController {
 	public ModelAndView edit(@RequestParam int rendezvousId) {
 
 		Rendezvous rendezvous = rendezvousService.findOneToEdit(rendezvousId);
+		RendezvousForm rendezvousForm = rendezvousService.construct(rendezvous);
 
-		ModelAndView result = createEditModelAndView(rendezvous);
+		ModelAndView result = createEditModelAndView(rendezvousForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Rendezvous rendezvous, BindingResult binding) {
+	public ModelAndView save(@Valid RendezvousForm rendezvousForm, BindingResult binding) {
 
 		ModelAndView result;
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(rendezvous);
+			result = this.createEditModelAndView(rendezvousForm);
 		else
 			try {
+				Rendezvous rendezvous = rendezvousService.reconstruct(rendezvousForm, binding);
 				this.rendezvousService.save(rendezvous);
 				result = new ModelAndView("redirect:list-organised.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(rendezvous, "rendezvous.commit.error");
+				result = this.createEditModelAndView(rendezvousForm, "rendezvous.commit.error");
 			}
 		return result;
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(Rendezvous rendezvous, BindingResult binding) {
+	public ModelAndView delete(RendezvousForm rendezvousForm, BindingResult binding) {
 
 		ModelAndView result;
 
 		try {
-			this.rendezvousService.changeToDeleted(rendezvous.getId());
+			this.rendezvousService.changeToDeleted(rendezvousForm.getId());
 			result = new ModelAndView("redirect:list-organised.do");
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(rendezvous, "rendezvous.commit.error");
+			result = this.createEditModelAndView(rendezvousForm, "rendezvous.commit.error");
 		}
 
 		return result;
 	}
 	
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
-	public ModelAndView assing(int rendezvousSourceId, int rendezvousTargetId) {
+	public ModelAndView assign(int rendezvousSourceId, int rendezvousTargetId) {
 		
 		Rendezvous source = rendezvousService.findOneToEdit(rendezvousSourceId);
 		Rendezvous target = rendezvousService.findOneToEdit(rendezvousTargetId);
@@ -153,14 +157,15 @@ public class RendezvousUserController extends AbstractController {
 			rendezvousService.save(source);
 			result = new ModelAndView("redirect:list-link.do?rendezvousId=" + rendezvousSourceId);
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(source, "rendezvous.commit.error");
+			RendezvousForm sourceForm = rendezvousService.construct(source);
+			result = this.createEditModelAndView(sourceForm, "rendezvous.commit.error");
 		}
 
 		return result;
 	}
 	
 	@RequestMapping(value = "/unassign", method = RequestMethod.GET)
-	public ModelAndView unassing(int rendezvousSourceId, int rendezvousTargetId) {
+	public ModelAndView unassign(int rendezvousSourceId, int rendezvousTargetId) {
 		
 		Rendezvous source = rendezvousService.findOneToEdit(rendezvousSourceId);
 		Rendezvous target = rendezvousService.findOneToEdit(rendezvousTargetId);
@@ -172,7 +177,8 @@ public class RendezvousUserController extends AbstractController {
 			rendezvousService.save(source);
 			result = new ModelAndView("redirect:list-link.do?rendezvousId=" + rendezvousSourceId);
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(source, "rendezvous.commit.error");
+			RendezvousForm sourceForm = rendezvousService.construct(source);
+			result = this.createEditModelAndView(sourceForm, "rendezvous.commit.error");
 		}
 
 		return result;
@@ -214,22 +220,23 @@ public class RendezvousUserController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final Rendezvous rendezvous) {
+	protected ModelAndView createEditModelAndView(final RendezvousForm rendezvousForm) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(rendezvous, null);
+		result = this.createEditModelAndView(rendezvousForm, null);
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Rendezvous rendezvous,
+	protected ModelAndView createEditModelAndView(final RendezvousForm rendezvousForm,
 			final String messageCode) {
 
-		rendezvousService.checkPrincipal(rendezvous);
+		rendezvousService.checkPrincipalForm(rendezvousForm);
 
 		ModelAndView result;
 
 		result = new ModelAndView("rendezvous/edit");
-		result.addObject("rendezvous", rendezvous);
+		result.addObject("rendezvousForm", rendezvousForm);
+		result.addObject("message", messageCode);
 
 		return result;
 	}
