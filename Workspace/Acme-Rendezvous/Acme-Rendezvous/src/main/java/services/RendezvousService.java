@@ -133,10 +133,7 @@ public class RendezvousService {
 			attendant.getRsvpdRendezvouses().remove(rendezvous);
 		for (final Announcement announcement : rendezvous.getAnnouncements())
 			this.announcementService.delete(announcement);
-		if(rendezvous.getComments().size()>0)
-			this.commentService.deleteAll(rendezvous.getComments());
-		for (final Comment comment : rendezvous.getComments())
-			this.commentService.delete(comment);
+		this.commentService.deleteAll(rendezvous.getComments());
 		for (final Question question : rendezvous.getQuestions())
 			this.questionService.delete(question);
 		for (final Rendezvous linkedRendezvous : rendezvous.getLinkedRendezvouses())
