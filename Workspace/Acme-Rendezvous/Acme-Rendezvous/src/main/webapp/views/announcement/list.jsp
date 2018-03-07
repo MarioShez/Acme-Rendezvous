@@ -13,6 +13,11 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="announcement" requestURI="${requestURI }" id="row">	
 	
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<a href="announcement/admin/delete.do?announcementId=${row.id}"><spring:message code="announcement.delete"/></a>
+		</display:column>
+	</security:authorize>
 	
 	<display:column>
 		<a href="announcement/display.do?announcementId=${row.id}"><spring:message code="announcement.display"/></a>

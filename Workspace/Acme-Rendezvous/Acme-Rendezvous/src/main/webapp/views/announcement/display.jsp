@@ -29,13 +29,6 @@
 <b><spring:message code="announcement.rendezvous"/>:&nbsp;</b><jstl:out value="${announcement.rendezvous.name}"/>
 <br/>
 
-<security:authorize access="hasRole('ADMIN')">
-<jstl:if test="${announcement.id != 0}">
-	<input type="submit" name="delete"
-		value="<spring:message code="announcement.delete" />"
-		onclick="return confirm('<spring:message code="comment.confirm.delete" />')" />&nbsp;
-</jstl:if>
-</security:authorize>
 </form:form>
 
 <a href="javascript:window.history.back();">&laquo; <spring:message code="terms.back"/></a>
