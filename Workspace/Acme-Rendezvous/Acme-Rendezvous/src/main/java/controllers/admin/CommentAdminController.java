@@ -3,15 +3,10 @@ package controllers.admin;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdminService;
@@ -20,8 +15,6 @@ import services.RendezvousService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Comment;
-import domain.Rendezvous;
-import forms.CommentForm;
 
 @Controller
 @RequestMapping("/comment/admin")
@@ -76,52 +69,4 @@ public class CommentAdminController extends AbstractController{
 			return new ModelAndView("redirect:list.do");
 		}
 		
-		// Ancillary methods --------------------------------------------------
-
-		protected ModelAndView createEditModelAndView(final Comment comment) {
-			ModelAndView result;
-
-			result = this.createEditModelAndView(comment, null);
-
-			return result;
-		}
-
-		protected ModelAndView createEditModelAndView(final Comment comment,
-				final String message) {
-			ModelAndView result;
-			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
-			Rendezvous rendezvous = comment.getRendezvous(); 
-			rendezvouses.add(rendezvous);
-			
-			result = new ModelAndView("comment/edit");
-			result.addObject("comment", comment);
-			result.addObject("rendezvous", rendezvouses);
-			result.addObject("message", message);
-
-			return result;
-		}
-		
-		protected ModelAndView createEditModelAndViewForm(final CommentForm commentForm) {
-			ModelAndView result;
-
-			result = this.createEditModelAndViewForm(commentForm, null);
-
-			return result;
-		}
-
-		protected ModelAndView createEditModelAndViewForm(final CommentForm commentForm,
-				final String message) {
-			ModelAndView result;
-			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
-			Rendezvous rendezvous = commentForm.getRendezvous(); 
-			rendezvouses.add(rendezvous);
-			
-			result = new ModelAndView("comment/edit");
-			result.addObject("commentForm", commentForm);
-			result.addObject("rendezvous", rendezvouses);
-			result.addObject("message", message);
-
-			return result;
-		}
-	
 }
