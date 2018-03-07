@@ -11,7 +11,7 @@
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="announcement" requestURI="${requestURI }" id="row">	
+	name="announcement" requestURI="${requestURI }" id="row" defaultsort="3" defaultorder="descending">	
 	
 	
 	<display:column>
@@ -21,10 +21,13 @@
 	<spring:message code="announcement.title" var="titleHeader"/>
 	<display:column property="title" title="${titleHeader}" sortable="true"/>
 	
+	<spring:message code="announcement.format.date" var="formatDate"/>
+	<spring:message code="announcement.moment" var="momentHeader"/>
+	<display:column property="moment" title="${momentHeader}" sortable="true" format="${formatDate}"/>
+	
 	<spring:message code="announcement.rendezvous" var="rendezvousHeader"/>
 	<display:column title="${rendezvousHeader}">
-		<a href="rendezvous/display.do?rendezvousId=${row.rendezvous.id}">
-		<spring:message code="rendezvous.display"/></a>
+		<a href="rendezvous/display.do?rendezvousId=${row.rendezvous.id}"><jstl:out value="${row.rendezvous.name}"/></a>
 	</display:column>
 	
 
