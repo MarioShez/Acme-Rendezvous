@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -5,7 +6,6 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,27 +29,28 @@ public class RendezvousService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private RendezvousRepository rendezvousRepository;
+	private RendezvousRepository	rendezvousRepository;
 
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	private UserService userService;
+	private UserService				userService;
 
 	@Autowired
-	private AdminService adminService;
+	private AdminService			adminService;
 
 	@Autowired
-	private AnnouncementService announcementService;
+	private AnnouncementService		announcementService;
 
 	@Autowired
-	private CommentService commentService;
+	private CommentService			commentService;
 
 	@Autowired
-	private QuestionService questionService;
+	private QuestionService			questionService;
 
 	@Autowired
-	private Validator validator;
+	private Validator				validator;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -77,7 +78,7 @@ public class RendezvousService {
 		return result;
 
 	}
-	
+
 	public Collection<Rendezvous> findAll() {
 		Collection<Rendezvous> res;
 		res = this.rendezvousRepository.findAll();
@@ -87,8 +88,7 @@ public class RendezvousService {
 
 	public Rendezvous findOne(final int rendezvousId) {
 
-		final Rendezvous result = this.rendezvousRepository
-				.findOne(rendezvousId);
+		final Rendezvous result = this.rendezvousRepository.findOne(rendezvousId);
 		return result;
 	}
 
@@ -112,12 +112,12 @@ public class RendezvousService {
 		final Rendezvous result;
 
 		result = this.rendezvousRepository.save(rendezvous);
-		
-		User principal = userService.findByPrincipal();
+
+		final User principal = this.userService.findByPrincipal();
 
 		if (rendezvous.getId() == 0)
 			principal.getOrganisedRendezvouses().add(result);
-			principal.getRsvpdRendezvouses().add(result);
+		principal.getRsvpdRendezvouses().add(result);
 
 		return result;
 	}
@@ -133,27 +133,24 @@ public class RendezvousService {
 			attendant.getRsvpdRendezvouses().remove(rendezvous);
 		for (final Announcement announcement : rendezvous.getAnnouncements())
 			this.announcementService.delete(announcement);
-		if(rendezvous.getComments().size()>0)
+		if (rendezvous.getComments().size() > 0)
 			this.commentService.deleteAll(rendezvous.getComments());
-		for (final Comment comment : rendezvous.getComments())
-			this.commentService.delete(comment);
 		for (final Question question : rendezvous.getQuestions())
 			this.questionService.delete(question);
 		for (final Rendezvous linkedRendezvous : rendezvous.getLinkedRendezvouses())
 			rendezvous.getLinkedRendezvouses().remove(linkedRendezvous);
-		for (Rendezvous parentRendezvous : this.findParentRendezvouses(rendezvous.getId())){
+		for (final Rendezvous parentRendezvous : this.findParentRendezvouses(rendezvous.getId()))
 			parentRendezvous.getLinkedRendezvouses().remove(rendezvous);
-		}
 
 		this.rendezvousRepository.delete(rendezvous);
-}
+	}
 
 	// Other business methods -------------------------------------------------
-	
-	public RendezvousForm construct(Rendezvous rendezvous) {
-		
+
+	public RendezvousForm construct(final Rendezvous rendezvous) {
+
 		Assert.notNull(rendezvous);
-		
+
 		RendezvousForm rendezvousForm;
 
 		rendezvousForm = new RendezvousForm();
@@ -163,34 +160,32 @@ public class RendezvousService {
 		rendezvousForm.setDescription(rendezvous.getDescription());
 		rendezvousForm.setPicture(rendezvous.getPicture());
 		rendezvousForm.setMoment(rendezvous.getMoment());
-		if(rendezvous.getGpsCoordinate() == null){
+		if (rendezvous.getGpsCoordinate() == null) {
 			rendezvousForm.setLatitude(null);
 			rendezvousForm.setLongitude(null);
-		}else{
+		} else {
 			rendezvousForm.setLatitude(rendezvous.getGpsCoordinate().getLatitude());
 			rendezvousForm.setLongitude(rendezvous.getGpsCoordinate().getLongitude());
 		}
 		rendezvousForm.setAdult(rendezvous.getAdult());
 		rendezvousForm.setFinalVersion(rendezvous.getFinalVersion());
 		rendezvousForm.setDeleted(rendezvous.getDeleted());
-		
+
 		return rendezvousForm;
 	}
 
-	public Rendezvous reconstruct(RendezvousForm rendezvousForm,
-			BindingResult binding) {
-		
+	public Rendezvous reconstruct(final RendezvousForm rendezvousForm, final BindingResult binding) {
+
 		Assert.notNull(rendezvousForm);
-	
+
 		Rendezvous rendezvous;
-		
-		if(rendezvousForm.getId() != 0){
-			rendezvous = findOne(rendezvousForm.getId()); 
-		}else{
-			rendezvous = create();
-		}
-		
-		GpsCoordinate gpsCoordinate = new GpsCoordinate();
+
+		if (rendezvousForm.getId() != 0)
+			rendezvous = this.findOne(rendezvousForm.getId());
+		else
+			rendezvous = this.create();
+
+		final GpsCoordinate gpsCoordinate = new GpsCoordinate();
 		gpsCoordinate.setLatitude(rendezvousForm.getLatitude());
 		gpsCoordinate.setLongitude(rendezvousForm.getLongitude());
 
@@ -202,11 +197,10 @@ public class RendezvousService {
 		rendezvous.setAdult(rendezvousForm.getAdult());
 		rendezvous.setFinalVersion(rendezvousForm.getFinalVersion());
 		rendezvous.setDeleted(rendezvousForm.getDeleted());
-		
-		if(binding != null){
-			validator.validate(rendezvous, binding);
-		}
-	
+
+		if (binding != null)
+			this.validator.validate(rendezvous, binding);
+
 		return rendezvous;
 	}
 
@@ -217,14 +211,14 @@ public class RendezvousService {
 		final User principal = this.userService.findByPrincipal();
 		Assert.isTrue(rendezvous.getOrganiser().equals(principal));
 	}
-	
+
 	public void checkPrincipalForm(final RendezvousForm rendezvousForm) {
 
 		Assert.notNull(rendezvousForm);
-		
-		Rendezvous rendezvous = reconstruct(rendezvousForm, null);
+
+		final Rendezvous rendezvous = this.reconstruct(rendezvousForm, null);
 		final User principal = this.userService.findByPrincipal();
-		
+
 		Assert.isTrue(rendezvous.getOrganiser().equals(principal));
 	}
 
@@ -241,75 +235,69 @@ public class RendezvousService {
 
 	public Collection<Rendezvous> findFutureMomentAndNotAdult() {
 
-		final Collection<Rendezvous> result = this.rendezvousRepository
-				.findFutureMomentAndNotAdult();
+		final Collection<Rendezvous> result = this.rendezvousRepository.findFutureMomentAndNotAdult();
 		return result;
 	}
 
 	public Collection<Rendezvous> findFutureMoment() {
 
-		final Collection<Rendezvous> result = this.rendezvousRepository
-				.findFutureMoment();
-		return result;
-	}
-	
-	public Collection<Rendezvous> linkedRendezvousesFutureMomentByRendezvousId(int rendezvousId){
-		
-		Collection<Rendezvous> result = rendezvousRepository.linkedRendezvousesFutureMomentByRendezvousId(rendezvousId);
-		return result;
-	}
-	
-	public Collection<Rendezvous> linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(int rendezvousId){
-		
-		Collection<Rendezvous> result = rendezvousRepository.linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(rendezvousId);
-		return result;
-	}
-	
-	public Collection<Rendezvous> findByOrganiserId(int organiserId) {
-
-		final Collection<Rendezvous> result = this.rendezvousRepository
-				.findByOrganiserId(organiserId);
-		return result;
-	}
-	
-	public Collection<Rendezvous> findByOrganiserIdNotAdult(int organiserId) {
-
-		final Collection<Rendezvous> result = this.rendezvousRepository
-				.findByOrganiserIdNotAdult(organiserId);
+		final Collection<Rendezvous> result = this.rendezvousRepository.findFutureMoment();
 		return result;
 	}
 
-	public Collection<Rendezvous> findByAttendantId(int attendantId) {
+	public Collection<Rendezvous> linkedRendezvousesFutureMomentByRendezvousId(final int rendezvousId) {
 
-		final Collection<Rendezvous> result = this.rendezvousRepository
-				.findByAttendantId(attendantId);
+		final Collection<Rendezvous> result = this.rendezvousRepository.linkedRendezvousesFutureMomentByRendezvousId(rendezvousId);
 		return result;
 	}
-	
-	public Collection<Rendezvous> findByAttendantIdNotAdult(int attendantId) {
 
-		final Collection<Rendezvous> result = this.rendezvousRepository
-				.findByAttendantIdNotAdult(attendantId);
+	public Collection<Rendezvous> linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(final int rendezvousId) {
+
+		final Collection<Rendezvous> result = this.rendezvousRepository.linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(rendezvousId);
 		return result;
 	}
-	
+
+	public Collection<Rendezvous> findByOrganiserId(final int organiserId) {
+
+		final Collection<Rendezvous> result = this.rendezvousRepository.findByOrganiserId(organiserId);
+		return result;
+	}
+
+	public Collection<Rendezvous> findByOrganiserIdNotAdult(final int organiserId) {
+
+		final Collection<Rendezvous> result = this.rendezvousRepository.findByOrganiserIdNotAdult(organiserId);
+		return result;
+	}
+
+	public Collection<Rendezvous> findByAttendantId(final int attendantId) {
+
+		final Collection<Rendezvous> result = this.rendezvousRepository.findByAttendantId(attendantId);
+		return result;
+	}
+
+	public Collection<Rendezvous> findByAttendantIdNotAdult(final int attendantId) {
+
+		final Collection<Rendezvous> result = this.rendezvousRepository.findByAttendantIdNotAdult(attendantId);
+		return result;
+	}
+
 	public Collection<Rendezvous> findOrganisedRendezvousesByPrincipal() {
 
 		final User organiser = this.userService.findByPrincipal();
-		Collection<Rendezvous> result = findByOrganiserId(organiser.getId());
+		final Collection<Rendezvous> result = this.findByOrganiserId(organiser.getId());
 		return result;
 	}
-	
+
 	public Collection<Rendezvous> findRspvdRendezvousesByPrincipal() {
 
 		final User attendant = this.userService.findByPrincipal();
-		Collection<Rendezvous> result = findByAttendantId(attendant.getId());
+		final Collection<Rendezvous> result = this.findByAttendantId(attendant.getId());
 		return result;
 	}
-	
-	public Collection<Rendezvous> findParentRendezvouses(int rendezvousId){
-		
-		Collection<Rendezvous> result = rendezvousRepository.findParentRendezvouses(rendezvousId);
+
+	public Collection<Rendezvous> findParentRendezvouses(final int rendezvousId) {
+
+		final Collection<Rendezvous> result = this.rendezvousRepository.findParentRendezvouses(rendezvousId);
 		return result;
 	}
 
