@@ -51,33 +51,14 @@ public class AnnouncementAdminController extends AbstractController {
 	
 	// Delete ------------
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int announcementId) {
-		ModelAndView result;
-		Announcement announcement = new Announcement();
-
-		announcement = this.announcementService.findOne(announcementId);
-		Assert.notNull(announcement);
-		result = this.createEditModelAndView(announcement);
-
-		return result;
-	}
-	
-	
-	@RequestMapping(value="/edit", method=RequestMethod.POST, params ="delete")
-	public ModelAndView create(final Announcement announcement, 
-			final BindingResult binding){
-		ModelAndView res;
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(int announcementId){
 		
-		Assert.notNull(announcement);
-		try{
-			this.announcementService.delete(announcement);
-			res = new ModelAndView("redirect:list.do");
-		}catch (final Throwable oops) {
-			res = this.createEditModelAndView(announcement, "announcement.commit.error");
-		}
+		Announcement announcement = announcementService.findOne(announcementId);
 		
-		return res;
+		announcementService.delete(announcement);
+		
+		return new ModelAndView("redirect:list.do");
 	}
 
 	// Ancillary methods --------------------------------------------------

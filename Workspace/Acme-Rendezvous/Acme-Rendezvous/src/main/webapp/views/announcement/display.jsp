@@ -41,4 +41,3 @@
 </form:form>
 
 <acme:cancel url="announcement/list.do?rendezvousId=${announcement.rendezvous.id}" code="announcement.back"/>
-

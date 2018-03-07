@@ -11,10 +11,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="comment/display.do" modelAttribute="comment">
+<form:form action="comment/display.do" modelAttribute="commentForm">
 	
-	<form:hidden path="id" />
-	<form:hidden path="version" />
 
 <img src="<jstl:out value="${comment.picture}"/>" width="450" height="174">
 <br/>

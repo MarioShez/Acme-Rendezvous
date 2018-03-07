@@ -1,5 +1,6 @@
 package controllers.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import services.RendezvousService;
 import controllers.AbstractController;
 import domain.Announcement;
 import domain.Rendezvous;
+import forms.AnnouncementForm;
 
 @Controller
 @RequestMapping("/announcement/user")
@@ -62,31 +64,32 @@ public class AnnouncementUserController extends AbstractController {
 			
 			announcement = this.announcementService.create(rendezvous);
 			
+			AnnouncementForm announcementForm;
+			announcementForm = this.announcementService.construct(announcement);
 			
-//			moment = new Date(System.currentTimeMillis()-1);
-//			
-//			announcement.setRendezvous(rendezvous);
-			//announcement.setMoment(moment);
-			
-			res = this.createEditModelAndView(announcement);
+			res = this.createEditModelAndView(announcementForm);
 			
 			return res;
 		}
 		
 		@RequestMapping(value="/edit",method=RequestMethod.POST, params = "save")
-		public ModelAndView save(@Valid final Announcement announcement,
+		public ModelAndView save( final AnnouncementForm announcementForm,
 				final BindingResult binding){
 			ModelAndView res;
-			Integer id = announcement.getRendezvous().getId();
 			
 			if(binding.hasErrors()){
-				res = this.createEditModelAndView(announcement, "announcement.params.error");
+				res = this.createEditModelAndView(announcementForm, "announcement.params.error");
 			}else
 				try{
+					Announcement announcement = this.announcementService.reconstruct(announcementForm, binding);
 					this.announcementService.save(announcement);
+
+					Integer id = announcement.getRendezvous().getId();
 					res = new ModelAndView("redirect:/announcement/list.do?rendezvousId="+id);
 				}catch (final Throwable oops) {
-					res = this.createEditModelAndView(announcement, "announcement.commit.error");
+					System.out.println(oops);
+					System.out.println(binding);
+					res = this.createEditModelAndView(announcementForm, "announcement.commit.error");
 				}
 			
 			return res;
@@ -115,6 +118,31 @@ public class AnnouncementUserController extends AbstractController {
 			return res;
 		}
 	
+		
+		protected ModelAndView createEditModelAndView(final AnnouncementForm announcementForm) {
+			ModelAndView res;
+			
+			res = this.createEditModelAndView(announcementForm,null);
+			
+			return res;
+		}
+
+		protected ModelAndView createEditModelAndView(final AnnouncementForm announcementForm,
+				final String message) {
+			ModelAndView res;
+			res = new ModelAndView("announcement/edit");
+			Rendezvous rendezvous = announcementForm.getRendezvous();
+			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
+			rendezvouses.add(rendezvous);
+			
+			res.addObject("announcementForm",announcementForm);
+			res.addObject("rendezvous",rendezvouses);
+			res.addObject("message",message);
+			res.addObject("requestURI","announcement/user/edit.do");
+			
+			
+			return res;
+		}
 	
 
 }
