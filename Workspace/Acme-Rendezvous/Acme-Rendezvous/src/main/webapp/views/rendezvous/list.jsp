@@ -14,43 +14,55 @@
 <display:table name="rendezvouses" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 
 	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
-			<a href="rendezvous/admin/delete.do?rendezvousId=${row.id}"><spring:message code="rendezvous.delete"/></a>
-		</display:column>
+		<jstl:if test="${requestURI == 'rendezvous/admin/list.do'}">
+			<display:column>
+				<a href="rendezvous/admin/delete.do?rendezvousId=${row.id}"><spring:message code="rendezvous.delete"/></a>
+			</display:column>
+		</jstl:if>
 	</security:authorize>
 	
 	
-		<jstl:choose>
-			<jstl:when test="${requestURI == 'rendezvous/user/list-organised.do' and row.finalVersion == false and row.deleted == false}">
+	<jstl:choose>
+		<jstl:when test="${requestURI == 'rendezvous/user/list-organised.do' and row.finalVersion == false and row.deleted == false}">
+			<display:column>
+				<a href="rendezvous/user/edit.do?rendezvousId=${row.id}"><spring:message code="rendezvous.edit"/></a>
+			</display:column>
+		</jstl:when>
+		<jstl:when test="${requestURI == 'rendezvous/user/list-organised.do' and row.finalVersion == true and row.deleted == false}">
+			<display:column>
+				<a href="rendezvous/user/list-link.do?rendezvousId=${row.id}"><spring:message code="rendezvous.assignRendezvouses"/></a>
+			</display:column>
+		</jstl:when>
+		<jstl:when test="${requestURI == 'rendezvous/user/list-rsvp.do'}">
+			<display:column>
+				<a href="comment/user/create.do?rendezvousId=${row.id}"><spring:message code="rendezvous.comment"/></a>
+			</display:column>
+		</jstl:when>
+		<jstl:when test="${requestURI == 'rendezvous/user/list-link.do'}">
+			<jstl:if test="${!rendezvousSource.linkedRendezvouses.contains(row)}">
 				<display:column>
-					<a href="rendezvous/user/edit.do?rendezvousId=${row.id}"><spring:message code="rendezvous.edit"/></a>
+					<a href="rendezvous/user/assign.do?rendezvousSourceId=${rendezvousSource.id}&rendezvousTargetId=${row.id}"><spring:message code="rendezvous.assign"/></a>
 				</display:column>
-			</jstl:when>
-			<jstl:when test="${requestURI == 'rendezvous/user/list-rsvp.do'}">
+			</jstl:if>
+			<jstl:if test="${rendezvousSource.linkedRendezvouses.contains(row)}">
 				<display:column>
-					<a href="comment/user/create.do?rendezvousId=${row.id}"><spring:message code="rendezvous.comment"/></a>
+					<a href="rendezvous/user/unassign.do?rendezvousSourceId=${rendezvousSource.id}&rendezvousTargetId=${row.id}"><spring:message code="rendezvous.unassign"/></a>
 				</display:column>
-			</jstl:when>
-			<jstl:when test="${requestURI == 'rendezvous/user/list-link.do'}">
-				<jstl:if test="${!rendezvousSource.linkedRendezvouses.contains(row)}">
-					<display:column>
-						<a href="rendezvous/user/assign.do?rendezvousSourceId=${rendezvousSource.id}&rendezvousTargetId=${row.id}"><spring:message code="rendezvous.assign"/></a>
-					</display:column>
-				</jstl:if>
-				<jstl:if test="${rendezvousSource.linkedRendezvouses.contains(row)}">
-					<display:column>
-						<a href="rendezvous/user/unassign.do?rendezvousSourceId=${rendezvousSource.id}&rendezvousTargetId=${row.id}"><spring:message code="rendezvous.unassign"/></a>
-					</display:column>
-				</jstl:if>
-			</jstl:when>
-			<jstl:otherwise>
-				<display:column/>
-			</jstl:otherwise>
-		</jstl:choose>
+			</jstl:if>
+		</jstl:when>
+		<jstl:when test="${requestURI == 'rendezvous/admin/list.do'}">
+		
+		</jstl:when>
+		<jstl:otherwise>
+			<display:column/>
+		</jstl:otherwise>
+	</jstl:choose>
 	
-	<display:column>
-		<a href="rendezvous/display.do?rendezvousId=${row.id}"><spring:message code="rendezvous.display"/></a>
-	</display:column>
+	<jstl:if test="${requestURI != 'rendezvous/user/list-link.do'}">
+		<display:column>
+			<a href="rendezvous/display.do?rendezvousId=${row.id}"><spring:message code="rendezvous.display"/></a>
+		</display:column>
+	</jstl:if>
 		
 	<spring:message var="nameHeader" code="rendezvous.name"/>
 	<display:column property="name" title="${nameHeader}"/>

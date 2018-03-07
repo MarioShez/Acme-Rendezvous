@@ -58,10 +58,10 @@
 			<br/>
 		</jstl:if>
 		
-		<%-- <jstl:if test="${not empty rendezvous.comments}">--%>
+		<jstl:if test="${not empty rendezvous.comments}">
 			<a href="comment/rendezvous/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listComments"/></a>
 			<br/>
-		<%-- </jstl:if>--%>
+		</jstl:if>
 		
 		<jstl:choose>
 			<jstl:when test="${areRSPVd == false and empty rendezvous.questions}">
@@ -82,7 +82,11 @@
 		</jstl:choose>
 		
 	</jstl:when>
+	
 	<jstl:when test="${rendezvous.deleted == true}">
 		<h3 style="text-transform: uppercase; color: red;"><b><spring:message code="rendezvous.isDeleted"/></b></h3>
 	</jstl:when>
+	
 </jstl:choose>
+
+<acme:cancel url="rendezvous/list.do" code="rendezvous.back"/>
