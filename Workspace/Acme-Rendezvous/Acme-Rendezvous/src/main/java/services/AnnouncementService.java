@@ -127,6 +127,7 @@ public class AnnouncementService {
 		res.setId(announcement.getId());
 		res.setTitle(announcement.getTitle());
 		res.setDescription(announcement.getDescription());
+		res.setRendezvous(announcement.getRendezvous());
 		
 		return res;
 	}
@@ -141,6 +142,7 @@ public class AnnouncementService {
 		res.setMoment(moment);
 		res.setTitle(announcementForm.getTitle());
 		res.setDescription(announcementForm.getDescription());
+		res.setRendezvous(announcementForm.getRendezvous());
 		
 		if(binding!=null)
 			validator.validate(res, binding);

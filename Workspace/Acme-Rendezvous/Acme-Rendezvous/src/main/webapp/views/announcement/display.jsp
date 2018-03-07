@@ -11,10 +11,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="announcement/display.do" modelAttribute="announcement">
+<form:form action="announcement/display.do" modelAttribute="announcementForm">
 	
-	<form:hidden path="id" />
-	<form:hidden path="version" />
 
 <spring:message var="patternDate" code="announcement.pattern.date"/>
 <b><spring:message code="announcement.moment"/>:&nbsp;</b><fmt:formatDate value="${announcement.moment}" pattern="${patternDate}"/>
@@ -32,9 +30,9 @@
 <br/>
 
 <security:authorize access="hasRole('ADMIN')">
-<jstl:if test="${comment.id != 0}">
+<jstl:if test="${announcement.id != 0}">
 	<input type="submit" name="delete"
-		value="<spring:message code="comment.delete" />"
+		value="<spring:message code="announcement.delete" />"
 		onclick="return confirm('<spring:message code="comment.confirm.delete" />')" />&nbsp;
 </jstl:if>
 </security:authorize>

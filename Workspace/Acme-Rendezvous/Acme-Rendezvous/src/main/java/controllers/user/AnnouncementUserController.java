@@ -1,5 +1,6 @@
 package controllers.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -130,9 +131,12 @@ public class AnnouncementUserController extends AbstractController {
 				final String message) {
 			ModelAndView res;
 			res = new ModelAndView("announcement/edit");
-			
+			Rendezvous rendezvous = announcementForm.getRendezvous();
+			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
+			rendezvouses.add(rendezvous);
 			
 			res.addObject("announcementForm",announcementForm);
+			res.addObject("rendezvous",rendezvouses);
 			res.addObject("message",message);
 			res.addObject("requestURI","announcement/user/edit.do");
 			

@@ -28,6 +28,7 @@ public class AnnouncementForm {
 	private int id;
 	private String title;
 	private String description;
+	private Rendezvous rendezvous;
 	
 	
 	public int getId(){
@@ -57,20 +58,17 @@ public class AnnouncementForm {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
 
-	// Relationships  
-//
-//	private Rendezvous rendezvous;
-//	
-//	public Rendezvous getRendezvous(){
-//		return rendezvous;
-//	}
-//	
-//	public void setRendezvous(Rendezvous rendezvous){
-//		this.rendezvous = rendezvous;
-//	}
-//	
+	@Valid
+	@NotNull
+	@ManyToOne(optional=false)
+	public Rendezvous getRendezvous() {
+		return rendezvous;
+	}
+
+	public void setRendezvous(Rendezvous rendezvous) {
+		this.rendezvous = rendezvous;
+	}
+
 	
 }
