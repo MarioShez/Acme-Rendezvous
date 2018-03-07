@@ -43,6 +43,9 @@
 					</display:column>
 				</jstl:if>
 			</jstl:when>
+			<jstl:otherwise>
+				<display:column/>
+			</jstl:otherwise>
 		</jstl:choose>
 	
 	<display:column>
