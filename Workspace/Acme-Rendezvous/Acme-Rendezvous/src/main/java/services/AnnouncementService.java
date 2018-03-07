@@ -121,16 +121,29 @@ public class AnnouncementService {
 		return res;
 	}
 	
+	public AnnouncementForm construct(Announcement announcement){
+		AnnouncementForm res = new AnnouncementForm();
+		
+		res.setId(announcement.getId());
+		res.setTitle(announcement.getTitle());
+		res.setDescription(announcement.getDescription());
+		
+		return res;
+	}
+	
 	public Announcement reconstruct(AnnouncementForm announcementForm, BindingResult binding){
+		Assert.notNull(announcementForm);
 		Announcement res = new Announcement();
 		
 		Date moment = new Date(System.currentTimeMillis()-1);
 		
+		res.setId(announcementForm.getId());
 		res.setMoment(moment);
 		res.setTitle(announcementForm.getTitle());
 		res.setDescription(announcementForm.getDescription());
 		
-		validator.validate(res, binding);
+		if(binding!=null)
+			validator.validate(res, binding);
 		
 		return res;
 	}
