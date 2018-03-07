@@ -21,6 +21,7 @@ import services.UserService;
 import controllers.AbstractController;
 import domain.Comment;
 import domain.Rendezvous;
+import forms.CommentForm;
 
 @Controller
 @RequestMapping("/comment/admin")
@@ -65,33 +66,14 @@ public class CommentAdminController extends AbstractController{
 		
 		// Deleting --------------------------------------------------------------
 
-		@RequestMapping(value = "/edit", method = RequestMethod.GET)
-		public ModelAndView create(@RequestParam final int commentId) {
-			ModelAndView result;
-			Comment comment = new Comment();
-
-			comment = commentService.findOne(commentId);
-			Assert.notNull(comment);
-			result = this.createEditModelAndView(comment);
-
-			return result;
-		}
-		
-		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-		public ModelAndView create(@Valid final Comment comment,
-				final BindingResult binding) {
-			ModelAndView result;
+		@RequestMapping(value = "/delete", method = RequestMethod.GET)
+		public ModelAndView delete(int commentId){
 			
-			Assert.notNull(comment);
-			try{
-				this.commentService.delete(comment);
-				result = new ModelAndView("redirect:list.do");
-			}catch (final Throwable oops) {
-				result = this
-						.createEditModelAndView(comment, "comment.commit.error");
-			}
+			Comment comment = commentService.findOne(commentId);
 			
-			return result;
+			commentService.delete(comment);
+			
+			return new ModelAndView("redirect:list.do");
 		}
 		
 		// Ancillary methods --------------------------------------------------
@@ -113,6 +95,29 @@ public class CommentAdminController extends AbstractController{
 			
 			result = new ModelAndView("comment/edit");
 			result.addObject("comment", comment);
+			result.addObject("rendezvous", rendezvouses);
+			result.addObject("message", message);
+
+			return result;
+		}
+		
+		protected ModelAndView createEditModelAndViewForm(final CommentForm commentForm) {
+			ModelAndView result;
+
+			result = this.createEditModelAndViewForm(commentForm, null);
+
+			return result;
+		}
+
+		protected ModelAndView createEditModelAndViewForm(final CommentForm commentForm,
+				final String message) {
+			ModelAndView result;
+			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
+			Rendezvous rendezvous = commentForm.getRendezvous(); 
+			rendezvouses.add(rendezvous);
+			
+			result = new ModelAndView("comment/edit");
+			result.addObject("commentForm", commentForm);
 			result.addObject("rendezvous", rendezvouses);
 			result.addObject("message", message);
 

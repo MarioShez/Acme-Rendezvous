@@ -1,7 +1,15 @@
 package forms;
 
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
+
+import domain.Comment;
+import domain.Rendezvous;
 
 public class CommentForm {
 
@@ -17,9 +25,12 @@ public class CommentForm {
 	private String picture;
 	
 	private int id;
+	private Rendezvous rendezvous;
+	private Comment commentParent;
 
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getText() {
 		return text;
 	}
@@ -29,6 +40,7 @@ public class CommentForm {
 	}
 
 	@URL
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPicture() {
 		return picture;
 	}
@@ -44,4 +56,27 @@ public class CommentForm {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	@ManyToOne(optional = false)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public Rendezvous getRendezvous() {
+		return rendezvous;
+	}
+
+	public void setRendezvous(Rendezvous rendezvous) {
+		this.rendezvous = rendezvous;
+	}
+
+	@Valid
+	@ManyToOne(optional = true)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public Comment getCommentParent() {
+		return commentParent;
+	}
+
+	public void setCommentParent(Comment commentParent) {
+		this.commentParent = commentParent;
+	}
+	
+	
 }

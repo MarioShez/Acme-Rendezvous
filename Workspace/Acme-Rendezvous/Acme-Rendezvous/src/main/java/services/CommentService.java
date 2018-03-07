@@ -16,6 +16,7 @@ import domain.Comment;
 import domain.Rendezvous;
 import domain.User;
 import forms.CommentForm;
+import forms.RendezvousForm;
 
 @Service
 @Transactional
@@ -156,7 +157,7 @@ public class CommentService {
 		
 		Collection<Comment> replies = new ArrayList<Comment>();
 		User user = new User();
-		Rendezvous rendezvous = new Rendezvous();
+		user= this.userService.findByPrincipal();
 		
 		Date moment = new Date(System.currentTimeMillis()-1);
 		
@@ -166,7 +167,8 @@ public class CommentService {
 		
 		res.setReplies(replies);
 		res.setUser(user);
-		res.setRendezvous(rendezvous);
+		res.setRendezvous(commentForm.getRendezvous());
+		res.setCommentParent(commentForm.getCommentParent());
 		
 		validator.validate(res, binding);
 		
@@ -174,14 +176,26 @@ public class CommentService {
 		return res;
 	}
 	
-	public CommentForm reconstruct(Comment comment) {
+	public CommentForm construct(Comment comment) {
 		CommentForm res= new CommentForm();
 		
 		res.setPicture(comment.getPicture());
 		res.setText(comment.getText());
 		res.setId(comment.getId());
+		res.setRendezvous(comment.getRendezvous());
+		res.setCommentParent(comment.getCommentParent());
 		
 		return res;
+	}
+	
+	public void checkPrincipalForm(final CommentForm commentForm) {
+
+		Assert.notNull(commentForm);
+		
+		Comment comment = reconstruct(commentForm, null);
+		final User principal = this.userService.findByPrincipal();
+		
+		Assert.isTrue(comment.getUser().equals(principal));
 	}
 	
 }
