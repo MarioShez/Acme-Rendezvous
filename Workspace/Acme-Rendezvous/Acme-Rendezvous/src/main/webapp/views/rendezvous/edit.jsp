@@ -54,7 +54,7 @@
 		<a href="announcement/user/create.do?rendezvousId=${rendezvousForm.id}"><spring:message code="rendezvous.addAnnouncement"/></a>
 		<br/>
 		
-		<a href="question/user/list.do?rendezvousId=${rendezvousForm.id}"><spring:message code="rendezvous.listQuestions"/></a>
+		<a href="question/user/list-edit.do?rendezvousId=${rendezvousForm.id}"><spring:message code="rendezvous.listQuestions"/></a>
 		<br/>
 	</jstl:if>
 	

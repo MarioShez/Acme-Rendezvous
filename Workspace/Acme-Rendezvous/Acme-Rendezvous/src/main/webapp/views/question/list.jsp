@@ -12,31 +12,18 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<display:table name="questions" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
+<display:table name="questions" id="row" requestURI="question/user/list.do" pagesize="5" class="displaytag">
 		
-	<spring:message var="nameHeader" code="question.text"/>
-	<display:column property="content" title="${nameHeader}"/>
-	
-	<jstl:if test="${isPrincipal}">
-		<display:column>
-			<a href="question/user/edit.do?questionId=${row.id}"><spring:message code="question.edit"/></a>
-		</display:column>
-		
-		<display:column>
-			<a href="question/user/delete.do?questionId=${row.id}"><spring:message code="question.delete"/></a>
-		</display:column>
-	</jstl:if>
-	
-	<display:column>
-		<a href="answer/user/list.do?questionId=${row.id}"><spring:message code="question.seeAnswers"/></a>
+	<display:column sortable="false" title="${edit}">
+		<a href="question/user/edit.do?questionId=${row.id}"><spring:message code="question.edit" /></a>
 	</display:column>
 	
+	<spring:message code="question.text" var="textHeader"/>
+	<display:column property="content" title="${textHeader}" sortable="false"/>
+
 </display:table>
 
-<security:authorize access="hasRole('USER')">
-	<a href="question/user/create.do"><spring:message code="question.create"/></a>
-	<br/>
-</security:authorize>
+<a href="question/user/create.do?rendezvousId=${rendezvousId}"><spring:message code="question.create"/></a>
+<br/>
 
-<spring:message var="cancelValue" code="question.cancel" />
-<input type="button" name="cancel" value="${cancelValue}" onclick="javascript: relativeRedir('welcome/index.do');" />
+<acme:cancel code="question.cancel" url="rendezvous/user/edit.do?rendezvousId=${rendezvousId}"/>

@@ -9,17 +9,14 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action ="question/user/edit.do" modelAttribute="questionForm">
+<form:form action ="answer/user/edit.do" modelAttribute="answerForm">
 
 	<form:hidden path="id"/>
-	<form:hidden path="rendezvousId"/>
+	<form:hidden path="questionId"/>
 
-	<acme:textbox code="question.text" path="content"/>
+	<acme:textbox code="answer.text" path="content"/>
 	<br/>
 	
 	<acme:submit name="save" code="question.save"/>
-	<jstl:if test="${questionForm.id != 0}">
-		<acme:submit name="delete" code="question.delete"/>
-	</jstl:if>
-	<acme:cancel url="question/user/list-edit.do?rendezvousId=${question.rendezvous.id}" code="question.cancel"/>
+	<acme:cancel url="answer/user/list.do?rendezvousId=${rendezvousId}" code="answer.cancel"/>
 </form:form>	

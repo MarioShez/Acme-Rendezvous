@@ -69,7 +69,7 @@
 				<br/>
 			</jstl:when>
 			<jstl:when test="${areRSPVd == false and not empty rendezvous.questions}">
-				<button type="button" onclick="javascript: relativeRedir('rendezvous/user/rspv.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.makeRSPV" /></button>
+				<button type="button" onclick="javascript: relativeRedir('answer/user/list.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.makeRSPV" /></button>
 				<br/>
 			</jstl:when>
 			<jstl:when test="${areRSPVd}">

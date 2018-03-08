@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AnswerRepository;
-import security.UserAccountService;
 import domain.Answer;
 import domain.User;
 
@@ -25,15 +24,8 @@ public class AnswerService {
 	// Supporting services
 
 	@Autowired
-	private UserAccountService	userAccountService;
-
-	@Autowired
 	private UserService			userService;
 
-
-	//	@Autowired
-	//	private RendezvousesService rendezvousesService;
-	//	
 	// Constructors
 
 	public AnswerService() {
@@ -76,6 +68,10 @@ public class AnswerService {
 		Assert.isTrue(this.answerRepository.findByQuestionId(answer.getQuestion().getId()) != null);
 		Answer res;
 		res = this.answerRepository.save(answer);
+		if(answer.getId() == 0){
+			answer.getQuestion().getAnswers().add(res);
+			answer.getUser().getAnswer().add(res);
+		}
 		return res;
 	}
 
@@ -83,6 +79,8 @@ public class AnswerService {
 		Assert.notNull(answer);
 		Assert.isTrue(answer.getId() != 0);
 		Assert.isTrue(this.answerRepository.exists(answer.getId()));
+		answer.getUser().getAnswer().remove(answer);
+		answer.getQuestion().getAnswers().remove(answer);
 		this.answerRepository.delete(answer);
 	}
 
@@ -90,6 +88,10 @@ public class AnswerService {
 
 	public Collection<Answer> findByQuestionId(final Integer id) {
 		return this.answerRepository.findByQuestionId(id);
+	}
+	
+	public Answer findByUserIdAndQuestionId(int userId, int questionId) {
+		return this.answerRepository.findByUserIdAndQuestionId(userId, questionId);
 	}
 
 }
