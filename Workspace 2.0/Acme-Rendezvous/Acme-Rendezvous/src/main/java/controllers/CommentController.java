@@ -17,7 +17,6 @@ import services.CommentService;
 import services.RendezvousService;
 import domain.Comment;
 import domain.Rendezvous;
-import domain.User;
 
 @Controller
 @RequestMapping("/comment")

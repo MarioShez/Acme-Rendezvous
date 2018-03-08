@@ -4,17 +4,12 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AdminRepository;
 import security.Authority;
-import security.LoginService;
-import security.UserAccount;
-import domain.Admin;
-
 import security.LoginService;
 import security.UserAccount;
 import domain.Admin;

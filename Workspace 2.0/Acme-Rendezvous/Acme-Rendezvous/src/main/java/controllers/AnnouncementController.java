@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AnnouncementService;
-import services.RendezvousService;
 import domain.Announcement;
-import domain.Rendezvous;
 
 @Controller
 @RequestMapping("/announcement")
@@ -25,9 +23,6 @@ public class AnnouncementController extends AbstractController {
 	// Services ----------------------
 	@Autowired
 	private AnnouncementService announcementService;
-	
-	@Autowired
-	private RendezvousService rendezvousService;
 	
 	// Constructors ------------------
 	public AnnouncementController(){

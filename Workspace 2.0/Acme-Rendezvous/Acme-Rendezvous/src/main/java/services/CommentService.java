@@ -16,7 +16,6 @@ import domain.Comment;
 import domain.Rendezvous;
 import domain.User;
 import forms.CommentForm;
-import forms.RendezvousForm;
 
 @Service
 @Transactional
