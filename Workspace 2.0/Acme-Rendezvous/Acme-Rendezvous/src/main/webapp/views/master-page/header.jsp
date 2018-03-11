@@ -15,7 +15,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <div>
-	<a href="/Acme-Rendezvous"><img src="http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png" alt="Acme-Rendezvous Co., Inc." /></a>
+	<a href="/Acme-Rendezvous"><img src="images/logo.png" alt="Acme-Rendezvous 2.0 Co., Inc." /></a>
 </div>
 
 <div>
