@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import domain.Comment;
 import domain.GpsCoordinate;
 import domain.Question;
 import domain.Rendezvous;
+import domain.Request;
 import domain.User;
 import forms.RendezvousForm;
 
@@ -73,6 +75,7 @@ public class RendezvousService {
 		result.setAttendants(new ArrayList<User>());
 		result.getAttendants().add(this.userService.findByPrincipal());
 		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
+		result.setRequests(new ArrayList<Request>());
 
 		return result;
 

@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -21,10 +22,10 @@ public class AdminService {
 	// Managed repository
 
 	@Autowired
-	private AdminRepository adminRepository;
+	private AdminRepository	adminRepository;
+
 
 	// Supporting services
-
 
 	// Constructors
 
@@ -35,10 +36,10 @@ public class AdminService {
 	// Simple CRUD methods
 
 	public Admin create() {
-		Admin res = new Admin();
+		final Admin res = new Admin();
 
-		UserAccount userAccount = new UserAccount();
-		Authority authority = new Authority();
+		final UserAccount userAccount = new UserAccount();
+		final Authority authority = new Authority();
 
 		authority.setAuthority(Authority.ADMIN);
 		userAccount.addAuthority(authority);
@@ -54,7 +55,7 @@ public class AdminService {
 		return res;
 	}
 
-	public Admin findOne(int administratorId) {
+	public Admin findOne(final int administratorId) {
 		Assert.isTrue(administratorId != 0);
 		Admin res;
 		res = this.adminRepository.findOne(administratorId);
@@ -62,7 +63,7 @@ public class AdminService {
 		return res;
 	}
 
-	public Admin save(Admin administrator) {
+	public Admin save(final Admin administrator) {
 		Admin res;
 
 		if (administrator.getId() == 0) {
@@ -81,27 +82,27 @@ public class AdminService {
 
 	// Ancillary methods
 
-
 	public Admin findByPrincipal() {
 		Admin res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		res = this.adminRepository.findAdministratorByUserAccountId(userAccount
-				.getId());
+		res = this.adminRepository.findAdministratorByUserAccountId(userAccount.getId());
 		Assert.notNull(res);
 		return res;
 	}
 
-	
-	public void checkAuthority() {
+	public boolean checkAuthority() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		Collection<Authority> authority = userAccount.getAuthorities();
+		final Collection<Authority> authority = userAccount.getAuthorities();
 		Assert.notNull(authority);
-		Authority res = new Authority();
+		final Authority res = new Authority();
 		res.setAuthority("ADMIN");
-		Assert.isTrue(authority.contains(res));
+		if (authority.contains(res))
+			return true;
+		else
+			return false;
 	}
 
 	// C-1
@@ -111,25 +112,25 @@ public class AdminService {
 		return res;
 	}
 
-//
-//	public void checkAuthority() {
-//		UserAccount userAccount;
-//		userAccount = LoginService.getPrincipal();
-//		Assert.notNull(userAccount);
-//		Collection<Authority> authority = userAccount.getAuthorities();
-//		Assert.notNull(authority);
-//		Authority res = new Authority();
-//		res.setAuthority("ADMIN");
-//		Assert.isTrue(authority.contains(res));
-//	}
-//
-//	// C-1
-//	public Object[] avgSqtrUser() {
-//		Object[] res;
-//		res = this.adminRepository.avgSqtrUser();
-//		return res;
-//	}
-//
+	//
+	//	public void checkAuthority() {
+	//		UserAccount userAccount;
+	//		userAccount = LoginService.getPrincipal();
+	//		Assert.notNull(userAccount);
+	//		Collection<Authority> authority = userAccount.getAuthorities();
+	//		Assert.notNull(authority);
+	//		Authority res = new Authority();
+	//		res.setAuthority("ADMIN");
+	//		Assert.isTrue(authority.contains(res));
+	//	}
+	//
+	//	// C-1
+	//	public Object[] avgSqtrUser() {
+	//		Object[] res;
+	//		res = this.adminRepository.avgSqtrUser();
+	//		return res;
+	//	}
+	//
 	// C-2
 	public Double ratioUserRendezvous() {
 		Double res;

@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -25,7 +26,8 @@ public class ManagerService {
 	// Managed repository
 
 	@Autowired
-	private ManagerRepository managerRepository;
+	private ManagerRepository	managerRepository;
+
 
 	// Constructors
 
@@ -33,18 +35,20 @@ public class ManagerService {
 		super();
 	}
 
+
 	// Supporting services
 
 	@Autowired
-	private Validator validator;
+	private Validator	validator;
+
 
 	// Simple CRUD methods
 
 	public Manager create() {
-		Manager res = new Manager();
+		final Manager res = new Manager();
 
-		UserAccount userAccount = new UserAccount();
-		Authority authority = new Authority();
+		final UserAccount userAccount = new UserAccount();
+		final Authority authority = new Authority();
 
 		authority.setAuthority(Authority.MANAGER);
 		userAccount.addAuthority(authority);
@@ -60,7 +64,7 @@ public class ManagerService {
 		return res;
 	}
 
-	public Manager findOne(int managerId) {
+	public Manager findOne(final int managerId) {
 		Assert.isTrue(managerId != 0);
 		Manager res;
 		res = this.managerRepository.findOne(managerId);
@@ -68,7 +72,7 @@ public class ManagerService {
 		return res;
 	}
 
-	public Actor save(Manager manager) {
+	public Actor save(final Manager manager) {
 		Manager res;
 
 		if (manager.getId() == 0) {
@@ -84,36 +88,39 @@ public class ManagerService {
 		return res;
 	}
 
+	// Other businesss methods
+
 	public Manager findByPrincipal() {
 		Manager res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		if (userAccount == null) {
+		if (userAccount == null)
 			res = null;
-		} else {
-			res = this.managerRepository.findManagerByUserAccountId(userAccount
-					.getId());
-		}
+		else
+			res = this.managerRepository.findManagerByUserAccountId(userAccount.getId());
 		return res;
 	}
 
-	public void checkAuthority() {
+	public boolean checkAuthority() {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		Collection<Authority> authority = userAccount.getAuthorities();
+		final Collection<Authority> authority = userAccount.getAuthorities();
 		Assert.notNull(authority);
-		Authority res = new Authority();
+		final Authority res = new Authority();
 		res.setAuthority("MANAGER");
-		Assert.isTrue(authority.contains(res));
+		if (authority.contains(res))
+			return true;
+		else
+			return false;
 	}
 
-	public Manager reconstruct(UserForm managerForm, BindingResult binding) {
-		Manager res = new Manager();
+	public Manager reconstruct(final UserForm managerForm, final BindingResult binding) {
+		final Manager res = new Manager();
 
-		UserAccount userAccount = managerForm.getUserAccount();
+		final UserAccount userAccount = managerForm.getUserAccount();
 
-		Authority authority = new Authority();
+		final Authority authority = new Authority();
 		authority.setAuthority(Authority.MANAGER);
 		userAccount.addAuthority(authority);
 
@@ -125,9 +132,18 @@ public class ManagerService {
 		res.setAddress(managerForm.getAddress());
 		res.setBirth(managerForm.getBirth());
 
-		validator.validate(res, binding);
+		this.validator.validate(res, binding);
 
 		return res;
 	}
 
+	public Collection<Manager> managersMoreServicesThanAvg() {
+		final Collection<Manager> result = this.managerRepository.managersMoreServicesThanAvg();
+		return result;
+	}
+
+	public Collection<Manager> managersMoreServicesCancelled() {
+		final Collection<Manager> result = this.managerRepository.managersMoreServicesCancelled();
+		return result;
+	}
 }
