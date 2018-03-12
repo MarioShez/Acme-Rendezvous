@@ -59,10 +59,10 @@ public class UserServiceTest extends AbstractTest{
 				//creando user sin dirección
 				"user1", "surname1", "email1@gmail.com", "612345678", "", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
 			}
-//			,{
-//				//creando user sin fecha de nacimiento
-//				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "", "userName1", "password", DataIntegrityViolationException.class
-//			}
+			,{
+				//creando user sin fecha de nacimiento
+				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "", "userName1", "password", DataIntegrityViolationException.class
+			}
 			,{
 				//creando user sin username
 				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993", "", "password", javax.validation.ConstraintViolationException.class
@@ -89,7 +89,7 @@ public class UserServiceTest extends AbstractTest{
 		try{
 			fecha = pattern.parse(birth);
 		}catch(ParseException e){
-			e.printStackTrace();
+			e.getClass();
 		}
 		
 		try{

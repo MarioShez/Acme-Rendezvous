@@ -194,9 +194,14 @@
 		<property name="address" value="C/ Lugo" />
 		<property name="birth" value="12/09/1993" />
 		<property name="userAccount" ref="userAccount5" />
-		<property name="vat" value="1a-2b" />
+		<property name="vat" value="1A-2B" />
+		<property name="services">
+			<list>
+				<ref bean="service1"/>
+			</list>
+		</property>
 	</bean>
-	
+
 	<!-- manager2 -->
 
 	<bean id="manager2" class="domain.Manager">
@@ -207,36 +212,109 @@
 		<property name="address" value="C/ josé estoso" />
 		<property name="birth" value="12/09/1965" />
 		<property name="userAccount" ref="userAccount6" />
-		<property name="vat" value="1a-2b" />
+		<property name="vat" value="1A-2B" />
+		<property name="services">
+			<list>
+				<ref bean="service2"/>
+			</list>
+		</property>
 	</bean>
-	
-	<!-- Services -->
-	
-	<!-- Services1 -->
-	<bean id="services1" class="domain.Services">
+
+	<!-- Service -->
+
+	<!-- Service 1 -->
+	<bean id="service1" class="domain.Service">
 		<property name="name" value="Servicio 1" />
 		<property name="description" value="Servicio 1 esta bien" />
 		<property name="picture" value="" />
-		<property name="category">
+		<property name="categories">
 			<list>
 			</list>
 		</property>
 		<property name="manager" ref="manager1" />
+		<property name="cancelled" value="false" />
+		<property name="requests">
+			<list>
+				<ref bean="request1"/>
+			</list>
+		</property>
 	</bean>
-	
-	<!-- Services2 -->
-	<bean id="services2" class="domain.Services">
+
+	<!-- Service 2 -->
+	<bean id="service2" class="domain.Service">
 		<property name="name" value="Servicio 2" />
 		<property name="description" value="Servicio 2 esta mejor" />
-		<property name="picture" value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
-		<property name="category">
+		<property name="picture"
+			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
+		<property name="categories">
 			<list>
-	
+
 			</list>
 		</property>
 		<property name="manager" ref="manager2" />
+		<property name="cancelled" value="false" />
+		<property name="requests">
+			<list>
+				<ref bean="request2"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Request -->
+	<!-- Request 1 -->
+	<bean id="request1" class="domain.Request">
+		<property name="creditCard" ref="creditCard1" />
+		<property name="comment" value="Comment 1" />
+		<property name="service" ref="service1" />
+		<property name="rendezvous" ref="rendezvous1" />
+	</bean>
+
+	<!-- Request 2 -->
+	<bean id="request2" class="domain.Request">
+		<property name="creditCard" ref="creditCard2" />
+		<property name="comment" value="Comment 2" />
+		<property name="service" ref="service2" />
+		<property name="rendezvous" ref="rendezvous1" />
+	</bean>
+
+	<!-- Request 3 -->
+	<bean id="request3" class="domain.Request">
+		<property name="creditCard" ref="creditCard3" />
+		<property name="comment" value="Comment 3" />
+		<property name="service" ref="service1" />
+		<property name="rendezvous" ref="rendezvous2" />
+	</bean>
+
+	<!-- CreditCard -->
+	<!-- CreditCard 1 -->
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holder" value="Name creditCard1" />
+		<property name="brand" value="VISA" />
+		<property name="number" value="4539009782278447" />
+		<property name="expirationMonth" value="5" />
+		<property name="expirationYear" value="2022" />
+		<property name="cvv" value="612" />
 	</bean>
 	
+	<!-- CreditCard 2 -->
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holder" value="Name creditCard2" />
+		<property name="brand" value="VISA" />
+		<property name="number" value="4961155805327500" />
+		<property name="expirationMonth" value="7" />
+		<property name="expirationYear" value="2019" />
+		<property name="cvv" value="773" />
+	</bean>
+	
+	<!-- CreditCard 3 -->
+	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holder" value="Name creditCard3" />
+		<property name="brand" value="VISA" />
+		<property name="number" value="4532255185600482" />
+		<property name="expirationMonth" value="5" />
+		<property name="expirationYear" value="2019" />
+		<property name="cvv" value="216" />
+	</bean>
 
 	<!-- Rendezvous -->
 	<!-- Rendezvous 1 -->
@@ -278,6 +356,12 @@
 			<list>
 			</list>
 		</property>
+		<property name="requests">
+			<list>
+				<ref bean="request1"/>
+				<ref bean="request2"/>
+			</list>
+		</property>
 	</bean>
 
 	<!-- Rendezvous 2 -->
@@ -316,6 +400,11 @@
 				<ref bean="rendezvous3" />
 			</list>
 		</property>
+		<property name="requests">
+			<list>
+				<ref bean="request3"/>
+			</list>
+		</property>
 	</bean>
 
 	<!-- Rendezvous 3 -->
@@ -350,6 +439,10 @@
 			</list>
 		</property>
 		<property name="linkedRendezvouses">
+			<list>
+			</list>
+		</property>
+		<property name="requests">
 			<list>
 			</list>
 		</property>
