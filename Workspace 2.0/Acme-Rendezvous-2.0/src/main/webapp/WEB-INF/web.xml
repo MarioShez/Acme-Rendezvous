@@ -18,7 +18,7 @@
     <param-value>classpath:spring/servlet.xml</param-value>
   </context-param>
   <servlet>
-    <servlet-name>Acme-RendezvousServlet</servlet-name>
+    <servlet-name>Acme-Rendezvous-2.0Servlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
