@@ -30,7 +30,6 @@ public class User extends Actor {
 
 
 	@Valid
-	@NotNull
 	@OneToMany(mappedBy = "user")
 	public Collection<Answer> getAnswer() {
 		return this.answer;
@@ -41,7 +40,6 @@ public class User extends Actor {
 	}
 
 	@Valid
-	@NotNull
 	@OneToMany(mappedBy = "organiser")
 	public Collection<Rendezvous> getOrganisedRendezvouses() {
 		return this.organisedRendezvouses;
@@ -52,7 +50,6 @@ public class User extends Actor {
 	}
 
 	@Valid
-	@NotNull
 	@ManyToMany(mappedBy = "attendants")
 	public Collection<Rendezvous> getRsvpdRendezvouses() {
 		return this.rsvpdRendezvouses;
