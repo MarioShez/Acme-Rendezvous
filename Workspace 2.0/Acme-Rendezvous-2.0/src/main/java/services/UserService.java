@@ -77,7 +77,7 @@ public class UserService {
 		return res;
 	}
 
-	public Actor save(User user) {
+	public User save(User user) {
 		User res;
 
 		if (user.getId() == 0) {
@@ -123,6 +123,10 @@ public class UserService {
 		Authority res = new Authority();
 		res.setAuthority("USER");
 		Assert.isTrue(authority.contains(res));
+	}
+	
+	public void flush(){
+		this.userRepository.flush();
 	}
 
 	// 4.3

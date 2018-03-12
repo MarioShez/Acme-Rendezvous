@@ -27,7 +27,6 @@ public class User extends Actor {
 	private Collection<Rendezvous> rsvpdRendezvouses;
 	
 	@Valid
-	@NotNull
 	@OneToMany(mappedBy = "user")
 	public Collection<Answer> getAnswer() {
 		return answer;
@@ -39,7 +38,6 @@ public class User extends Actor {
 	
 	
 	@Valid
-	@NotNull
 	@OneToMany(mappedBy = "organiser")
 	public Collection<Rendezvous> getOrganisedRendezvouses() {
 		return organisedRendezvouses;
@@ -50,7 +48,6 @@ public class User extends Actor {
 	}
 	
 	@Valid
-	@NotNull
 	@ManyToMany(mappedBy = "attendants")
 	public Collection<Rendezvous> getRsvpdRendezvouses() {
 		return rsvpdRendezvouses;
