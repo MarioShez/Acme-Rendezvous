@@ -39,7 +39,7 @@ public class AnnouncementServiceTest extends AbstractTest {
 				// negative test: title blank
 				{"user1", "rendezvous1", " ", "sample description", javax.validation.ConstraintViolationException.class},
 				// negative test: description blank
-				{"user1", "rendezvous1", "sample title", " ", javax.validation.ConstraintViolationException.class},
+				{"user1", "rendezvous1", "sample title", " ", javax.validation.ConstraintViolationException.class}
 		
 		};
 		
@@ -167,6 +167,5 @@ public class AnnouncementServiceTest extends AbstractTest {
 		unauthenticate();
 	}
 	
-	
-	
+
 }
