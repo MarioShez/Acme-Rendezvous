@@ -158,6 +158,10 @@ public class AnnouncementService {
 		Assert.notNull(res);
 		return res;
 	}
+	
+	public void flush(){
+		this.announcementRepository.flush();
+	}
 
 
 }
