@@ -24,9 +24,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(indexes = {@Index(columnList = "moment,adult") })
-
-
+@Table(indexes = {
+	@Index(columnList = "moment,adult")
+})
 public class Rendezvous extends DomainEntity {
 
 	// Constructors -----------------------------------------------------------
@@ -131,6 +131,7 @@ public class Rendezvous extends DomainEntity {
 	private User						organiser;
 	private Collection<User>			attendants;
 	private Collection<Rendezvous>		linkedRendezvouses;
+	private Collection<Request>			requests;
 
 
 	@Valid
@@ -197,6 +198,17 @@ public class Rendezvous extends DomainEntity {
 
 	public void setLinkedRendezvouses(final Collection<Rendezvous> linkedRendezvouses) {
 		this.linkedRendezvouses = linkedRendezvouses;
+	}
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "rendezvous")
+	public Collection<Request> getRequests() {
+		return this.requests;
+	}
+
+	public void setRequests(final Collection<Request> requests) {
+		this.requests = requests;
 	}
 
 }

@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Collection;
@@ -16,51 +17,54 @@ import org.hibernate.validator.constraints.SafeHtml;
 @Access(AccessType.PROPERTY)
 public class Category extends DomainEntity {
 
-	
 	// Constructors
 
-		public Category() {
-			super();
-		}
-		
-		// Attributes
+	public Category() {
+		super();
+	}
 
-		private String name;
-		private String description;
-		
-		@NotBlank
-		@SafeHtml
-		public String getName() {
-			return name;
-		}
 
-		public void setName(String name) {
-			this.name = name;
-		}
+	// Attributes
 
-		@NotBlank
-		@SafeHtml
-		public String getDescription() {
-			return description;
-		}
+	private String	name;
+	private String	description;
 
-		public void setDescription(String description) {
-			this.description = description;
-		}
-		
-		// Relationships
 
-		private Collection<Services> services;
-		
-		@Valid
-		@NotNull
-		@ManyToMany(mappedBy="category")
-		public Collection<Services> getServices() {
-			return services;
-		}
+	@NotBlank
+	@SafeHtml
+	public String getName() {
+		return this.name;
+	}
 
-		public void setServices(Collection<Services> services) {
-			this.services = services;
-		}
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	@NotBlank
+	@SafeHtml
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(final String description) {
+		this.description = description;
+	}
+
+
+	// Relationships
+
+	private Collection<Service>	services;
+
+
+	@Valid
+	@NotNull
+	@ManyToMany(mappedBy = "categories")
+	public Collection<Service> getServices() {
+		return this.services;
+	}
+
+	public void setServices(final Collection<Service> services) {
+		this.services = services;
+	}
 
 }
