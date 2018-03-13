@@ -56,6 +56,9 @@
 		
 		<a href="question/user/list.do?rendezvousId=${rendezvousForm.id}"><spring:message code="rendezvous.listQuestions"/></a>
 		<br/>
+		
+		<a href="request/user/create.do?rendezvousId=${rendezvousForm.id}"><spring:message code="rendezvous.makeRequest"/></a>
+		<br/>
 	</jstl:if>
 	
 	<jstl:if test="${rendezvousForm.finalVersion == false or rendezvousForm.deleted == false}">

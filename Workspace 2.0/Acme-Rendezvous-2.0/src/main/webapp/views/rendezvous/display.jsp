@@ -59,9 +59,16 @@
 		</jstl:if>
 		
 		<jstl:if test="${not empty rendezvous.comments}">
-			<a href="comment/rendezvous/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listComments"/></a>
+			<a href="comment/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listComments"/></a>
 			<br/>
 		</jstl:if>
+		
+		<security:authorize access="isAuthenticated()">
+			<jstl:if test="${not empty rendezvous.requests}">
+				<a href="service/actor/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listServices"/></a>
+				<br/>
+			</jstl:if>
+		</security:authorize>
 		
 		<jstl:choose>
 			<jstl:when test="${areRSPVd == false and empty rendezvous.questions}">
