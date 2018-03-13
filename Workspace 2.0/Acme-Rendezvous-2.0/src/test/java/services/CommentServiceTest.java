@@ -31,6 +31,7 @@ public class CommentServiceTest extends AbstractTest {
 	@Autowired
 	RendezvousService rendezvousService;
 
+	// User comment on the rendezvous that he or she has RSVPd
 	@SuppressWarnings("unchecked")
 	@Test
 	public void driverCreateAndSaveComment() {
@@ -41,11 +42,28 @@ public class CommentServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 
-		{
-				// usuario "user1" crea un comment para un rendezvous
-				// "rendezvous1" al que asiste
-				null, "test create", "https://testPrueba.com", null, null,
-				"rendezvous1", "user1", null }
+				{
+						// usuario "user1" crea un comment para un rendezvous
+						// "rendezvous1" al que asiste
+						null, "test create1", "https://testPrueba.com", null,
+						null, "rendezvous1", "user1", null },
+				{
+						// El usuario "user1" va a crear un commment para un
+						// rendezvous "rendezvous2" al q no va a asistir
+						null, "test create2", "https://testPrueba.com", null,
+						null, "rendezvous2", "user1",
+						IllegalArgumentException.class },
+				{
+						// el usuario "user1" va a responder a un comentario
+						// escrito en una cita a la q asiste
+						null, "test create3", "https://testPrueba.com", null,
+						iterador.next(), "rendezvous1", "user1", null },
+				{
+						// el usuario "user3" va a responder a un comentario
+						// escrito en una cita a la q no asiste
+						null, "test create3", "https://testPrueba.com", null,
+						iterador.next(), "rendezvous1", "user3",
+						IllegalArgumentException.class },
 
 		};
 
@@ -106,4 +124,51 @@ public class CommentServiceTest extends AbstractTest {
 
 		return res;
 	}
+
+	// Admin remove a comment that he or she thnks is inappropiate
+
+	@Test
+	public void driverAdminDeleteComment() {
+
+		final Object testingData[][] = {
+
+		{
+				// Admin "admin" borra un comentario "comment2" qye ya
+				// existe
+				"admin", "comment1", null, },
+
+		{
+				// El usuario "user1" va a intentar borrar un comentario
+				"user1", "comment1", IllegalArgumentException.class },
+
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+
+			this.templateDelete((String) testingData[i][0],
+					(String) testingData[i][1], (Class<?>) testingData[i][2]);
+		}
+
+	}
+
+	private void templateDelete(final String actor, final String comment,
+			final Class<?> expected) {
+		Comment comment1;
+
+		Class<?> caught = null;
+
+		try {
+			this.authenticate(actor);
+			comment1 = this.commentService.findOne(this.getEntityId(comment));
+			this.commentService.delete(comment1);
+
+			this.unauthenticate();
+			// this.commentService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+
+		}
+		this.checkExceptions(expected, caught);
+	}
+
 }
