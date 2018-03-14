@@ -28,7 +28,10 @@
 		
 		<value>/views/terms/tiles.xml</value>
 		<value>/views/user/tiles.xml</value>
+		<value>/views/manager/tiles.xml</value>
 		<value>/views/rendezvous/tiles.xml</value>
+		<value>/views/service/tiles.xml</value>
+		<value>/views/request/tiles.xml</value>
 		<value>/views/question/tiles.xml</value>
 		<value>/views/comment/tiles.xml</value>
 		<value>/views/announcement/tiles.xml</value>
