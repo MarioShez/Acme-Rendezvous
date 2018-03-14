@@ -100,7 +100,7 @@ public class Comment extends DomainEntity {
 	}
 
 	@Valid
-	@OneToMany()
+	@OneToMany(mappedBy= "commentParent")
 	public Collection<Comment> getReplies() {
 		return replies;
 	}
