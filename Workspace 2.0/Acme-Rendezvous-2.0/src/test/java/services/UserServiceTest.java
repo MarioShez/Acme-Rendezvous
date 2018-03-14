@@ -29,22 +29,6 @@ public class UserServiceTest extends AbstractTest{
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	
-	@Test
-	public void loginUserDriver(){
-		final Object testingData[][] = {
-			{
-				"user1", null
-			},{
-				"errorUser", IllegalArgumentException.class 
-			}
-		};
-		for(int i=0; i < testingData.length; i++){
-			this.templateLoginUser((String) testingData[i][0], (Class<?>) testingData[i][1]);
-		}
-	}
-	
-
 	@Test
 	public void registrationUserDriver(){
 		final Object testingData[][] = {
@@ -55,6 +39,37 @@ public class UserServiceTest extends AbstractTest{
 			,{
 				//creando user sin name
 				"", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
+			}
+			,{
+				//creando user sin surname
+				"user1", "", "email1@gmail.com", "612345678", "Address1", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
+			}
+			
+			,{
+				//creando user sin email
+				"user1", "surname1", "", "612345678", "Address1", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
+			}
+			
+			,{
+				//creando user sin teléfono
+				"user1", "surname1", "email1@gmail.com", "", "Address1", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
+			}
+			
+			,{
+				//creando user sin dirección
+				"user1", "surname1", "email1@gmail.com", "612345678", "", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
+			}
+			,{
+				//creando user sin fecha de nacimiento
+				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "", "userName1", "password", DataIntegrityViolationException.class
+			}
+			,{
+				//creando user sin username
+				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993", "", "password", javax.validation.ConstraintViolationException.class
+			}
+			,{
+				//creando user sin contraseña
+				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993", "userName1", "", DataIntegrityViolationException.class
 			}
 		};
 		
@@ -97,20 +112,6 @@ public class UserServiceTest extends AbstractTest{
 			this.entityManager.clear();
 		}
 		
-		this.checkExceptions(expected, caught);
-	}
-	
-	private void templateLoginUser(final String username, final Class<?> expected) {
-		Class<?> caught;
-		caught = null;
-		
-		try{
-			super.authenticate(username);
-			this.unauthenticate();
-		}catch(final Throwable oops){
-			caught = oops.getClass();
-			this.entityManager.clear();
-		}
 		this.checkExceptions(expected, caught);
 	}
 	
