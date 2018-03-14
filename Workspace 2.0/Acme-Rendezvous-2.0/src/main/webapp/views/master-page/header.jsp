@@ -15,7 +15,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <div>
-	<a href="/Acme-Rendezvous"><img src="images/logo.png" alt="Acme-Rendezvous 2.0 Co., Inc." /></a>
+	<a href="/Acme-Rendezvous-2.0"><img src="images/logo.png" alt="Acme-Rendezvous 2.0 Co., Inc." /></a>
 </div>
 
 <div>
