@@ -54,8 +54,8 @@
 		<a href="announcement/user/create.do?rendezvousId=${rendezvousForm.id}"><spring:message code="rendezvous.addAnnouncement"/></a>
 		<br/>
 		
-		<a href="question/user/list.do?rendezvousId=${rendezvousForm.id}"><spring:message code="rendezvous.listQuestions"/></a>
-		<br/>
+		<%-- <a href="question/user/list.do?rendezvousId=${rendezvousForm.id}"><spring:message code="rendezvous.listQuestions"/></a>
+		<br/> --%>
 		
 		<a href="request/user/create.do?rendezvousId=${rendezvousForm.id}"><spring:message code="rendezvous.makeRequest"/></a>
 		<br/>

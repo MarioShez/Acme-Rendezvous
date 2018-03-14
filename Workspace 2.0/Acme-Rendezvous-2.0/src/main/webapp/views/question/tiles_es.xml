@@ -31,8 +31,8 @@
 		<put-attribute name="body" value="/views/question/edit.jsp" />
 	</definition>
 	
-<!--	<definition name="question/display" extends="master.page">	
+	<definition name="question/display" extends="master.page">	
 		<put-attribute name="title" value="Display rendezvous" />
 		<put-attribute name="body" value="/views/rendezvous/display.jsp" />
-	</definition> -->
+	</definition>
 </tiles-definitions>

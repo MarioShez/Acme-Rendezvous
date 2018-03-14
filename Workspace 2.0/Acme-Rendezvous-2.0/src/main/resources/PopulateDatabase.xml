@@ -109,13 +109,13 @@
 		<property name="address" value="C/Margarita nº7" />
 		<property name="birth" value="12/09/1993" />
 		<property name="userAccount" ref="userAccount2" />
-		<property name="answer">
+		<!-- <property name="answer">
 			<list>
 				<ref bean="answer1" />
 				<ref bean="answer2" />
 				<ref bean="answer3" />
 			</list>
-		</property>
+		</property> -->
 		<property name="organisedRendezvouses">
 			<list>
 				<ref bean="rendezvous1" />
@@ -137,12 +137,12 @@
 		<property name="address" value="C/La Vega nº7" />
 		<property name="birth" value="06/05/1992" />
 		<property name="userAccount" ref="userAccount3" />
-		<property name="answer">
+		<!-- <property name="answer">
 			<list>
 				<ref bean="answer4" />
 				<ref bean="answer5" />
 			</list>
-		</property>
+		</property> -->
 		<property name="organisedRendezvouses">
 			<list>
 				<ref bean="rendezvous2" />
@@ -166,12 +166,12 @@
 		<property name="address" value="C/LAraña nº12" />
 		<property name="birth" value="06/05/1998" />
 		<property name="userAccount" ref="userAccount4" />
-		<property name="answer">
+		<!-- <property name="answer">
 			<list>
 				<ref bean="answer6" />
 
 			</list>
-		</property>
+		</property> -->
 		<property name="organisedRendezvouses">
 			<list>
 			</list>
@@ -340,12 +340,12 @@
 				<ref bean="comment1" />
 			</list>
 		</property>
-		<property name="questions">
+		<!-- <property name="questions">
 			<list>
 				<ref bean="question1" />
 				<ref bean="question2" />
 			</list>
-		</property>
+		</property> -->
 		<property name="organiser" ref="user1" />
 		<property name="attendants">
 			<list>
@@ -385,10 +385,10 @@
 				<ref bean="comment3" />
 			</list>
 		</property>
-		<property name="questions">
+		<!-- <property name="questions">
 			<list>
 			</list>
-		</property>
+		</property> -->
 		<property name="organiser" ref="user2" />
 		<property name="attendants">
 			<list>
@@ -426,11 +426,11 @@
 			<list>
 			</list>
 		</property>
-		<property name="questions">
+		<!-- <property name="questions">
 			<list>
 				<ref bean="question3" />
 			</list>
-		</property>
+		</property> -->
 		<property name="organiser" ref="user2" />
 		<property name="attendants">
 			<list>
@@ -494,7 +494,7 @@
 
 	<!-- Question -->
 	<!-- Question 1 -->
-	<bean id="question1" class="domain.Question">
+	<!-- <bean id="question1" class="domain.Question">
 		<property name="content" value="Question 01?" />
 		<property name="answers">
 			<list>
@@ -504,10 +504,10 @@
 			</list>
 		</property>
 		<property name="rendezvous" ref="rendezvous1" />
-	</bean>
+	</bean> -->
 
 	<!-- Question 2 -->
-	<bean id="question2" class="domain.Question">
+	<!-- <bean id="question2" class="domain.Question">
 		<property name="content" value="Question 02?" />
 		<property name="answers">
 			<list>
@@ -516,10 +516,10 @@
 			</list>
 		</property>
 		<property name="rendezvous" ref="rendezvous1" />
-	</bean>
+	</bean> -->
 
 	<!-- Question 3 -->
-	<bean id="question3" class="domain.Question">
+	<!-- <bean id="question3" class="domain.Question">
 		<property name="content" value="Question 03?" />
 		<property name="answers">
 			<list>
@@ -529,65 +529,65 @@
 			</list>
 		</property>
 		<property name="rendezvous" ref="rendezvous3" />
-	</bean>
+	</bean> -->
 
 
 	<!-- Answer -->
 	<!-- Answer 01 -->
-	<bean id="answer1" class="domain.Answer">
+	<!-- <bean id="answer1" class="domain.Answer">
 		<property name="content" value="Answer 1" />
 		<property name="question" ref="question1" />
 		<property name="user" ref="user1" />
-	</bean>
+	</bean> -->
 
 	<!-- Answer 02 -->
-	<bean id="answer2" class="domain.Answer">
+	<!-- <bean id="answer2" class="domain.Answer">
 		<property name="content" value="Answer 2" />
 		<property name="question" ref="question1" />
 		<property name="user" ref="user1" />
 	</bean>
-
+ -->
 	<!-- Answer 03 -->
-	<bean id="answer3" class="domain.Answer">
+	<!-- <bean id="answer3" class="domain.Answer">
 		<property name="content" value="Answer 3" />
 		<property name="question" ref="question1" />
 		<property name="user" ref="user1" />
-	</bean>
+	</bean> -->
 
 	<!-- Answer 04 -->
-	<bean id="answer4" class="domain.Answer">
+	<!-- <bean id="answer4" class="domain.Answer">
 		<property name="content" value="Answer 4" />
 		<property name="question" ref="question2" />
 		<property name="user" ref="user2" />
-	</bean>
+	</bean> -->
 
 	<!-- Answer 05 -->
-	<bean id="answer5" class="domain.Answer">
+	<!-- <bean id="answer5" class="domain.Answer">
 		<property name="content" value="Answer 5" />
 		<property name="question" ref="question2" />
 		<property name="user" ref="user2" />
-	</bean>
+	</bean> -->
 
 	<!-- Answer 06 -->
-	<bean id="answer6" class="domain.Answer">
+	<!-- <bean id="answer6" class="domain.Answer">
 		<property name="content" value="Answer 6" />
 		<property name="question" ref="question3" />
 		<property name="user" ref="user3" />
-	</bean>
+	</bean> -->
 
 	<!-- Answer 07 -->
-	<bean id="answer7" class="domain.Answer">
+	<!-- <bean id="answer7" class="domain.Answer">
 		<property name="content" value="Answer 7" />
 		<property name="question" ref="question3" />
 		<property name="user" ref="user3" />
-	</bean>
+	</bean> -->
 
 	<!-- Answer 08 -->
-	<bean id="answer8" class="domain.Answer">
+	<!-- <bean id="answer8" class="domain.Answer">
 		<property name="content" value="Answer 8" />
 		<property name="question" ref="question3" />
 		<property name="user" ref="user3" />
-	</bean>
+	</bean> -->
 
 
 

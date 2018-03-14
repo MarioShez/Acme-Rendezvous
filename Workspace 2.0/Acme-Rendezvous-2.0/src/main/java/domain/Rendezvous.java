@@ -127,7 +127,7 @@ public class Rendezvous extends DomainEntity {
 
 	private Collection<Announcement>	announcements;
 	private Collection<Comment>			comments;
-	private Collection<Question>		questions;
+	//private Collection<Question>		questions;
 	private User						organiser;
 	private Collection<User>			attendants;
 	private Collection<Rendezvous>		linkedRendezvouses;
@@ -156,16 +156,16 @@ public class Rendezvous extends DomainEntity {
 		this.comments = comments;
 	}
 
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "rendezvous")
-	public Collection<Question> getQuestions() {
-		return this.questions;
-	}
-
-	public void setQuestions(final Collection<Question> questions) {
-		this.questions = questions;
-	}
+	//	@Valid
+	//	@NotNull
+	//	@OneToMany(mappedBy = "rendezvous")
+	//	public Collection<Question> getQuestions() {
+	//		return this.questions;
+	//	}
+	//
+	//	public void setQuestions(final Collection<Question> questions) {
+	//		this.questions = questions;
+	//	}
 
 	@Valid
 	@NotNull

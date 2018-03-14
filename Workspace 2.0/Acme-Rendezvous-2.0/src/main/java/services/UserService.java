@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -15,8 +16,6 @@ import repositories.UserRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Actor;
-import domain.Answer;
 import domain.Rendezvous;
 import domain.User;
 import forms.UserForm;
@@ -28,12 +27,13 @@ public class UserService {
 	// Managed repository
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepository	userRepository;
 
 	// Supporting services
 
 	@Autowired
-	private Validator validator;
+	private Validator		validator;
+
 
 	// Constructors
 
@@ -44,18 +44,18 @@ public class UserService {
 	// Simple CRUD methods
 
 	public User create() {
-		User res = new User();
+		final User res = new User();
 
-		UserAccount userAccount = new UserAccount();
-		Authority authority = new Authority();
-		Collection<Answer> answer = new ArrayList<Answer>();
-		Collection<Rendezvous> organisedrendezvouses = new ArrayList<Rendezvous>();
-		Collection<Rendezvous> rsvpdRendezvouses = new ArrayList<Rendezvous>();
+		final UserAccount userAccount = new UserAccount();
+		final Authority authority = new Authority();
+		//final Collection<Answer> answer = new ArrayList<Answer>();
+		final Collection<Rendezvous> organisedrendezvouses = new ArrayList<Rendezvous>();
+		final Collection<Rendezvous> rsvpdRendezvouses = new ArrayList<Rendezvous>();
 
 		authority.setAuthority(Authority.USER);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
-		res.setAnswer(answer);
+		//res.setAnswer(answer);
 		res.setOrganisedRendezvouses(organisedrendezvouses);
 		res.setRsvpdRendezvouses(rsvpdRendezvouses);
 
@@ -69,7 +69,7 @@ public class UserService {
 		return res;
 	}
 
-	public User findOne(int userId) {
+	public User findOne(final int userId) {
 		Assert.isTrue(userId != 0);
 		User res;
 		res = this.userRepository.findOne(userId);
@@ -77,7 +77,7 @@ public class UserService {
 		return res;
 	}
 
-	public User save(User user) {
+	public User save(final User user) {
 		User res;
 
 		if (user.getId() == 0) {
@@ -106,11 +106,10 @@ public class UserService {
 		User res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		if(userAccount == null){
+		if (userAccount == null)
 			res = null;
-		}else{
-			res = this.userRepository.findUserByUserAccountId(userAccount.getId());	
-		}
+		else
+			res = this.userRepository.findUserByUserAccountId(userAccount.getId());
 		return res;
 	}
 
@@ -118,22 +117,22 @@ public class UserService {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		Collection<Authority> authority = userAccount.getAuthorities();
+		final Collection<Authority> authority = userAccount.getAuthorities();
 		Assert.notNull(authority);
-		Authority res = new Authority();
+		final Authority res = new Authority();
 		res.setAuthority("USER");
 		Assert.isTrue(authority.contains(res));
 	}
-	
-	public void flush(){
+
+	public void flush() {
 		this.userRepository.flush();
 	}
 
 	// 4.3
 
-	public Collection<User> findAttendsByRendezvousId(int rendezvousId) {
+	public Collection<User> findAttendsByRendezvousId(final int rendezvousId) {
 		Collection<User> res;
-		res = userRepository.findAttendsByRendezvousId(rendezvousId);
+		res = this.userRepository.findAttendsByRendezvousId(rendezvousId);
 		Assert.notNull(res);
 
 		return res;
@@ -141,24 +140,24 @@ public class UserService {
 
 	// 4.3
 
-	public User findOrganiserByRendezvousId(int rendezvousId) {
+	public User findOrganiserByRendezvousId(final int rendezvousId) {
 		User res;
-		res = userRepository.findOrganiserByRendezvousId(rendezvousId);
+		res = this.userRepository.findOrganiserByRendezvousId(rendezvousId);
 		Assert.notNull(res);
 
 		return res;
 	}
 
-	public User reconstruct(UserForm userForm, BindingResult binding) {
-		User res = new User();
+	public User reconstruct(final UserForm userForm, final BindingResult binding) {
+		final User res = new User();
 
-		Collection<Answer> answers = new ArrayList<Answer>();
-		Collection<Rendezvous> organisedRendezvouses = new ArrayList<Rendezvous>();
-		Collection<Rendezvous> rsvpdRendezvous = new ArrayList<Rendezvous>();
+		//final Collection<Answer> answers = new ArrayList<Answer>() ;
+		final Collection<Rendezvous> organisedRendezvouses = new ArrayList<Rendezvous>();
+		final Collection<Rendezvous> rsvpdRendezvous = new ArrayList<Rendezvous>();
 
-		UserAccount userAccount = userForm.getUserAccount();
+		final UserAccount userAccount = userForm.getUserAccount();
 
-		Authority authority = new Authority();
+		final Authority authority = new Authority();
 		authority.setAuthority(Authority.USER);
 		userAccount.addAuthority(authority);
 
@@ -170,11 +169,11 @@ public class UserService {
 		res.setAddress(userForm.getAddress());
 		res.setBirth(userForm.getBirth());
 
-		res.setAnswer(answers);
+		//res.setAnswer(answers);
 		res.setRsvpdRendezvouses(rsvpdRendezvous);
 		res.setOrganisedRendezvouses(organisedRendezvouses);
 
-		validator.validate(res, binding);
+		this.validator.validate(res, binding);
 
 		return res;
 	}

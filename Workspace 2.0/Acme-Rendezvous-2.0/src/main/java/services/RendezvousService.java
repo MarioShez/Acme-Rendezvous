@@ -17,7 +17,6 @@ import repositories.RendezvousRepository;
 import domain.Announcement;
 import domain.Comment;
 import domain.GpsCoordinate;
-import domain.Question;
 import domain.Rendezvous;
 import domain.Request;
 import domain.User;
@@ -46,8 +45,8 @@ public class RendezvousService {
 	@Autowired
 	private CommentService			commentService;
 
-	@Autowired
-	private QuestionService			questionService;
+	//	@Autowired
+	//	private QuestionService			questionService;
 
 	@Autowired
 	private Validator				validator;
@@ -71,7 +70,7 @@ public class RendezvousService {
 		result.setOrganiser(this.userService.findByPrincipal());
 		result.setAnnouncements(new ArrayList<Announcement>());
 		result.setComments(new ArrayList<Comment>());
-		result.setQuestions(new ArrayList<Question>());
+		//result.setQuestions(new ArrayList<Question>());
 		result.setAttendants(new ArrayList<User>());
 		result.getAttendants().add(this.userService.findByPrincipal());
 		result.setLinkedRendezvouses(new ArrayList<Rendezvous>());
@@ -137,8 +136,8 @@ public class RendezvousService {
 			this.announcementService.delete(announcement);
 		if (rendezvous.getComments().size() > 0)
 			this.commentService.deleteAll(rendezvous.getComments());
-		for (final Question question : rendezvous.getQuestions())
-			this.questionService.delete(question);
+		//		for (final Question question : rendezvous.getQuestions())
+		//			this.questionService.delete(question);
 		for (final Rendezvous linkedRendezvous : rendezvous.getLinkedRendezvouses())
 			rendezvous.getLinkedRendezvouses().remove(linkedRendezvous);
 		for (final Rendezvous parentRendezvous : this.findParentRendezvouses(rendezvous.getId()))

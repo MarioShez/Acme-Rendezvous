@@ -71,14 +71,14 @@
 		</security:authorize>
 		
 		<jstl:choose>
-			<jstl:when test="${areRSPVd == false and empty rendezvous.questions}">
+			<jstl:when test="${areRSPVd == false}">
 				<button type="button" onclick="javascript: relativeRedir('rendezvous/user/rspv.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.makeRSPV" /></button>
 				<br/>
 			</jstl:when>
-			<jstl:when test="${areRSPVd == false and not empty rendezvous.questions}">
+			<%-- <jstl:when test="${areRSPVd == false and not empty rendezvous.questions}">
 				<button type="button" onclick="javascript: relativeRedir('rendezvous/user/rspv.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.makeRSPV" /></button>
 				<br/>
-			</jstl:when>
+			</jstl:when> --%>
 			<jstl:when test="${areRSPVd}">
 				<button type="button" onclick="javascript: relativeRedir('rendezvous/user/unrspv.do?rendezvousId=${rendezvous.id}')" ><spring:message code="rendezvous.cancelRSPV" /></button>
 				<br/>
