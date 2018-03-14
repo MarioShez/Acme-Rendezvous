@@ -489,7 +489,7 @@
 		</property>
 		<property name="user" ref="user2" />
 		<property name="rendezvous" ref="rendezvous2" />
-		<!-- <property name="commentParent" ref="comment1" /> -->
+		<property name="commentParent" ref="comment1" /> 
 	</bean>
 
 	<!-- Question -->
