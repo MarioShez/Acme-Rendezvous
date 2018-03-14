@@ -32,10 +32,10 @@
 <br/>
 
 <security:authorize access="hasRole('ADMIN')">
-<jstl:if test="${comment.id != 0}">
+<jstl:if test="${announcement.id != 0}">
 	<input type="submit" name="delete"
-		value="<spring:message code="comment.delete" />"
-		onclick="return confirm('<spring:message code="comment.confirm.delete" />')" />&nbsp;
+		value="<spring:message code="announcement.delete" />"
+		onclick="return confirm('<spring:message code="announcement.confirm.delete" />')" />&nbsp;
 </jstl:if>
 </security:authorize>
 </form:form>
