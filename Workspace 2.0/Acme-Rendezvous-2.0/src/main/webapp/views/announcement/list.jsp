@@ -19,11 +19,11 @@
 	</display:column>
 	
 	<spring:message code="announcement.title" var="titleHeader"/>
-	<display:column property="title" title="${titleHeader}" sortable="true"/>
+	<display:column property="title" title="${titleHeader}" sortable="false"/>
 	
 	<spring:message code="announcement.format.date" var="formatDate"/>
 	<spring:message code="announcement.moment" var="momentHeader"/>
-	<display:column property="moment" title="${momentHeader}" sortable="true" format="${formatDate}"/>
+	<display:column property="moment" title="${momentHeader}" sortable="false" format="${formatDate}"/>
 	
 	<spring:message code="announcement.rendezvous" var="rendezvousHeader"/>
 	<display:column title="${rendezvousHeader}">
