@@ -83,6 +83,18 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="manager3" />
+		<property name="password" value="2d3a5db4a2a9717b43698520a8de57d0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 
 	<!-- Other domain beans come here -->
@@ -198,6 +210,7 @@
 		<property name="services">
 			<list>
 				<ref bean="service1"/>
+				<ref bean="service3"/>
 			</list>
 		</property>
 	</bean>
@@ -216,6 +229,28 @@
 		<property name="services">
 			<list>
 				<ref bean="service2"/>
+				<ref bean="service4"/>
+				<ref bean="service6"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- manager3 -->
+
+	<bean id="manager3" class="domain.Manager">
+		<property name="name" value="juan manager" />
+		<property name="surname" value="Acme Explorer" />
+		<property name="email" value="admin@system.com" />
+		<property name="phone" value="694443780" />
+		<property name="address" value="C/ josé estoso" />
+		<property name="birth" value="12/09/1965" />
+		<property name="userAccount" ref="userAccount7" />
+		<property name="vat" value="1A-2B" />
+		<property name="services">
+			<list>
+				<ref bean="service5"/>
+				<ref bean="service7"/>
+				<ref bean="service8"/>
 			</list>
 		</property>
 	</bean>
@@ -259,6 +294,121 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- Service 3 -->
+	<bean id="service3" class="domain.Service">
+		<property name="name" value="Servicio 3" />
+		<property name="description" value="Servicio 3 esta mejor" />
+		<property name="picture"
+			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
+		<property name="categories">
+			<list>
+
+			</list>
+		</property>
+		<property name="manager" ref="manager1" />
+		<property name="cancelled" value="false" />
+		<property name="requests">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Service 4 -->
+	<bean id="service4" class="domain.Service">
+		<property name="name" value="Servicio 4" />
+		<property name="description" value="Servicio 4 esta mejor" />
+		<property name="picture"
+			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
+		<property name="categories">
+			<list>
+
+			</list>
+		</property>
+		<property name="manager" ref="manager2" />
+		<property name="cancelled" value="true" />
+		<property name="requests">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Service 5 -->
+	<bean id="service5" class="domain.Service">
+		<property name="name" value="Servicio 5" />
+		<property name="description" value="Servicio 5 esta mejor" />
+		<property name="picture"
+			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
+		<property name="categories">
+			<list>
+
+			</list>
+		</property>
+		<property name="manager" ref="manager3" />
+		<property name="cancelled" value="false" />
+		<property name="requests">
+			<list>
+				<ref bean="request4"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Service 6 -->
+	<bean id="service6" class="domain.Service">
+		<property name="name" value="Servicio 6" />
+		<property name="description" value="Servicio 6 esta mejor" />
+		<property name="picture"
+			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
+		<property name="categories">
+			<list>
+
+			</list>
+		</property>
+		<property name="manager" ref="manager2" />
+		<property name="cancelled" value="false" />
+		<property name="requests">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Service 7 -->
+	<bean id="service7" class="domain.Service">
+		<property name="name" value="Servicio 7" />
+		<property name="description" value="Servicio 7 esta mejor" />
+		<property name="picture"
+			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
+		<property name="categories">
+			<list>
+
+			</list>
+		</property>
+		<property name="manager" ref="manager3" />
+		<property name="cancelled" value="false" />
+		<property name="requests">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Service 8 -->
+	<bean id="service8" class="domain.Service">
+		<property name="name" value="Servicio 8" />
+		<property name="description" value="Servicio 8 esta mejor" />
+		<property name="picture"
+			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
+		<property name="categories">
+			<list>
+
+			</list>
+		</property>
+		<property name="manager" ref="manager3" />
+		<property name="cancelled" value="true" />
+		<property name="requests">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Request -->
 	<!-- Request 1 -->
@@ -282,6 +432,14 @@
 		<property name="creditCard" ref="creditCard3" />
 		<property name="comment" value="Comment 3" />
 		<property name="service" ref="service1" />
+		<property name="rendezvous" ref="rendezvous2" />
+	</bean>
+	
+	<!-- Request 4 -->
+	<bean id="request4" class="domain.Request">
+		<property name="creditCard" ref="creditCard4" />
+		<property name="comment" value="Comment 4" />
+		<property name="service" ref="service5" />
 		<property name="rendezvous" ref="rendezvous2" />
 	</bean>
 
@@ -308,6 +466,16 @@
 	
 	<!-- CreditCard 3 -->
 	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holder" value="Name creditCard3" />
+		<property name="brand" value="VISA" />
+		<property name="number" value="4532255185600482" />
+		<property name="expirationMonth" value="5" />
+		<property name="expirationYear" value="2019" />
+		<property name="cvv" value="216" />
+	</bean>
+	
+	<!-- CreditCard 3 -->
+	<bean id="creditCard4" class="domain.CreditCard">
 		<property name="holder" value="Name creditCard3" />
 		<property name="brand" value="VISA" />
 		<property name="number" value="4532255185600482" />
@@ -403,6 +571,7 @@
 		<property name="requests">
 			<list>
 				<ref bean="request3"/>
+				<ref bean="request4"/>
 			</list>
 		</property>
 	</bean>
