@@ -26,9 +26,6 @@ public class ServiceService {
 	// Supported services
 
 	@Autowired
-	private RequestService		requestService;
-
-	@Autowired
 	private ManagerService		managerService;
 
 	@Autowired
@@ -75,6 +72,15 @@ public class ServiceService {
 		res = this.serviceRepository.findOne(serviceId);
 		return res;
 	}
+	
+	public Service findOneToEdit(final int serviceId) {
+		Assert.isTrue(serviceId != 0);
+		Service res;
+		res = this.serviceRepository.findOne(serviceId);
+		Assert.isTrue(res.getManager().equals(managerService.findByPrincipal()));
+		Assert.isTrue(res.isCancelled() == false);
+		return res;
+	}
 
 	public Service save(final Service service) {
 
@@ -93,15 +99,14 @@ public class ServiceService {
 	public void delete(final Service service) {
 
 		Assert.isTrue(service.getManager().equals(this.managerService.findByPrincipal()));
+		Assert.isTrue(service.getRequests().isEmpty());
 
 		service.getManager().getServices().remove(service);
 		//		for (final Category c : service.getCategories()) {
 		//			c.getServices().remove(service);
 		//			this.categoryService.save(c);
 		//		}
-		for (final Request r : service.getRequests())
-			this.requestService.delete(r);
-
+		
 		this.serviceRepository.delete(service);
 	}
 
