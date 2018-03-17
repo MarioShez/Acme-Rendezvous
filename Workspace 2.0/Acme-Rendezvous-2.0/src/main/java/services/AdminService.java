@@ -180,19 +180,19 @@ public class AdminService {
 		return res;
 	}
 
-	// A-1
-	public Object[] avgSqtrQuestionsPerRendezvous() {
-		Object[] res;
-		res = this.adminRepository.avgSqtrQuestionsPerRendezvous();
-		return res;
-	}
-
-	// A-2
-	public Collection<Object> avgSqtrAnswersPerRendezvous() {
-		Collection<Object> res;
-		res = this.adminRepository.avgSqtrAnswersPerRendezvous();
-		return res;
-	}
+//	// A-1
+//	public Object[] avgSqtrQuestionsPerRendezvous() {
+//		Object[] res;
+//		res = this.adminRepository.avgSqtrQuestionsPerRendezvous();
+//		return res;
+//	}
+//
+//	// A-2
+//	public Collection<Object> avgSqtrAnswersPerRendezvous() {
+//		Collection<Object> res;
+//		res = this.adminRepository.avgSqtrAnswersPerRendezvous();
+//		return res;
+//	}
 
 	// A-3
 	public Object[] avgSqtRrepliesPerComment() {

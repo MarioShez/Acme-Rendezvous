@@ -53,12 +53,12 @@
 		</a>
 	</display:column>
 	
-	<spring:message code="user.answer" var="answerHeader"/>
+	<%-- <spring:message code="user.answer" var="answerHeader"/>
 	<display:column title="${answerHeader}">
 		<a href="answer/user/list.do?answerId=${row.id }">
 			<spring:message code="user.answer.link"/>
 		</a>
-	</display:column>
+	</display:column> --%>
 	
 </display:table>
 
