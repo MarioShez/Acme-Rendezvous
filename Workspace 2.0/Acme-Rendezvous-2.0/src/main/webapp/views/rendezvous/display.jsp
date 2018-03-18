@@ -44,7 +44,7 @@
 		</jstl:if>
 		
 		<jstl:if test="${not empty rendezvous.attendants}">
-			<a href="user/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listAttendants"/></a>
+			<a href="user/listRendezvousAttends.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listAttendants"/></a>
 			<br/>
 		</jstl:if>
 		

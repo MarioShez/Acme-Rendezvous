@@ -82,7 +82,6 @@ public class UserForm {
 	@Past
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public Date getBirth() {
 		return this.birth;
 	}

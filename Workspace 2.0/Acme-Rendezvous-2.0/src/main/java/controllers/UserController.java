@@ -1,6 +1,7 @@
 
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -128,16 +129,16 @@ public class UserController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/rendezvousAttends/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/listRendezvousAttends", method = RequestMethod.GET)
 	public ModelAndView listRendezvousAttendant(@RequestParam int rendezvousId) {
 		ModelAndView result;
-		Collection<User> attends;
+		Collection<User> attends = new ArrayList<User>();
 
-		attends = userService.findAttendsByRendezvousId(rendezvousId);
+		attends = this.userService.findAttendsByRendezvousId(rendezvousId);
 
 		result = new ModelAndView("user/list");
 		result.addObject("user", attends);
-		result.addObject("requestURI", "user/rendezvousAttends/list.do");
+		result.addObject("requestURI", "user/listRendezvousAttends.do");
 
 		return result;
 	}
