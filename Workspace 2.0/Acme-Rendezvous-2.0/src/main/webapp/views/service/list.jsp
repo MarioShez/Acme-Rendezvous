@@ -11,22 +11,55 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="requests" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
-		
-	<spring:message var="rendezvousHeader" code="request.rendezvous"/>
-	<display:column property="rendezvous.name" title="${rendezvousHeader}"/>
+<display:table name="services" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
+
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<a href="service/admin/cancel.do?serviceId=${row.id}"><spring:message code="service.cancel"/></a>
+		</display:column>	
+	</security:authorize>
 	
-	<spring:message var="serviceHeader" code="request.service"/>
-	<display:column property="service.name" title="${serviceHeader}"/>
+	<jstl:if test="${requestURI == 'service/manager/list.do'}">
+		<display:column>
+			<a href="service/manager/edit.do?serviceId=${row.id}"><spring:message code="service.edit"/></a>
+		</display:column>
+	</jstl:if>
 	
-	<spring:message var="commentHeader" code="request.comment"/>
-	<display:column property="comment" title="${commentHeader}"/>
+	<display:column>
+		<jstl:if test="${row.cancelled == false}">
+			<a href="service/actor/display.do?serviceId=${row.id}"><spring:message code="service.display"/></a>
+		</jstl:if>
+	</display:column>
 		
+	<spring:message var="nameHeader" code="service.name"/>
+	<display:column property="name" title="${nameHeader}"/>
+	
+	<jstl:if test="${requestURI == 'service/actor/list.do'}">
+		<spring:message var="managerHeader" code="service.manager"/>
+		<display:column title="${nameHeader}">
+			<jstl:out value="${row.manager.name} ${row.manager.surname}"/>
+		</display:column>
+	</jstl:if>
+	
+	<spring:message var="cancelledHeader" code="service.cancelled"/>
+	<display:column property="cancelled" title="${cancelledHeader}" sortable="true">
+		<%-- <jstl:choose>
+			<jstl:when test="${row.cancelled == true}">
+				<jstl:out value="<spring:message code="service.yes"/>"/>
+			</jstl:when>
+			<jstl:when test="${row.cancelled == false}">
+				<jstl:out value="<spring:message code="service.no"/>"/>
+			</jstl:when>
+		</jstl:choose> --%>
+	</display:column>
+	
 </display:table>
 
-<security:authorize access="hasRole('USER')">
-	<a href="request/user/create.do"><spring:message code="request.create"/></a>
+<%-- <jstl:if test="${requestURI == 'service/manager/list.do'}"> --%>
+<security:authorize access="hasRole('MANAGER')">
+	<a href="service/manager/create.do"><spring:message code="service.create"/></a>
 	<br/>
 </security:authorize>
+<%-- </jstl:if> --%>
 
-<acme:cancel code="request.cancel" url="welcome/index.do"/>
+<acme:cancel code="service.cancel" url="welcome/index.do"/>

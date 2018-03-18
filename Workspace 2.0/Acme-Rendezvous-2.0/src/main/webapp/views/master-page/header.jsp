@@ -62,6 +62,14 @@
 	
 		</security:authorize>
 		<li><a class="fNiv" href="rendezvous/list.do"><spring:message code="master.page.avalibleRendezvouses" /></a></li>
+		
+		<security:authorize access="hasRole('USER')">
+			<li><a class="fNiv" href="service/list.do"><spring:message code="master.page.avalibleServices" /></a></li>
+		</security:authorize>
+		<security:authorize access="hasRole('MANAGER')">
+			<li><a class="fNiv" href="service/manager/list.do"><spring:message code="master.page.avalibleServices" /></a></li>
+		</security:authorize>
+		
 		<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.listUsers" /></a></li>
 		<li><a class="fNiv" href="terms/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>
 	</ul>

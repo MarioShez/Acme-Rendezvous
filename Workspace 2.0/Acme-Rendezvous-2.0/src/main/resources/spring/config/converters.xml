@@ -52,6 +52,8 @@
 		<bean class="converters.RendezvousToStringConverter" />
 		<bean class="converters.StringToRendezvousConverter" />
 		
+		<bean class="converters.ServiceToStringConverter" />
+		<bean class="converters.StringToServiceConverter" />
 		
 	</util:list>
 	

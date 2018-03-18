@@ -7,12 +7,15 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ServiceRepository;
 import domain.Category;
 import domain.Manager;
 import domain.Request;
 import domain.Service;
+import domain.ServiceForm;
 
 @org.springframework.stereotype.Service
 @Transactional
@@ -30,6 +33,9 @@ public class ServiceService {
 
 	@Autowired
 	private AdminService		adminService;
+	
+	@Autowired
+	private Validator validator;
 
 
 	//	@Autowired
@@ -115,6 +121,41 @@ public class ServiceService {
 	public Collection<Service> bestSellingService() {
 		final Collection<Service> result = this.serviceRepository.bestSellingServices();
 		return result;
+	}
+
+	
+	public ServiceForm construct(Service service) {
+		ServiceForm res = new ServiceForm();
+		
+		res.setId(service.getId());
+		res.setName(service.getName());
+		res.setDescription(service.getDescription());
+		res.setPicture(service.getPicture());
+		res.setManager(service.getManager());
+		res.setRequests(service.getRequests());
+		res.setCategories(service.getCategories());
+		
+		return res;
+	}
+	
+	public Service reconstruct(ServiceForm serviceForm, BindingResult binding){
+		Assert.notNull(serviceForm);
+		Service res = new Service();
+		
+		res.setCancelled(false);
+		
+		res.setId(serviceForm.getId());
+		res.setName(serviceForm.getName());
+		res.setDescription(serviceForm.getDescription());
+		res.setPicture(serviceForm.getPicture());
+		res.setManager(serviceForm.getManager());
+		res.setRequests(serviceForm.getRequests());
+		res.setCategories(serviceForm.getCategories());
+		
+		if(binding!=null)
+			validator.validate(res, binding);
+		
+		return res;
 	}
 
 }
