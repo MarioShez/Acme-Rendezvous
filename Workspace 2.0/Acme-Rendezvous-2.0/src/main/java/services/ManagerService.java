@@ -115,16 +115,15 @@ public class ManagerService {
 	}
 
 	public Manager reconstruct(final ManagerForm managerForm, final BindingResult binding) {
-		final Manager res = new Manager();
 		
-		Collection<domain.Service> services = new ArrayList<domain.Service>();
+		final Manager res;
 		
-		final UserAccount userAccount = managerForm.getUserAccount();
-		final Authority authority = new Authority();
-		authority.setAuthority(Authority.MANAGER);
-		userAccount.addAuthority(authority);
+		if(managerForm.getId() == 0){
+			res = create();
+		}else{
+			res = findOne(managerForm.getId());
+		}
 		
-		res.setUserAccount(userAccount);
 		res.setName(managerForm.getName());
 		res.setSurname(managerForm.getSurname());
 		res.setEmail(managerForm.getEmail());
@@ -150,6 +149,7 @@ public class ManagerService {
 		res.setName(manager.getName());
 		res.setSurname(manager.getSurname());
 		res.setEmail(manager.getEmail());
+		res.setBirth(manager.getBirth());
 		res.setPhone(manager.getPhone());
 		res.setAddress(manager.getAddress());
 		res.setUsername(manager.getUserAccount().getUsername());

@@ -1,3 +1,4 @@
+
 package converters;
 
 import org.apache.commons.lang.StringUtils;
@@ -7,15 +8,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import repositories.CommentRepository;
-
 import domain.Comment;
 
 @Component
 @Transactional
-public class StringToCommentConverter implements Converter<String, Comment>{
+public class StringToCommentConverter implements Converter<String, Comment> {
 
 	@Autowired
 	CommentRepository	commentRepository;
+
 
 	@Override
 	public Comment convert(final String text) {
@@ -35,6 +36,5 @@ public class StringToCommentConverter implements Converter<String, Comment>{
 
 		return result;
 	}
-	
-	
+
 }

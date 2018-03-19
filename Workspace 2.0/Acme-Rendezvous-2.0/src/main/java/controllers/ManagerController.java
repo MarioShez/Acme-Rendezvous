@@ -79,6 +79,7 @@ public class ManagerController extends AbstractController{
 		res = new ModelAndView("manager/register");
 		res.addObject("managerForm",managerForm);
 		res.addObject("message",message);
+		res.addObject("actionURI", "manager/register.do");
 		
 		return res;
 	}
