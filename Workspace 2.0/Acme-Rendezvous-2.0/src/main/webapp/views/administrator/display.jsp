@@ -246,9 +246,9 @@
 		</jstl:forEach>
 	</tr>
 </table>
-<%-- 
-<spring:message code="administrator.best.service" />
-<jstl:out value="${bestSellingServices}"></jstl:out>
+
+<spring:message code="administrator.bestSellingServicesLabel" />
+<jstl:out value="${bestSellingServicesLabel}"></jstl:out>
 <table class="displaytag"  name="bestSellingServices">
 	<tr>
 		<th>
@@ -259,13 +259,12 @@
 	<tr>
 		<jstl:forEach var="datos" items="${bestSellingServices}">
 			<td>
-				<jstl:out value="${datos}"></jstl:out>
+				<jstl:out value="${datos[0].name}"></jstl:out>
 			</td>
 		</jstl:forEach>
 	</tr>
 	
 </table>
---%>
  
  <spring:message code="administrator.managersMoreServicesThanAvgLabel"/>
 <jstl:out value="${managersMoreServicesThanAvgLabel}"></jstl:out>
@@ -292,15 +291,15 @@
 <table class="displaytag"  name="managersMoreServicesCancelled">
 	<tr>
 		<th>
-			<spring:message code="administrator.managersCancelled" var="managersHeader" />
-			<jstl:out value="${managersHeader}"></jstl:out>
+			<spring:message code="administrator.managersCancelled" var="managersCHeader" />
+			<jstl:out value="${managersCHeader}"></jstl:out>
 		</th>
 	</tr>
 	<jstl:forEach var="datos" items="${managersMoreServicesCancelled}">
 	<tr>
 		
 			<td>
-				<jstl:out value="${datos.name}"></jstl:out>
+				<jstl:out value="${datos[0].name}"></jstl:out>
 			</td>
 		
 	</tr>

@@ -62,15 +62,18 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
 	// Nuevas queries entregable D09
 
-	// C1
+	// C1 The best-selling services.
 	@Query("select s, s.requests.size from Service s order by s.requests.size desc")
-	Manager bestSellingServices();
+	Collection<Object> bestSellingServices();
 
-	// C2
+	// C2 The managers who provide more services than the average.
 	@Query("select m from Manager m where m.services.size > (select avg(p.services.size) from Manager p)")
 	Collection<Object> managersMoreServicesThanAvg();
 	
-	//C3
+	//C3 The managers who have got more services cancelled.
 	@Query("select m, m.services.size from Manager m join m.services s where s.cancelled = true order by m.services.size desc")
-	Collection<Object> managersMoreServicesCancelled();
+	Collection<Manager> managersMoreServicesCancelled();
+	
+	//B1 The average number of categories per rendezvous
+	
 }
