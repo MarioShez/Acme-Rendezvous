@@ -49,7 +49,7 @@ public class UserController extends AbstractController {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "creator/list", method = RequestMethod.GET)
 	public ModelAndView listCreator(@RequestParam int organiserId) {
 		ModelAndView result;
@@ -63,7 +63,7 @@ public class UserController extends AbstractController {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "display", method = RequestMethod.GET)
 	public ModelAndView listUser(@RequestParam int userId) {
 		ModelAndView result;
@@ -77,7 +77,39 @@ public class UserController extends AbstractController {
 
 		return result;
 	}
-	
+
+	// Editing ---------------------------------------------------------------
+
+	@RequestMapping(value = "/user/edit", method = RequestMethod.GET)
+	public ModelAndView edit() {
+		ModelAndView result;
+		User user;
+		UserForm editUserForm;
+
+		user = this.userService.findByPrincipal();
+		editUserForm = this.userService.construct(user);
+		
+		result = this.createEditModelAndViewEdit(editUserForm);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/user/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView editSave(@Valid final UserForm userForm, final BindingResult binding) {
+		ModelAndView res;
+		if (binding.hasErrors())
+			res = this.createEditModelAndViewEdit(userForm, "user.params.error");
+		else
+			try {
+				User user = this.userService.reconstruct(userForm, binding);
+				this.userService.save(user);
+				res = new ModelAndView("redirect:../../");
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndViewEdit(userForm, "user.commit.error");
+			}
+
+		return res;
+	}
 
 	// Registering ----------------------------------------------------------
 
@@ -155,6 +187,24 @@ public class UserController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("user/register");
+		result.addObject("userForm", userForm);
+		result.addObject("message", message);
+
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndViewEdit(final UserForm userForm) {
+		ModelAndView result;
+
+		result = this.createEditModelAndViewEdit(userForm, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewEdit(final UserForm userForm, final String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("user/edit");
 		result.addObject("userForm", userForm);
 		result.addObject("message", message);
 

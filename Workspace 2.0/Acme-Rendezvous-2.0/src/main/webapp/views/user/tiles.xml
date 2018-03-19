@@ -26,4 +26,9 @@
 		<put-attribute name="body" value="/views/user/list.jsp" />
 	</definition>
 	
+	<definition name="user/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit users" />
+		<put-attribute name="body" value="/views/user/edit.jsp" />
+	</definition>
+	
 </tiles-definitions>

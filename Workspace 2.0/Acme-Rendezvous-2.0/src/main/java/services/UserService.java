@@ -149,19 +149,29 @@ public class UserService {
 	}
 
 	public User reconstruct(final UserForm userForm, final BindingResult binding) {
-		final User res = new User();
+		
+		Assert.notNull(userForm);
+		
+		User res = new User();
 
+		if (userForm.getId() != 0)
+			res = this.findOne(userForm.getId());
+		else
+			res = this.create();
+		
+		
 		//final Collection<Answer> answers = new ArrayList<Answer>() ;
-		final Collection<Rendezvous> organisedRendezvouses = new ArrayList<Rendezvous>();
-		final Collection<Rendezvous> rsvpdRendezvous = new ArrayList<Rendezvous>();
+		
+//		final Collection<Rendezvous> organisedRendezvouses = new ArrayList<Rendezvous>();
+//		final Collection<Rendezvous> rsvpdRendezvous = new ArrayList<Rendezvous>();
+//
+//		final UserAccount userAccount = userForm.getUserAccount();
+//
+//		final Authority authority = new Authority();
+//		authority.setAuthority(Authority.USER);
+//		userAccount.addAuthority(authority);
 
-		final UserAccount userAccount = userForm.getUserAccount();
-
-		final Authority authority = new Authority();
-		authority.setAuthority(Authority.USER);
-		userAccount.addAuthority(authority);
-
-		res.setUserAccount(userAccount);
+//		res.setUserAccount(userAccount);
 		res.setName(userForm.getName());
 		res.setSurname(userForm.getSurname());
 		res.setEmail(userForm.getEmail());
@@ -170,12 +180,31 @@ public class UserService {
 		res.setBirth(userForm.getBirth());
 
 		//res.setAnswer(answers);
-		res.setRsvpdRendezvouses(rsvpdRendezvous);
-		res.setOrganisedRendezvouses(organisedRendezvouses);
+//		res.setRsvpdRendezvouses(rsvpdRendezvous);
+//		res.setOrganisedRendezvouses(organisedRendezvouses);
 
 		this.validator.validate(res, binding);
 
 		return res;
+	}
+
+	public UserForm construct(User user) {
+			
+		Assert.notNull(user);
+		UserForm editUserForm = new UserForm();
+		
+		editUserForm.setId(user.getId());
+		editUserForm.setName(user.getName());
+		editUserForm.setSurname(user.getSurname());
+		editUserForm.setEmail(user.getEmail());
+		editUserForm.setPhone(user.getPhone());
+		editUserForm.setAddress(user.getAddress());
+		editUserForm.setBirth(user.getBirth());
+		editUserForm.setUserAccount(user.getUserAccount());
+		editUserForm.setRepeatPassword(user.getUserAccount().getPassword());
+		editUserForm.setTermsAndConditions(true);
+		
+		return editUserForm;
 	}
 
 }
