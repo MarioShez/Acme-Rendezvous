@@ -75,5 +75,17 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	Collection<Manager> managersMoreServicesCancelled();
 	
 	//B1 The average number of categories per rendezvous
+	@Query("select avg(r.requests.size) from Rendezvous r")
+	Double AvgCategoryPerRendezvous();
 	
+	//B2 The average ratio of services in each category.
+	@Query("select avg(r.services.size) from Category r")
+	Double AvgServicesPerCategories();
+	
+	//B3 The average, the minimum, the maximum, and the standard deviation of services requested per rendezvous.
+	@Query("select avg(r.requests.size), min(r.requests.size), max(r.requests.size),stddev(r.requests.size) from Rendezvous r")
+	Object[] AvgMinMaxStrServicePerRendezvous();
+	
+	//B4 The top-selling services.
+	//utilizamos la primera query
 }

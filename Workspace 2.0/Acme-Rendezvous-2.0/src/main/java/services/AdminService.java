@@ -223,5 +223,12 @@ public class AdminService {
 				.managersMoreServicesCancelled();
 		return result;
 	}
+	
+	// B-1
+	public Double AvgCategoryPerRendezvous() {
+		final Double result = this.adminRepository
+				.AvgCategoryPerRendezvous();
+		return result;
+	}
 
 }
