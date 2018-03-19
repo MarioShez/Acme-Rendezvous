@@ -1,4 +1,3 @@
-
 package services;
 
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import repositories.ManagerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Actor;
 import domain.Manager;
 import forms.ManagerForm;
 
@@ -27,8 +25,7 @@ public class ManagerService {
 	// Managed repository
 
 	@Autowired
-	private ManagerRepository	managerRepository;
-
+	private ManagerRepository managerRepository;
 
 	// Constructors
 
@@ -36,12 +33,10 @@ public class ManagerService {
 		super();
 	}
 
-
 	// Supporting services
 
 	@Autowired
-	private Validator	validator;
-
+	private Validator validator;
 
 	// Simple CRUD methods
 
@@ -100,7 +95,8 @@ public class ManagerService {
 		if (userAccount == null)
 			res = null;
 		else
-			res = this.managerRepository.findManagerByUserAccountId(userAccount.getId());
+			res = this.managerRepository.findManagerByUserAccountId(userAccount
+					.getId());
 		return res;
 	}
 
@@ -117,8 +113,6 @@ public class ManagerService {
 		else
 			return false;
 	}
-
-
 
 	public Manager reconstruct(final ManagerForm managerForm, final BindingResult binding) {
 		final Manager res = new Manager();
@@ -137,14 +131,38 @@ public class ManagerService {
 		res.setPhone(managerForm.getPhone());
 		res.setAddress(managerForm.getAddress());
 		res.setBirth(managerForm.getBirth());
-		
+		res.getUserAccount().setUsername(managerForm.getUsername());
+		res.getUserAccount().setPassword(managerForm.getPassword());
 		res.setVat(managerForm.getVat());
-		res.setServices(services);
 
-		this.validator.validate(res, binding);
+		if (binding != null) {
+			this.validator.validate(res, binding);
+		}
+
+		return res;
+	}
+
+	public ManagerForm construct(final Manager manager) {
+
+		ManagerForm res = new ManagerForm();
+		
+		res.setId(manager.getId());
+		res.setName(manager.getName());
+		res.setSurname(manager.getSurname());
+		res.setEmail(manager.getEmail());
+		res.setPhone(manager.getPhone());
+		res.setAddress(manager.getAddress());
+		res.setUsername(manager.getUserAccount().getUsername());
+		res.setPassword(manager.getUserAccount().getPassword());
+		res.setRepeatPassword(manager.getUserAccount().getPassword());
+		res.setVat(manager.getVat());
+		if(manager.getId() == 0){
+			res.setTermsAndConditions(false);
+		}else{
+			res.setTermsAndConditions(true);
+		}
 		
 		return res;
 	}
-	
 
 }

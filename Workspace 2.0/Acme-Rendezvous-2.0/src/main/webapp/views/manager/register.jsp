@@ -32,11 +32,11 @@
 	<br/>
 	<acme:textbox code="manager.address" path="address"/>
 	<br/>
-	<acme:textbox code="manager.birth" path="birth"/>
+	<acme:textbox code="manager.birth" path="birth" placeholder="dd/MM/yyyy"/>
 	<br/>
-	<acme:textbox code="manager.userName" path="userAccount.username"/>
+	<acme:textbox code="manager.userName" path="username"/>
 	<br/>
-	<acme:password code="manager.password" path="userAccount.password"/>
+	<acme:password code="manager.password" path="password"/>
 	<br/>
 	<acme:password code="manager.repeatPassword" path="repeatPassword"/>
 	<br/>

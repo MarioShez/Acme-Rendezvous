@@ -45,7 +45,7 @@ public class ManagerController extends AbstractController{
 		manager = managerService.reconstruct(managerForm, binding);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(managerForm, "manager.params.error");
-		else if (!managerForm.getRepeatPassword().equals(managerForm.getUserAccount().getPassword()))
+		else if (!managerForm.getRepeatPassword().equals(managerForm.getPassword()))
 			res = this.createEditModelAndView(managerForm, "manager.commit.errorPassword");
 		else if (managerForm.getTermsAndConditions() == false) {
 			res = this.createEditModelAndView(managerForm, "manager.params.errorTerms");

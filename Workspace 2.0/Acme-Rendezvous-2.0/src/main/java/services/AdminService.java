@@ -204,8 +204,8 @@ public class AdminService {
 	// Nuevas queries
 
 	// C-1
-	public Manager bestSellingService() {
-		final Manager result = this.adminRepository
+	public Collection<Object> bestSellingService() {
+		final Collection<Object> result = this.adminRepository
 				.bestSellingServices();
 		return result;
 	}
@@ -218,9 +218,29 @@ public class AdminService {
 	}
 
 	// C-3
-	public Collection<Object> managersMoreServicesCancelled() {
-		final Collection<Object> result = this.adminRepository
+	public Collection<Manager> managersMoreServicesCancelled() {
+		final Collection<Manager> result = this.adminRepository
 				.managersMoreServicesCancelled();
+		return result;
+	}
+	
+	// B-1
+	public Double AvgCategoryPerRendezvous() {
+		final Double result = this.adminRepository
+				.AvgCategoryPerRendezvous();
+		return result;
+	}
+	//B-2
+	public Double AvgServicesPerCategories() {
+		final Double result = this.adminRepository
+				.AvgServicesPerCategories();
+		return result;
+	}
+	
+	//B-3
+	public Object[] AvgMinMaxStrServicePerRendezvous() {
+		final Object[] result = this.adminRepository
+				.AvgMinMaxStrServicePerRendezvous();
 		return result;
 	}
 
