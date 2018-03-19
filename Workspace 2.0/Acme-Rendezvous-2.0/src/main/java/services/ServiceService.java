@@ -15,7 +15,7 @@ import domain.Category;
 import domain.Manager;
 import domain.Request;
 import domain.Service;
-import domain.ServiceForm;
+import forms.ServiceForm;
 
 @org.springframework.stereotype.Service
 @Transactional
@@ -118,11 +118,6 @@ public class ServiceService {
 
 	// Other business methods
 
-	public Collection<Service> bestSellingService() {
-		final Collection<Service> result = this.serviceRepository.bestSellingServices();
-		return result;
-	}
-	
 	public Collection<Service> findByRendezvousId(int rendezvousId){
 		Collection<Service> result = serviceRepository.findByRendezvousId(rendezvousId);
 		return result;

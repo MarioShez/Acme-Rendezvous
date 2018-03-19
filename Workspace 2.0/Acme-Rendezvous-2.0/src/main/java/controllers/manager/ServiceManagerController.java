@@ -16,7 +16,7 @@ import services.ServiceService;
 import controllers.AbstractController;
 import domain.Manager;
 import domain.Service;
-import domain.ServiceForm;
+import forms.ServiceForm;
 
 @Controller
 @RequestMapping("/service/manager")
