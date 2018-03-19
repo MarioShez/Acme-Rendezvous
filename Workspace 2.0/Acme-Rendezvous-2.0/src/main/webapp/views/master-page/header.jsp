@@ -72,9 +72,6 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<security:authorize access="hasRole('ADMIN')">
-						<li><a href="admin/admin/edit.do"><spring:message code="master.page.editProfile" /></a></li>
-					</security:authorize>
 					<security:authorize access="hasRole('USER')">
 						<li><a href="user/user/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 					</security:authorize>

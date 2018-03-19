@@ -18,13 +18,22 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="manager/register.do" modelAttribute="managerForm">
+<form:form action="${actionURI}" modelAttribute="managerForm">
+
+	<form:hidden path="id"/>
+
+	<jstl:if test="${managerForm.id != 0}">
+		<form:hidden path="username"/>
+		<form:hidden path="password"/>
+		<form:hidden path="repeatPassword"/>
+		<form:hidden path="termsAndConditions"/>
+	</jstl:if>
 	
 	<acme:textbox code="manager.name" path="name"/>
 	<br/>
 	<acme:textbox code="manager.surname" path="surname"/>
 	<br/>
-	<acme:textbox code="manager.vat" path="vat"/>
+	<acme:textbox code="manager.vat" path="vat" placeholder="ex: ABCD1234-"/>
 	<br/>
 	<acme:textbox code="manager.email" path="email"/>
 	<br/>
@@ -34,18 +43,20 @@
 	<br/>
 	<acme:textbox code="manager.birth" path="birth" placeholder="dd/MM/yyyy"/>
 	<br/>
-	<acme:textbox code="manager.userName" path="username"/>
-	<br/>
-	<acme:password code="manager.password" path="password"/>
-	<br/>
-	<acme:password code="manager.repeatPassword" path="repeatPassword"/>
-	<br/>
-	
-	<acme:checkbox code="manager.acceptTerms" path="termsAndConditions"/>
-	
-	<a href="terms/list.do"><spring:message code="manager.acceptTermsLink"/></a>
-	<br />
-	
+	<jstl:if test="${managerForm.id == 0}">
+		<acme:textbox code="manager.userName" path="username"/>
+		<br/>
+		<acme:password code="manager.password" path="password"/>
+		<br/>
+		<acme:password code="manager.repeatPassword" path="repeatPassword"/>
+		<br/>
+		
+		<acme:checkbox code="manager.acceptTerms" path="termsAndConditions"/>
+		
+		<a href="terms/list.do"><spring:message code="manager.acceptTermsLink"/></a>
+		<br />
+	</jstl:if>
+
 	<acme:submit name="save" code="manager.save"/>
 	<acme:cancel url="welcome/index.do" code="manager.cancel"/>
 	
