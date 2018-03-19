@@ -132,6 +132,19 @@ public class ServiceService {
 		Collection<Service> result = serviceRepository.findByManagerId(managerId);
 		return result;
 	}
+	
+	public void changeCancelled(int serviceId){
+		
+		Assert.isTrue(adminService.checkAuthority());
+		
+		Service service = findOne(serviceId);
+		
+		Assert.isTrue(service.isCancelled() == false);
+		Assert.isTrue(service.getRequests().isEmpty());
+		
+		service.setCancelled(true);
+		save(service);
+	}
 
 	
 	public ServiceForm construct(Service service) {
