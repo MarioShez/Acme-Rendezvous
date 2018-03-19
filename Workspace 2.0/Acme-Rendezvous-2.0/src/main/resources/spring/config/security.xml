@@ -78,6 +78,9 @@
 		<security:intercept-url pattern="/user/display.do" access="permitAll" />
 
 
+		<security:intercept-url pattern="/manager/register.do" access="permitAll" />
+
+
 		<!-- Rendezvous -->
 		<security:intercept-url pattern="/rendezvous/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/rendezvous/user/**" access="hasRole('USER')" />
