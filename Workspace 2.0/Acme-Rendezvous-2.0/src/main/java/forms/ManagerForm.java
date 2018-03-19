@@ -13,21 +13,19 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import security.UserAccount;
-
 public class ManagerForm {
 
+	private int id;
 	private String	name;
 	private String	surname;
 	private String	email;
 	private String	phone;
 	private String	address;
 	private Date	birth;
-	private UserAccount userAccount;
-	
-	private String vat;
-	
+	private String username;
+	private String password;
 	private String repeatPassword;
+	private String vat;
 	private boolean termsAndConditions;
 	
 	public ManagerForm(){
@@ -35,17 +33,14 @@ public class ManagerForm {
 	}
 	
 	
-	@NotBlank
-	@Pattern(regexp = "^[A-Z0-9\\-]+$")
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getVat() {
-		return vat;
+	public int getId() {
+		return id;
 	}
 
-	public void setVat(String vat) {
-		this.vat = vat;
+	public void setId(int id) {
+		this.id = id;
 	}
-
+	
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
@@ -54,7 +49,7 @@ public class ManagerForm {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSurname() {
@@ -105,11 +100,24 @@ public class ManagerForm {
 		this.birth = birth;
 	}
 	
-	public UserAccount getUserAccount() {
-		return userAccount;
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getUsername() {
+		return username;
 	}
-	public void setUserAccount(UserAccount userAccount) {
-		this.userAccount = userAccount;
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword (String password) {
+		this.password = password;
 	}
 	
 	@NotBlank
@@ -117,15 +125,27 @@ public class ManagerForm {
 	public String getRepeatPassword() {
 		return repeatPassword;
 	}
+	
 	public void setRepeatPassword(String repeatPassword) {
 		this.repeatPassword = repeatPassword;
 	}
+	
+	@NotBlank
+	@Pattern(regexp = "^[A-Z0-9\\-]+$")
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getVat() {
+		return vat;
+	}
 
-	public Boolean getTermsAndConditions() {
+	public void setVat(String vat) {
+		this.vat = vat;
+	}
+
+	public boolean getTermsAndConditions() {
 		return termsAndConditions;
 	}
 
-	public void setTermsAndConditions(Boolean termsAndConditions) {
+	public void setTermsAndConditions(boolean termsAndConditions) {
 		this.termsAndConditions = termsAndConditions;
 	}
 }
