@@ -1,4 +1,3 @@
-
 package repositories;
 
 import java.util.Collection;
@@ -8,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Admin;
+import domain.Manager;
+import domain.Service;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
@@ -47,16 +48,29 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	@Query("select r from Rendezvous r where r.linkedRendezvouses.size > (select avg(r.linkedRendezvouses.size)* 1.1 from Rendezvous r)")
 	Collection<Object> rendezvousLinked();
 
-	//	// A-1
-	//	@Query("select avg(r.questions.size), sqrt(sum(r.questions.size*r.questions.size)/count(r.questions.size)-(avg(r.questions.size)*avg(r.questions.size))) from Rendezvous r")
-	//	Object[] avgSqtrQuestionsPerRendezvous();
+	// // A-1
+	// @Query("select avg(r.questions.size), sqrt(sum(r.questions.size*r.questions.size)/count(r.questions.size)-(avg(r.questions.size)*avg(r.questions.size))) from Rendezvous r")
+	// Object[] avgSqtrQuestionsPerRendezvous();
 	//
-	//	// A-2
-	//	@Query("select (select count(a) from Answer a where a.question.rendezvous.id= r.id) from Rendezvous r")
-	//	Collection<Object> avgSqtrAnswersPerRendezvous();
+	// // A-2
+	// @Query("select (select count(a) from Answer a where a.question.rendezvous.id= r.id) from Rendezvous r")
+	// Collection<Object> avgSqtrAnswersPerRendezvous();
 
 	// A-3
 	@Query("select avg(c.replies.size), sqrt(sum(c.replies.size*c.replies.size)/count(c.replies.size)-(avg(c.replies.size)*avg(c.replies.size))) from Comment c")
 	Object[] avgSqtRrepliesPerComment();
 
+	// Nuevas queries entregable D09
+
+	// C1
+	@Query("select s, s.requests.size from Service s order by s.requests.size desc")
+	Manager bestSellingServices();
+
+	// C2
+	@Query("select m from Manager m where m.services.size > (select avg(p.services.size) from Manager p)")
+	Collection<Object> managersMoreServicesThanAvg();
+	
+	//C3
+	@Query("select m, m.services.size from Manager m join m.services s where s.cancelled = true order by m.services.size desc")
+	Collection<Object> managersMoreServicesCancelled();
 }

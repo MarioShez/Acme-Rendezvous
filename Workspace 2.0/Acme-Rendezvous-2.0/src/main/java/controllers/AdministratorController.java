@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdminService;
+import domain.Manager;
 
 @Controller
 @RequestMapping("/administrator")
@@ -74,6 +75,10 @@ public class AdministratorController extends AbstractController {
 //		Object avgSqtrQuestionsPerRendezvous[];
 //		Collection<Object> avgSqtrAnswersPerRendezvous;
 		Object avgSqtRrepliesPerComment[];
+		Collection<Object> managersMoreServicesThanAvg;
+		Collection<Object> managersMoreServicesCancelled;
+		//Manager bestSellingServices;
+		
 
 		avgSqtrUser = this.administratorService.avgSqtrUser();
 		ratioUserRendezvous = this.administratorService.ratioUserRendezvous();
@@ -86,6 +91,9 @@ public class AdministratorController extends AbstractController {
 //		avgSqtrQuestionsPerRendezvous = this.administratorService.avgSqtrQuestionsPerRendezvous();
 //		avgSqtrAnswersPerRendezvous = this.administratorService.avgSqtrAnswersPerRendezvous();
 		avgSqtRrepliesPerComment = this.administratorService.avgSqtRrepliesPerComment();
+		managersMoreServicesThanAvg = this.administratorService.managersMoreServicesThanAvg();
+		managersMoreServicesCancelled = this.administratorService.managersMoreServicesCancelled();
+		//bestSellingServices= this.administratorService.bestSellingService();
 
 		result.addObject("rendezvousPerUser", avgSqtrUser);
 		result.addObject("ratioUserRendezvous", ratioUserRendezvous);
@@ -99,6 +107,10 @@ public class AdministratorController extends AbstractController {
 //		result.addObject("questionsPerRendezvous", avgSqtrQuestionsPerRendezvous);
 //		result.addObject("answersPerRendezvous", avgSqtrAnswersPerRendezvous);
 		result.addObject("repliesPerComment", avgSqtRrepliesPerComment);
+		result.addObject("managersMoreServicesThanAvg", managersMoreServicesThanAvg);
+		result.addObject("managersMoreServicesCancelled", managersMoreServicesCancelled);
+		//result.addObject("bestSellingServices", bestSellingServices);
+
 
 		return result;
 	}
