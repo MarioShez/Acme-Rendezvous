@@ -72,6 +72,15 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
+					<security:authorize access="hasRole('ADMIN')">
+						<li><a href="admin/admin/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('USER')">
+						<li><a href="user/user/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('MANAGER')">
+						<li><a href="manager/manager/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 					
 				</ul>
