@@ -230,5 +230,18 @@ public class AdminService {
 				.AvgCategoryPerRendezvous();
 		return result;
 	}
+	//B-2
+	public Double AvgServicesPerCategories() {
+		final Double result = this.adminRepository
+				.AvgServicesPerCategories();
+		return result;
+	}
+	
+	//B-3
+	public Object[] AvgMinMaxStrServicePerRendezvous() {
+		final Object[] result = this.adminRepository
+				.AvgMinMaxStrServicePerRendezvous();
+		return result;
+	}
 
 }
