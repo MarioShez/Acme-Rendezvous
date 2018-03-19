@@ -80,6 +80,7 @@
 		</security:authorize>
 		
 		<li><a class="fNiv" href="rendezvous/list.do"><spring:message code="master.page.avalibleRendezvouses" /></a></li>
+		<li><a class="fNiv" href="category/list.do"><spring:message code="master.page.category" /></a></li>
 		<li><a class="fNiv" href="user/list.do"><spring:message code="master.page.listUsers" /></a></li>
 		<li><a class="fNiv" href="terms/list.do"><spring:message code="master.page.termsAndConditions" /></a></li>
 	</ul>
