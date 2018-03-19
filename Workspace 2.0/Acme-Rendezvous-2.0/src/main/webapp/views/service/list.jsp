@@ -42,15 +42,15 @@
 	</jstl:if>
 	
 	<spring:message var="cancelledHeader" code="service.cancelled"/>
-	<display:column property="cancelled" title="${cancelledHeader}" sortable="true">
-		<%-- <jstl:choose>
+	<display:column title="${cancelledHeader}" sortable="true">
+		<jstl:choose>
 			<jstl:when test="${row.cancelled == true}">
-				<jstl:out value="<spring:message code="service.yes"/>"/>
+				<spring:message code="service.yes"/>
 			</jstl:when>
 			<jstl:when test="${row.cancelled == false}">
-				<jstl:out value="<spring:message code="service.no"/>"/>
+				<spring:message code="service.no"/>
 			</jstl:when>
-		</jstl:choose> --%>
+		</jstl:choose>
 	</display:column>
 	
 </display:table>

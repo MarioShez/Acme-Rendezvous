@@ -13,8 +13,8 @@
 
 <form:form action="service/manager/edit.do" modelAttribute="serviceForm">
 
-	<%-- <form:hidden path="id"/>
-	<form:hidden path="cancelled"/> --%>
+	<form:hidden path="id"/>
+	<form:hidden path="cancelled"/>
 	
 	<acme:textbox code="service.name" path="name" readonly="${serviceForm.cancelled}"/>
 	<br/>

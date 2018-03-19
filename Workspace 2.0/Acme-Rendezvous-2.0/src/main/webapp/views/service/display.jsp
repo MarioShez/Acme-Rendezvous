@@ -19,11 +19,11 @@
 <b><spring:message code="service.description"/>:&nbsp;</b><jstl:out value="${service.description}"/>
 <br/>
 
-<b><spring:message code="rendezvous.manager"/>:&nbsp;</b><jstl:out value="${service.manager.name} ${service.manager.surname}"/>
+<b><spring:message code="service.manager"/>:&nbsp;</b><jstl:out value="${service.manager.name} ${service.manager.surname}"/>
 <br/>
 
 <jstl:if test="${not empty service.requests}">
-	<a href="request/actor/list.do?serviceId=${service.id}"><spring:message code="rendezvous.listRequests"/></a>
+	<a href="request/actor/list.do?serviceId=${service.id}"><spring:message code="service.listRequests"/></a>
 	<br/>
 </jstl:if>
 

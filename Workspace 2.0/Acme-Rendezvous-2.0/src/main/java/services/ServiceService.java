@@ -122,6 +122,16 @@ public class ServiceService {
 		final Collection<Service> result = this.serviceRepository.bestSellingServices();
 		return result;
 	}
+	
+	public Collection<Service> findByRendezvousId(int rendezvousId){
+		Collection<Service> result = serviceRepository.findByRendezvousId(rendezvousId);
+		return result;
+	}
+	
+	public Collection<Service> findByManagerId(int managerId){
+		Collection<Service> result = serviceRepository.findByManagerId(managerId);
+		return result;
+	}
 
 	
 	public ServiceForm construct(Service service) {
@@ -131,26 +141,25 @@ public class ServiceService {
 		res.setName(service.getName());
 		res.setDescription(service.getDescription());
 		res.setPicture(service.getPicture());
-		res.setManager(service.getManager());
-		res.setRequests(service.getRequests());
-		res.setCategories(service.getCategories());
 		
 		return res;
 	}
 	
 	public Service reconstruct(ServiceForm serviceForm, BindingResult binding){
+
 		Assert.notNull(serviceForm);
-		Service res = new Service();
 		
-		res.setCancelled(false);
-		
-		res.setId(serviceForm.getId());
+		Service res;
+
+		if(serviceForm.getId() == 0){
+			res = create();
+		}else{
+			res = findOne(serviceForm.getId());
+		}
+
 		res.setName(serviceForm.getName());
 		res.setDescription(serviceForm.getDescription());
 		res.setPicture(serviceForm.getPicture());
-		res.setManager(serviceForm.getManager());
-		res.setRequests(serviceForm.getRequests());
-		res.setCategories(serviceForm.getCategories());
 		
 		if(binding!=null)
 			validator.validate(res, binding);
