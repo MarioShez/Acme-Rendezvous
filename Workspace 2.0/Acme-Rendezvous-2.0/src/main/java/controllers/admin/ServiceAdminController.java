@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AdminService;
 import services.ServiceService;
 import controllers.AbstractController;
-import domain.Service;
 
 @Controller
 @RequestMapping("/service/admin")
@@ -40,9 +39,9 @@ public class ServiceAdminController extends AbstractController {
 		
 		ModelAndView result;
 		
-		Service service = serviceService.findOne(serviceId);
-		service.setCancelled(true);
-		result = new ModelAndView("redirect:service/actor/list.do");
+		serviceService.changeCancelled(serviceId);
+		
+		result = new ModelAndView("redirect:/service/actor/list.do");
 		
 		return result;
 	}

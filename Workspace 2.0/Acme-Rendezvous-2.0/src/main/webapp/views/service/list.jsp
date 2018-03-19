@@ -15,7 +15,9 @@
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
-			<a href="service/admin/cancel.do?serviceId=${row.id}"><spring:message code="service.cancel"/></a>
+			<jstl:if test="${row.cancelled == false && empty row.requests}">
+				<a href="service/admin/cancel.do?serviceId=${row.id}"><spring:message code="service.cancel"/></a>
+			</jstl:if>
 		</display:column>	
 	</security:authorize>
 	
