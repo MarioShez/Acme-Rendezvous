@@ -247,6 +247,65 @@
 	</tr>
 </table>
 
+<spring:message code="administrator.bestSellingServicesLabel" />
+<jstl:out value="${bestSellingServicesLabel}"></jstl:out>
+<table class="displaytag"  name="bestSellingServices">
+	<tr>
+		<th>
+			<spring:message code="administrator.thebest" var="bestHeader" />
+			<jstl:out value="${bestHeader}"></jstl:out>
+		</th>
+	</tr>
+	<tr>
+		<jstl:forEach var="datos" items="${bestSellingServices}">
+			<td>
+				<jstl:out value="${datos[0].name}"></jstl:out>
+			</td>
+		</jstl:forEach>
+	</tr>
+	
+</table>
+ 
+ <spring:message code="administrator.managersMoreServicesThanAvgLabel"/>
+<jstl:out value="${managersMoreServicesThanAvgLabel}"></jstl:out>
+<table class="displaytag"  name="managersMoreServicesThanAvg">
+	<tr>
+		<th>
+			<spring:message code="administrator.managers" var="managersHeader" />
+			<jstl:out value="${managersHeader}"></jstl:out>
+		</th>
+	</tr>
+	<jstl:forEach var="datos" items="${managersMoreServicesThanAvg}">
+	<tr>
+		
+			<td>
+				<jstl:out value="${datos.name}"></jstl:out>
+			</td>
+		
+	</tr>
+	</jstl:forEach>
+</table>
+
+ <spring:message code="administrator.managersMoreServicesCancelledLabel"/>
+<jstl:out value="${managersMoreServicesCancelledLabel}"></jstl:out>
+<table class="displaytag"  name="managersMoreServicesCancelled">
+	<tr>
+		<th>
+			<spring:message code="administrator.managersCancelled" var="managersCHeader" />
+			<jstl:out value="${managersCHeader}"></jstl:out>
+		</th>
+	</tr>
+	<jstl:forEach var="datos" items="${managersMoreServicesCancelled}">
+	<tr>
+		
+			<td>
+				<jstl:out value="${datos[0].name}"></jstl:out>
+			</td>
+		
+	</tr>
+	</jstl:forEach>
+</table>
+
 </security:authorize>
 
 

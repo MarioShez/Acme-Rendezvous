@@ -264,6 +264,8 @@
 		<property name="picture" value="" />
 		<property name="categories">
 			<list>
+				<ref bean="water"/>
+				<ref bean="riverWater"/>
 			</list>
 		</property>
 		<property name="manager" ref="manager1" />
@@ -283,7 +285,8 @@
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
 		<property name="categories">
 			<list>
-
+				<ref bean="mountainClimbing"/>
+				<ref bean="climbing"/>
 			</list>
 		</property>
 		<property name="manager" ref="manager2" />
@@ -303,7 +306,8 @@
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
 		<property name="categories">
 			<list>
-
+				<ref bean="riverClimbing"/>
+				<ref bean="climbing"/>
 			</list>
 		</property>
 		<property name="manager" ref="manager1" />
@@ -322,7 +326,7 @@
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
 		<property name="categories">
 			<list>
-
+				<ref bean="savana"/>
 			</list>
 		</property>
 		<property name="manager" ref="manager2" />
@@ -341,7 +345,8 @@
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
 		<property name="categories">
 			<list>
-
+				<ref bean="lake"/>
+				<ref bean="water"/>
 			</list>
 		</property>
 		<property name="manager" ref="manager3" />
@@ -361,7 +366,8 @@
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
 		<property name="categories">
 			<list>
-
+				<ref bean="mountainGround"/>
+				<ref bean="ground"/>
 			</list>
 		</property>
 		<property name="manager" ref="manager2" />
@@ -380,7 +386,7 @@
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
 		<property name="categories">
 			<list>
-
+				<ref bean="ground"/>
 			</list>
 		</property>
 		<property name="manager" ref="manager3" />
@@ -399,7 +405,7 @@
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
 		<property name="categories">
 			<list>
-
+				<ref bean="water"/>
 			</list>
 		</property>
 		<property name="manager" ref="manager3" />
@@ -409,6 +415,196 @@
 			</list>
 		</property>
 	</bean>
+
+	<!-- Category -->
+	<!-- Category 0 -->
+	<bean id="category" class="domain.Category">
+		<property name="name" value="CATEGORY" />
+		<property name="description" value="Principal" />
+		<property name="services">
+			<list>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+				<ref bean="safari"/>
+				<ref bean = "climbing"/>
+			</list>
+		</property>
+		<property name="categoryParent"><null/></property>
+	</bean>
+	
+	<!-- Category 1 -->
+	<bean id="water" class="domain.Category">
+		<property name="name" value="Water" />
+		<property name="description" value="Water: lake, river" />
+		<property name="services">
+			<list>
+				<ref bean="service1"/>
+				<ref bean="service5"/>
+				<ref bean="service8"/>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+				<ref bean="lake"/>
+				<ref bean = "riverWater"/>
+			</list>
+		</property>
+		<property name="categoryParent" ref="safari"/>
+	</bean>
+	
+	<!-- Category 2 -->
+	<bean id="safari" class="domain.Category">
+		<property name="name" value="Safari" />
+		<property name="description" value="Safari: ground, water" />
+		<property name="services">
+			<list>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+				<ref bean="ground"/>
+				<ref bean = "water"/>
+			</list>
+		</property>
+		<property name="categoryParent" ref="category"/>
+	</bean>
+	
+	<!-- Category 3 -->
+	<bean id="riverWater" class="domain.Category">
+		<property name="name" value="River" />
+		<property name="description" value="River service" />
+		<property name="services">
+			<list>
+				<ref bean="service1"/>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+		<property name="categoryParent" ref="water"/>
+	</bean>
+	
+	<!-- Category 4 -->
+	<bean id="mountainClimbing" class="domain.Category">
+		<property name="name" value="Mountain" />
+		<property name="description" value="Mountain climbing service)" />
+		<property name="services">
+			<list>
+				<ref bean="service2"/>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+		<property name="categoryParent" ref="climbing"/>
+	</bean>
+	
+	<!-- Category 5 -->
+	<bean id="mountainGround" class="domain.Category">
+		<property name="name" value="Mountain" />
+		<property name="description" value="Mountain ground service" />
+		<property name="services">
+			<list>
+				<ref bean="service6"/>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+		<property name="categoryParent" ref="ground"/>
+	</bean>
+	
+	<!-- Category 6 -->
+	<bean id="ground" class="domain.Category">
+		<property name="name" value="Ground" />
+		<property name="description" value="Ground: savana, mountain" />
+		<property name="services">
+			<list>
+				<ref bean="service6"/>
+				<ref bean="service7"/>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+				<ref bean="savana"/>
+				<ref bean="mountainGround"/>
+			</list>
+		</property>
+		<property name="categoryParent" ref="safari"/>
+	</bean>
+	
+	<!-- Category 7 -->
+	<bean id="climbing" class="domain.Category">
+		<property name="name" value="Climbing" />
+		<property name="description" value="Climbing: mountain, river" />
+		<property name="services">
+			<list>
+				<ref bean="service2"/>
+				<ref bean="service3"/>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+				<ref bean="mountainClimbing"/>
+				<ref bean="riverClimbing"/>
+			</list>
+		</property>
+		<property name="categoryParent" ref="category"/>
+	</bean>
+	
+	<!-- Category 8 -->
+	<bean id="riverClimbing" class="domain.Category">
+		<property name="name" value="River" />
+		<property name="description" value="River service" />
+		<property name="services">
+			<list>
+				<ref bean="service3"/>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+		<property name="categoryParent" ref="climbing"/>
+	</bean>
+	
+	<!-- Category 9 -->
+	<bean id="savana" class="domain.Category">
+		<property name="name" value="Savana" />
+		<property name="description" value="Savana service" />
+		<property name="services">
+			<list>
+				<ref bean="service4"/>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+		<property name="categoryParent" ref="ground"/>
+	</bean>
+	
+	<!-- Category 10 -->
+	<bean id="lake" class="domain.Category">
+		<property name="name" value="Lake" />
+		<property name="description" value="Lake service" />
+		<property name="services">
+			<list>
+				<ref bean="service5"/>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+		<property name="categoryParent" ref="water"/>
+	</bean>
+	
 
 	<!-- Request -->
 	<!-- Request 1 -->

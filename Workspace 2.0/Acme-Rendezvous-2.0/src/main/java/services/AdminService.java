@@ -1,4 +1,3 @@
-
 package services;
 
 import java.util.Collection;
@@ -14,6 +13,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Admin;
+import domain.Manager;
 
 @Service
 @Transactional
@@ -22,8 +22,7 @@ public class AdminService {
 	// Managed repository
 
 	@Autowired
-	private AdminRepository	adminRepository;
-
+	private AdminRepository adminRepository;
 
 	// Supporting services
 
@@ -86,7 +85,8 @@ public class AdminService {
 		Admin res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		res = this.adminRepository.findAdministratorByUserAccountId(userAccount.getId());
+		res = this.adminRepository.findAdministratorByUserAccountId(userAccount
+				.getId());
 		Assert.notNull(res);
 		return res;
 	}
@@ -113,23 +113,23 @@ public class AdminService {
 	}
 
 	//
-	//	public void checkAuthority() {
-	//		UserAccount userAccount;
-	//		userAccount = LoginService.getPrincipal();
-	//		Assert.notNull(userAccount);
-	//		Collection<Authority> authority = userAccount.getAuthorities();
-	//		Assert.notNull(authority);
-	//		Authority res = new Authority();
-	//		res.setAuthority("ADMIN");
-	//		Assert.isTrue(authority.contains(res));
-	//	}
+	// public void checkAuthority() {
+	// UserAccount userAccount;
+	// userAccount = LoginService.getPrincipal();
+	// Assert.notNull(userAccount);
+	// Collection<Authority> authority = userAccount.getAuthorities();
+	// Assert.notNull(authority);
+	// Authority res = new Authority();
+	// res.setAuthority("ADMIN");
+	// Assert.isTrue(authority.contains(res));
+	// }
 	//
-	//	// C-1
-	//	public Object[] avgSqtrUser() {
-	//		Object[] res;
-	//		res = this.adminRepository.avgSqtrUser();
-	//		return res;
-	//	}
+	// // C-1
+	// public Object[] avgSqtrUser() {
+	// Object[] res;
+	// res = this.adminRepository.avgSqtrUser();
+	// return res;
+	// }
 	//
 	// C-2
 	public Double ratioUserRendezvous() {
@@ -180,25 +180,48 @@ public class AdminService {
 		return res;
 	}
 
-//	// A-1
-//	public Object[] avgSqtrQuestionsPerRendezvous() {
-//		Object[] res;
-//		res = this.adminRepository.avgSqtrQuestionsPerRendezvous();
-//		return res;
-//	}
-//
-//	// A-2
-//	public Collection<Object> avgSqtrAnswersPerRendezvous() {
-//		Collection<Object> res;
-//		res = this.adminRepository.avgSqtrAnswersPerRendezvous();
-//		return res;
-//	}
+	// // A-1
+	// public Object[] avgSqtrQuestionsPerRendezvous() {
+	// Object[] res;
+	// res = this.adminRepository.avgSqtrQuestionsPerRendezvous();
+	// return res;
+	// }
+	//
+	// // A-2
+	// public Collection<Object> avgSqtrAnswersPerRendezvous() {
+	// Collection<Object> res;
+	// res = this.adminRepository.avgSqtrAnswersPerRendezvous();
+	// return res;
+	// }
 
 	// A-3
 	public Object[] avgSqtRrepliesPerComment() {
 		Object[] res;
 		res = this.adminRepository.avgSqtRrepliesPerComment();
 		return res;
+	}
+
+	// Nuevas queries
+
+	// C-1
+	public Collection<Object> bestSellingService() {
+		final Collection<Object> result = this.adminRepository
+				.bestSellingServices();
+		return result;
+	}
+
+	// C-2
+	public Collection<Object> managersMoreServicesThanAvg() {
+		final Collection<Object> result = this.adminRepository
+				.managersMoreServicesThanAvg();
+		return result;
+	}
+
+	// C-3
+	public Collection<Manager> managersMoreServicesCancelled() {
+		final Collection<Manager> result = this.adminRepository
+				.managersMoreServicesCancelled();
+		return result;
 	}
 
 }

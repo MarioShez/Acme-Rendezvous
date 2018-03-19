@@ -301,5 +301,10 @@ public class RendezvousService {
 		final Collection<Rendezvous> result = this.rendezvousRepository.findParentRendezvouses(rendezvousId);
 		return result;
 	}
+	
+	public Collection<Rendezvous> rendezvousGroupedByCategory(int categoryId){
+		final Collection<Rendezvous> result = this.rendezvousRepository.rendezvousGroupedByCategory(categoryId);
+		return result;
+	}
 
 }

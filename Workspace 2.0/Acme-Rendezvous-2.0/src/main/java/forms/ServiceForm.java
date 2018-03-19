@@ -1,4 +1,4 @@
-package domain;
+package forms;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
