@@ -119,15 +119,6 @@ public class ManagerService {
 	}
 
 
-	public Collection<Manager> managersMoreServicesThanAvg() {
-		final Collection<Manager> result = this.managerRepository.managersMoreServicesThanAvg();
-		return result;
-	}
-
-	public Collection<Manager> managersMoreServicesCancelled() {
-		final Collection<Manager> result = this.managerRepository.managersMoreServicesCancelled();
-		return result;
-	}
 
 	public Manager reconstruct(final ManagerForm managerForm, final BindingResult binding) {
 		final Manager res = new Manager();
