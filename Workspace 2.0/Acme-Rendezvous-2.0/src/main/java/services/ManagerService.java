@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Manager;
-import forms.UserForm;
+import forms.ManagerForm;
 
 @Service
 @Transactional
@@ -46,6 +47,7 @@ public class ManagerService {
 
 	public Manager create() {
 		final Manager res = new Manager();
+		Collection<domain.Service> services = new ArrayList<domain.Service>();
 
 		final UserAccount userAccount = new UserAccount();
 		final Authority authority = new Authority();
@@ -53,6 +55,7 @@ public class ManagerService {
 		authority.setAuthority(Authority.MANAGER);
 		userAccount.addAuthority(authority);
 		res.setUserAccount(userAccount);
+		res.setServices(services);
 
 		return res;
 	}
@@ -72,7 +75,7 @@ public class ManagerService {
 		return res;
 	}
 
-	public Actor save(final Manager manager) {
+	public Manager save(final Manager manager) {
 		Manager res;
 
 		if (manager.getId() == 0) {
@@ -115,15 +118,27 @@ public class ManagerService {
 			return false;
 	}
 
-	public Manager reconstruct(final UserForm managerForm, final BindingResult binding) {
+
+	public Collection<Manager> managersMoreServicesThanAvg() {
+		final Collection<Manager> result = this.managerRepository.managersMoreServicesThanAvg();
+		return result;
+	}
+
+	public Collection<Manager> managersMoreServicesCancelled() {
+		final Collection<Manager> result = this.managerRepository.managersMoreServicesCancelled();
+		return result;
+	}
+
+	public Manager reconstruct(final ManagerForm managerForm, final BindingResult binding) {
 		final Manager res = new Manager();
-
+		
+		Collection<domain.Service> services = new ArrayList<domain.Service>();
+		
 		final UserAccount userAccount = managerForm.getUserAccount();
-
 		final Authority authority = new Authority();
 		authority.setAuthority(Authority.MANAGER);
 		userAccount.addAuthority(authority);
-
+		
 		res.setUserAccount(userAccount);
 		res.setName(managerForm.getName());
 		res.setSurname(managerForm.getSurname());
@@ -131,10 +146,14 @@ public class ManagerService {
 		res.setPhone(managerForm.getPhone());
 		res.setAddress(managerForm.getAddress());
 		res.setBirth(managerForm.getBirth());
+		
+		res.setVat(managerForm.getVat());
+		res.setServices(services);
 
 		this.validator.validate(res, binding);
-
+		
 		return res;
 	}
+	
 
 }
