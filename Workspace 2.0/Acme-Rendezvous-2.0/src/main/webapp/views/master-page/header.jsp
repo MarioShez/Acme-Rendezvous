@@ -27,7 +27,7 @@
 				<li><a href="rendezvous/admin/list.do"><spring:message code="master.page.administrator.rendezvous" /></a></li>
 				<li><a href="comment/admin/list.do"><spring:message code="master.page.administrator.comment" /></a></li>
 				<li><a href="announcement/admin/list.do"><spring:message code="master.page.administrator.announcement" /></a></li>
-				<li><a href="service/actor/list.do"><spring:message code="master.page.service" /></a></li>
+				<li><a href="service/list.do"><spring:message code="master.page.service" /></a></li>
 				<li><a href="administrator/display.do"><spring:message code="master.page.administrator.information" /></a></li>
 			</ul>
 		</security:authorize>
@@ -38,7 +38,7 @@
 				<li><a href="rendezvous/user/list-organised.do"><spring:message code="master.page.user.organisedRendezvouses" /></a></li>
 				<li><a href="rendezvous/user/list-rspv.do"><spring:message code="master.page.user.rspvRendezvouses" /></a></li>
 				<li><a href="announcement/user/list.do"><spring:message code="master.page.user.streamingAnnouncements" /></a></li>
-				<li><a href="service/actor/list.do"><spring:message code="master.page.service" /></a></li>
+				<li><a href="service/list.do"><spring:message code="master.page.service" /></a></li>
 			</ul>
 			
 		</security:authorize>
@@ -46,7 +46,7 @@
 		<security:authorize access="hasRole('MANAGER')">
 		<li><a class="fNiv"><spring:message	code="master.page.manager" /></a>
 			<ul>
-				<li><a href="service/actor/list.do"><spring:message code="master.page.service" /></a></li>
+				<li><a href="service/list.do"><spring:message code="master.page.service" /></a></li>
 				<li><a href="service/manager/list.do"><spring:message code="master.page.manager.listServices" /></a></li>
 			</ul>
 			

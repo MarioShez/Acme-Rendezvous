@@ -65,7 +65,7 @@
 		
 		<security:authorize access="isAuthenticated()">
 			<jstl:if test="${not empty rendezvous.requests}">
-				<a href="service/actor/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listServices"/></a>
+				<a href="service/list.do?rendezvousId=${rendezvous.id}"><spring:message code="rendezvous.listServices"/></a>
 				<br/>
 			</jstl:if>
 		</security:authorize>

@@ -58,6 +58,9 @@
 		<bean class="converters.ServiceToStringConverter" />
 		<bean class="converters.StringToServiceConverter" />
 		
+		<bean class="converters.CategoryToStringConverter" />
+		<bean class="converters.StringToCategoryConverter" />
+		
 	</util:list>
 	
 </beans>

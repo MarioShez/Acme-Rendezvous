@@ -1,4 +1,4 @@
-package controllers.actor;
+package controllers;
 
 import java.util.Collection;
 
@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ServiceService;
-import controllers.AbstractController;
 import domain.Service;
 
 @Controller
-@RequestMapping("/service/actor")
-public class ServiceActorController extends AbstractController {
+@RequestMapping("/service")
+public class ServiceController extends AbstractController {
 
 	// Services ---------------
 
@@ -24,7 +23,7 @@ public class ServiceActorController extends AbstractController {
 
 	// Constructors -----------
 
-	public ServiceActorController() {
+	public ServiceController() {
 		super();
 	}
 
@@ -44,7 +43,7 @@ public class ServiceActorController extends AbstractController {
 		
 		result = new ModelAndView("service/list");
 		result.addObject("services", services);
-		result.addObject("requestURI", "service/actor/list.do");
+		result.addObject("requestURI", "service/list.do");
 
 		return result;
 	}
