@@ -113,6 +113,10 @@ public class ManagerService {
 		else
 			return false;
 	}
+	
+	public void flush() {
+		this.managerRepository.flush();
+	}
 
 	public Manager reconstruct(final ManagerForm managerForm, final BindingResult binding) {
 		

@@ -29,6 +29,46 @@ public class UserServiceTest extends AbstractTest{
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	//Test Login---------------------------------------
+	
+	@Test
+	public void loginDriver(){
+		final Object testingData[][] = {
+			{
+				//creando user correctamente
+				"user1",null
+			}
+			,{
+				//creando user sin name
+				"DonManuee", IllegalArgumentException.class
+			}
+		};
+		
+		for (int i = 0; i<testingData.length; i++){
+			this.templateLoginUser((String) testingData[i][0], (Class<?>) testingData[i][1]);
+		}
+	}
+	
+	private void templateLoginUser(final String user, final Class<?> expected){
+		Class<?> caught;
+		caught = null;
+		
+		try{
+			super.authenticate(user);
+			this.unauthenticate();
+			this.userService.flush();
+			
+		}catch (final Throwable oops){
+			caught = oops.getClass();
+			this.entityManager.clear();
+		}
+		
+		this.checkExceptions(expected, caught);
+	}
+	
+	
+	//Test create---------------------------------------
+	// Use Case 3.1
 	@Test
 	public void registrationUserDriver(){
 		final Object testingData[][] = {
@@ -103,6 +143,60 @@ public class UserServiceTest extends AbstractTest{
 			user.setBirth(fecha);
 			user.getUserAccount().setUsername(username);
 			user.getUserAccount().setPassword(password);
+			
+			user = this.userService.save(user);
+			
+			this.userService.flush();
+		}catch (final Throwable oops){
+			caught = oops.getClass();
+			this.entityManager.clear();
+		}
+		
+		this.checkExceptions(expected, caught);
+	}
+	
+	
+	@Test
+	public void editUserDriver(){
+		final Object testingData[][] = {
+			{
+				//creando user correctamente
+				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993",  null
+			}
+			,{
+				//creando user sin name
+				"", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993",  javax.validation.ConstraintViolationException.class
+			}
+		};
+		
+		for (int i = 0; i<testingData.length; i++){
+			this.templateEditUser((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (Class<?>) testingData[i][6]);
+		}
+	}
+	
+	
+	private void templateEditUser(final String name, final String surname, final String email, final String phone, final String address, final String birth,  final Class<?> expected){
+		Class<?> caught;
+		User user;
+		caught = null;
+		Date fecha = new Date();
+		
+		SimpleDateFormat pattern = new SimpleDateFormat("dd/MM/yyyy");
+		try{
+			fecha = pattern.parse(birth);
+		}catch(ParseException e){
+			e.getClass();
+		}
+		
+		try{
+			user = this.userService.create();
+			
+			user.setName(name);
+			user.setSurname(surname);
+			user.setEmail(email);
+			user.setPhone(phone);
+			user.setAddress(address);
+			user.setBirth(fecha);
 			
 			user = this.userService.save(user);
 			

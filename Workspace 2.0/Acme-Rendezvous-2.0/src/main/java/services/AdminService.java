@@ -104,6 +104,10 @@ public class AdminService {
 		else
 			return false;
 	}
+	
+	public void flush() {
+		this.adminRepository.flush();
+	}
 
 	// C-1
 	public Object[] avgSqtrUser() {
