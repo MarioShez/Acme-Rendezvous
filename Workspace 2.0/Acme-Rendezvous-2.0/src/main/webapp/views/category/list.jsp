@@ -20,7 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-<display:table pagesize="6" class="displaytag" keepStatus="true"
+<display:table pagesize="6" class="displaycomment" keepStatus="true"
 	name="category" requestURI="${requestURI }" id="row">
 	
 	<security:authorize access="hasRole('ADMIN')">
@@ -28,11 +28,6 @@
 			<a href="category/admin/edit.do?categoryId=${row.id }"><spring:message code="category.edit"/></a>
 		</display:column>
 	</security:authorize>
-	
-	<spring:message code="category.categoryParent" var="categoryParent" />
-	<jstl:if test="${categoryParent != \"CATEGORY\"}">
-		<display:column property="categoryParent.name" title="${categoryParent }" sortable="false" />
-	</jstl:if>
 	
 	<spring:message code="category.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader}" sortable="true" />
@@ -44,9 +39,8 @@
 		<a href="rendezvous/listByCategory.do?categoryId=${row.id}"><spring:message code="category.rendezvous"/></a>
 	</display:column>
 	
-	<spring:message code="category.categories" var="categoriesHeader" />
-	<display:column title="${categoriesHeader}">
-		<a href="category/list.do?categoryId=${row.id}"><spring:message code="category.listCategories"/></a>
+	<display:column>
+		<a href="category/list.do?categoryId=${row.id}"><spring:message code="category.categories"/></a>
 	</display:column>
 	
 	
