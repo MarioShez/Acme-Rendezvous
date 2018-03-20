@@ -1,3 +1,4 @@
+
 package converters;
 
 import org.springframework.core.convert.converter.Converter;
@@ -21,4 +22,5 @@ public class CategoryToStringConverter implements Converter<Category, String> {
 
 		return result;
 	}
+
 }
