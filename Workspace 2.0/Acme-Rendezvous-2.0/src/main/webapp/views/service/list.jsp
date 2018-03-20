@@ -29,14 +29,14 @@
 	
 	<display:column>
 		<jstl:if test="${row.cancelled == false}">
-			<a href="service/actor/display.do?serviceId=${row.id}"><spring:message code="service.display"/></a>
+			<a href="service/display.do?serviceId=${row.id}"><spring:message code="service.display"/></a>
 		</jstl:if>
 	</display:column>
 		
 	<spring:message var="nameHeader" code="service.name"/>
 	<display:column property="name" title="${nameHeader}"/>
 	
-	<jstl:if test="${requestURI == 'service/actor/list.do'}">
+	<jstl:if test="${requestURI == 'service/list.do'}">
 		<spring:message var="managerHeader" code="service.manager"/>
 		<display:column title="${nameHeader}">
 			<jstl:out value="${row.manager.name} ${row.manager.surname}"/>

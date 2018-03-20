@@ -41,7 +41,7 @@ public class ServiceAdminController extends AbstractController {
 		
 		serviceService.changeCancelled(serviceId);
 		
-		result = new ModelAndView("redirect:/service/actor/list.do");
+		result = new ModelAndView("redirect:/service/list.do");
 		
 		return result;
 	}

@@ -22,9 +22,4 @@
 <b><spring:message code="service.manager"/>:&nbsp;</b><jstl:out value="${service.manager.name} ${service.manager.surname}"/>
 <br/>
 
-<jstl:if test="${not empty service.requests}">
-	<a href="request/actor/list.do?serviceId=${service.id}"><spring:message code="service.listRequests"/></a>
-	<br/>
-</jstl:if>
-
 <acme:cancel url="service/actor/list.do" code="service.back"/>

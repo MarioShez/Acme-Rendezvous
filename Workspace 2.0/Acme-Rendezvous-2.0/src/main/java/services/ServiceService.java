@@ -13,6 +13,7 @@ import org.springframework.validation.Validator;
 import repositories.ServiceRepository;
 import domain.Category;
 import domain.Manager;
+import domain.Rendezvous;
 import domain.Request;
 import domain.Service;
 import forms.ServiceForm;
@@ -27,12 +28,15 @@ public class ServiceService {
 	private ServiceRepository	serviceRepository;
 
 	// Supported services
+	
+	@Autowired
+	private RendezvousService		rendezvousService;
 
 	@Autowired
-	private ManagerService		managerService;
+	private ManagerService			managerService;
 
 	@Autowired
-	private AdminService		adminService;
+	private AdminService			adminService;
 	
 	@Autowired
 	private Validator validator;
@@ -139,6 +143,25 @@ public class ServiceService {
 		
 		service.setCancelled(true);
 		save(service);
+	}
+	
+	public Collection<Service> findNonCancelled(){
+		
+		Collection<Service> result = serviceRepository.findNonCancelled();
+		return result;
+	}
+	
+	public Collection<Service> findAvalibleServicesByRendezvousId(int rendezvousId){
+		
+		Collection<Service> result = serviceRepository.findNonCancelled();
+		Rendezvous rendezvous = rendezvousService.findOne(rendezvousId);
+		for(Request request:rendezvous.getRequests()){
+			if(result.contains(request.getService())){
+				result.remove(request.getService());
+			}
+		}
+		
+		return result;
 	}
 
 	

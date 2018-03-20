@@ -20,5 +20,8 @@ public interface ServiceRepository extends JpaRepository<Service, Integer> {
 	
 	@Query("select s from Service s where s.manager.id = ?1")
 	Collection<Service> findByManagerId(int managerId);
+	
+	@Query("select s from Service s where s.cancelled = false")
+	Collection<Service> findNonCancelled();
 
 }

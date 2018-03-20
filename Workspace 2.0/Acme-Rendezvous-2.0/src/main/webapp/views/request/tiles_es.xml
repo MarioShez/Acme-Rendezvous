@@ -15,25 +15,10 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
-
-	<definition name="service/list" extends="master.page">	
-		<put-attribute name="title" value="Listar servicios" />
-		<put-attribute name="body" value="/views/service/list.jsp" />
-	</definition>
 	
-	<definition name="service/edit" extends="master.page">	
-		<put-attribute name="title" value="Editar un servicio" />
-		<put-attribute name="body" value="/views/service/edit.jsp" />
-	</definition>
-	
-	<definition name="service/create" extends="master.page">	
-		<put-attribute name="title" value="Crear un servicio" />
-		<put-attribute name="body" value="/views/service/edit.jsp" />
-	</definition>
-	
-	<definition name="service/display" extends="master.page">	
-		<put-attribute name="title" value="Mostrar servicio" />
-		<put-attribute name="body" value="/views/service/display.jsp" />
+	<definition name="request/create" extends="master.page">	
+		<put-attribute name="title" value="Crear una petición" />
+		<put-attribute name="body" value="/views/request/edit.jsp" />
 	</definition>
 	
 </tiles-definitions>

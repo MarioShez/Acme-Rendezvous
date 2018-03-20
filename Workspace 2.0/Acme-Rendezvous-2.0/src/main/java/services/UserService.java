@@ -113,7 +113,8 @@ public class UserService {
 		return res;
 	}
 
-	public void checkAuthority() {
+	public boolean checkAuthority() {
+		boolean result = false;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
@@ -121,7 +122,10 @@ public class UserService {
 		Assert.notNull(authority);
 		final Authority res = new Authority();
 		res.setAuthority("USER");
-		Assert.isTrue(authority.contains(res));
+		if(authority.contains(res)){
+			result = true;
+		}
+		return result;
 	}
 
 	public void flush() {

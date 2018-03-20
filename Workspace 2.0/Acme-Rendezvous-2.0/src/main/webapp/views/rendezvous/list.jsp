@@ -72,7 +72,16 @@
 	<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true"/>
 	
 	<spring:message var="adultHeader" code="rendezvous.adult"/>
-	<display:column property="adult" title="${adultHeader}" sortable="true" />
+	<display:column title="${adultHeader}" sortable="true">
+		<jstl:choose>
+			<jstl:when test="${row.adult == true}">
+				<spring:message code="rendezvous.yes"/>
+			</jstl:when>
+			<jstl:when test="${row.adult == false}">
+				<spring:message code="rendezvous.no"/>
+			</jstl:when>
+		</jstl:choose>
+	</display:column>
 	
 </display:table>
 

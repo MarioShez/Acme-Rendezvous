@@ -14,15 +14,16 @@
 <form:form action="request/user/edit.do" modelAttribute="requestForm">
 
 	<form:hidden path="id"/>
-	<jstl:if test="${requestForm.rendezvous != null}">
-		<form:hidden path="rendezvous"/>
+	<jstl:if test="${requestForm.rendezvousId != 0}">
+		<form:hidden path="rendezvousId"/>
 	</jstl:if>
 	
-	<jstl:if test="${requestForm.rendezvous == null}">
+	<jstl:if test="${requestForm.rendezvousId == 0}">
 		<acme:select items="${rendezvouses}" itemLabel="name" code="request.rendezvous" path="rendezvous"/>
 	</jstl:if>
 	
-	<acme:select items="${service}" itemLabel="name" code="" path=""/>
+	<acme:select items="${services}" itemLabel="name" code="request.service" path="serviceId"/>
+	<br/>
 	
 	<fieldset>
 		<legend><spring:message code="request.creditCard"/>:</legend>
@@ -35,22 +36,23 @@
 		<br/>
 		<acme:textbox code="request.creditCard.expirationMonth" path="expirationMonth" placeholder="MM"/>
 		<br/>
-		<acme:textbox code="request.creditCard.expirationYear" path="expirationYear" placeholder="YY"/>
+		<acme:textbox code="request.creditCard.expirationYear" path="expirationYear" placeholder="YYYY"/>
 		<br/>
 		<acme:textbox code="request.creditCard.cvv" path="cvv" placeholder="###"/>
 		<br/>
 	</fieldset>
+	<br/>
 	
 	<acme:textarea code="request.comment" path="comment"/>
 		
 	<acme:submit name="save" code="service.save"/>
 	&nbsp;
 	<jstl:choose>
-		<jstl:when test="${requestForm == null}">
+		<jstl:when test="${requestForm.rendezvousId == 0}">
 			<acme:cancel url="welcome/index.do" code="request.cancel"/>
 		</jstl:when>
-		<jstl:when test="${requestForm != null}">
-			<acme:cancel url="rendezvous/user/edit.do?rendezvousId=${requestForm.rendezvous.id}" code="request.cancel"/>
+		<jstl:when test="${requestForm.rendezvousId != 0}">
+			<acme:cancel url="rendezvous/user/edit.do?rendezvousId=${requestForm.rendezvousId}" code="request.cancel"/>
 		</jstl:when>
 	</jstl:choose>
 

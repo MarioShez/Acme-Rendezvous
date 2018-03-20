@@ -96,6 +96,9 @@
 		<security:intercept-url pattern="/service/manager/**" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/service/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/service/**" access="isAuthenticated()" />
+		
+		<!-- Request -->
+		<security:intercept-url pattern="/request/**" access="hasRole('USER')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
