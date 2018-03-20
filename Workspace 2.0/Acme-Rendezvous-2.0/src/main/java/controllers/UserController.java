@@ -107,6 +107,7 @@ public class UserController extends AbstractController {
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndViewEdit(userForm, "user.commit.error");
 			}
+		System.out.println(binding);
 
 		return res;
 	}
@@ -132,7 +133,7 @@ public class UserController extends AbstractController {
 		user = userService.reconstruct(userForm, binding);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(userForm, "user.params.error");
-		else if (!userForm.getRepeatPassword().equals(userForm.getUserAccount().getPassword()))
+		else if (!userForm.getRepeatPassword().equals(userForm.getPassword()))
 			res = this.createEditModelAndView(userForm, "user.commit.errorPassword");
 		else if (userForm.getTermsAndConditions() == false) {
 			res = this.createEditModelAndView(userForm, "user.params.errorTerms");

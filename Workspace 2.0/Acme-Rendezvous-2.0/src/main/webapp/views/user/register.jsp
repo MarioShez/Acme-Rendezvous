@@ -32,9 +32,9 @@
 	<br/>
 	<acme:textbox code="user.birth" path="birth"/>
 	<br/>
-	<acme:textbox code="user.userName" path="userAccount.username"/>
+	<acme:textbox code="user.userName" path="username"/>
 	<br/>
-	<acme:password code="user.password" path="userAccount.password"/>
+	<acme:password code="user.password" path="password"/>
 	<br/>
 	<acme:password code="user.repeatPassword" path="repeatPassword"/>
 	<br/>

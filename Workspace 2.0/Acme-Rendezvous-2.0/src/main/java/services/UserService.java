@@ -163,29 +163,14 @@ public class UserService {
 		else
 			res = this.create();
 		
-		
-		//final Collection<Answer> answers = new ArrayList<Answer>() ;
-		
-//		final Collection<Rendezvous> organisedRendezvouses = new ArrayList<Rendezvous>();
-//		final Collection<Rendezvous> rsvpdRendezvous = new ArrayList<Rendezvous>();
-//
-//		final UserAccount userAccount = userForm.getUserAccount();
-//
-//		final Authority authority = new Authority();
-//		authority.setAuthority(Authority.USER);
-//		userAccount.addAuthority(authority);
-
-//		res.setUserAccount(userAccount);
 		res.setName(userForm.getName());
 		res.setSurname(userForm.getSurname());
 		res.setEmail(userForm.getEmail());
 		res.setPhone(userForm.getPhone());
 		res.setAddress(userForm.getAddress());
 		res.setBirth(userForm.getBirth());
-
-		//res.setAnswer(answers);
-//		res.setRsvpdRendezvouses(rsvpdRendezvous);
-//		res.setOrganisedRendezvouses(organisedRendezvouses);
+		res.getUserAccount().setUsername(userForm.getUsername());
+		res.getUserAccount().setPassword(userForm.getPassword());
 
 		this.validator.validate(res, binding);
 
@@ -204,7 +189,8 @@ public class UserService {
 		editUserForm.setPhone(user.getPhone());
 		editUserForm.setAddress(user.getAddress());
 		editUserForm.setBirth(user.getBirth());
-		editUserForm.setUserAccount(user.getUserAccount());
+		editUserForm.setUsername(user.getUserAccount().getUsername());
+		editUserForm.setPassword(user.getUserAccount().getPassword());
 		editUserForm.setRepeatPassword(user.getUserAccount().getPassword());
 		editUserForm.setTermsAndConditions(true);
 		
