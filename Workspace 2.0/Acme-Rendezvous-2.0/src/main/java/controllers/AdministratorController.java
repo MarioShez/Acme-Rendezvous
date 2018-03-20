@@ -78,6 +78,9 @@ public class AdministratorController extends AbstractController {
 		Collection<Object> managersMoreServicesThanAvg;
 		Collection<Manager> managersMoreServicesCancelled;
 		Collection<Object> bestSellingServices;
+		Double AvgCategoryPerRendezvous;
+		Double AvgServicesPerCategories;
+		Object AvgMinMaxStrServicePerRendezvous;
 		
 
 		avgSqtrUser = this.administratorService.avgSqtrUser();
@@ -94,6 +97,9 @@ public class AdministratorController extends AbstractController {
 		managersMoreServicesThanAvg = this.administratorService.managersMoreServicesThanAvg();
 		managersMoreServicesCancelled = this.administratorService.managersMoreServicesCancelled();
 		bestSellingServices= this.administratorService.bestSellingService();
+		AvgCategoryPerRendezvous= this.administratorService.AvgCategoryPerRendezvous();
+		AvgServicesPerCategories= this.administratorService.AvgServicesPerCategories();
+		AvgMinMaxStrServicePerRendezvous= this.administratorService.AvgMinMaxStrServicePerRendezvous();
 
 		result.addObject("rendezvousPerUser", avgSqtrUser);
 		result.addObject("ratioUserRendezvous", ratioUserRendezvous);
@@ -110,6 +116,9 @@ public class AdministratorController extends AbstractController {
 		result.addObject("managersMoreServicesThanAvg", managersMoreServicesThanAvg);
 		result.addObject("managersMoreServicesCancelled", managersMoreServicesCancelled);
 		result.addObject("bestSellingServices", bestSellingServices);
+		result.addObject("AvgCategoryPerRendezvous", AvgCategoryPerRendezvous);
+		result.addObject("AvgServicesPerCategories", AvgServicesPerCategories);
+		result.addObject("AvgMinMaxStrServicePerRendezvous", AvgMinMaxStrServicePerRendezvous);
 
 
 		return result;

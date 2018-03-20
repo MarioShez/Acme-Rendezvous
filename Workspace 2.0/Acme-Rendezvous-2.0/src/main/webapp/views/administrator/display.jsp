@@ -306,6 +306,70 @@
 	</jstl:forEach>
 </table>
 
+<spring:message code="administrator.AvgCategoryPerRendezvousLabel" />
+<jstl:out value="${AvgCategoryPerRendezvousLabel}"></jstl:out>
+<table class="displaytag"  name="AvgCategoryPerRendezvous">
+	<tr>
+		<th>
+			<spring:message code="administrator.average" var="avgHeader" />
+			<jstl:out value="${avgHeader}"></jstl:out>
+		</th>
+	</tr>
+	<tr>
+	
+		<td>
+			<jstl:out value="${AvgCategoryPerRendezvous}"></jstl:out>
+		</td>
+	</tr>
+</table>
+
+<spring:message code="administrator.AvgServicesPerCategoriesLabel" />
+<jstl:out value="${AvgServicesPerCategoriesLabel}"></jstl:out>
+<table class="displaytag"  name="AvgServicesPerCategories">
+	<tr>
+		<th>
+			<spring:message code="administrator.average" var="avgHeader" />
+			<jstl:out value="${avgHeader}"></jstl:out>
+		</th>
+	</tr>
+	<tr>
+	
+		<td>
+			<jstl:out value="${AvgServicesPerCategories}"></jstl:out>
+		</td>
+	</tr>
+</table>
+
+<spring:message code="administrator.AvgMinMaxStrServicePerRendezvousLabel"/>
+<jstl:out value="${AvgMinMaxStrServicePerRendezvousLabel}"></jstl:out>
+<table class="displaytag"  name="AvgMinMaxStrServicePerRendezvous">
+	<tr>
+		<th>
+			<spring:message code="administrator.average" var="averageHeader" />
+			<jstl:out value="${averageHeader}"></jstl:out>
+		</th>
+		<th>
+			<spring:message code="administrator.min" var="minHeader" />
+			<jstl:out value="${minHeader}"></jstl:out>
+		</th>
+		<th>
+			<spring:message code="administrator.max" var="maxHeader" />
+			<jstl:out value="${maxHeader}"></jstl:out>
+		</th>
+		<th>
+			<spring:message code="administrator.standardDeviation" var="standardDeviationHeader" />
+			<jstl:out value="${standardDeviationHeader}"></jstl:out>
+		</th>
+	</tr>
+	<tr>
+		<jstl:forEach var="datos" items="${AvgMinMaxStrServicePerRendezvous}">
+			<td>
+				<jstl:out value="${datos}"></jstl:out>
+			</td>
+		</jstl:forEach>
+	</tr>
+</table>
+
 </security:authorize>
 
 
