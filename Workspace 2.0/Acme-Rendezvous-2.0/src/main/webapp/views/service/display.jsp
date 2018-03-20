@@ -22,4 +22,4 @@
 <b><spring:message code="service.manager"/>:&nbsp;</b><jstl:out value="${service.manager.name} ${service.manager.surname}"/>
 <br/>
 
-<acme:cancel url="service/actor/list.do" code="service.back"/>
+<acme:cancel url="service/list.do" code="service.back"/>

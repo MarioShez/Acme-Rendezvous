@@ -12,7 +12,6 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import security.UserAccount;
 
 
 public class UserForm {
@@ -24,8 +23,8 @@ public class UserForm {
 	private String	phone;
 	private String	address;
 	private Date	birth;
-	private UserAccount userAccount;
-	
+	private String username;
+	private String password;
 	private String repeatPassword;
 	private boolean termsAndConditions;
 	
@@ -92,13 +91,6 @@ public class UserForm {
 		this.birth = birth;
 	}
 	
-	public UserAccount getUserAccount() {
-		return userAccount;
-	}
-	public void setUserAccount(UserAccount userAccount) {
-		this.userAccount = userAccount;
-	}
-	
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getRepeatPassword() {
@@ -124,5 +116,24 @@ public class UserForm {
 		this.id = id;
 	}
 
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 }

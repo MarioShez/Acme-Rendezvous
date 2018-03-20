@@ -16,8 +16,8 @@
 	<form:hidden path="id" />
 	<form:hidden path="repeatPassword" />
 	<form:hidden path="termsAndConditions" />
-	<form:hidden path="userAccount" />
-	
+	<form:hidden path="password" />
+	<form:hidden path="username" />
 	
 	<acme:textbox code="user.name" path="name"/>
 	<br/>
