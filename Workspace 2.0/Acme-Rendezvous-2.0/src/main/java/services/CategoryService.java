@@ -100,4 +100,13 @@ public class CategoryService {
 		categoryParent.setCategories(children);
 		this.categoryRepository.save(categoryParent);
 	}
+
+	public Collection<Category> subCategories() {
+		Collection<Category> res;
+		
+		res = this.categoryRepository.findCategories();
+		Assert.notNull(res);
+		
+		return res;
+	}
 }
