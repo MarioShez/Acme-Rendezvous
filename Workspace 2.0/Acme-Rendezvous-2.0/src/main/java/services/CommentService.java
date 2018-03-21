@@ -150,6 +150,10 @@ public class CommentService {
 		return commentsOfThisRendezvouse;
 	}
 	
+	public void flush() {
+		this.commentRepository.flush();
+	}
+	
 	
 	public Comment reconstruct(CommentForm commentForm, BindingResult binding) {
 		Comment res= new Comment();
