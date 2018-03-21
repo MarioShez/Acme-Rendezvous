@@ -42,11 +42,11 @@ public class RendezvousServiceTest extends AbstractTest {
 		Object testingData[][] = {
 			// positive test
 			{
-				"user1", "name", "description", "www.goole.es", "10/05/2000", gpsCoordinate, false, false, null
+				"user1", "name", "description", "www.goole.es", "10/05/2020 19:32", gpsCoordinate, false, false, null
 			},
 			// negative test: usuario no valido
 			{
-				null, "name", "description", "www.goole.es", "10/05/2000", gpsCoordinate, false, false, IllegalArgumentException.class
+				null, "name", "description", "www.goole.es", "10/05/2020 19:32", gpsCoordinate, false, false, IllegalArgumentException.class
 			},
 		};
 		for (int i = 0; i < testingData.length; i++) {
@@ -65,7 +65,7 @@ public class RendezvousServiceTest extends AbstractTest {
 			Object testingData[][] = {
 				// positive test
 				{
-					"rendezvous1", "user1", "name", "description", "www.goole.es", "10/05/2000 19:32", gpsCoordinate, false, false, null
+					"rendezvous1", "user1", "name", "description", "www.goole.es", "10/05/2020 19:32", gpsCoordinate, false, false, null
 				},
 				// negative test: usuario no válido
 //				{
@@ -87,7 +87,7 @@ public class RendezvousServiceTest extends AbstractTest {
 		caught = null;
 		Date fecha = new Date();
 
-		SimpleDateFormat pattern = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat pattern = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		try {
 			fecha = pattern.parse(date);
 		} catch (ParseException e) {
@@ -106,7 +106,6 @@ public class RendezvousServiceTest extends AbstractTest {
 			rendezvous.setFinalVersion(finalVersion);
 
 		} catch (Throwable oops) {
-			System.out.println(oops);
 			caught = oops.getClass();
 		}
 		checkExceptions(expected, caught);
@@ -115,6 +114,7 @@ public class RendezvousServiceTest extends AbstractTest {
 	
 	private void templateEdit(int rendezvousId, String user, String name, String description, String picture, String date, GpsCoordinate gps, boolean adult, boolean finalVersion, Class<?> expected) {
 		Rendezvous rendezvous;
+		rendezvous= new Rendezvous();
 		Class<?> caught;
 		caught = null;
 		Date fecha = new Date();
@@ -139,7 +139,6 @@ public class RendezvousServiceTest extends AbstractTest {
 			rendezvous.setFinalVersion(finalVersion);
 			
 			this.rendezvousService.save(rendezvous);
-			this.rendezvousService.flush();
 			unauthenticate();
 		} catch (Throwable oops) {
 			caught = oops.getClass();
