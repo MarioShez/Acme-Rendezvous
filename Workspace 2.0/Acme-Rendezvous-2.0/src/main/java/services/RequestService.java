@@ -109,6 +109,10 @@ public class RequestService {
 	}
 
 	// Other business methods
+	
+	public void flush() {
+		this.requestRepository.flush();
+	}
 
 	public RequestForm construct(final Request request) {
 

@@ -306,5 +306,9 @@ public class RendezvousService {
 		final Collection<Rendezvous> result = this.rendezvousRepository.rendezvousGroupedByCategory(categoryId);
 		return result;
 	}
+	
+	public void flush() {
+		this.rendezvousRepository.flush();
+	}
 
 }
