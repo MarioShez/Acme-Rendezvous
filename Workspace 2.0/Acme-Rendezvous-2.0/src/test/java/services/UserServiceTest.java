@@ -30,7 +30,7 @@ public class UserServiceTest extends AbstractTest{
 	private EntityManager entityManager;
 	
 	//Test Login---------------------------------------
-	
+	//5.1 Acme-Rendezvous Do the same as an actor who is not authenticated, but register to the system.
 	@Test
 	public void loginDriver(){
 		final Object testingData[][] = {
@@ -67,8 +67,8 @@ public class UserServiceTest extends AbstractTest{
 	}
 	
 	
-	//Test create---------------------------------------
-	// Use Case 3.1
+	//Test Registro---------------------------------------
+	// 4.1 Acme-Rendezvous  Register to the system as a user.
 	@Test
 	public void registrationUserDriver(){
 		final Object testingData[][] = {
@@ -155,7 +155,7 @@ public class UserServiceTest extends AbstractTest{
 		this.checkExceptions(expected, caught);
 	}
 	
-	
+	// Test Edit USer
 	@Test
 	public void editUserDriver(){
 		final Object testingData[][] = {

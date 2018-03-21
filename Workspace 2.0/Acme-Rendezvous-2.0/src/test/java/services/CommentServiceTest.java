@@ -31,7 +31,7 @@ public class CommentServiceTest extends AbstractTest {
 	@Autowired
 	RendezvousService rendezvousService;
 
-	// User comment on the rendezvous that he or she has RSVPd
+	// 5.6 Acme-Rendezvous Comment on the rendezvouses that he or she has RSVPd.
 	@SuppressWarnings("unchecked")
 	@Test
 	public void driverCreateAndSaveComment() {
@@ -125,7 +125,7 @@ public class CommentServiceTest extends AbstractTest {
 		return res;
 	}
 
-	// Admin remove a comment that he or she thnks is inappropiate
+	// 6.1 Acme-Rendezvous Remove a comment that he or she thinks is inappropriate.
 
 	@Test
 	public void driverAdminDeleteComment() {
@@ -163,7 +163,7 @@ public class CommentServiceTest extends AbstractTest {
 			this.commentService.delete(comment1);
 
 			this.unauthenticate();
-			// this.commentService.flush();
+			this.commentService.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 

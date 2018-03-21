@@ -66,46 +66,5 @@ public class AdminServiceTest extends AbstractTest{
 			this.checkExceptions(expected, caught);
 		}
 		
-		@Test
-		public void driveRemoveComment() {
-
-			final Object testingData[][] = {
-				//admin está registrado
-				{
-					"admin", "comment1", null
-				}, {
-					"user1", "comment1", IllegalArgumentException.class
-				}
-			};
-
-			for (int i = 0; i < testingData.length; i++)
-				this.templateRemoveComment((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
-
-		}
-
-		public void templateRemoveComment(final String username, final String commentId, final Class<?> expected) {
-
-			Class<?> caught;
-			Comment comment;
-
-			caught = null;
-			comment = this.commentService.findOne(super.getEntityId(commentId));
-
-			try {
-				super.authenticate(username);
-				this.commentService.delete(comment);
-				this.unauthenticate();
-				this.commentService.flush();
-			} catch (final Throwable oops) {
-				caught = oops.getClass();
-				//Se borra la cache para que no salte siempre el error del primer objeto que ha fallado en el test
-				this.entityManager.clear();
-			}
-
-			this.checkExceptions(expected, caught);
-
-		}
-		
-		
 
 }

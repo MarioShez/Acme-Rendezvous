@@ -27,6 +27,7 @@ public class AnnouncementServiceTest extends AbstractTest {
 	
 	
 	// Create and Save Test  --------------------------------------------------------
+	// 6.1 Acme-Rendezvous Create an announcement regarding one of the rendezvouses that he or she's created previously.
 	@Test
 	public void driverCreateAndSave(){
 		Object testingData[][] = {
@@ -126,6 +127,7 @@ public class AnnouncementServiceTest extends AbstractTest {
 	
 	
 	// Delete Test  --------------------------------------------------------
+	// 17.1 Acme-Rendezvous Remove an announcement that he or she thinks is inappropriate.
 
 	@Test
 	public void driverDelete(){
