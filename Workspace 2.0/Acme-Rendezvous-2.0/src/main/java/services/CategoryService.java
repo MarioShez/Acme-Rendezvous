@@ -157,4 +157,10 @@ public class CategoryService {
 		
 		return res;
 	}
+
+	public Collection<Category> findCategories() {
+		Collection<Category> res = new ArrayList<Category>();
+		res = this.categoryRepository.findCategories();
+		return res;
+	}
 }

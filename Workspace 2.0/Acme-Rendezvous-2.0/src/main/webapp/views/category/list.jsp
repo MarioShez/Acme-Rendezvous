@@ -29,10 +29,10 @@
 		</display:column>
 	</security:authorize>
 	
-	<spring:message code="category.categoryParent" var="categoryParent" />
-	<jstl:if test="${categoryParent != \"CATEGORY\"}">
+	<%--<spring:message code="category.categoryParent" var="categoryParent" />
+	 <jstl:if test="${categoryParent != \"CATEGORY\"}">
 		<display:column property="categoryParent.name" title="${categoryParent }" sortable="false" />
-	</jstl:if>
+	</jstl:if> --%>
 	
 	<spring:message code="category.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader}" sortable="true" />
@@ -40,7 +40,8 @@
 	<spring:message code="category.description" var="descriptionHeader" />
 	<display:column property="description" title="${descriptionHeader}" sortable="false" />
 
-	<display:column>
+	<spring:message code="category.rendezvous" var="rendezvousHeader" />
+	<display:column title="${rendezvousHeader }">
 		<a href="rendezvous/listByCategory.do?categoryId=${row.id}"><spring:message code="category.rendezvous"/></a>
 	</display:column>
 	
