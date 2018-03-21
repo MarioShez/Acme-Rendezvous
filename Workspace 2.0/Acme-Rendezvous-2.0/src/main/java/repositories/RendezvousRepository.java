@@ -38,7 +38,7 @@ public interface RendezvousRepository extends JpaRepository<Rendezvous, Integer>
 	@Query("select r from Rendezvous r join r.linkedRendezvouses l where l.id=?1")
 	Collection<Rendezvous> findParentRendezvouses(int rendezvousId);
 
-	@Query("select r.rendezvous from Request r join r.service.categories c where c.id=?1")
+	@Query("select r.rendezvous from Request r join r.service.category c where c.id=?1")
 	Collection<Rendezvous> rendezvousGroupedByCategory(int categoryId);
 	
 
