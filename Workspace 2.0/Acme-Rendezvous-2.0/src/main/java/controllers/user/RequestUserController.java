@@ -91,34 +91,37 @@ public class RequestUserController extends AbstractController {
 		Assert.isTrue(userService.checkAuthority());
 		
 		ModelAndView result;
-		Request request = requestService.reconstruct(requestForm, binding);
+		Request request;
 		
 		if(binding.hasErrors()){
 			result = createEditModelAndView(requestForm);
 		}else{
 			try{
+				request = requestService.reconstruct(requestForm, binding);
 				requestService.save(request);
 				result = new ModelAndView("redirect:/service/list.do?rendezvousId="+requestForm.getRendezvousId());
+				
+				Map<String, String> map = new HashMap<>();
+				map.put("holder", request.getCreditCard().getHolder());
+				map.put("brand", request.getCreditCard().getBrand());
+				map.put("number", request.getCreditCard().getNumber());
+				map.put("expirationMonth", String.valueOf(request.getCreditCard().getExpirationMonth()));
+				map.put("expirationYear", String.valueOf(request.getCreditCard().getExpirationYear()));
+				map.put("cvv", String.valueOf(request.getCreditCard().getCvv()));
+				
+				ObjectMapper mapper = new ObjectMapper();
+				String jsonCreditCard= mapper.writerWithDefaultPrettyPrinter().writeValueAsString(map);
+				
+				Cookie creditCardCookie = new Cookie("CREDITCARD", jsonCreditCard);
+				creditCardCookie.setMaxAge(1000000);
+				creditCardCookie.setPath("/");
+				response.addCookie(creditCardCookie);
 			}catch(Throwable oops){
 				result = createEditModelAndView(requestForm, "request.commit.error");
 			}
 		}
 		
-		Map<String, String> map = new HashMap<>();
-		map.put("holder", request.getCreditCard().getHolder());
-		map.put("brand", request.getCreditCard().getBrand());
-		map.put("number", request.getCreditCard().getNumber());
-		map.put("expirationMonth", String.valueOf(request.getCreditCard().getExpirationMonth()));
-		map.put("expirationYear", String.valueOf(request.getCreditCard().getExpirationYear()));
-		map.put("cvv", String.valueOf(request.getCreditCard().getCvv()));
 		
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonCreditCard= mapper.writerWithDefaultPrettyPrinter().writeValueAsString(map);
-		
-		Cookie creditCardCookie = new Cookie("CREDITCARD", jsonCreditCard);
-		creditCardCookie.setMaxAge(1000000);
-		creditCardCookie.setPath("/");
-		response.addCookie(creditCardCookie);
 		
 		return result;
 	

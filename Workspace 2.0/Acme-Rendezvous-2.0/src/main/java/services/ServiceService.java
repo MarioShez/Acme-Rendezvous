@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ServiceRepository;
-import domain.Category;
 import domain.Manager;
 import domain.Rendezvous;
 import domain.Request;
@@ -39,6 +38,9 @@ public class ServiceService {
 	private AdminService			adminService;
 	
 	@Autowired
+	private CategoryService			categoryService;
+	
+	@Autowired
 	private Validator validator;
 
 
@@ -58,10 +60,8 @@ public class ServiceService {
 		final Service res = new Service();
 		final Manager manager = this.managerService.findByPrincipal();
 		final boolean cancelled = false;
-		final Collection<Category> categories = new ArrayList<Category>();
 		final Collection<Request> requests = new ArrayList<Request>();
 
-		res.setCategories(categories);
 		res.setManager(manager);
 		res.setCancelled(cancelled);
 		res.setRequests(requests);
@@ -102,7 +102,11 @@ public class ServiceService {
 		res = this.serviceRepository.save(service);
 		if (service.getId() == 0)
 			service.getManager().getServices().add(res);
-
+		
+		if (service.getCategory() != null && !service.getCategory().getServices().contains(res)) {
+			service.getCategory().getServices().add(res);
+		}
+		
 		return res;
 	}
 
@@ -112,10 +116,10 @@ public class ServiceService {
 		Assert.isTrue(service.getRequests().isEmpty());
 
 		service.getManager().getServices().remove(service);
-		//		for (final Category c : service.getCategories()) {
-		//			c.getServices().remove(service);
-		//			this.categoryService.save(c);
-		//		}
+		if(service.getCategory() != null){
+			service.getCategory().getServices().remove(service);
+			categoryService.save(service.getCategory());
+		}
 		
 		this.serviceRepository.delete(service);
 	}

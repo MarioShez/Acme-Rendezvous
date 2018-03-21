@@ -109,6 +109,7 @@
 			authentication-failure-url="/security/loginFailure.do" />
 
 		<security:logout 
+			delete-cookies="CREDITCARD"
 			logout-success-url="/" 
 			invalidate-session="true" />
 	</security:http>

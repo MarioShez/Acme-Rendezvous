@@ -83,7 +83,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="manager3" />
 		<property name="password" value="2d3a5db4a2a9717b43698520a8de57d0" />
@@ -121,13 +121,8 @@
 		<property name="address" value="C/Margarita nº7" />
 		<property name="birth" value="12/09/1993" />
 		<property name="userAccount" ref="userAccount2" />
-		<!-- <property name="answer">
-			<list>
-				<ref bean="answer1" />
-				<ref bean="answer2" />
-				<ref bean="answer3" />
-			</list>
-		</property> -->
+		<!-- <property name="answer"> <list> <ref bean="answer1" /> <ref bean="answer2" 
+			/> <ref bean="answer3" /> </list> </property> -->
 		<property name="organisedRendezvouses">
 			<list>
 				<ref bean="rendezvous1" />
@@ -149,12 +144,8 @@
 		<property name="address" value="C/La Vega nº7" />
 		<property name="birth" value="06/05/1992" />
 		<property name="userAccount" ref="userAccount3" />
-		<!-- <property name="answer">
-			<list>
-				<ref bean="answer4" />
-				<ref bean="answer5" />
-			</list>
-		</property> -->
+		<!-- <property name="answer"> <list> <ref bean="answer4" /> <ref bean="answer5" 
+			/> </list> </property> -->
 		<property name="organisedRendezvouses">
 			<list>
 				<ref bean="rendezvous2" />
@@ -178,12 +169,7 @@
 		<property name="address" value="C/LAraña nº12" />
 		<property name="birth" value="06/05/1998" />
 		<property name="userAccount" ref="userAccount4" />
-		<!-- <property name="answer">
-			<list>
-				<ref bean="answer6" />
-
-			</list>
-		</property> -->
+		<!-- <property name="answer"> <list> <ref bean="answer6" /> </list> </property> -->
 		<property name="organisedRendezvouses">
 			<list>
 			</list>
@@ -209,8 +195,8 @@
 		<property name="vat" value="1A-2B" />
 		<property name="services">
 			<list>
-				<ref bean="service1"/>
-				<ref bean="service3"/>
+				<ref bean="service1" />
+				<ref bean="service3" />
 			</list>
 		</property>
 	</bean>
@@ -228,13 +214,13 @@
 		<property name="vat" value="1A-2B" />
 		<property name="services">
 			<list>
-				<ref bean="service2"/>
-				<ref bean="service4"/>
-				<ref bean="service6"/>
+				<ref bean="service2" />
+				<ref bean="service4" />
+				<ref bean="service6" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- manager3 -->
 
 	<bean id="manager3" class="domain.Manager">
@@ -248,9 +234,9 @@
 		<property name="vat" value="1A-2B" />
 		<property name="services">
 			<list>
-				<ref bean="service5"/>
-				<ref bean="service7"/>
-				<ref bean="service8"/>
+				<ref bean="service5" />
+				<ref bean="service7" />
+				<ref bean="service8" />
 			</list>
 		</property>
 	</bean>
@@ -262,17 +248,12 @@
 		<property name="name" value="Servicio 1" />
 		<property name="description" value="Servicio 1 esta bien" />
 		<property name="picture" value="" />
-		<property name="categories">
-			<list>
-				<ref bean="water"/>
-				<ref bean="riverWater"/>
-			</list>
-		</property>
+		<property name="category" ref="category1"/>
 		<property name="manager" ref="manager1" />
 		<property name="cancelled" value="false" />
 		<property name="requests">
 			<list>
-				<ref bean="request1"/>
+				<ref bean="request1" />
 			</list>
 		</property>
 	</bean>
@@ -283,33 +264,23 @@
 		<property name="description" value="Servicio 2 esta mejor" />
 		<property name="picture"
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
-		<property name="categories">
-			<list>
-				<ref bean="mountainClimbing"/>
-				<ref bean="climbing"/>
-			</list>
-		</property>
+		<property name="category" ref="category1"/>
 		<property name="manager" ref="manager2" />
 		<property name="cancelled" value="false" />
 		<property name="requests">
 			<list>
-				<ref bean="request2"/>
+				<ref bean="request2" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Service 3 -->
 	<bean id="service3" class="domain.Service">
 		<property name="name" value="Servicio 3" />
 		<property name="description" value="Servicio 3 esta mejor" />
 		<property name="picture"
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
-		<property name="categories">
-			<list>
-				<ref bean="riverClimbing"/>
-				<ref bean="climbing"/>
-			</list>
-		</property>
+		<property name="category" ref="category1"/>
 		<property name="manager" ref="manager1" />
 		<property name="cancelled" value="false" />
 		<property name="requests">
@@ -317,18 +288,14 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Service 4 -->
 	<bean id="service4" class="domain.Service">
 		<property name="name" value="Servicio 4" />
 		<property name="description" value="Servicio 4 esta mejor" />
 		<property name="picture"
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
-		<property name="categories">
-			<list>
-				<ref bean="savana"/>
-			</list>
-		</property>
+		<property name="category" ref="category2"/>
 		<property name="manager" ref="manager2" />
 		<property name="cancelled" value="true" />
 		<property name="requests">
@@ -336,40 +303,30 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Service 5 -->
 	<bean id="service5" class="domain.Service">
 		<property name="name" value="Servicio 5" />
 		<property name="description" value="Servicio 5 esta mejor" />
 		<property name="picture"
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
-		<property name="categories">
-			<list>
-				<ref bean="lake"/>
-				<ref bean="water"/>
-			</list>
-		</property>
+		<property name="category" ref="category2"/>
 		<property name="manager" ref="manager3" />
 		<property name="cancelled" value="false" />
 		<property name="requests">
 			<list>
-				<ref bean="request4"/>
+				<ref bean="request4" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Service 6 -->
 	<bean id="service6" class="domain.Service">
 		<property name="name" value="Servicio 6" />
 		<property name="description" value="Servicio 6 esta mejor" />
 		<property name="picture"
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
-		<property name="categories">
-			<list>
-				<ref bean="mountainGround"/>
-				<ref bean="ground"/>
-			</list>
-		</property>
+		<property name="category" ref="category3"/>
 		<property name="manager" ref="manager2" />
 		<property name="cancelled" value="false" />
 		<property name="requests">
@@ -377,18 +334,14 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Service 7 -->
 	<bean id="service7" class="domain.Service">
 		<property name="name" value="Servicio 7" />
 		<property name="description" value="Servicio 7 esta mejor" />
 		<property name="picture"
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
-		<property name="categories">
-			<list>
-				<ref bean="ground"/>
-			</list>
-		</property>
+		<property name="category" ref="category3"/>
 		<property name="manager" ref="manager3" />
 		<property name="cancelled" value="false" />
 		<property name="requests">
@@ -396,18 +349,14 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Service 8 -->
 	<bean id="service8" class="domain.Service">
 		<property name="name" value="Servicio 8" />
 		<property name="description" value="Servicio 8 esta mejor" />
 		<property name="picture"
 			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
-		<property name="categories">
-			<list>
-				<ref bean="water"/>
-			</list>
-		</property>
+		<property name="category" ref="category4"/>
 		<property name="manager" ref="manager3" />
 		<property name="cancelled" value="true" />
 		<property name="requests">
@@ -417,194 +366,76 @@
 	</bean>
 
 	<!-- Category -->
-	<!-- Category 0 -->
-	<bean id="category" class="domain.Category">
-		<property name="name" value="CATEGORY" />
-		<property name="description" value="Principal" />
+
+	<!-- Category 1 -->
+	<bean id="category1" class="domain.Category">
+		<property name="name" value="Ground" />
+		<property name="description" value="Ground category" />
 		<property name="services">
 			<list>
+				<ref bean="service1" />
+				<ref bean="service2" />
+				<ref bean="service3" />
 			</list>
 		</property>
 		<property name="categories">
 			<list>
-				<ref bean="safari"/>
-				<ref bean = "climbing"/>
+				<ref bean="category2" />
+				<ref bean="category3" />
 			</list>
 		</property>
 		<property name="categoryParent"><null/></property>
 	</bean>
-	
-	<!-- Category 1 -->
-	<bean id="water" class="domain.Category">
-		<property name="name" value="Water" />
-		<property name="description" value="Water: lake, river" />
-		<property name="services">
-			<list>
-				<ref bean="service1"/>
-				<ref bean="service5"/>
-				<ref bean="service8"/>
-			</list>
-		</property>
-		<property name="categories">
-			<list>
-				<ref bean="lake"/>
-				<ref bean = "riverWater"/>
-			</list>
-		</property>
-		<property name="categoryParent" ref="safari"/>
-	</bean>
-	
+
 	<!-- Category 2 -->
-	<bean id="safari" class="domain.Category">
-		<property name="name" value="Safari" />
-		<property name="description" value="Safari: ground, water" />
+	<bean id="category2" class="domain.Category">
+		<property name="name" value="Beach" />
+		<property name="description" value="Beach category" />
 		<property name="services">
 			<list>
+				<ref bean="service4" />
+				<ref bean="service5" />
 			</list>
 		</property>
 		<property name="categories">
 			<list>
-				<ref bean="ground"/>
-				<ref bean = "water"/>
 			</list>
 		</property>
-		<property name="categoryParent" ref="category"/>
+		<property name="categoryParent" ref="category1" />
 	</bean>
-	
+
 	<!-- Category 3 -->
-	<bean id="riverWater" class="domain.Category">
-		<property name="name" value="River" />
-		<property name="description" value="River service" />
-		<property name="services">
-			<list>
-				<ref bean="service1"/>
-			</list>
-		</property>
-		<property name="categories">
-			<list>
-			</list>
-		</property>
-		<property name="categoryParent" ref="water"/>
-	</bean>
-	
-	<!-- Category 4 -->
-	<bean id="mountainClimbing" class="domain.Category">
-		<property name="name" value="Mountain" />
-		<property name="description" value="Mountain climbing service)" />
-		<property name="services">
-			<list>
-				<ref bean="service2"/>
-			</list>
-		</property>
-		<property name="categories">
-			<list>
-			</list>
-		</property>
-		<property name="categoryParent" ref="climbing"/>
-	</bean>
-	
-	<!-- Category 5 -->
-	<bean id="mountainGround" class="domain.Category">
-		<property name="name" value="Mountain" />
-		<property name="description" value="Mountain ground service" />
-		<property name="services">
-			<list>
-				<ref bean="service6"/>
-			</list>
-		</property>
-		<property name="categories">
-			<list>
-			</list>
-		</property>
-		<property name="categoryParent" ref="ground"/>
-	</bean>
-	
-	<!-- Category 6 -->
-	<bean id="ground" class="domain.Category">
-		<property name="name" value="Ground" />
-		<property name="description" value="Ground: savana, mountain" />
-		<property name="services">
-			<list>
-				<ref bean="service6"/>
-				<ref bean="service7"/>
-			</list>
-		</property>
-		<property name="categories">
-			<list>
-				<ref bean="savana"/>
-				<ref bean="mountainGround"/>
-			</list>
-		</property>
-		<property name="categoryParent" ref="safari"/>
-	</bean>
-	
-	<!-- Category 7 -->
-	<bean id="climbing" class="domain.Category">
-		<property name="name" value="Climbing" />
-		<property name="description" value="Climbing: mountain, river" />
-		<property name="services">
-			<list>
-				<ref bean="service2"/>
-				<ref bean="service3"/>
-			</list>
-		</property>
-		<property name="categories">
-			<list>
-				<ref bean="mountainClimbing"/>
-				<ref bean="riverClimbing"/>
-			</list>
-		</property>
-		<property name="categoryParent" ref="category"/>
-	</bean>
-	
-	<!-- Category 8 -->
-	<bean id="riverClimbing" class="domain.Category">
-		<property name="name" value="River" />
-		<property name="description" value="River service" />
-		<property name="services">
-			<list>
-				<ref bean="service3"/>
-			</list>
-		</property>
-		<property name="categories">
-			<list>
-			</list>
-		</property>
-		<property name="categoryParent" ref="climbing"/>
-	</bean>
-	
-	<!-- Category 9 -->
-	<bean id="savana" class="domain.Category">
+	<bean id="category3" class="domain.Category">
 		<property name="name" value="Savana" />
-		<property name="description" value="Savana service" />
+		<property name="description" value="Savana category" />
 		<property name="services">
 			<list>
-				<ref bean="service4"/>
+				<ref bean="service6" />
+				<ref bean="service7" />
 			</list>
 		</property>
 		<property name="categories">
 			<list>
 			</list>
 		</property>
-		<property name="categoryParent" ref="ground"/>
+		<property name="categoryParent" ref="category1" />
 	</bean>
-	
-	<!-- Category 10 -->
-	<bean id="lake" class="domain.Category">
-		<property name="name" value="Lake" />
-		<property name="description" value="Lake service" />
+
+	<!-- Category 4 -->
+	<bean id="category4" class="domain.Category">
+		<property name="name" value="Sea" />
+		<property name="description" value="Sea category" />
 		<property name="services">
 			<list>
-				<ref bean="service5"/>
+				<ref bean="service8" />
 			</list>
 		</property>
 		<property name="categories">
 			<list>
 			</list>
 		</property>
-		<property name="categoryParent" ref="water"/>
+		<property name="categoryParent"><null/></property>
 	</bean>
-	
 
 	<!-- Request -->
 	<!-- Request 1 -->
@@ -630,7 +461,7 @@
 		<property name="service" ref="service1" />
 		<property name="rendezvous" ref="rendezvous2" />
 	</bean>
-	
+
 	<!-- Request 4 -->
 	<bean id="request4" class="domain.Request">
 		<property name="creditCard" ref="creditCard4" />
@@ -649,7 +480,7 @@
 		<property name="expirationYear" value="2022" />
 		<property name="cvv" value="612" />
 	</bean>
-	
+
 	<!-- CreditCard 2 -->
 	<bean id="creditCard2" class="domain.CreditCard">
 		<property name="holder" value="Name creditCard2" />
@@ -659,7 +490,7 @@
 		<property name="expirationYear" value="2019" />
 		<property name="cvv" value="773" />
 	</bean>
-	
+
 	<!-- CreditCard 3 -->
 	<bean id="creditCard3" class="domain.CreditCard">
 		<property name="holder" value="Name creditCard3" />
@@ -669,7 +500,7 @@
 		<property name="expirationYear" value="2019" />
 		<property name="cvv" value="216" />
 	</bean>
-	
+
 	<!-- CreditCard 3 -->
 	<bean id="creditCard4" class="domain.CreditCard">
 		<property name="holder" value="Name creditCard3" />
@@ -704,12 +535,8 @@
 				<ref bean="comment1" />
 			</list>
 		</property>
-		<!-- <property name="questions">
-			<list>
-				<ref bean="question1" />
-				<ref bean="question2" />
-			</list>
-		</property> -->
+		<!-- <property name="questions"> <list> <ref bean="question1" /> <ref bean="question2" 
+			/> </list> </property> -->
 		<property name="organiser" ref="user1" />
 		<property name="attendants">
 			<list>
@@ -722,8 +549,8 @@
 		</property>
 		<property name="requests">
 			<list>
-				<ref bean="request1"/>
-				<ref bean="request2"/>
+				<ref bean="request1" />
+				<ref bean="request2" />
 			</list>
 		</property>
 	</bean>
@@ -749,10 +576,7 @@
 				<ref bean="comment3" />
 			</list>
 		</property>
-		<!-- <property name="questions">
-			<list>
-			</list>
-		</property> -->
+		<!-- <property name="questions"> <list> </list> </property> -->
 		<property name="organiser" ref="user2" />
 		<property name="attendants">
 			<list>
@@ -766,8 +590,8 @@
 		</property>
 		<property name="requests">
 			<list>
-				<ref bean="request3"/>
-				<ref bean="request4"/>
+				<ref bean="request3" />
+				<ref bean="request4" />
 			</list>
 		</property>
 	</bean>
@@ -791,11 +615,8 @@
 			<list>
 			</list>
 		</property>
-		<!-- <property name="questions">
-			<list>
-				<ref bean="question3" />
-			</list>
-		</property> -->
+		<!-- <property name="questions"> <list> <ref bean="question3" /> </list> 
+			</property> -->
 		<property name="organiser" ref="user2" />
 		<property name="attendants">
 			<list>
@@ -840,7 +661,7 @@
 		</property>
 		<property name="user" ref="user2" />
 		<property name="rendezvous" ref="rendezvous2" />
-		<!--<property name="commentParent"><null/></property>-->
+		<!--<property name="commentParent"><null/></property> -->
 	</bean>
 
 	<!-- Comment 3 -->
@@ -854,105 +675,68 @@
 		</property>
 		<property name="user" ref="user2" />
 		<property name="rendezvous" ref="rendezvous2" />
-		<property name="commentParent" ref="comment2" /> 
+		<property name="commentParent" ref="comment2" />
 	</bean>
 
 	<!-- Question -->
 	<!-- Question 1 -->
-	<!-- <bean id="question1" class="domain.Question">
-		<property name="content" value="Question 01?" />
-		<property name="answers">
-			<list>
-				<ref bean="answer1" />
-				<ref bean="answer2" />
-				<ref bean="answer3" />
-			</list>
-		</property>
-		<property name="rendezvous" ref="rendezvous1" />
-	</bean> -->
+	<!-- <bean id="question1" class="domain.Question"> <property name="content" 
+		value="Question 01?" /> <property name="answers"> <list> <ref bean="answer1" 
+		/> <ref bean="answer2" /> <ref bean="answer3" /> </list> </property> <property 
+		name="rendezvous" ref="rendezvous1" /> </bean> -->
 
 	<!-- Question 2 -->
-	<!-- <bean id="question2" class="domain.Question">
-		<property name="content" value="Question 02?" />
-		<property name="answers">
-			<list>
-				<ref bean="answer4" />
-				<ref bean="answer5" />
-			</list>
-		</property>
-		<property name="rendezvous" ref="rendezvous1" />
-	</bean> -->
+	<!-- <bean id="question2" class="domain.Question"> <property name="content" 
+		value="Question 02?" /> <property name="answers"> <list> <ref bean="answer4" 
+		/> <ref bean="answer5" /> </list> </property> <property name="rendezvous" 
+		ref="rendezvous1" /> </bean> -->
 
 	<!-- Question 3 -->
-	<!-- <bean id="question3" class="domain.Question">
-		<property name="content" value="Question 03?" />
-		<property name="answers">
-			<list>
-				<ref bean="answer6" />
-				<ref bean="answer7" />
-				<ref bean="answer8" />
-			</list>
-		</property>
-		<property name="rendezvous" ref="rendezvous3" />
-	</bean> -->
+	<!-- <bean id="question3" class="domain.Question"> <property name="content" 
+		value="Question 03?" /> <property name="answers"> <list> <ref bean="answer6" 
+		/> <ref bean="answer7" /> <ref bean="answer8" /> </list> </property> <property 
+		name="rendezvous" ref="rendezvous3" /> </bean> -->
 
 
 	<!-- Answer -->
 	<!-- Answer 01 -->
-	<!-- <bean id="answer1" class="domain.Answer">
-		<property name="content" value="Answer 1" />
-		<property name="question" ref="question1" />
-		<property name="user" ref="user1" />
-	</bean> -->
+	<!-- <bean id="answer1" class="domain.Answer"> <property name="content" 
+		value="Answer 1" /> <property name="question" ref="question1" /> <property 
+		name="user" ref="user1" /> </bean> -->
 
 	<!-- Answer 02 -->
-	<!-- <bean id="answer2" class="domain.Answer">
-		<property name="content" value="Answer 2" />
-		<property name="question" ref="question1" />
-		<property name="user" ref="user1" />
-	</bean>
- -->
+	<!-- <bean id="answer2" class="domain.Answer"> <property name="content" 
+		value="Answer 2" /> <property name="question" ref="question1" /> <property 
+		name="user" ref="user1" /> </bean> -->
 	<!-- Answer 03 -->
-	<!-- <bean id="answer3" class="domain.Answer">
-		<property name="content" value="Answer 3" />
-		<property name="question" ref="question1" />
-		<property name="user" ref="user1" />
-	</bean> -->
+	<!-- <bean id="answer3" class="domain.Answer"> <property name="content" 
+		value="Answer 3" /> <property name="question" ref="question1" /> <property 
+		name="user" ref="user1" /> </bean> -->
 
 	<!-- Answer 04 -->
-	<!-- <bean id="answer4" class="domain.Answer">
-		<property name="content" value="Answer 4" />
-		<property name="question" ref="question2" />
-		<property name="user" ref="user2" />
-	</bean> -->
+	<!-- <bean id="answer4" class="domain.Answer"> <property name="content" 
+		value="Answer 4" /> <property name="question" ref="question2" /> <property 
+		name="user" ref="user2" /> </bean> -->
 
 	<!-- Answer 05 -->
-	<!-- <bean id="answer5" class="domain.Answer">
-		<property name="content" value="Answer 5" />
-		<property name="question" ref="question2" />
-		<property name="user" ref="user2" />
-	</bean> -->
+	<!-- <bean id="answer5" class="domain.Answer"> <property name="content" 
+		value="Answer 5" /> <property name="question" ref="question2" /> <property 
+		name="user" ref="user2" /> </bean> -->
 
 	<!-- Answer 06 -->
-	<!-- <bean id="answer6" class="domain.Answer">
-		<property name="content" value="Answer 6" />
-		<property name="question" ref="question3" />
-		<property name="user" ref="user3" />
-	</bean> -->
+	<!-- <bean id="answer6" class="domain.Answer"> <property name="content" 
+		value="Answer 6" /> <property name="question" ref="question3" /> <property 
+		name="user" ref="user3" /> </bean> -->
 
 	<!-- Answer 07 -->
-	<!-- <bean id="answer7" class="domain.Answer">
-		<property name="content" value="Answer 7" />
-		<property name="question" ref="question3" />
-		<property name="user" ref="user3" />
-	</bean> -->
+	<!-- <bean id="answer7" class="domain.Answer"> <property name="content" 
+		value="Answer 7" /> <property name="question" ref="question3" /> <property 
+		name="user" ref="user3" /> </bean> -->
 
 	<!-- Answer 08 -->
-	<!-- <bean id="answer8" class="domain.Answer">
-		<property name="content" value="Answer 8" />
-		<property name="question" ref="question3" />
-		<property name="user" ref="user3" />
-	</bean> -->
+	<!-- <bean id="answer8" class="domain.Answer"> <property name="content" 
+		value="Answer 8" /> <property name="question" ref="question3" /> <property 
+		name="user" ref="user3" /> </bean> -->
 
 
 
