@@ -1,4 +1,3 @@
-
 package services;
 
 import java.text.ParseException;
@@ -19,69 +18,142 @@ import domain.GpsCoordinate;
 import domain.Rendezvous;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-	"classpath:spring/junit.xml"
-})
+@ContextConfiguration(locations = { "classpath:spring/junit.xml" })
 @Transactional
 public class RendezvousServiceTest extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 
 	@Autowired
-	private RendezvousService	rendezvousService;
-
+	private RendezvousService rendezvousService;
 
 	// Tests ------------------------------------------------------------------
 
-	// 5.2 Acme-Rendezvous Create a rendezvous, which he’s implicitly assumed to attend.
+	// 5.2 Acme-Rendezvous Create a rendezvous, which he’s implicitly assumed
+	// to attend.
 	@Test
 	public void driverCreate() {
 		GpsCoordinate gpsCoordinate = new GpsCoordinate();
-		gpsCoordinate = createGps();
+		gpsCoordinate = createGpsOk();
+		GpsCoordinate gpsLatitudeNull = createGpsLatitudeNull();
+		GpsCoordinate gpsLongitudeNull = createGpsLongitudeNull();
+		GpsCoordinate gpsLatitudeOutRangeM = createGpsLatitudeOutRangeMore();
+		GpsCoordinate gpsLongitudeOutRangeM = createGpsLongitudeOutRangeMore();
+		GpsCoordinate gpsLatitudeOutRangeL = createGpsLatitudeOutRangeLess();
+		GpsCoordinate gpsLongitudeOutRangeL = createGpsLongitudeOutRangeLess();
 
 		Object testingData[][] = {
-			// positive test
-			{
-				"user1", "name", "description", "www.goole.es", "10/05/2020 19:32", gpsCoordinate, false, false, null
-			},
-			// negative test: usuario no valido
-			{
-				null, "name", "description", "www.goole.es", "10/05/2020 19:32", gpsCoordinate, false, false, IllegalArgumentException.class
-			},
-		};
+				// positive test
+				{ "user1", "name", "description", "http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
+						"10/05/2020 19:32", gpsCoordinate, false, false, null },
+				// negative test: usuario no valido
+				{ null, "name", "description", "http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
+						"10/05/2020 19:32", gpsCoordinate, false, false,
+						IllegalArgumentException.class },
+				// latitude null
+				{ "user1", "name", "description", "http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
+						"10/05/2020 19:32", gpsLatitudeNull, false, false, null },
+				// longitude null
+				{ "user1", "name", "description", "http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
+						"10/05/2020 19:32", gpsLongitudeNull, false, false,
+						null },
+				// latitude out of range up
+				{ "user1", "name", "description", "http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
+						"10/05/2020 19:32", gpsLatitudeOutRangeM, false, false,
+						javax.validation.ConstraintViolationException.class },
+				// longitude out of range up
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLongitudeOutRangeM, false,
+//						false,
+//						javax.validation.ConstraintViolationException.class },
+//				// latitude out of range down
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLatitudeOutRangeL, false, false,
+//						javax.validation.ConstraintViolationException.class },
+//				// longitude out of range down
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLongitudeOutRangeL, false,
+//						false,
+//						javax.validation.ConstraintViolationException.class }, 
+						};
+
 		for (int i = 0; i < testingData.length; i++) {
-			templateCreate((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (GpsCoordinate) testingData[i][5], (boolean) testingData[i][6],
-				(boolean) testingData[i][7], (Class<?>) testingData[i][8]);
+			templateCreate((String) testingData[i][0],
+					(String) testingData[i][1], (String) testingData[i][2],
+					(String) testingData[i][3], (String) testingData[i][4],
+					(GpsCoordinate) testingData[i][5],
+					(boolean) testingData[i][6], (boolean) testingData[i][7],
+					(Class<?>) testingData[i][8]);
 		}
 
 	}
-	
-	// 5.2 Acme-Rendezvous Create a rendezvous, Note that a user may edit his or her rendezvouses as long as they aren’t saved them in final mode.
-		@Test
-		public void driverEdit() {
-			GpsCoordinate gpsCoordinate = new GpsCoordinate();
-			gpsCoordinate = createGps();
 
-			Object testingData[][] = {
+	// 5.2 Acme-Rendezvous Create a rendezvous, Note that a user may edit his or
+	// her rendezvouses as long as they aren’t saved them in final mode.
+	@Test
+	public void driverEdit() {
+		GpsCoordinate gpsCoordinate = new GpsCoordinate();
+		gpsCoordinate = createGpsOk();
+		GpsCoordinate gpsLatitudeNull = createGpsLatitudeNull();
+		GpsCoordinate gpsLongitudeNull = createGpsLongitudeNull();
+		GpsCoordinate gpsLatitudeOutRangeM = createGpsLatitudeOutRangeMore();
+		GpsCoordinate gpsLongitudeOutRangeM = createGpsLongitudeOutRangeMore();
+		GpsCoordinate gpsLatitudeOutRangeL = createGpsLatitudeOutRangeLess();
+		GpsCoordinate gpsLongitudeOutRangeL = createGpsLongitudeOutRangeLess();
+
+		Object testingData[][] = {
 				// positive test
-				{
-					"rendezvous1", "user1", "name", "description", "www.goole.es", "10/05/2020 19:32", gpsCoordinate, false, false, null
-				},
-				// negative test: usuario no válido
-//				{
-//					"rendezvous1", "user2", "name", "description", "www.goole.es", "10/05/2000", gpsCoordinate, false, true, javax.validation.ConstraintViolationException.class
-//				},
-			};
-			for (int i = 0; i < testingData.length; i++) {
-				templateEdit(getEntityId((String) testingData[i][0]), (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (String) testingData[i][4], (String) testingData[i][5], (GpsCoordinate) testingData[i][6], (boolean) testingData[i][7],
-					(boolean) testingData[i][8], (Class<?>) testingData[i][9]);
-			}
+				{ "rendezvous1", "user1", "name", "description",
+						"www.goole.es", "10/05/2020 19:32", gpsCoordinate,
+						false, false, null },
+				// negative test: usuario no v�lido
+				{ "rendezvous1", "user2", "name", "description",
+						"www.goole.es", "10/05/2000", gpsCoordinate, false,
+						true, java.lang.IllegalArgumentException.class },
+//				// latitude null
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLatitudeNull, false, false, null },
+//				// longitude null
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLongitudeNull, false, false,
+//						null },
+				// latitude out of range up
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLatitudeOutRangeM, false, false,
+//						javax.validation.ConstraintViolationException.class },
+//				// longitude out of range up
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLongitudeOutRangeM, false,
+//						false,
+//						javax.validation.ConstraintViolationException.class },
+//				// latitude out of range down
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLatitudeOutRangeL, false, false,
+//						javax.validation.ConstraintViolationException.class },
+//				// longitude out of range down
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLongitudeOutRangeL, false,
+//						false,
+//						javax.validation.ConstraintViolationException.class },
 
+		};
+		for (int i = 0; i < testingData.length; i++) {
+			templateEdit(getEntityId((String) testingData[i][0]),
+					(String) testingData[i][1], (String) testingData[i][2],
+					(String) testingData[i][3], (String) testingData[i][4],
+					(String) testingData[i][5],
+					(GpsCoordinate) testingData[i][6],
+					(boolean) testingData[i][7], (boolean) testingData[i][8],
+					(Class<?>) testingData[i][9]);
 		}
+
+	}
 
 	// Ancillary methods ------------------------------------------------------
 
-	private void templateCreate(String user, String name, String description, String picture, String date, GpsCoordinate gps, boolean adult, boolean finalVersion, Class<?> expected) {
+	private void templateCreate(String user, String name, String description,
+			String picture, String date, GpsCoordinate gps, boolean adult,
+			boolean finalVersion, Class<?> expected) {
 		Rendezvous rendezvous;
 		Class<?> caught;
 		caught = null;
@@ -95,7 +167,7 @@ public class RendezvousServiceTest extends AbstractTest {
 		}
 
 		try {
-			authenticate(user);
+			super.authenticate(user);
 			rendezvous = this.rendezvousService.create();
 			rendezvous.setName(name);
 			rendezvous.setDescription(description);
@@ -105,16 +177,24 @@ public class RendezvousServiceTest extends AbstractTest {
 			rendezvous.setAdult(adult);
 			rendezvous.setFinalVersion(finalVersion);
 
+			this.rendezvousService.save(rendezvous);
+			this.rendezvousService.flush();
+			this.unauthenticate();
 		} catch (Throwable oops) {
+			System.out.println(oops);
+			
 			caught = oops.getClass();
+			System.out.println(caught);
 		}
 		checkExceptions(expected, caught);
-		unauthenticate();
+		
 	}
-	
-	private void templateEdit(int rendezvousId, String user, String name, String description, String picture, String date, GpsCoordinate gps, boolean adult, boolean finalVersion, Class<?> expected) {
+
+	private void templateEdit(int rendezvousId, String user, String name,
+			String description, String picture, String date, GpsCoordinate gps,
+			boolean adult, boolean finalVersion, Class<?> expected) {
 		Rendezvous rendezvous;
-		rendezvous= new Rendezvous();
+		rendezvous = new Rendezvous();
 		Class<?> caught;
 		caught = null;
 		Date fecha = new Date();
@@ -129,7 +209,7 @@ public class RendezvousServiceTest extends AbstractTest {
 		try {
 			authenticate(user);
 			rendezvous = this.rendezvousService.findOne(rendezvousId);
-			
+
 			rendezvous.setName(name);
 			rendezvous.setDescription(description);
 			rendezvous.setPicture(picture);
@@ -137,20 +217,75 @@ public class RendezvousServiceTest extends AbstractTest {
 			rendezvous.setGpsCoordinate(gps);
 			rendezvous.setAdult(adult);
 			rendezvous.setFinalVersion(finalVersion);
-			
+
 			this.rendezvousService.save(rendezvous);
-			unauthenticate();
+			
 		} catch (Throwable oops) {
 			caught = oops.getClass();
 		}
 		checkExceptions(expected, caught);
+		unauthenticate();
 	}
 
-	private GpsCoordinate createGps() {
+	private GpsCoordinate createGpsOk() {
 		GpsCoordinate res = new GpsCoordinate();
 
 		res.setLatitude(89.0);
 		res.setLongitude(179.0);
+
+		return res;
+	}
+
+	private GpsCoordinate createGpsLatitudeNull() {
+		GpsCoordinate res = new GpsCoordinate();
+
+		res.setLatitude(null);
+		res.setLongitude(179.0);
+
+		return res;
+	}
+
+	private GpsCoordinate createGpsLongitudeNull() {
+		GpsCoordinate res = new GpsCoordinate();
+
+		res.setLatitude(89.0);
+		res.setLongitude(null);
+
+		return res;
+	}
+
+	private GpsCoordinate createGpsLatitudeOutRangeMore() {
+		GpsCoordinate res = new GpsCoordinate();
+
+		res.setLatitude(100.0);
+		res.setLongitude(179.0);
+
+		return res;
+	}
+
+	private GpsCoordinate createGpsLongitudeOutRangeMore() {
+		GpsCoordinate res = new GpsCoordinate();
+
+		res.setLatitude(89.0);
+		res.setLongitude(2005585.0);
+
+		return res;
+	}
+
+	private GpsCoordinate createGpsLatitudeOutRangeLess() {
+		GpsCoordinate res = new GpsCoordinate();
+
+		res.setLatitude(-100.0);
+		res.setLongitude(179.0);
+
+		return res;
+	}
+
+	private GpsCoordinate createGpsLongitudeOutRangeLess() {
+		GpsCoordinate res = new GpsCoordinate();
+
+		res.setLatitude(89.0);
+		res.setLongitude(-200.0);
 
 		return res;
 	}

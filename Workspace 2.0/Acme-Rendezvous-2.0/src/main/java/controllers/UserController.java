@@ -130,7 +130,6 @@ public class UserController extends AbstractController {
 		ModelAndView res;
 		User user;
 
-		user = userService.reconstruct(userForm, binding);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(userForm, "user.params.error");
 		else if (!userForm.getRepeatPassword().equals(userForm.getPassword()))
@@ -139,6 +138,7 @@ public class UserController extends AbstractController {
 			res = this.createEditModelAndView(userForm, "user.params.errorTerms");
 		} else
 			try {
+				user = userService.reconstruct(userForm, binding);
 				this.userService.save(user);
 				res = new ModelAndView("redirect:../");
 			} catch (final Throwable oops) {
