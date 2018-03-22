@@ -21,13 +21,15 @@
 <form:form action="${requestURI }" modelAttribute="categoryForm">
 	<security:authorize access="hasRole('ADMIN')">
 	
+	<form:hidden path="id"/>
+	
 	<acme:textarea code="category.name" path="name"/>
 	<br/>
 	
 	<acme:textarea code="category.description" path="description"/>
 	<br/>
 	
-	<acme:select items="${categories}" itemLabel="id" code="category.categoryParent" path="categoryParentId"/>
+	<acme:select items="${categories}" itemLabel="name" code="category.categoryParent" path="categoryParentId"/>
 	<br/>
 	
 </security:authorize>

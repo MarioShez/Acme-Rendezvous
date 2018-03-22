@@ -29,10 +29,10 @@
 		</display:column>
 	</security:authorize>
 	
-	<%--<spring:message code="category.categoryParent" var="categoryParent" />
-	 <jstl:if test="${categoryParent != \"CATEGORY\"}">
+	<spring:message code="category.categoryParent" var="categoryParent" />
+	 <jstl:if test="${categoryParent != null}">
 		<display:column property="categoryParent.name" title="${categoryParent }" sortable="false" />
-	</jstl:if> --%>
+	</jstl:if>
 	
 	<spring:message code="category.name" var="nameHeader" />
 	<display:column property="name" title="${nameHeader}" sortable="true" />
@@ -42,7 +42,7 @@
 
 	<spring:message code="category.rendezvous" var="rendezvousHeader" />
 	<display:column title="${rendezvousHeader }">
-		<a href="rendezvous/listByCategory.do?categoryId=${row.id}"><spring:message code="category.rendezvous"/></a>
+		<a href="rendezvous/list.do?categoryId=${row.id}"><spring:message code="category.rendezvous"/></a>
 	</display:column>
 	
 	<spring:message code="category.categories" var="categoriesHeader" />
@@ -54,10 +54,8 @@
 </display:table>
 
 	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
 			<a href="category/admin/create.do"><spring:message code="category.create"/></a>
 			<br/>
-		</display:column>
 	</security:authorize>
 
 	

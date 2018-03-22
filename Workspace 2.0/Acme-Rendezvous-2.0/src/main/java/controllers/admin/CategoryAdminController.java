@@ -60,6 +60,25 @@ public class CategoryAdminController extends AbstractController {
 		return res;
 	}
 	
+	@RequestMapping(value="/create",method=RequestMethod.POST, params="save")
+	public ModelAndView saveCreate(CategoryForm categoryForm, final BindingResult binding){
+		ModelAndView res;
+		
+		if(binding.hasErrors()){
+			res = this.createEditModelAndView(categoryForm, "category.params.errors");
+		}else{
+			try{
+				Category category = this.categoryService.reconstruct(categoryForm, binding);
+				this.categoryService.save(category);
+				res = new ModelAndView("redirect:/category/list.do");
+				
+			}catch (final Throwable oops) {
+				res = this.createEditModelAndView(categoryForm,"category.commit.error");
+			}
+		}
+		return res;
+	}
+	
 	// Create -----------------------------
 		@RequestMapping(value="/create", method=RequestMethod.GET)
 		public ModelAndView create(){
