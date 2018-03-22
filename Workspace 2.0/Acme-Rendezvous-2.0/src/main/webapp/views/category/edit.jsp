@@ -21,30 +21,26 @@
 <form:form action="${requestURI }" modelAttribute="categoryForm">
 	<security:authorize access="hasRole('ADMIN')">
 	
-	<acme:textarea code="category.name" path="text"/>
+	<acme:textarea code="category.name" path="name"/>
 	<br/>
 	
-	<acme:textarea code="category.description" path="text"/>
+	<acme:textarea code="category.description" path="description"/>
 	<br/>
 	
-	<acme:select items="${categoryParent}" itemLabel="name" code="category.categoryParent" path="categoryParent"/>
+	<acme:select items="${categories}" itemLabel="id" code="category.categoryParent" path="categoryParentId"/>
 	<br/>
 	
 </security:authorize>
 
 	<input type="button" name="cancel"
-			value="<spring:message code="category.cancel" />"
-			onclick="javascript: relativeRedir('/');" />
-	
-	
+		value="<spring:message code="category.cancel" />"
+		onclick="javascript: relativeRedir('/');" />
+
+
 	<security:authorize access="hasRole('ADMIN')">
-		<jstl:when test="${requestURI == 'category/admin/edit.do'}">
 			<input type="submit" name="save"
 				value="<spring:message code="category.save" />" />&nbsp; 
-		</jstl:when>
-	</security:authorize>
-	
-	<security:authorize access="hasRole('ADMIN')">
+
 	<jstl:if test="${categoryForm.id != 0}">
 		<input type="submit" name="delete"
 			value="<spring:message code="category.delete" />"
