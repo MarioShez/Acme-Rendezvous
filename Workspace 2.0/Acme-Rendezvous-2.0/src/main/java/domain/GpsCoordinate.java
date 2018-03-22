@@ -15,8 +15,8 @@ public class GpsCoordinate {
 	private Double latitude;
 	private Double longitude;
 	
-//	@Digits(integer = 3, fraction = 5)
 	@Range(min = -90, max = 90)
+//	@Digits(integer = 3, fraction = 5)
 	public Double getLatitude() {
 		return latitude;
 	}
@@ -25,8 +25,8 @@ public class GpsCoordinate {
 		this.latitude = latitude;
 	}
 	
-//	@Digits(integer = 3, fraction = 5)
 	@Range(min = -180, max = 180)
+//	@Digits(integer = 3, fraction = 5)
 	public Double getLongitude() {
 		return longitude;
 	}
