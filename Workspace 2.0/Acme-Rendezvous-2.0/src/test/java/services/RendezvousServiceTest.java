@@ -44,21 +44,21 @@ public class RendezvousServiceTest extends AbstractTest {
 
 		Object testingData[][] = {
 				// positive test
-				{ "user1", "name", "description", "www.goole.es",
+				{ "user1", "name", "description", "http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2020 19:32", gpsCoordinate, false, false, null },
 				// negative test: usuario no valido
-				{ null, "name", "description", "www.goole.es",
+				{ null, "name", "description", "http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2020 19:32", gpsCoordinate, false, false,
 						IllegalArgumentException.class },
 				// latitude null
-				{ "user1", "name", "description", "www.goole.es",
+				{ "user1", "name", "description", "http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2020 19:32", gpsLatitudeNull, false, false, null },
 				// longitude null
-				{ "user1", "name", "description", "www.goole.es",
+				{ "user1", "name", "description", "http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2020 19:32", gpsLongitudeNull, false, false,
 						null },
 				// latitude out of range up
-				{ "user1", "name", "description", "www.goole.es",
+				{ "user1", "name", "description", "http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2020 19:32", gpsLatitudeOutRangeM, false, false,
 						javax.validation.ConstraintViolationException.class },
 				// longitude out of range up
@@ -106,7 +106,7 @@ public class RendezvousServiceTest extends AbstractTest {
 				{ "rendezvous1", "user1", "name", "description",
 						"www.goole.es", "10/05/2020 19:32", gpsCoordinate,
 						false, false, null },
-				// negative test: usuario no válido
+				// negative test: usuario no vï¿½lido
 				{ "rendezvous1", "user2", "name", "description",
 						"www.goole.es", "10/05/2000", gpsCoordinate, false,
 						true, java.lang.IllegalArgumentException.class },
@@ -167,7 +167,7 @@ public class RendezvousServiceTest extends AbstractTest {
 		}
 
 		try {
-			authenticate(user);
+			super.authenticate(user);
 			rendezvous = this.rendezvousService.create();
 			rendezvous.setName(name);
 			rendezvous.setDescription(description);
@@ -178,7 +178,8 @@ public class RendezvousServiceTest extends AbstractTest {
 			rendezvous.setFinalVersion(finalVersion);
 
 			this.rendezvousService.save(rendezvous);
-
+			this.rendezvousService.flush();
+			this.unauthenticate();
 		} catch (Throwable oops) {
 			System.out.println(oops);
 			
@@ -186,7 +187,7 @@ public class RendezvousServiceTest extends AbstractTest {
 			System.out.println(caught);
 		}
 		checkExceptions(expected, caught);
-		unauthenticate();
+		
 	}
 
 	private void templateEdit(int rendezvousId, String user, String name,
