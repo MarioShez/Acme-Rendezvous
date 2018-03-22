@@ -43,14 +43,11 @@ public class RendezvousController extends AbstractController {
 	// Listing -------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(required = false) Integer rendezvousId,
-							@RequestParam(required = false) Integer categoryId) {
+	public ModelAndView list(@RequestParam(required = false) Integer rendezvousId) {
 
 		Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
 		
 		Actor principal = actorService.findByPrincipal();
-		
-		
 		
 		if(rendezvousId == null && principal == null){
 			rendezvouses = rendezvousService.findFutureMomentAndNotAdult();
@@ -64,17 +61,6 @@ public class RendezvousController extends AbstractController {
 			rendezvouses = rendezvousService.linkedRendezvousesFutureMomentByRendezvousId(rendezvousId);
 		}else if(rendezvousId!= null && !actorService.isAdult(principal.getBirth())){
 			rendezvouses = rendezvousService.linkedRendezvousesFutureMomentAndNotAdultByRendezvousId(rendezvousId);
-		}
-		
-		if(categoryId!=null){
-			rendezvouses = this.rendezvousService.rendezvousGroupedByCategory(categoryId);
-			Collection<Rendezvous> rendezvousNotAdult = rendezvousService.findFutureMomentAndNotAdult();
-			if(principal==null || !(actorService.isAdult(principal.getBirth()))){
-				for(int i=0;i<=rendezvouses.size();i++)
-					if(!(rendezvousNotAdult.contains(rendezvouses.toArray()[i]))){
-						rendezvouses.remove(rendezvouses.toArray()[i]);
-					}
-			}
 		}
 		
 		ModelAndView result = new ModelAndView("rendezvous/list");
@@ -127,20 +113,20 @@ public class RendezvousController extends AbstractController {
 		return result;
 	}
 	
-//	@RequestMapping(value = "/listByCategory", method = RequestMethod.GET)
-//	public ModelAndView list(@RequestParam int categoryId) {
-//		
-//		Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
-//		
-//		rendezvouses = this.rendezvousService.rendezvousGroupedByCategory(categoryId);
-//		
-//		ModelAndView result = new ModelAndView("rendezvous/list");
-//		result.addObject("rendezvouses", rendezvouses);
-//		result.addObject("rendezvousSource", null);
-//		result.addObject("requestURI", "rendezvous/list.do");
-//		
-//		return result;
-//	}
+	@RequestMapping(value = "/listByCategory", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int categoryId) {
+		
+		Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
+		
+		rendezvouses = this.rendezvousService.rendezvousGroupedByCategory(categoryId);
+		
+		ModelAndView result = new ModelAndView("rendezvous/list");
+		result.addObject("rendezvouses", rendezvouses);
+		result.addObject("rendezvousSource", null);
+		result.addObject("requestURI", "rendezvous/list.do");
+		
+		return result;
+	}
 	
 	// Display -------------------------------------------------------
 	
