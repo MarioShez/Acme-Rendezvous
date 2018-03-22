@@ -2,7 +2,6 @@
 package services;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -310,48 +309,6 @@ public class RendezvousService {
 	
 	public void flush() {
 		this.rendezvousRepository.flush();
-	}
-	
-	public void YesRSVP(final int rendezvousId) {
-		User usuario;
-		Rendezvous rendezvous;
-		rendezvous = this.rendezvousRepository.findOne(rendezvousId);
-		usuario = this.userService.findByPrincipal();
-
-		if (rendezvous.getAdult() == true)
-			Assert.isTrue(this.Age(usuario.getBirth()) > 17);
-
-		if (!rendezvous.getAttendants().contains(usuario))
-			rendezvous.getAttendants().add(usuario);
-		this.rendezvousRepository.save(rendezvous);
-
-	}
-
-	public void NoRSVP(final int rendezvousId) {
-		User usuario;
-		Rendezvous rendezvous;
-		rendezvous = this.rendezvousRepository.findOne(rendezvousId);
-		usuario = this.userService.findByPrincipal();
-		Assert.isTrue(rendezvous.getAttendants().contains(usuario));
-		rendezvous.getAttendants().remove(usuario);
-		this.rendezvousRepository.save(rendezvous);
-
-	}
-	
-	public int Age(final Date birthDay) {
-		Calendar today, fechan;
-		today = Calendar.getInstance();
-		fechan = Calendar.getInstance();
-		fechan.setTime(birthDay);
-
-		int diffYear = today.get(Calendar.YEAR) - fechan.get(Calendar.YEAR);
-		final int diffMonth = today.get(Calendar.MONTH) - fechan.get(Calendar.MONTH);
-		final int diffDay = today.get(Calendar.DAY_OF_MONTH) - fechan.get(Calendar.DAY_OF_MONTH);
-		// Si está en ese año pero todavía no los ha cumplido
-		if (diffMonth < 0 || (diffMonth == 0 && diffDay < 0))
-			diffYear = diffYear - 1;
-		return diffYear;
-
 	}
 
 }
