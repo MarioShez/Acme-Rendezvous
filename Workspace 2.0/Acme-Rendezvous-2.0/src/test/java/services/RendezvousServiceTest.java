@@ -88,10 +88,9 @@ public class RendezvousServiceTest extends AbstractTest {
 						"name",
 						"description",
 						"http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
-						"10/05/2020 19:32", gpsLatitudeOutRangeM, false, false,
-						javax.validation.ConstraintViolationException.class },
+
 				// longitude out of range up
-				{
+				
 						"user1",
 						"name",
 						"description",
@@ -190,6 +189,31 @@ public class RendezvousServiceTest extends AbstractTest {
 						"http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2000", gpsCoordinate, false, true,
 						java.lang.IllegalArgumentException.class },
+//				// latitude null
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLatitudeNull, false, false, null },
+//				// longitude null
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLongitudeNull, false, false,
+//						null },
+				// latitude out of range up
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLatitudeOutRangeM, false, false,
+//						javax.validation.ConstraintViolationException.class },
+//				// longitude out of range up
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLongitudeOutRangeM, false,
+//						false,
+//						javax.validation.ConstraintViolationException.class },
+//				// latitude out of range down
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLatitudeOutRangeL, false, false,
+//						javax.validation.ConstraintViolationException.class },
+//				// longitude out of range down
+//				{ "user1", "name", "description", "www.goole.es",
+//						"10/05/2020 19:32", gpsLongitudeOutRangeL, false,
+//						false,
+//						javax.validation.ConstraintViolationException.class },
 
 		};
 		for (int i = 0; i < testingData.length; i++) {
@@ -224,6 +248,7 @@ public class RendezvousServiceTest extends AbstractTest {
 			authenticate(user);
 			rendezvous = this.rendezvousService.findOne(rendezvousId);
 
+
 			rendezvous.setName(name);
 			rendezvous.setDescription(description);
 			rendezvous.setPicture(picture);
@@ -240,6 +265,7 @@ public class RendezvousServiceTest extends AbstractTest {
 			caught = oops.getClass();
 		}
 		checkExceptions(expected, caught);
+		
 	}
 
 	// Test delete de user
