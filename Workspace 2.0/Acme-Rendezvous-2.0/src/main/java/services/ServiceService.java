@@ -27,21 +27,21 @@ public class ServiceService {
 	private ServiceRepository	serviceRepository;
 
 	// Supported services
+	
+	@Autowired
+	private RendezvousService		rendezvousService;
 
 	@Autowired
-	private RendezvousService	rendezvousService;
+	private ManagerService			managerService;
 
 	@Autowired
-	private ManagerService		managerService;
-
+	private AdminService			adminService;
+	
 	@Autowired
-	private AdminService		adminService;
-
+	private CategoryService			categoryService;
+	
 	@Autowired
-	private CategoryService		categoryService;
-
-	@Autowired
-	private Validator			validator;
+	private Validator validator;
 
 
 	//	@Autowired
@@ -82,7 +82,7 @@ public class ServiceService {
 		res = this.serviceRepository.findOne(serviceId);
 		return res;
 	}
-
+	
 	public Service findOneToEdit(final int serviceId) {
 		Assert.isTrue(serviceId != 0);
 		Service res;
@@ -102,11 +102,11 @@ public class ServiceService {
 		res = this.serviceRepository.save(service);
 		if (service.getId() == 0)
 			service.getManager().getServices().add(res);
-
+		
 		if (service.getCategory() != null && !service.getCategory().getServices().contains(res)) {
 			service.getCategory().getServices().add(res);
 		}
-
+		
 		return res;
 	}
 
@@ -116,93 +116,90 @@ public class ServiceService {
 		Assert.isTrue(service.getRequests().isEmpty());
 
 		service.getManager().getServices().remove(service);
-		if (service.getCategory() != null) {
+		if(service.getCategory() != null){
 			service.getCategory().getServices().remove(service);
 			categoryService.save(service.getCategory());
 		}
-
+		
 		this.serviceRepository.delete(service);
 	}
 
 	// Other business methods
 
-	public Collection<Service> findByRendezvousId(int rendezvousId) {
+	public Collection<Service> findByRendezvousId(int rendezvousId){
 		Collection<Service> result = serviceRepository.findByRendezvousId(rendezvousId);
 		return result;
 	}
-
-	public Collection<Service> findByManagerId(int managerId) {
+	
+	public Collection<Service> findByManagerId(int managerId){
 		Collection<Service> result = serviceRepository.findByManagerId(managerId);
 		return result;
 	}
-
-	public void changeCancelled(int serviceId) {
-
+	
+	public void changeCancelled(int serviceId){
+		
 		Assert.isTrue(adminService.checkAuthority());
-
+		
 		Service service = findOne(serviceId);
-
+		
 		Assert.isTrue(service.isCancelled() == false);
 		Assert.isTrue(service.getRequests().isEmpty());
-
+		
 		service.setCancelled(true);
 		save(service);
 	}
-
-	public Collection<Service> findNonCancelled() {
-
+	
+	public Collection<Service> findNonCancelled(){
+		
 		Collection<Service> result = serviceRepository.findNonCancelled();
 		return result;
 	}
-
-	public Collection<Service> findAvalibleServicesByRendezvousId(int rendezvousId) {
-
+	
+	public Collection<Service> findAvalibleServicesByRendezvousId(int rendezvousId){
+		
 		Collection<Service> result = serviceRepository.findNonCancelled();
 		Rendezvous rendezvous = rendezvousService.findOne(rendezvousId);
-		for (Request request : rendezvous.getRequests()) {
-			if (result.contains(request.getService())) {
+		for(Request request:rendezvous.getRequests()){
+			if(result.contains(request.getService())){
 				result.remove(request.getService());
 			}
 		}
-
+		
 		return result;
 	}
 
+	
 	public ServiceForm construct(Service service) {
 		ServiceForm res = new ServiceForm();
-
+		
 		res.setId(service.getId());
 		res.setName(service.getName());
 		res.setDescription(service.getDescription());
 		res.setPicture(service.getPicture());
-
+		
 		return res;
 	}
-
-	public Service reconstruct(ServiceForm serviceForm, BindingResult binding) {
+	
+	public Service reconstruct(ServiceForm serviceForm, BindingResult binding){
 
 		Assert.notNull(serviceForm);
-
+		
 		Service res;
 
-		if (serviceForm.getId() == 0) {
+		if(serviceForm.getId() == 0){
 			res = create();
-		} else {
+		}else{
 			res = findOne(serviceForm.getId());
 		}
 
 		res.setName(serviceForm.getName());
 		res.setDescription(serviceForm.getDescription());
 		res.setPicture(serviceForm.getPicture());
-
-		if (binding != null)
+		
+		if(binding!=null)
 			validator.validate(res, binding);
-
+		
 		return res;
-	}
-
-	public void flush() {
-		this.serviceRepository.flush();
 	}
 
 }

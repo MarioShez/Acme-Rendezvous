@@ -82,7 +82,6 @@ public class ServiceServiceTest extends AbstractTest {
 			Service service = serviceService.findOneToEdit(serviceId);
 			service.setName("Service name changed");
 			serviceService.save(service);
-			serviceService.flush();
 			super.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -101,7 +100,6 @@ public class ServiceServiceTest extends AbstractTest {
 			super.authenticate(authenticate);
 			Service service = serviceService.findOneToEdit(serviceId);
 			serviceService.delete(service);
-			serviceService.flush();
 			super.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

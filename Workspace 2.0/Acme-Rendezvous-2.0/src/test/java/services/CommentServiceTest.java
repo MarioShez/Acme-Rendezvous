@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -44,23 +45,23 @@ public class CommentServiceTest extends AbstractTest {
 				{
 						// usuario "user1" crea un comment para un rendezvous
 						// "rendezvous1" al que asiste
-						"test create1", "https://testPrueba.com", null,
+						null, "test create1", "https://testPrueba.com", null,
 						null, "rendezvous1", "user1", null },
 				{
 						// El usuario "user1" va a crear un commment para un
 						// rendezvous "rendezvous2" al q no va a asistir
-						"test create2", "https://testPrueba.com", null,
+						null, "test create2", "https://testPrueba.com", null,
 						null, "rendezvous2", "user1",
 						IllegalArgumentException.class },
 				{
 						// el usuario "user1" va a responder a un comentario
 						// escrito en una cita a la q asiste
-						"test create3", "https://testPrueba.com", null,
+						null, "test create3", "https://testPrueba.com", null,
 						iterador.next(), "rendezvous1", "user1", null },
 				{
 						// el usuario "user3" va a responder a un comentario
 						// escrito en una cita a la q no asiste
-						"test create3", "https://testPrueba.com", null,
+						null, "test create3", "https://testPrueba.com", null,
 						iterador.next(), "rendezvous1", "user3",
 						IllegalArgumentException.class },
 
@@ -68,17 +69,17 @@ public class CommentServiceTest extends AbstractTest {
 
 		for (int i = 0; i < testingData.length; i++) {
 
-			this.templateCreateAndSave(
-					(String) testingData[i][0], (String) testingData[i][1],
-					(List<Comment>) testingData[i][2],
-					(Comment) testingData[i][3],
-					super.getEntityId((String) testingData[i][4]),
-					(String) testingData[i][5], (Class<?>) testingData[i][6]);
+			this.templateCreateAndSave((Date) testingData[i][0],
+					(String) testingData[i][1], (String) testingData[i][2],
+					(List<Comment>) testingData[i][3],
+					(Comment) testingData[i][4],
+					super.getEntityId((String) testingData[i][5]),
+					(String) testingData[i][6], (Class<?>) testingData[i][7]);
 		}
 
 	}
 
-	private void templateCreateAndSave(final String text,
+	private void templateCreateAndSave(final Date moment, final String text,
 			final String picture, final List<Comment> replies,
 			final Comment commentParent, final int rendezvousId,
 			final String userName, final Class<?> expected) {
@@ -91,6 +92,7 @@ public class CommentServiceTest extends AbstractTest {
 			super.authenticate(userName);
 			rendezvousComment = this.rendezvousService.findOne(rendezvousId);
 			comment = this.commentService.create();
+			comment.setMoment(moment);
 			comment.setText(text);
 			comment.setPicture(picture);
 			comment.setReplies(replies);
@@ -99,9 +101,10 @@ public class CommentServiceTest extends AbstractTest {
 			comment = this.commentService.save(comment);
 
 			this.unauthenticate();
-			this.commentService.flush();
+			// this.commentService.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
+
 		}
 		this.checkExceptions(expected, caught);
 	}
