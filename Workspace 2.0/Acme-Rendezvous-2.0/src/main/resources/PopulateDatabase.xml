@@ -217,6 +217,7 @@
 				<ref bean="service2" />
 				<ref bean="service4" />
 				<ref bean="service6" />
+				<ref bean="service9" />
 			</list>
 		</property>
 	</bean>
@@ -364,6 +365,21 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- Service 9 -->
+	<bean id="service9" class="domain.Service">
+		<property name="name" value="Servicio 9" />
+		<property name="description" value="Servicio 9 esta mejor" />
+		<property name="picture"
+			value="http://www.neurosurg.cam.ac.uk/files/2017/09/yourstory_service_msme.jpg" />
+		<property name="category" ref="category3"/>
+		<property name="manager" ref="manager2" />
+		<property name="cancelled" value="false" />
+		<property name="requests">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Category -->
 
@@ -376,6 +392,7 @@
 				<ref bean="service1" />
 				<ref bean="service2" />
 				<ref bean="service3" />
+				<ref bean="service9" />
 			</list>
 		</property>
 		<property name="categories">
