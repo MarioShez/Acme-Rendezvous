@@ -348,7 +348,7 @@ public class RendezvousService {
 		int diffYear = today.get(Calendar.YEAR) - fechan.get(Calendar.YEAR);
 		final int diffMonth = today.get(Calendar.MONTH) - fechan.get(Calendar.MONTH);
 		final int diffDay = today.get(Calendar.DAY_OF_MONTH) - fechan.get(Calendar.DAY_OF_MONTH);
-		// Si está en ese año pero todavía no los ha cumplido
+
 		if (diffMonth < 0 || (diffMonth == 0 && diffDay < 0))
 			diffYear = diffYear - 1;
 		return diffYear;
@@ -370,5 +370,7 @@ public class RendezvousService {
 		
 		return res;
 	}
+	
+	
 
 }

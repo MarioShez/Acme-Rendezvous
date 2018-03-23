@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ServiceRepository;
+import domain.Category;
 import domain.Manager;
 import domain.Rendezvous;
 import domain.Request;
@@ -61,10 +62,12 @@ public class ServiceService {
 		final Manager manager = this.managerService.findByPrincipal();
 		final boolean cancelled = false;
 		final Collection<Request> requests = new ArrayList<Request>();
+		final Category category= new Category();
 
 		res.setManager(manager);
 		res.setCancelled(cancelled);
 		res.setRequests(requests);
+		res.setCategory(category);
 
 		return res;
 	}
@@ -194,6 +197,7 @@ public class ServiceService {
 		res.setName(serviceForm.getName());
 		res.setDescription(serviceForm.getDescription());
 		res.setPicture(serviceForm.getPicture());
+		res.setCategory(serviceForm.getCategory());
 
 		if (binding != null)
 			validator.validate(res, binding);
