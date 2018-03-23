@@ -131,16 +131,15 @@ public class AnnouncementService {
 		res.setId(announcement.getId());
 		res.setTitle(announcement.getTitle());
 		res.setDescription(announcement.getDescription());
-		res.setRendezvous(rendezvous.getId());
+		res.setRendezvousId(rendezvous.getId());
 		
 		return res;
 	}
 	
 	public Announcement reconstruct(AnnouncementForm announcementForm, BindingResult binding){
+		
 		Assert.notNull(announcementForm);
-		Announcement res = new Announcement();
-		int rendezvousId = announcementForm.getRendezvousId();
-		Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
+		Announcement res = create(rendezvousService.findOne(announcementForm.getRendezvousId()));
 		
 		Date moment = new Date(System.currentTimeMillis()-1);
 		
@@ -148,7 +147,6 @@ public class AnnouncementService {
 		res.setMoment(moment);
 		res.setTitle(announcementForm.getTitle());
 		res.setDescription(announcementForm.getDescription());
-		res.setRendezvous(rendezvous);
 		
 		if(binding!=null)
 			validator.validate(res, binding);

@@ -1,10 +1,6 @@
 package forms;
 
 
-import javax.persistence.ManyToOne;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
@@ -52,14 +48,11 @@ public class AnnouncementForm {
 		this.description = description;
 	}
 
-	@Valid
-	@NotNull
-	@ManyToOne(optional=false)
 	public int getRendezvousId() {
 		return rendezvousId;
 	}
 
-	public void setRendezvous(int rendezvousId) {
+	public void setRendezvousId(int rendezvousId) {
 		this.rendezvousId = rendezvousId;
 	}
 

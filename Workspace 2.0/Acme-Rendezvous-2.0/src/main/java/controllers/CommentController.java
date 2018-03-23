@@ -113,7 +113,7 @@ public class CommentController extends AbstractController {
 	// Deleting --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int commentId) {
+	public ModelAndView edit(@RequestParam final int commentId) {
 		ModelAndView result;
 		Comment comment = new Comment();
 
@@ -125,7 +125,7 @@ public class CommentController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView create(@Valid final Comment comment,
+	public ModelAndView delete(@Valid final Comment comment,
 			final BindingResult binding) {
 		ModelAndView result;
 		
@@ -144,11 +144,11 @@ public class CommentController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/rendezvous/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int rendezvousId) {
 		ModelAndView result;
 		Comment c;
 
-		c = this.commentService.create();
+		c = this.commentService.create(rendezvousId);
 		result = this.createEditModelAndView(c);
 		return result;
 	}
