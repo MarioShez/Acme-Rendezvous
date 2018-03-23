@@ -408,7 +408,7 @@ public class RendezvousServiceTest extends AbstractTest {
 				// positive test
 				{ "user1", "rendezvous1", null},
 				// negative test, comprueba que un user efectivamente no tenga un rendezvous al que no va a asistir en su lista de attendants
-//				{ "user1", "rendezvous2", IllegalArgumentException.class },
+				{ "user1", "rendezvous2", IllegalArgumentException.class },
 
 		};
 		for (int i = 0; i < testingData.length; i++) {
@@ -438,11 +438,10 @@ public class RendezvousServiceTest extends AbstractTest {
 
 		} catch (Throwable oops) {
 			caught = oops.getClass();
-			System.out.println(oops);
-			System.out.println(caught);
 		}
 		checkExceptions(expected, caught);
 	}
+	
 
 	// Creación de gps
 
