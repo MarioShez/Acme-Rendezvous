@@ -2,6 +2,7 @@ package services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -17,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Announcement;
 import domain.GpsCoordinate;
 import domain.Rendezvous;
 import domain.User;
@@ -358,7 +358,7 @@ public class RendezvousServiceTest extends AbstractTest {
 
 				// positive test
 				{ "user1", "rendezvous1", null},
-				// positive test
+				// negative test
 				{ "user1", "rendezvous2", IllegalArgumentException.class },
 				// Manager no puede asistir a un rendezvous
 				{ "manager1", "rendezvous1", IllegalArgumentException.class },
@@ -407,10 +407,8 @@ public class RendezvousServiceTest extends AbstractTest {
 
 				// positive test
 				{ "user1", "rendezvous1", null},
-				// positive test
-				{ "user1", "rendezvous2", IllegalArgumentException.class },
-				// Manager no puede asistir a un rendezvous
-				{ "manager1", "rendezvous1", IllegalArgumentException.class },
+				// negative test, comprueba que un user efectivamente no tenga un rendezvous al que no va a asistir en su lista de attendants
+//				{ "user1", "rendezvous2", IllegalArgumentException.class },
 
 		};
 		for (int i = 0; i < testingData.length; i++) {
@@ -424,23 +422,24 @@ public class RendezvousServiceTest extends AbstractTest {
 	private void templateListAssistUser(String user, int rendezvousId,
 			Class<?> expected) {
 		Rendezvous rendezvous;
-		Collection<Rendezvous> assists = null;
-		User userF;
+		Collection<Rendezvous> rendezvousAssists = new ArrayList<Rendezvous>();
+		User principalUser;
 		Class<?> caught;
 
 		caught = null;
 
 		try {
 			authenticate(user);
-			userF = this.userService.findByPrincipal();
+			principalUser = this.userService.findByPrincipal();
 			rendezvous = this.rendezvousService.findOne(rendezvousId);
-			//assists= this.rendezvousService;
-			Assert.isTrue(assists.contains(rendezvous));
+			rendezvousAssists = this.rendezvousService.findByAttendantId(principalUser.getId());
+			Assert.isTrue(rendezvousAssists.contains(rendezvous));
 			unauthenticate();
 
 		} catch (Throwable oops) {
 			caught = oops.getClass();
-			this.entityManager.clear();
+			System.out.println(oops);
+			System.out.println(caught);
 		}
 		checkExceptions(expected, caught);
 	}
