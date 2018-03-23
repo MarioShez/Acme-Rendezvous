@@ -1,8 +1,14 @@
 package forms;
 
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
+
+import domain.Category;
 
 public class ServiceForm {
 	
@@ -17,7 +23,8 @@ public class ServiceForm {
 	private String description;
 	private String picture;
 	private boolean cancelled;
-	private int categoryId;
+	
+	private Category				category;
 
 	
 	
@@ -66,12 +73,14 @@ public class ServiceForm {
 	public void setCancelled(final boolean cancelled) {
 		this.cancelled = cancelled;
 	}
-	
-	public int getCategoryId() {
-		return this.categoryId;
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Category getCategory() {
+		return this.category;
 	}
 
-	public void setCategoryId(final int categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(final Category category) {
+		this.category = category;
 	}
 }

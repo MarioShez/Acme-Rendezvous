@@ -64,7 +64,7 @@
 
 	<security:authorize access="hasRole('USER')">
 		<div>
-			<a href="comment/user/create.do">
+			<a href="comment/user/edit.do">
 				<button>
 					<spring:message code="comment.create" />
 				</button>

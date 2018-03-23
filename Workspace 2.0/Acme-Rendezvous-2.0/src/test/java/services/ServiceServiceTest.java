@@ -32,28 +32,27 @@ public class ServiceServiceTest extends AbstractTest {
 	private ServiceService serviceService;
 
 	// Tests ------------------------------------------------------------------
-	
-	// 5.2 Acme-Rendezvous-2.0 Manage his or her services, which includes listing them, creating them, updating them, and deleting them as long as they are not required by any rendezvouses.
+
 	@Test
 	public void driver() {
 		final Object testingEditData[][] = { 
-				{ "manager1", "service1", null },										// positive test: editando service correctamente 
-				{ null, "service2", IllegalArgumentException.class },					// negative test: Un anonimo no puede editar un servicio
-				{ "manager2", "service2", null },										// positive test: editando service correctamente 
-				{ "user1", "service1", IllegalArgumentException.class },				// negative test: Un usuario no puede editar un servicio
-				{ "manager1", "service3", null },										// positive test: editando service correctamente 
-				{ "manager1", "serviceNotExisting", NumberFormatException.class },		// negative test: Un manager no puede editar un servicio que no existe
-				{ "manager3", "service5", null },										// positive test: editando service correctamente 
-				{ "manager2", "service4", IllegalArgumentException.class }				// negative test: Un manager no puede editar un servicio cancelado
+				{ "manager1", "service1", null },
+				{ null, "service2", IllegalArgumentException.class },					// Un anonimo no puede editar un servicio
+				{ "manager2", "service2", null },
+				{ "user1", "service1", IllegalArgumentException.class },				// Un usuario no puede editar un servicio
+				{ "manager1", "service3", null },
+				{ "manager1", "serviceNotExisting", NumberFormatException.class },		// Un manager no puede editar un servicio que no existe
+				{ "manager3", "service5", null },
+				{ "manager2", "service4", IllegalArgumentException.class }				// Un manager no puede editar un servicio cancelado
 				};
 		
 		final Object testingDeleteData[][] = { 
 				{ "manager1", "service3", null },
-				{ null, "service2", IllegalArgumentException.class },					// negative test: Un anonimo no puede eliminar un servicio
-				{ "manager2", "service6", null },										// positive test: eliminando un service correctamente
-				{ "user1", "service1", IllegalArgumentException.class },				// negative test: Un usuario no puede eliminar un servicio
-				{ "manager3", "service7", null },										// positive test: eliminando un service correctamente
-				{ "manager3", "service5", IllegalArgumentException.class },				// negative test: Un manager no puede eliminar un servicio que contenga peticiones
+				{ null, "service2", IllegalArgumentException.class },					// Un anonimo no puede eliminar un servicio
+				{ "manager2", "service6", null },
+				{ "user1", "service1", IllegalArgumentException.class },				// Un usuario no puede eliminar un servicio
+				{ "manager3", "service7", null },
+				{ "manager3", "service5", IllegalArgumentException.class },				// Un manager no puede eliminar un servicio que contenga peticiones
 				};
 
 		for (int i = 0; i < testingEditData.length; i++)

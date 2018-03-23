@@ -97,10 +97,13 @@ public class RequestService {
 
 	public void delete(final Request request) {
 
+		Assert.isTrue(this.userService.findByPrincipal()
+				.getOrganisedRendezvouses().contains(request.getRendezvous()));
+
 		request.getRendezvous().getRequests().remove(request);
-//		this.rendezvousService.save(request.getRendezvous());
+		this.rendezvousService.save(request.getRendezvous());
 		request.getService().getRequests().remove(request);
-//		this.serviceService.save(request.getService());
+		this.serviceService.save(request.getService());
 
 		this.requestRepository.delete(request);
 	}

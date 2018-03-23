@@ -30,7 +30,7 @@
 	<br />
 
 	<acme:selectObligatory items="${categories}" itemLabel="name"
-		code="service.category" path="categoryId" />
+		code="service.category" path="category" />
 	<br />
 
 	<jstl:if test="${serviceForm.cancelled == false}">

@@ -48,9 +48,6 @@ public class RendezvousService {
 
 	//	@Autowired
 	//	private QuestionService			questionService;
-	
-	@Autowired
-	private RequestService			requestService;
 
 	@Autowired
 	private Validator				validator;
@@ -142,15 +139,10 @@ public class RendezvousService {
 			this.commentService.deleteAll(rendezvous.getComments());
 		//		for (final Question question : rendezvous.getQuestions())
 		//			this.questionService.delete(question);
-//		for (final Rendezvous linkedRendezvous : rendezvous.getLinkedRendezvouses())
-//			rendezvous.getLinkedRendezvouses().remove(linkedRendezvous);
+		for (final Rendezvous linkedRendezvous : rendezvous.getLinkedRendezvouses())
+			rendezvous.getLinkedRendezvouses().remove(linkedRendezvous);
 		for (final Rendezvous parentRendezvous : this.findParentRendezvouses(rendezvous.getId()))
 			parentRendezvous.getLinkedRendezvouses().remove(rendezvous);
-		Collection<Request> requests = new ArrayList<Request>();
-		requests.addAll(rendezvous.getRequests());
-		for (Request request : requests){
-			requestService.delete(request);
-		}
 
 		this.rendezvousRepository.delete(rendezvous);
 	}

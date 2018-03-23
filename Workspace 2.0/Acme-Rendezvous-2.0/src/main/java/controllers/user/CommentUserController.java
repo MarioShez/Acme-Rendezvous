@@ -62,7 +62,7 @@ public class CommentUserController extends AbstractController {
 	}
 
 	// Creation ---------------------------------------------------------------
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
 		Comment c;

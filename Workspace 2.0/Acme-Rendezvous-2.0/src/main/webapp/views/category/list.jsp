@@ -56,9 +56,7 @@
 	
 	<spring:message code="category.categories" var="categoriesHeader" />
 	<display:column title="${categoriesHeader}">
-		<jstl:if test="${not empty row.categories}">
-			<a href="category/list.do?categoryId=${row.id}"><spring:message code="category.listCategories"/></a>
-		</jstl:if>
+		<a href="category/list.do?categoryId=${row.id}"><spring:message code="category.listCategories"/></a>
 	</display:column>
 	
 	

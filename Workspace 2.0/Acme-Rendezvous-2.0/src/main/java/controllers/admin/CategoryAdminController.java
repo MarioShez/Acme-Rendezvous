@@ -118,14 +118,12 @@ public class CategoryAdminController extends AbstractController {
 		ModelAndView res;
 		Collection<Category> categories;
 		categories = this.categoryService.findAll();
-		if(categoryForm.getId() != 0){
-			categories.remove(categoryService.findOne(categoryForm.getId()));
-		}
 		
 		res = new ModelAndView("category/edit");
 		res.addObject("categoryForm",categoryForm);
 		res.addObject("categories",categories);
 		res.addObject("message",message);
+//		res.addObject("requestURI","category/admin/edit.do");
 		
 		return res;
 	}

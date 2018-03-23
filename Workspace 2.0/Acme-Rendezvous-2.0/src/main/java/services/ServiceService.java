@@ -121,6 +121,7 @@ public class ServiceService {
 		service.getManager().getServices().remove(service);
 		if (service.getCategory() != null) {
 			service.getCategory().getServices().remove(service);
+			categoryService.save(service.getCategory());
 		}
 
 		this.serviceRepository.delete(service);
@@ -177,7 +178,6 @@ public class ServiceService {
 		res.setName(service.getName());
 		res.setDescription(service.getDescription());
 		res.setPicture(service.getPicture());
-		res.setCategoryId(service.getCategory().getId());
 
 		return res;
 	}
@@ -197,7 +197,7 @@ public class ServiceService {
 		res.setName(serviceForm.getName());
 		res.setDescription(serviceForm.getDescription());
 		res.setPicture(serviceForm.getPicture());
-		res.setCategory(categoryService.findOne(serviceForm.getCategoryId()));
+		res.setCategory(serviceForm.getCategory());
 
 		if (binding != null)
 			validator.validate(res, binding);
