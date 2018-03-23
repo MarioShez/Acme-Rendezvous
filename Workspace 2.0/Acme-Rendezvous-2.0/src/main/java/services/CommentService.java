@@ -96,11 +96,12 @@ public class CommentService {
 		res = this.commentRepository.save(comment);
 		
 		
-//		if(comment.getId() == 0){
-//			Date moment;
-//			moment = new Date(System.currentTimeMillis()-1000);
-//			comment.setMoment(moment);
-//		}
+		if(comment.getId() == 0){
+			Date moment;
+			moment = new Date(System.currentTimeMillis()-1000);
+			comment.setMoment(moment);
+			comment.getRendezvous().getComments().add(res);
+		}
 		
 		if(comment.getCommentParent() != null){
 			this.actualizarParent(comment.getCommentParent(), res);
