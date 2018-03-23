@@ -22,7 +22,7 @@
 		<acme:select items="${rendezvouses}" itemLabel="name" code="request.rendezvous" path="rendezvous"/>
 	</jstl:if>
 	
-	<acme:select items="${services}" itemLabel="name" code="request.service" path="serviceId"/>
+	<acme:selectObligatory items="${services}" itemLabel="name" code="request.service" path="serviceId"/>
 	<br/>
 	
 	<fieldset>
