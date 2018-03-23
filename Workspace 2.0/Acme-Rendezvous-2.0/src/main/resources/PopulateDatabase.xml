@@ -436,6 +436,21 @@
 		</property>
 		<property name="categoryParent"><null/></property>
 	</bean>
+	
+	<!-- Category 5 -->
+	<bean id="category5" class="domain.Category">
+		<property name="name" value="Forest" />
+		<property name="description" value="Forest category" />
+		<property name="services">
+			<list>
+			</list>
+		</property>
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+		<property name="categoryParent"><null/></property>
+	</bean>
 
 	<!-- Request -->
 	<!-- Request 1 -->
