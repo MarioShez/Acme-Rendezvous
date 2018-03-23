@@ -46,11 +46,11 @@ public class CommentService {
 
 	// Simple CRUD methods
 
-	public Comment create(int rendezvousId) {
+	public Comment create() {
 		userService.checkAuthority();
 		Comment res = new Comment();
 		Collection<Comment> replies = new ArrayList<Comment>();
-		Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
+		Rendezvous rendezvous = new Rendezvous();
 		User u = new User();
 		Comment parent= new Comment();
 		Assert.notNull(u);
@@ -159,7 +159,7 @@ public class CommentService {
 	
 	
 	public Comment reconstruct(CommentForm commentForm, BindingResult binding) {
-		Comment res= this.create(commentForm.getCommentParentId());
+		Comment res= new Comment();
 		int rendezvousId = commentForm.getRendezvousId();
 		int commentParentId = commentForm.getCommentParentId();
 		Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
