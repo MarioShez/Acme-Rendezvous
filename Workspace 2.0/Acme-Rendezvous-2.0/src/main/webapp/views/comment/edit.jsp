@@ -27,12 +27,12 @@
 	<acme:textbox code="comment.picture" path="picture"/>
 	<br/>
 	
-	<acme:select items="${rendezvous }" itemLabel="name" code="comment.rendezvous" path="rendezvous"/>
+	<acme:selectObligatory items="${rendezvous }" itemLabel="name" code="comment.rendezvous" path="rendezvous"/>
 	<br/>
 	
 	<jstl:choose>
 		<jstl:when test="${requestURI == 'comment/user/editReplies.do'}">
-			<acme:select items="${commentParent }" itemLabel="text" code="comment.commentParent" path="commentParent"/>
+			<acme:selectObligatory items="${commentParent }" itemLabel="text" code="comment.commentParent" path="commentParent"/>
 		</jstl:when>
 	</jstl:choose>
 	

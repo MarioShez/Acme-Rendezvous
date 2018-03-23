@@ -108,8 +108,6 @@ public class CommentUserController extends AbstractController {
 						"redirect:/comment/rendezvous/list.do?rendezvousId="
 								+ rendezvousId);
 			} catch (final Throwable oops) {
-				System.out.println(oops);
-				System.out.println(binding);
 				result = this.createEditModelAndViewForm(commentForm,
 						"comment.commit.error");
 			}
