@@ -46,9 +46,10 @@ public class ServiceServiceTest extends AbstractTest {
 				{ "manager3", "service5", null },										// positive test: editando service correctamente 
 				{ "manager2", "service4", IllegalArgumentException.class }				// negative test: Un manager no puede editar un servicio cancelado
 				};
-			final Object testingDeleteData[][] = { 
-				{ "manager2", "service9", null },
-				{ "pepote", "service2", IllegalArgumentException.class },				// negative test: Un anonimo no puede eliminar un servicio
+		
+		final Object testingDeleteData[][] = { 
+				{ "manager1", "service3", null },
+				{ null, "service2", IllegalArgumentException.class },					// negative test: Un anonimo no puede eliminar un servicio
 				{ "manager2", "service6", null },										// positive test: eliminando un service correctamente
 				{ "user1", "service1", IllegalArgumentException.class },				// negative test: Un usuario no puede eliminar un servicio
 				{ "manager3", "service7", null },										// positive test: eliminando un service correctamente
@@ -61,7 +62,7 @@ public class ServiceServiceTest extends AbstractTest {
 							  (Class<?>) testingEditData[i][2]
 							 );
 		
-				for (int i = 0; i < testingDeleteData.length; i++){
+		for (int i = 0; i < testingDeleteData.length; i++){
 			this.templateDelete((String) testingDeleteData[i][0],
 					  			(String) testingDeleteData[i][1],
 					  			(Class<?>) testingDeleteData[i][2]

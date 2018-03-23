@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import utilities.AbstractTest;
+import domain.Comment;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring/junit.xml"})
@@ -21,6 +22,8 @@ public class AdminServiceTest extends AbstractTest{
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private CommentService commentService;
 	
 	@PersistenceContext
 	private EntityManager entityManager;
