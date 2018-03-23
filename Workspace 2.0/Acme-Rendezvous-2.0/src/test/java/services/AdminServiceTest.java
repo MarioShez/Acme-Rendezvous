@@ -35,11 +35,11 @@ public class AdminServiceTest extends AbstractTest{
 		public void loginDriver(){
 			final Object testingData[][] = {
 				{
-					//creando user correctamente
+					// logueado correctamente
 					"admin",null
 				}
 				,{
-					//creando user sin name
+					// logueado user sin existir
 					"DonManuee", IllegalArgumentException.class
 				}
 			};

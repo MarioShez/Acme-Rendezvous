@@ -42,23 +42,23 @@ public class CommentServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 				{
-						// usuario "user1" crea un comment para un rendezvous
+						// Positive Test: usuario "user1" crea un comment para un rendezvous
 						// "rendezvous1" al que asiste
 						"test create1", "https://testPrueba.com", null,
 						null, "rendezvous1", "user1", null },
 				{
-						// El usuario "user1" va a crear un commment para un
+						// Negative Test: El usuario "user1" va a crear un commment para un
 						// rendezvous "rendezvous2" al q no va a asistir
 						"test create2", "https://testPrueba.com", null,
 						null, "rendezvous2", "user1",
 						IllegalArgumentException.class },
 				{
-						// el usuario "user1" va a responder a un comentario
+						// Negative Test: el usuario "user1" va a responder a un comentario
 						// escrito en una cita a la q asiste
 						"test create3", "https://testPrueba.com", null,
 						iterador.next(), "rendezvous1", "user1", null },
 				{
-						// el usuario "user3" va a responder a un comentario
+						// Negative Test: el usuario "user3" va a responder a un comentario
 						// escrito en una cita a la q no asiste
 						"test create3", "https://testPrueba.com", null,
 						iterador.next(), "rendezvous1", "user3",
@@ -130,12 +130,12 @@ public class CommentServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 		{
-				// Admin "admin" borra un comentario "comment2" qye ya
+				//Positive Test: Admin "admin" borra un comentario "comment2" qye ya
 				// existe
 				"admin", "comment1", null, },
 
 		{
-				// El usuario "user1" va a intentar borrar un comentario
+				//Negative Test: El usuario "user1" va a intentar borrar un comentario
 				"user1", "comment1", IllegalArgumentException.class },
 
 		};

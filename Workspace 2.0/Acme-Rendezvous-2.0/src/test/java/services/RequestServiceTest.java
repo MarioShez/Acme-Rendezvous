@@ -1,13 +1,5 @@
 package services;
 
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -17,12 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import utilities.AbstractTest;
-import domain.Comment;
 import domain.CreditCard;
-import domain.Rendezvous;
 import domain.Request;
 import domain.Service;
-import domain.User;
 
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,9 +31,6 @@ public class RequestServiceTest extends AbstractTest {
 
 	@Autowired
 	UserService userService;
-
-	@PersistenceContext
-	private EntityManager entityManager;
 
 	// Test CreateAndSave
 	// ----------------------------------------------------------------------------------
@@ -67,42 +53,42 @@ public class RequestServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 
 				{
-						// lo crea bien
+						// positive test: creando un request correctamente
 						"rendezvous1", "service1", cc, "comment1", "user1",
 						null },
 				{
 
-						// sin holder
+						// negative test: creando un request sin holder
 						"rendezvous1", "service1", ccNoHolder, "comment1",
 						"user1",
 						javax.validation.ConstraintViolationException.class },
 				{
 
-						// sin brand
+						// negative test: creando un request sin brand
 						"rendezvous1", "service1", ccNoBrand, "comment1",
 						"user1",
 						javax.validation.ConstraintViolationException.class },
 				{
 
-						// mal CVV
+						// negative test: creando un request mal CVV
 						"rendezvous1", "service1", ccBadCVV, "comment1",
 						"user1",
 						javax.validation.ConstraintViolationException.class },
 				{
 
-						// mal mes
+						// negative test: creando un request insertando mal el mes
 						"rendezvous1", "service1", ccBadMonth, "comment1",
 						"user1",
 						javax.validation.ConstraintViolationException.class },
 				{
 
-						// mal number
+						// negative test: creando un request insertando mal un number
 						"rendezvous1", "service1", ccBadNumber, "comment1",
 						"user1",
 						javax.validation.ConstraintViolationException.class },
 				{
 
-						// mal year
+						// negative test: creando un request insertando mal un year
 						"rendezvous1", "service1", ccBadYear, "comment1",
 						"user1",
 						javax.validation.ConstraintViolationException.class },
@@ -124,7 +110,6 @@ public class RequestServiceTest extends AbstractTest {
 			final int serviceId, final CreditCard creditCard,
 			final String comment, final String user, Class<?> expected) {
 
-		final Rendezvous rendezvous;
 		Request request;
 		Service service;
 		Class<?> caught;
@@ -135,8 +120,6 @@ public class RequestServiceTest extends AbstractTest {
 			super.authenticate(user);
 
 			service = this.serviceService.findOne(serviceId);
-
-			rendezvous = this.rendezvousService.findOne(rendezvousId);
 
 			request = this.requestService.create(rendezvousId);
 			request.setComment(comment);
