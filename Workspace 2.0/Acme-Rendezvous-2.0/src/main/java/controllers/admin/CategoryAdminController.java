@@ -102,7 +102,7 @@ public class CategoryAdminController extends AbstractController {
 		category =this.categoryService.findOne(categoryId);
 		this.categoryService.delete(category);
 		
-		return new ModelAndView("redirect:list.do");
+		return new ModelAndView("redirect:/category/list.do");
 	}
 	
 	// Ancillary methods -----------------------------------

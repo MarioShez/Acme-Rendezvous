@@ -23,10 +23,19 @@
 <display:table pagesize="6" class="displaytag" keepStatus="true"
 	name="category" requestURI="${requestURI }" id="row">
 	
+	
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
 			<a href="category/admin/edit.do?categoryId=${row.id }"><spring:message code="category.edit"/></a>
 		</display:column>
+		
+		
+		<display:column>
+			<jstl:if test="${empty row.services }">
+				<a href = "category/admin/delete.do?categoryId=${row.id }"><spring:message code="category.delete"/></a>
+			</jstl:if>
+		</display:column>
+	
 	</security:authorize>
 	
 	<spring:message code="category.categoryParent" var="categoryParent" />

@@ -42,12 +42,6 @@
 	<security:authorize access="hasRole('ADMIN')">
 			<input type="submit" name="save"
 				value="<spring:message code="category.save" />" />&nbsp; 
-
-	<jstl:if test="${categoryForm.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="category.delete" />"
-			onclick="return confirm('<spring:message code="category.confirm.delete" />')" />&nbsp;
-	</jstl:if>
 	</security:authorize>
 		
 </form:form>

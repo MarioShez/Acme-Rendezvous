@@ -47,6 +47,8 @@ public class CategoryService {
 
 	public Category create() {
 
+		Assert.isTrue(adminService.checkAuthority());
+		
 		final Category result = new Category();
 		result.setCategories(new ArrayList<Category>());
 		result.setServices(new ArrayList<Service>());
@@ -78,7 +80,7 @@ public class CategoryService {
 
 	public Category save(final Category category) {
 		
-		Assert.isTrue(adminService.checkAuthority() || managerService.checkAuthority());
+		Assert.isTrue(adminService.checkAuthority());
 		Assert.notNull(category);
 
 		Category result = this.categoryRepository.save(category);
@@ -98,6 +100,7 @@ public class CategoryService {
 
 	public void delete(final Category category) {
 		
+		Assert.isTrue(adminService.checkAuthority());
 		Assert.isTrue(category.getServices().isEmpty());
 
 		if(category.getCategoryParent() != null){
@@ -115,6 +118,7 @@ public class CategoryService {
 		
 		this.categoryRepository.delete(category);
 	}
+
 	
 	// Other business methods
 
@@ -162,5 +166,9 @@ public class CategoryService {
 		Collection<Category> res = new ArrayList<Category>();
 		res = this.categoryRepository.findCategories();
 		return res;
+	}
+
+	public void flush() {
+		this.categoryRepository.flush();
 	}
 }
