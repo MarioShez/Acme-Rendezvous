@@ -2,6 +2,7 @@ package services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -253,7 +254,7 @@ public class RendezvousServiceTest extends AbstractTest {
 
 		Object testingData[][] = {
 		// positive test
-		{ "user1", "rendezvous1", null },
+		{ "user2", "rendezvous2", null },
 
 		};
 		for (int i = 0; i < testingData.length; i++) {
@@ -275,13 +276,13 @@ public class RendezvousServiceTest extends AbstractTest {
 			authenticate(user);
 			rendezvous = this.rendezvousService.findOne(rendezvousId);
 
-			this.rendezvousService.delete(rendezvous);
+			this.rendezvousService.FakeDelete(rendezvous);
 			this.rendezvousService.flush();
 			unauthenticate();
 
 		} catch (Throwable oops) {
 			caught = oops.getClass();
-			// this.entityManager.clear();
+			this.entityManager.clear();
 		}
 		checkExceptions(expected, caught);
 	}
@@ -297,15 +298,15 @@ public class RendezvousServiceTest extends AbstractTest {
 	public void driverAssistUser() {
 
 		Object testingData[][] = {
-		// positive test user 1 asiste a rendezvous 1
-		{ "user1", "rendezvous1", null },
-		//user3 menor de edad asiste a rendezvous para mayores
-		{ "user3", "rendezvous2", IllegalArgumentException.class },
-		//user2 mayor de edad asiste a rendezvous para mayores
-		{ "user2", "rendezvous2", null },
-		
+				// positive test user 1 asiste a rendezvous 1
+				{ "user1", "rendezvous1", null },
+				// user3 menor de edad asiste a rendezvous para mayores
+				{ "user3", "rendezvous2", IllegalArgumentException.class },
+				// user2 mayor de edad asiste a rendezvous para mayores
+				{ "user2", "rendezvous2", null },
+
 		};
-		
+
 		for (int i = 0; i < testingData.length; i++) {
 			templateAssistUser((String) testingData[i][0],
 					getEntityId((String) testingData[i][1]),
@@ -352,8 +353,14 @@ public class RendezvousServiceTest extends AbstractTest {
 	public void driverNotAssistUser() {
 
 		Object testingData[][] = {
-		// positive test
-		{ "user2", "rendezvous1", null },
+
+
+				// positive test
+				{ "user1", "rendezvous1", null},
+				// positive test
+				{ "user1", "rendezvous2", IllegalArgumentException.class },
+				// Manager no puede asistir a un rendezvous
+				{ "manager1", "rendezvous1", IllegalArgumentException.class },
 
 		};
 		for (int i = 0; i < testingData.length; i++) {
@@ -374,7 +381,7 @@ public class RendezvousServiceTest extends AbstractTest {
 
 		try {
 			authenticate(user);
-			
+
 			this.rendezvousService.NoRSVP(rendezvousId);
 			this.rendezvousService.flush();
 
@@ -389,11 +396,8 @@ public class RendezvousServiceTest extends AbstractTest {
 		}
 		checkExceptions(expected, caught);
 	}
-	
-	
-	
-	//5.5 Acme Rendezvous List the rendezvouses that he or she’s RSVPd.
-	
+
+	// 5.5 Acme Rendezvous List the rendezvouses that he or she’s RSVPd.
 
 	// Creación de gps
 
