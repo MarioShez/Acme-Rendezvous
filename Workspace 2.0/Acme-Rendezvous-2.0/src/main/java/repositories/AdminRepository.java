@@ -87,5 +87,6 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	Object[] AvgMinMaxStrServicePerRendezvous();
 	
 	//B4 The top-selling services.
-	//utilizamos la primera query
+	@Query("select c.services from Category c order by c.services.size desc")
+	Collection<domain.Service> TopSellingServices();
 }
