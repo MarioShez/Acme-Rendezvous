@@ -370,6 +370,25 @@
 	</tr>
 </table>
 
+<spring:message code="administrator.topSellingServicesLabel" />
+<jstl:out value="${topSellingServicesLabel	}"></jstl:out>
+<table class="displaytag"  name="bestSellingServices">
+	<tr>
+		<th>
+			<spring:message code="administrator.top" var="bestHeader" />
+			<jstl:out value="${bestHeader}"></jstl:out>
+		</th>
+	</tr>
+	<tr>
+		<jstl:forEach var="datos" items="${bestSellingServices}">
+			<td>
+				<jstl:out value="${datos[0].name}"></jstl:out>
+			</td>
+		</jstl:forEach>
+	</tr>
+	
+</table>
+
 </security:authorize>
 
 

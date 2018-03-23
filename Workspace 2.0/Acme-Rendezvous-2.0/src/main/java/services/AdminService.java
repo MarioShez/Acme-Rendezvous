@@ -247,5 +247,13 @@ public class AdminService {
 				.AvgMinMaxStrServicePerRendezvous();
 		return result;
 	}
+	
+	//B-4
+	public Collection<domain.Service> TopSellingService() {
+		final Collection<domain.Service> result = this.adminRepository
+				.TopSellingServices();
+		return result;
+	}
+	
 
 }

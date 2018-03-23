@@ -146,6 +146,7 @@ public class RendezvousService {
 
 		this.rendezvousRepository.delete(rendezvous);
 	}
+	
 
 	// Other business methods -------------------------------------------------
 
@@ -352,6 +353,22 @@ public class RendezvousService {
 			diffYear = diffYear - 1;
 		return diffYear;
 
+	}
+	
+	public Rendezvous FakeDelete(Rendezvous rendezvous){
+		User user;
+		Rendezvous res;
+		
+		Assert.notNull(rendezvous);
+		
+		user= this.userService.findByPrincipal();
+		Assert.isTrue(user.getOrganisedRendezvouses().contains(rendezvous));
+		boolean x= true;
+		Assert.isTrue(rendezvous.getFinalVersion()==true);
+		rendezvous.setDeleted(x);
+		res= this.rendezvousRepository.save(rendezvous);
+		
+		return res;
 	}
 
 }
