@@ -35,11 +35,11 @@ public class UserServiceTest extends AbstractTest{
 	public void loginDriver(){
 		final Object testingData[][] = {
 			{
-				//creando user correctamente
+				//positive test: creando user correctamente
 				"user1",null
 			}
 			,{
-				//creando user sin name
+				//negative test: user sin name
 				"DonManuee", IllegalArgumentException.class
 			}
 		};
@@ -73,42 +73,42 @@ public class UserServiceTest extends AbstractTest{
 	public void registrationUserDriver(){
 		final Object testingData[][] = {
 			{
-				//creando user correctamente
+				//positive test: creando user correctamente
 				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993", "userName1", "password", null
 			}
 			,{
-				//creando user sin name
+				//negative test: creando user sin name
 				"", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
 			}
 			,{
-				//creando user sin surname
+				//negative test: creando user sin surname
 				"user1", "", "email1@gmail.com", "612345678", "Address1", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
 			}
 			
 			,{
-				//creando user sin email
+				//negative test: creando user sin email
 				"user1", "surname1", "", "612345678", "Address1", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
 			}
 			
 			,{
-				//creando user sin teléfono
+				//negative test: creando user sin teléfono
 				"user1", "surname1", "email1@gmail.com", "", "Address1", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
 			}
 			
 			,{
-				//creando user sin dirección
+				//negative test: creando user sin dirección
 				"user1", "surname1", "email1@gmail.com", "612345678", "", "18/10/1993", "userName1", "password", DataIntegrityViolationException.class
 			}
 			,{
-				//creando user sin fecha de nacimiento
+				//negative test: creando user sin fecha de nacimiento
 				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "", "userName1", "password", DataIntegrityViolationException.class
 			}
 			,{
-				//creando user sin username
+				//negative test: creando user sin username
 				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993", "", "password", javax.validation.ConstraintViolationException.class
 			}
 			,{
-				//creando user sin contraseña
+				//negative test: creando user sin contraseña
 				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993", "userName1", "", DataIntegrityViolationException.class
 			}
 		};
@@ -160,11 +160,11 @@ public class UserServiceTest extends AbstractTest{
 	public void editUserDriver(){
 		final Object testingData[][] = {
 			{
-				//creando user correctamente
+				//positive test: editando user correctamente
 				"user1", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993",  null
 			}
 			,{
-				//creando user sin name
+				//negative test: editando user sin name
 				"", "surname1", "email1@gmail.com", "612345678", "Address1", "18/10/1993",  javax.validation.ConstraintViolationException.class
 			}
 		};

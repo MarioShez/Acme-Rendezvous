@@ -69,14 +69,14 @@ public class RendezvousServiceTest extends AbstractTest {
 						"http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2020 19:32", gpsCoordinate, false, false,
 						IllegalArgumentException.class },
-				// latitude null
+				// Positive test:latitude null
 				{
 						"user1",
 						"name",
 						"description",
 						"http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2020 19:32", gpsLatitudeNull, false, false, null },
-				// longitude null
+				// Positive test:longitude null
 				{
 						"user1",
 						"name",
@@ -84,7 +84,7 @@ public class RendezvousServiceTest extends AbstractTest {
 						"http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2020 19:32", gpsLongitudeNull, false, false,
 						null },
-				// latitude out of range up
+				// negative test:latitude out of range up
 				{
 						"user1",
 						"name",
@@ -92,7 +92,7 @@ public class RendezvousServiceTest extends AbstractTest {
 						"http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2020 19:32", gpsLatitudeOutRangeM, false, false,
 						javax.validation.ConstraintViolationException.class },
-				// longitude out of range up
+				// negative test:longitude out of range up
 				{
 						"user1",
 						"name",
@@ -101,7 +101,7 @@ public class RendezvousServiceTest extends AbstractTest {
 						"10/05/2020 19:32", gpsLongitudeOutRangeM, false,
 						false,
 						javax.validation.ConstraintViolationException.class },
-				// latitude out of range down
+				// negative test:latitude out of range down
 				{
 						"user1",
 						"name",
@@ -109,7 +109,7 @@ public class RendezvousServiceTest extends AbstractTest {
 						"http://www.uwyo.edu/reslife-dining/_files/re-design-images/dining-logos/rendezvouslogo_2016.png",
 						"10/05/2020 19:32", gpsLatitudeOutRangeL, false, false,
 						javax.validation.ConstraintViolationException.class },
-				// longitude out of range down
+				// negative test:longitude out of range down
 				{
 						"user1",
 						"name",
@@ -254,8 +254,11 @@ public class RendezvousServiceTest extends AbstractTest {
 	public void driverDeleteUser() {
 
 		Object testingData[][] = {
-		// positive test
-		{ "user2", "rendezvous2", null },
+				// positive test
+				{ "user2", "rendezvous2", null },
+
+				// negative test
+				{ "user1", "rendezvous2",java.lang.IllegalArgumentException.class },
 
 		};
 		for (int i = 0; i < testingData.length; i++) {
@@ -299,11 +302,11 @@ public class RendezvousServiceTest extends AbstractTest {
 	public void driverAssistUser() {
 
 		Object testingData[][] = {
-				// positive test user 1 asiste a rendezvous 1
+				// positive test: user 1 asiste a rendezvous 1
 				{ "user1", "rendezvous1", null },
-				// user3 menor de edad asiste a rendezvous para mayores
+				// negative test:user3 menor de edad asiste a rendezvous para mayores
 				{ "user3", "rendezvous2", IllegalArgumentException.class },
-				// user2 mayor de edad asiste a rendezvous para mayores
+				// positive test:user2 mayor de edad asiste a rendezvous para mayores
 				{ "user2", "rendezvous2", null },
 
 		};
@@ -355,9 +358,8 @@ public class RendezvousServiceTest extends AbstractTest {
 
 		Object testingData[][] = {
 
-
 				// positive test
-				{ "user1", "rendezvous1", null},
+				{ "user1", "rendezvous1", null },
 				// negative test
 				{ "user1", "rendezvous2", IllegalArgumentException.class },
 				// Manager no puede asistir a un rendezvous
@@ -404,10 +406,11 @@ public class RendezvousServiceTest extends AbstractTest {
 
 		Object testingData[][] = {
 
-
 				// positive test
-				{ "user1", "rendezvous1", null},
-				// negative test, comprueba que un user efectivamente no tenga un rendezvous al que no va a asistir en su lista de attendants
+				{ "user1", "rendezvous1", null },
+				// negative test: comprueba que un user no tenga
+				// un rendezvous al que no va a asistir en su lista de
+				// attendants
 				{ "user1", "rendezvous2", IllegalArgumentException.class },
 
 		};
@@ -432,7 +435,8 @@ public class RendezvousServiceTest extends AbstractTest {
 			authenticate(user);
 			principalUser = this.userService.findByPrincipal();
 			rendezvous = this.rendezvousService.findOne(rendezvousId);
-			rendezvousAssists = this.rendezvousService.findByAttendantId(principalUser.getId());
+			rendezvousAssists = this.rendezvousService
+					.findByAttendantId(principalUser.getId());
 			Assert.isTrue(rendezvousAssists.contains(rendezvous));
 			unauthenticate();
 
@@ -441,7 +445,6 @@ public class RendezvousServiceTest extends AbstractTest {
 		}
 		checkExceptions(expected, caught);
 	}
-	
 
 	// Creación de gps
 

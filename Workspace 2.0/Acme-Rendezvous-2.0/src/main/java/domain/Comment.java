@@ -23,7 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(indexes = {@Index(columnList = "rendezvous_Id") })
+@Table(indexes = {@Index(columnList = "rendezvous_id") })
 public class Comment extends DomainEntity {
 
 	// Constructors

@@ -25,7 +25,7 @@ public class CategoryServiceTest extends AbstractTest{
 	@Autowired
 	private CategoryService categoryService;
 	
-	
+	//11.1 Manage the categories of services, which includes listing, creating, updating, delet-ing, and re-organising them in the category hierarchies.
 	// Create and Save Test -------------------------
 	
 	@Test
@@ -81,7 +81,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	
-	
+	//11.1 Manage the categories of services, which includes listing, creating, updating, delet-ing, and re-organising them in the category hierarchies.
 	// Edit and Save Test -------------------------
 	
 	@Test
@@ -136,7 +136,7 @@ public class CategoryServiceTest extends AbstractTest{
 		
 	}
 	
-	
+	//11.1 Manage the categories of services, which includes listing, creating, updating, delet-ing, and re-organising them in the category hierarchies.
 	// Delete Test -------------------------
 	
 		@Test
