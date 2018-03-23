@@ -129,7 +129,8 @@ public class AnnouncementUserController extends AbstractController {
 				final String message) {
 			ModelAndView res;
 			res = new ModelAndView("announcement/edit");
-			Rendezvous rendezvous = announcementForm.getRendezvous();
+			int rendezvousId = announcementForm.getRendezvousId();
+			Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
 			Collection<Rendezvous> rendezvouses = new ArrayList<Rendezvous>();
 			rendezvouses.add(rendezvous);
 			

@@ -252,9 +252,11 @@ public class CommentUserController extends AbstractController {
 		
 
 		Collection<Rendezvous> rendezvous = new ArrayList<Rendezvous>();
-		rendezvous.add(commentForm.getRendezvous());
+		Rendezvous rend = this.rendezvousService.findOne(commentForm.getRendezvousId());
+		rendezvous.add(rend);
 		Collection<Comment> comments = new ArrayList<Comment>();
-		comments.add(commentForm.getCommentParent());
+		Comment com = this.commentService.findOne(commentForm.getCommentParentId());
+		comments.add(com);
 
 		result = new ModelAndView("comment/edit");
 		result.addObject("commentForm", commentForm);

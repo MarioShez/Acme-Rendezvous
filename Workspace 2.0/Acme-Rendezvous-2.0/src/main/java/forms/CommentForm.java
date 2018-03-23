@@ -8,8 +8,6 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
 
-import domain.Comment;
-import domain.Rendezvous;
 
 public class CommentForm {
 
@@ -25,8 +23,8 @@ public class CommentForm {
 	private String picture;
 	
 	private int id;
-	private Rendezvous rendezvous;
-	private Comment commentParent;
+	private int rendezvousId;
+	private int commentParentId;
 
 
 	@NotBlank
@@ -59,23 +57,23 @@ public class CommentForm {
 	
 	@ManyToOne(optional = false)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public Rendezvous getRendezvous() {
-		return rendezvous;
+	public int getRendezvousId() {
+		return rendezvousId;
 	}
 
-	public void setRendezvous(Rendezvous rendezvous) {
-		this.rendezvous = rendezvous;
+	public void setRendezvousId(int rendezvousId) {
+		this.rendezvousId = rendezvousId;
 	}
 
 	@Valid
 	@ManyToOne(optional = true)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public Comment getCommentParent() {
-		return commentParent;
+	public int getCommentParentId() {
+		return commentParentId;
 	}
 
-	public void setCommentParent(Comment commentParent) {
-		this.commentParent = commentParent;
+	public void setCommentParentId(int commentParentId) {
+		this.commentParentId = commentParentId;
 	}
 	
 	
