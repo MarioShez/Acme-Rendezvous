@@ -10,8 +10,6 @@
 
 package services;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -23,9 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import utilities.AbstractTest;
 import domain.Service;
 
-@ContextConfiguration(locations = {
-	"classpath:spring/junit.xml"
-})
+@ContextConfiguration(locations = { "classpath:spring/junit.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 public class ServiceServiceTest extends AbstractTest {
@@ -33,69 +29,43 @@ public class ServiceServiceTest extends AbstractTest {
 	// System under test ------------------------------------------------------
 
 	@Autowired
-	private ServiceService	serviceService;
-
-	@PersistenceContext
-	private EntityManager	entityManager;
-
+	private ServiceService serviceService;
 
 	// Tests ------------------------------------------------------------------
-
+	
 	// 5.2 Acme-Rendezvous-2.0 Manage his or her services, which includes listing them, creating them, updating them, and deleting them as long as they are not required by any rendezvouses.
 	@Test
 	public void driver() {
-		final Object testingEditData[][] = {
-			{
-				"manager1", "service1", null
-			},										// positive test: editando service correctamente 
-			{
-				null, "service2", IllegalArgumentException.class
-			},					// negative test: Un anonimo no puede editar un servicio
-			{
-				"manager2", "service2", null
-			},										// positive test: editando service correctamente 
-			{
-				"user1", "service1", IllegalArgumentException.class
-			},				// negative test: Un usuario no puede editar un servicio
-			{
-				"manager1", "service3", null
-			},										// positive test: editando service correctamente 
-			{
-				"manager1", "serviceNotExisting", NumberFormatException.class
-			},		// negative test: Un manager no puede editar un servicio que no existe
-			{
-				"manager3", "service5", null
-			},										// positive test: editando service correctamente 
-			{
-				"manager2", "service4", IllegalArgumentException.class
-			}
-		// negative test: Un manager no puede editar un servicio cancelado
-		};
-		final Object testingDeleteData[][] = {
-			{
-				"manager2", "service9", null
-			}, {
-				"pepote", "service2", IllegalArgumentException.class
-			},				// negative test: Un anonimo no puede eliminar un servicio
-			{
-				"manager2", "service6", null
-			},										// positive test: eliminando un service correctamente
-			{
-				"user1", "service1", IllegalArgumentException.class
-			},				// negative test: Un usuario no puede eliminar un servicio
-			{
-				"manager3", "service7", null
-			},										// positive test: eliminando un service correctamente
-			{
-				"manager3", "service5", IllegalArgumentException.class
-			},				// negative test: Un manager no puede eliminar un servicio que contenga peticiones
-		};
+		final Object testingEditData[][] = { 
+				{ "manager1", "service1", null },										// positive test: editando service correctamente 
+				{ null, "service2", IllegalArgumentException.class },					// negative test: Un anonimo no puede editar un servicio
+				{ "manager2", "service2", null },										// positive test: editando service correctamente 
+				{ "user1", "service1", IllegalArgumentException.class },				// negative test: Un usuario no puede editar un servicio
+				{ "manager1", "service3", null },										// positive test: editando service correctamente 
+				{ "manager1", "serviceNotExisting", NumberFormatException.class },		// negative test: Un manager no puede editar un servicio que no existe
+				{ "manager3", "service5", null },										// positive test: editando service correctamente 
+				{ "manager2", "service4", IllegalArgumentException.class }				// negative test: Un manager no puede editar un servicio cancelado
+				};
+			final Object testingDeleteData[][] = { 
+				{ "manager2", "service9", null },
+				{ "pepote", "service2", IllegalArgumentException.class },				// negative test: Un anonimo no puede eliminar un servicio
+				{ "manager2", "service6", null },										// positive test: eliminando un service correctamente
+				{ "user1", "service1", IllegalArgumentException.class },				// negative test: Un usuario no puede eliminar un servicio
+				{ "manager3", "service7", null },										// positive test: eliminando un service correctamente
+				{ "manager3", "service5", IllegalArgumentException.class },				// negative test: Un manager no puede eliminar un servicio que contenga peticiones
+				};
 
 		for (int i = 0; i < testingEditData.length; i++)
-			this.templateEdit((String) testingEditData[i][0], (String) testingEditData[i][1], (Class<?>) testingEditData[i][2]);
-
-		for (int i = 0; i < testingDeleteData.length; i++) {
-			this.templateDelete((String) testingDeleteData[i][0], (String) testingDeleteData[i][1], (Class<?>) testingDeleteData[i][2]);
+			this.templateEdit((String) testingEditData[i][0],
+							  (String) testingEditData[i][1],
+							  (Class<?>) testingEditData[i][2]
+							 );
+		
+				for (int i = 0; i < testingDeleteData.length; i++){
+			this.templateDelete((String) testingDeleteData[i][0],
+					  			(String) testingDeleteData[i][1],
+					  			(Class<?>) testingDeleteData[i][2]
+					 			);
 		}
 	}
 
@@ -116,7 +86,6 @@ public class ServiceServiceTest extends AbstractTest {
 			super.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
-			this.entityManager.clear();
 		}
 
 		this.checkExceptions(expected, caught);
@@ -136,48 +105,6 @@ public class ServiceServiceTest extends AbstractTest {
 			super.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
-			this.entityManager.clear();
-		}
-
-		this.checkExceptions(expected, caught);
-
-	}
-
-	// 6.1 Acme-Rendezvous-2.0 Cancel a service that he or she finds inappropriate. Such services cannot be re-quested for any rendezvous. They must be flagged appropriately when listed.
-	@Test
-	public void driverCancel() {
-		final Object testingData[][] = {
-			// positive test: se cancela correctamente un service
-			{
-				"admin", "service3", null
-			},
-			// negative test: intentando cancelar un service con un rendezvous asociado.
-			{
-				"admin", "service1", IllegalArgumentException.class
-			},
-			// negative test: intentando cancelar un service con un rol que no es admin.
-			{
-				"user1", "service1", IllegalArgumentException.class
-			}
-
-		};
-
-		for (int i = 0; i < testingData.length; i++)
-			this.templateCancel((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (Class<?>) testingData[i][2]);
-	}
-
-	private void templateCancel(String username, int serviceId, Class<?> expected) {
-		Class<?> caught;
-		caught = null;
-
-		try {
-			super.authenticate(username);
-			this.serviceService.changeCancelled(serviceId);
-			super.unauthenticate();
-			this.serviceService.flush();
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-			this.entityManager.clear();
 		}
 
 		this.checkExceptions(expected, caught);
