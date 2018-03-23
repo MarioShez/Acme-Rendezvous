@@ -1,5 +1,8 @@
 package forms;
 
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
@@ -21,7 +24,7 @@ public class CommentForm {
 	
 	private int id;
 	private int rendezvousId;
-	private Integer commentParentId;
+	private int commentParentId;
 
 
 	@NotBlank
@@ -52,6 +55,8 @@ public class CommentForm {
 		this.id = id;
 	}
 	
+	@ManyToOne(optional = false)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public int getRendezvousId() {
 		return rendezvousId;
 	}
@@ -60,11 +65,14 @@ public class CommentForm {
 		this.rendezvousId = rendezvousId;
 	}
 
-	public Integer getCommentParentId() {
+	@Valid
+	@ManyToOne(optional = true)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public int getCommentParentId() {
 		return commentParentId;
 	}
 
-	public void setCommentParentId(Integer commentParentId) {
+	public void setCommentParentId(int commentParentId) {
 		this.commentParentId = commentParentId;
 	}
 	

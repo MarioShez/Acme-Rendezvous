@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import utilities.AbstractTest;
 import domain.Comment;
+import domain.Rendezvous;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
@@ -81,17 +82,20 @@ public class CommentServiceTest extends AbstractTest {
 			final String picture, final List<Comment> replies,
 			final Comment commentParent, final int rendezvousId,
 			final String userName, final Class<?> expected) {
+		final Rendezvous rendezvousComment;
 		Comment comment;
 
 		Class<?> caught = null;
 
 		try {
 			super.authenticate(userName);
-			comment = this.commentService.create(rendezvousId);
+			rendezvousComment = this.rendezvousService.findOne(rendezvousId);
+			comment = this.commentService.create();
 			comment.setText(text);
 			comment.setPicture(picture);
 			comment.setReplies(replies);
 			comment.setCommentParent(commentParent);
+			comment.setRendezvous(rendezvousComment);
 			comment = this.commentService.save(comment);
 
 			this.unauthenticate();

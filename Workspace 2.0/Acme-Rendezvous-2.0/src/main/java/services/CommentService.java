@@ -51,13 +51,15 @@ public class CommentService {
 		Comment res = new Comment();
 		Collection<Comment> replies = new ArrayList<Comment>();
 		Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
-		User u = userService.findByPrincipal();
+		User u = new User();
+		Comment parent= new Comment();
 		Assert.notNull(u);
 
 		Date moment = new Date(System.currentTimeMillis()-1000);
 
 		res.setMoment(moment);
 		res.setUser(u);
+		res.setCommentParent(parent);
 		res.setReplies(replies);
 		res.setRendezvous(rendezvous);
 		return res;
@@ -157,23 +159,29 @@ public class CommentService {
 	
 	
 	public Comment reconstruct(CommentForm commentForm, BindingResult binding) {
+		Comment res= this.create(commentForm.getCommentParentId());
+		int rendezvousId = commentForm.getRendezvousId();
+		int commentParentId = commentForm.getCommentParentId();
+		Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
+		Comment commentParent = this.findOne(commentParentId);
 		
-		Comment res= this.create(commentForm.getRendezvousId());
-		
-		if(commentForm.getCommentParentId() != null){
-			Comment commentParent = this.findOne(commentForm.getCommentParentId());
-			res.setCommentParent(commentParent);
-		}
+		Collection<Comment> replies = new ArrayList<Comment>();
+		User user = new User();
+		user= this.userService.findByPrincipal();
 		
 		Date moment = new Date(System.currentTimeMillis()-1);
+		
 		res.setMoment(moment);
 		res.setPicture(commentForm.getPicture());
 		res.setText(commentForm.getText());
-		res.setRendezvous(rendezvousService.findOne(commentForm.getRendezvousId()));
 		
-		if(binding != null){
-			validator.validate(res, binding);
-		}
+		res.setReplies(replies);
+		res.setUser(user);
+		res.setRendezvous(rendezvous);
+		res.setCommentParent(commentParent);
+		
+		validator.validate(res, binding);
+		
 		
 		return res;
 	}
@@ -187,9 +195,7 @@ public class CommentService {
 		res.setText(comment.getText());
 		res.setId(comment.getId());
 		res.setRendezvousId(rendezvous.getId());
-		if(commentParent != null){
-			res.setCommentParentId(commentParent.getId());
-		}
+		res.setCommentParentId(commentParent.getId());
 		
 		return res;
 	}
