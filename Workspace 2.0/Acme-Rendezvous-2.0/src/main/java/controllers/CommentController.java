@@ -40,11 +40,17 @@ public class CommentController extends AbstractController {
 	// Listing --------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView display() {
+	public ModelAndView display(@RequestParam(required=false) Integer rendezvousId) {
 		ModelAndView result;
 
 		Collection<Comment> comment;
 		comment = this.commentService.findAll();
+		
+		Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
+		
+		if(rendezvousId!=null){
+			comment = rendezvous.getComments();
+		}
 
 		result = new ModelAndView("comment/list");
 
