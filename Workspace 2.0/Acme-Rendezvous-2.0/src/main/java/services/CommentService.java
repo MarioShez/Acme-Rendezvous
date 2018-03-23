@@ -35,8 +35,6 @@ public class CommentService {
 	@Autowired
 	private AdminService adminService;
 	
-	@Autowired
-	private RendezvousService rendezvousService;
 
 	// Constructors
 
@@ -159,10 +157,6 @@ public class CommentService {
 	
 	public Comment reconstruct(CommentForm commentForm, BindingResult binding) {
 		Comment res= new Comment();
-		int rendezvousId = commentForm.getRendezvousId();
-		int commentParentId = commentForm.getCommentParentId();
-		Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
-		Comment commentParent = this.findOne(commentParentId);
 		
 		Collection<Comment> replies = new ArrayList<Comment>();
 		User user = new User();
@@ -176,8 +170,8 @@ public class CommentService {
 		
 		res.setReplies(replies);
 		res.setUser(user);
-		res.setRendezvous(rendezvous);
-		res.setCommentParent(commentParent);
+		res.setRendezvous(commentForm.getRendezvous());
+		res.setCommentParent(commentForm.getCommentParent());
 		
 		validator.validate(res, binding);
 		
@@ -187,14 +181,12 @@ public class CommentService {
 	
 	public CommentForm construct(Comment comment) {
 		CommentForm res= new CommentForm();
-		Rendezvous rendezvous = comment.getRendezvous();
-		Comment commentParent = comment.getCommentParent();
 		
 		res.setPicture(comment.getPicture());
 		res.setText(comment.getText());
 		res.setId(comment.getId());
-		res.setRendezvousId(rendezvous.getId());
-		res.setCommentParentId(commentParent.getId());
+		res.setRendezvous(comment.getRendezvous());
+		res.setCommentParent(comment.getCommentParent());
 		
 		return res;
 	}

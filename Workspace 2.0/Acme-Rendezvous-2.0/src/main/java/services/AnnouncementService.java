@@ -27,9 +27,6 @@ public class AnnouncementService {
 	@Autowired
 	private AnnouncementRepository announcementRepository;
 	
-	@Autowired
-	private RendezvousService rendezvousService;
-	
 	// Supporting services
 //	@Autowired
 //	private RendezvousService rendezvousService;
@@ -126,12 +123,11 @@ public class AnnouncementService {
 	
 	public AnnouncementForm construct(Announcement announcement){
 		AnnouncementForm res = new AnnouncementForm();
-		Rendezvous rendezvous = announcement.getRendezvous();
 		
 		res.setId(announcement.getId());
 		res.setTitle(announcement.getTitle());
 		res.setDescription(announcement.getDescription());
-		res.setRendezvous(rendezvous.getId());
+		res.setRendezvous(announcement.getRendezvous());
 		
 		return res;
 	}
@@ -139,8 +135,6 @@ public class AnnouncementService {
 	public Announcement reconstruct(AnnouncementForm announcementForm, BindingResult binding){
 		Assert.notNull(announcementForm);
 		Announcement res = new Announcement();
-		int rendezvousId = announcementForm.getRendezvousId();
-		Rendezvous rendezvous = this.rendezvousService.findOne(rendezvousId);
 		
 		Date moment = new Date(System.currentTimeMillis()-1);
 		
@@ -148,7 +142,7 @@ public class AnnouncementService {
 		res.setMoment(moment);
 		res.setTitle(announcementForm.getTitle());
 		res.setDescription(announcementForm.getDescription());
-		res.setRendezvous(rendezvous);
+		res.setRendezvous(announcementForm.getRendezvous());
 		
 		if(binding!=null)
 			validator.validate(res, binding);

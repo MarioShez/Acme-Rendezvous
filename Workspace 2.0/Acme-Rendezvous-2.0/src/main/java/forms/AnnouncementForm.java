@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 
+import domain.Rendezvous;
+
 public class AnnouncementForm {
 
 	// Constructor 
@@ -21,7 +23,7 @@ public class AnnouncementForm {
 	private int id;
 	private String title;
 	private String description;
-	private int rendezvousId;
+	private Rendezvous rendezvous;
 	
 	
 	public int getId(){
@@ -55,12 +57,12 @@ public class AnnouncementForm {
 	@Valid
 	@NotNull
 	@ManyToOne(optional=false)
-	public int getRendezvousId() {
-		return rendezvousId;
+	public Rendezvous getRendezvous() {
+		return rendezvous;
 	}
 
-	public void setRendezvous(int rendezvousId) {
-		this.rendezvousId = rendezvousId;
+	public void setRendezvous(Rendezvous rendezvous) {
+		this.rendezvous = rendezvous;
 	}
 
 	
