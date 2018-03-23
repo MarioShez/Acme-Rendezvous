@@ -36,11 +36,11 @@ public class ManagerServiceTest extends AbstractTest{
 		public void loginDriver(){
 			final Object testingData[][] = {
 				{
-					//creando manager correctamente
+					//Positive Test: creando manager correctamente
 					"manager1",null
 				}
 				,{
-					//creando manager sin name
+					//Negative Test:creando manager sin name
 					"DonManuee", IllegalArgumentException.class
 				}
 			};
@@ -67,50 +67,51 @@ public class ManagerServiceTest extends AbstractTest{
 			this.checkExceptions(expected, caught);
 		}
 		
+		//3.1 Register to the system as a manager.
 	@Test
 	public void registrationManagerDriver(){
 		final Object testingData[][] = {
 			{
-				//creando manager correctamente
+				//Positive Test: creando manager correctamente
 				"manager1", "surname1", "1A-2B" ,"email1@gmail.com", "612345678", "Address1", "18/10/1993", "managerName1", "password", null
 			}
 			,{
-				//creando manager sin name
+				//Negative Test: creando manager sin name
 				"", "surname1","1A-2B" , "email1@gmail.com", "612345678", "Address1", "18/10/1993", "managerName1", "password", DataIntegrityViolationException.class
 			}
 			,{
-				//creando manager sin surname
+				//Negative Test: creando manager sin surname
 				"manager1", "","1A-2B" , "email1@gmail.com", "612345678", "Address1", "18/10/1993", "managerName1", "password", DataIntegrityViolationException.class
 			}
 			
 			,{
-				//creando manager sin email
+				//Negative Test: creando manager sin email
 				"manager1", "surname1","1A-2B" , "", "612345678", "Address1", "18/10/1993", "managerName1", "password", DataIntegrityViolationException.class
 			}
 			
 			,{
-				//creando manager sin teléfono
+				//Negative Test: creando manager sin teléfono
 				"manager1", "surname1","1A-2B" , "email1@gmail.com", "", "Address1", "18/10/1993", "managerName1", "password", DataIntegrityViolationException.class
 			}
 			
 			,{
-				//creando manager sin dirección
+				//Negative Test: creando manager sin dirección
 				"manager1", "surname1","1A-2B" , "email1@gmail.com", "612345678", "", "18/10/1993", "managerName1", "password", DataIntegrityViolationException.class
 			}
 			,{
-				//creando manager sin fecha de nacimiento
+				//Negative Test: creando manager sin fecha de nacimiento
 				"manager1", "surname1","1A-2B" , "email1@gmail.com", "612345678", "Address1", "", "managerName1", "password", DataIntegrityViolationException.class
 			}
 			,{
-				//creando manager sin username
+				//Negative Test: creando manager sin username
 				"manager1", "surname1","1A-2B" , "email1@gmail.com", "612345678", "Address1", "18/10/1993", "", "password", javax.validation.ConstraintViolationException.class
 			}
 			,{
-				//creando manager sin contraseña
+				//Negative Test: creando manager sin contraseña
 				"manager1", "surname1","1A-2B" , "email1@gmail.com", "612345678", "Address1", "18/10/1993", "managerName1", "", DataIntegrityViolationException.class
 			}
 			,{
-				//creando manager sin VAT
+				//Negative Test: creando manager sin VAT
 				"manager1", "surname1", "" ,"email1@gmail.com", "612345678", "Address1", "18/10/1993", "managerName1", "password", DataIntegrityViolationException.class
 			}
 		};
@@ -162,11 +163,11 @@ public class ManagerServiceTest extends AbstractTest{
 	public void editManagerDriver(){
 		final Object testingData[][] = {
 			{
-				//creando manager correctamente
+				//Positive Test: creando manager correctamente
 				"manager1", "surname1", "1A-2B" ,"email1@gmail.com", "612345678", "Address1", "18/10/1993",  null
 			}
 			,{
-				//creando manager sin name
+				//Negative Test: creando manager sin name
 				"", "surname1","1A-2B" , "email1@gmail.com", "612345678", "Address1", "18/10/1993",  javax.validation.ConstraintViolationException.class
 			}
 
