@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.RendezvousService;
 import services.UserService;
 import controllers.AbstractController;
@@ -30,6 +31,9 @@ public class RendezvousUserController extends AbstractController {
 
 	@Autowired
 	private UserService			userService;
+	
+	@Autowired
+	private ActorService 		actorService;
 
 
 	// Constructors --------------------------------------------------
@@ -226,11 +230,14 @@ public class RendezvousUserController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final RendezvousForm rendezvousForm, final String messageCode) {
 
 		this.rendezvousService.checkPrincipalForm(rendezvousForm);
+		User user = this.userService.findByPrincipal(); 
+		boolean adult = this.actorService.isAdult(user.getBirth());
 
 		ModelAndView result;
 
 		result = new ModelAndView("rendezvous/edit");
 		result.addObject("rendezvousForm", rendezvousForm);
+		result.addObject("adultUser", adult);
 		result.addObject("message", messageCode);
 
 		return result;

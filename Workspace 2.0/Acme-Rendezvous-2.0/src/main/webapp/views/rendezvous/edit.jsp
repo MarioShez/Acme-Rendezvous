@@ -39,8 +39,10 @@
 		<br/>
 	</fieldset>
 	
-	<acme:checkbox code="rendezvous.adult" path="adult" disabled="${rendezvousForm.finalVersion}"/>
-	<br/>
+	<jstl:if test="${adultUser==true }">
+		<acme:checkbox code="rendezvous.adult" path="adult" disabled="${rendezvousForm.finalVersion}"/>
+		<br/>
+	</jstl:if>
 	
 	<jstl:if test="${rendezvousForm.finalVersion == false}">
 		<acme:checkbox code="rendezvous.finalVersion" path="finalVersion"/>
