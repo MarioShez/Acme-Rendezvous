@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Announcement;
 import domain.GpsCoordinate;
 import domain.Rendezvous;
 import domain.User;
@@ -398,6 +399,51 @@ public class RendezvousServiceTest extends AbstractTest {
 	}
 
 	// 5.5 Acme Rendezvous List the rendezvouses that he or she’s RSVPd.
+	@Test
+	public void driverListAssistUser() {
+
+		Object testingData[][] = {
+
+
+				// positive test
+				{ "user1", "rendezvous1", null},
+				// positive test
+				{ "user1", "rendezvous2", IllegalArgumentException.class },
+				// Manager no puede asistir a un rendezvous
+				{ "manager1", "rendezvous1", IllegalArgumentException.class },
+
+		};
+		for (int i = 0; i < testingData.length; i++) {
+			templateListAssistUser((String) testingData[i][0],
+					getEntityId((String) testingData[i][1]),
+					(Class<?>) testingData[i][2]);
+		}
+
+	}
+
+	private void templateListAssistUser(String user, int rendezvousId,
+			Class<?> expected) {
+		Rendezvous rendezvous;
+		Collection<Rendezvous> assists = null;
+		User userF;
+		Class<?> caught;
+
+		caught = null;
+
+		try {
+			authenticate(user);
+			userF = this.userService.findByPrincipal();
+			rendezvous = this.rendezvousService.findOne(rendezvousId);
+			//assists= this.rendezvousService;
+			Assert.isTrue(assists.contains(rendezvous));
+			unauthenticate();
+
+		} catch (Throwable oops) {
+			caught = oops.getClass();
+			this.entityManager.clear();
+		}
+		checkExceptions(expected, caught);
+	}
 
 	// Creación de gps
 
