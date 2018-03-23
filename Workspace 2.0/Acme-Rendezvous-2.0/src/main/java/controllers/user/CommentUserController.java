@@ -63,10 +63,10 @@ public class CommentUserController extends AbstractController {
 
 	// Creation ---------------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int rendezvousId) {
 		ModelAndView result;
 		Comment c;
-		c = this.commentService.create();
+		c = this.commentService.create(rendezvousId);
 		
 		CommentForm cForm = this.commentService.construct(c);
 		result = this.createEditModelAndViewForm(cForm);
@@ -80,7 +80,7 @@ public class CommentUserController extends AbstractController {
 		Comment commentParent;
 		commentParent = this.commentService.findOne(commentId);
 
-		c = this.commentService.create();
+		c = this.commentService.create(commentParent.getRendezvous().getId());
 		
 		c.setCommentParent(commentParent);
 		c.setRendezvous(commentParent.getRendezvous());

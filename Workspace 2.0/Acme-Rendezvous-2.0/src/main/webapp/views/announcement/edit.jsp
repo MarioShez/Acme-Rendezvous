@@ -16,7 +16,7 @@
 	<br/>
 	<acme:textarea code="announcement.description" path="description"/>
 	<br/>
-	<acme:select items="${rendezvous }" itemLabel="name" code="announcement.rendezvous" path="rendezvous"/>
+	<acme:select items="${rendezvous }" itemLabel="name" code="announcement.rendezvous" path="rendezvousId"/>
 	<br/>
 	
 	<input type="button" name="cancel"
